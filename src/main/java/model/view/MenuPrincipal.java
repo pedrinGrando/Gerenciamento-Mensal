@@ -6,17 +6,26 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.UsuarioController;
 import model.vo.UsuarioVO;
+
 import java.awt.Color;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import java.awt.Font;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MenuPrincipal extends JFrame {
 
 	private JPanel contentPane;
+	private PainelVerConta painelVerConta;
+	private PainelAlterarDados painelAlterarDados;
+	private PainelConsultarDespesa painelConsultarDesp;
+	UsuarioController usuarioController = new UsuarioController();
 
 	/**
 	 * Launch the application.
@@ -38,7 +47,7 @@ public class MenuPrincipal extends JFrame {
 	 * Create the frame.
 	 * @param userLogado 
 	 */
-	public MenuPrincipal(UsuarioVO userLogado) {
+	public MenuPrincipal(final UsuarioVO userOnline) {
 		setBackground(new Color(255, 255, 255));
 		setTitle("Gerenciamento Mensal | Menu");
 		setResizable(false);
@@ -54,18 +63,66 @@ public class MenuPrincipal extends JFrame {
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmVerConta = new JMenuItem("Ver conta ");
+		mntmVerConta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//TROCA DE PAINEL NA TELA PRINCIPAL
+				painelVerConta = new PainelVerConta(userOnline);
+				setContentPane(painelVerConta);
+				revalidate(); 
+				
+			}
+		});
 		mntmVerConta.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		mnNewMenu.add(mntmVerConta);
 		
 		JMenuItem mntmAtualizarDados = new JMenuItem("Atualizar dados ");
+		mntmAtualizarDados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				painelAlterarDados = new PainelAlterarDados(userOnline);
+				setContentPane(painelAlterarDados);
+				revalidate(); 
+			
+			}
+		});
 		mntmAtualizarDados.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		mnNewMenu.add(mntmAtualizarDados);
 		
 		JMenuItem mntmTrocarConta = new JMenuItem("Trocar usuário");
+		mntmTrocarConta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//Traz a tela de login novamente 
+				dispose();
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+				
+			}
+		});
 		mntmTrocarConta.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		mnNewMenu.add(mntmTrocarConta);
 		
 		JMenuItem mntmEncerrarConta = new JMenuItem("Encerrar conta");
+		mntmEncerrarConta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean retorn = false;
+				String resp = JOptionPane.showInputDialog("Deseja excluir sua conta?\n"
+						+userOnline.getNome() + " Digite:"
+								+ "\n1-Confirmar"
+								+ "\n2-Cancelar");
+				if (resp.equals("1")) {
+				retorn = usuarioController.excluirContaController(userOnline);
+				JOptionPane.showMessageDialog(null, "Usuário excluído com sucesso!", "GS - Gerenciador de salário", JOptionPane.INFORMATION_MESSAGE);
+				} else if (resp.equals("2")) {
+				   dispose();
+				   MenuPrincipal tela = new MenuPrincipal(userOnline);
+				   tela.setVisible(true);
+				}
+				
+			}
+				
+		});
 		mntmEncerrarConta.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		mnNewMenu.add(mntmEncerrarConta);
 		
@@ -74,6 +131,16 @@ public class MenuPrincipal extends JFrame {
 		menuBar.add(mnNewMenu_2);
 		
 		JMenuItem mntmConsultarDesp = new JMenuItem("Consultar");
+		mntmConsultarDesp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				painelConsultarDesp = new PainelConsultarDespesa(userOnline);
+				setContentPane(painelConsultarDesp);
+				revalidate();
+				
+				
+			}
+		});
 		mntmConsultarDesp.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		mnNewMenu_2.add(mntmConsultarDesp);
 		
@@ -124,7 +191,7 @@ public class MenuPrincipal extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Made by Pedro A/Gabriel (48988471534)");
-		lblNewLabel.setFont(new Font("Source Sans Pro ExtraLight", Font.ITALIC, 9));
+		lblNewLabel.setFont(new Font("Yu Gothic UI", Font.ITALIC, 9));
 		lblNewLabel.setBounds(294, 11, 299, 14);
 		panel.add(lblNewLabel);
 	}

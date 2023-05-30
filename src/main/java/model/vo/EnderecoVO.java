@@ -7,11 +7,11 @@ public class EnderecoVO {
 	private String rua;
 	private String bairro;
 	private int numero;
-	private int cep;
-	private char estado;
+	private String cep;
+	private String estado;
 	private String cidade;
 	
-	public EnderecoVO(int idEndereco, int idUsuario, String rua, String bairro, int numero, int cep, char estado,
+	public EnderecoVO(int idEndereco, int idUsuario, String rua, String bairro, int numero, String cep, String estado,
 			String cidade) {
 		super();
 		this.idEndereco = idEndereco;
@@ -68,19 +68,19 @@ public class EnderecoVO {
 		this.numero = numero;
 	}
 
-	public int getCep() {
+	public String getCep() {
 		return cep;
 	}
 
-	public void setCep(int cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 
-	public char getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(char estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 
@@ -91,5 +91,6 @@ public class EnderecoVO {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
+
 	
 }

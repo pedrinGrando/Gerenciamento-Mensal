@@ -5,12 +5,26 @@ import model.vo.UsuarioVO;
 
 public class UsuarioController {
 	
-	private UsuarioBO userBO;
+	UsuarioBO userBO = new UsuarioBO();
 
+	public UsuarioVO realizarLoginController(UsuarioVO userOnline) {
+		UsuarioVO usuarioVO = new UsuarioVO();
+		
+		usuarioVO = userBO.realizarLoginBO(userOnline);
+		
+		return usuarioVO;
+	}
 
-	public UsuarioVO realizarLoginController(UsuarioVO userLogado) {
-		// TODO Auto-generated method stub
-		return userBO.realizarLoginBO(userLogado);
+	public boolean excluirContaController(UsuarioVO userOnline) {
+		
+		return userBO.excluirContaBO(userOnline);
+	}
+
+	public void cadastrarUsuarioController(UsuarioVO usuario) {
+		
+		
+		
+
 	}
 
 }

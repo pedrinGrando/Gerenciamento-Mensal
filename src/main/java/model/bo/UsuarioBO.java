@@ -5,11 +5,20 @@ import model.vo.UsuarioVO;
 
 public class UsuarioBO {
 	
-	private UsuarioDAO userDAO;
-
-	public UsuarioVO realizarLoginBO(UsuarioVO userLogado) {
+	UsuarioDAO userDAO = new UsuarioDAO();
+	
+	public UsuarioVO realizarLoginBO(UsuarioVO userOnline) {
+		UsuarioVO usuarioVO = new UsuarioVO();
 		
-		return userDAO.realizarLoginDAO(userLogado);
+		
+		usuarioVO = userDAO.realizarLoginDAO(userOnline);
+		
+		return usuarioVO;
+	}
+
+	public boolean excluirContaBO(UsuarioVO userOnline) {
+	
+		return userDAO.excluirContaDAO(userOnline);
 	}
 
 }
