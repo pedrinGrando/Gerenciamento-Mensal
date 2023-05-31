@@ -13,4 +13,9 @@ public class TabelaController {
 		return tabBO.salvarDadosTabelaBO(userLogado, tabela);
 	}
 
+	public TabelaVO consultarMesController(TabelaVO tabelaVO) {
+		
+		return tabBO.consultarMesBO(tabelaVO);
+	}
+
 }

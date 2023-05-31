@@ -14,4 +14,10 @@ public class TabelaBO {
 		return tabDAO.salvarDadosTabelaDAO(userLogado, tabela);
 	}
 
+
+	public TabelaVO consultarMesBO(TabelaVO tabelaVO) {
+		
+		return tabDAO.consultarMesTabelaDAO(tabelaVO);
+	}
+
 }

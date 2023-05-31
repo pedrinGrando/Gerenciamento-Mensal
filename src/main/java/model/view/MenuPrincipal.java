@@ -28,6 +28,9 @@ public class MenuPrincipal extends JFrame {
 	private PainelAlterarDados painelAlterarDados;
 	private PainelConsultarDespesa painelConsultarDesp;
 	private PainelAdicionarDespesa painelInserirDesp;
+	private PainelCalculoMensal painelCalculoMensal;
+	private PainelConsultaMes painelConsultaMes;
+	private PainelTabelaCompleta painelTabelaCompleta;
 	
 	UsuarioController usuarioController = new UsuarioController();
 
@@ -172,29 +175,43 @@ public class MenuPrincipal extends JFrame {
 		mntmCalculoMensal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
-				
-				
-				
+				painelCalculoMensal = new PainelCalculoMensal(userOnline);
+				setContentPane(painelCalculoMensal);
+				revalidate();
 				
 			}
 		});
 		mntmCalculoMensal.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		mnNewMenu_1.add(mntmCalculoMensal);
 		
-		JMenuItem mntmMesAnt = new JMenuItem("Mês anterior");
-		mntmMesAnt.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-		mnNewMenu_1.add(mntmMesAnt);
-		
 		JMenu mnNewMenu_3 = new JMenu("Tabela");
 		mnNewMenu_3.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
 		menuBar.add(mnNewMenu_3);
 		
 		JMenuItem mntmMesEsp = new JMenuItem("Mês específico");
+		mntmMesEsp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				painelConsultaMes = new PainelConsultaMes(userOnline);
+				setContentPane(painelConsultaMes);
+				revalidate();
+				
+			}
+		});
 		mntmMesEsp.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		mnNewMenu_3.add(mntmMesEsp);
 		
 		JMenuItem mntmTabelaCompleta = new JMenuItem("Tabela completa");
+		mntmTabelaCompleta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				painelTabelaCompleta = new PainelTabelaCompleta(userOnline);
+				setContentPane(painelTabelaCompleta);
+				revalidate();
+				
+				
+			}
+		});
 		mntmTabelaCompleta.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		mnNewMenu_3.add(mntmTabelaCompleta);
 		
