@@ -31,7 +31,7 @@ public class PainelVerConta extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PainelVerConta(final UsuarioVO userLogado) {
+	public PainelVerConta(final UsuarioVO userOnline) {
 
 		setLayout(null);
 		
@@ -70,57 +70,43 @@ public class PainelVerConta extends JPanel {
 		nome_label.setBounds(123, 72, 340, 14);
 		add(nome_label);
 		
-		nome_label.setText(userLogado.getNome());
+		nome_label.setText(userOnline.getNome());
 		
 		JLabel cpf_label = new JLabel("");
 		cpf_label.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		cpf_label.setBounds(55, 97, 163, 14);
 		add(cpf_label);
 		
-		cpf_label.setText(userLogado.getCpf());
+		cpf_label.setText(userOnline.getCpf());
 		
 		JLabel email_label = new JLabel("");
 		email_label.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		email_label.setBounds(55, 122, 179, 14);
 		add(email_label);
 		
-		email_label.setText(userLogado.getEmail());
+		email_label.setText(userOnline.getEmail());
 		
 		JLabel salario_label = new JLabel("");
 		salario_label.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		salario_label.setBounds(104, 147, 383, 14);
 		add(salario_label);
 		
-		salario_label.setText("R$ "+userLogado.getSalariol());
+		salario_label.setText("R$ "+userOnline.getSalariol());
 		
 		JLabel despesas_label = new JLabel("");
 		despesas_label.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		despesas_label.setBounds(123, 172, 416, 14);
 		add(despesas_label);
 		
-		double desc = calcularDescontoTotal(userLogado);
-		despesas_label.setText("R$ "+desc);
-		
-		JButton btnNewButton_1 = new JButton("Alterar dados");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//dispose();
-				//TelaAlteracaoDeDados tela = new TelaAlteracaoDeDados(userLogado);
-				//tela.setVisible(true);
-			}
-		});
-		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\GETIN\\Desktop\\Gerenciador de salário(GS)\\GerenciadorSalario\\img\\atualizarIcon.png"));
-		btnNewButton_1.setBackground(new Color(192, 192, 192));
-		btnNewButton_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btnNewButton_1.setBounds(76, 303, 142, 23);
-		add(btnNewButton_1);
+		//double desc = despController.calcularDescontoTotalController(userOnline);
+		//despesas_label.setText("R$ "+desc);
 		
 		JButton btnNewButton_2 = new JButton("Excluir conta");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean retorn = false;
 				String resp = JOptionPane.showInputDialog("Tem certeza que deseja excluir seu usuário?\n"
-						+userLogado.getNome() + " Digite:"
+						+userOnline.getNome() + " Digite:"
 								+ "\n1-Confirmar"
 								+ "\n2-Cancelar");
 				if (resp.equals("1")) {
@@ -128,9 +114,7 @@ public class PainelVerConta extends JPanel {
 				//retorn = user.excluirContaUsuarioInterface(userLogado);
 				JOptionPane.showMessageDialog(null, "Usuário excluído com sucesso!", "GS - Gerenciador de salário", JOptionPane.INFORMATION_MESSAGE);
 				} else if (resp.equals("2")) {
-				  // dispose();
-				   //TelaMenu tela = new TelaMenu(userLogado);
-				  // tela.setVisible(true);
+				 
 				}
 			}
 		});
@@ -141,26 +125,7 @@ public class PainelVerConta extends JPanel {
 		add(btnNewButton_2);
 		
 	}
-	
-	//Calculo de despesas total
-	private double calcularDescontoTotal(UsuarioVO userOnline) {
-		double total = 0;
-	
-		total = despController.calcularDescontoTotalController(userOnline);
 		
-		return total;
-	   }
-	
-	private double calcularDescontoTotal2(UsuarioVO userLogado) {
-		double total = 0;
-	
-		//total = despController.calcularDescontoTotalController(userLogado);
-		
-		return total;
-	   }
-	
-	
-		
-	}
+}
 
 

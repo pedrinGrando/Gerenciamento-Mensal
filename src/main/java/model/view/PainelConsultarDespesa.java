@@ -46,10 +46,6 @@ public class PainelConsultarDespesa extends JPanel {
 		lblNewLabel_6.setBounds(168, 24, 183, 23);
 		add(lblNewLabel_6);
 		
-		btnNewButton_1.setBackground(new Color(64, 128, 128));
-		btnNewButton_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btnNewButton_1.setBounds(0, 305, 33, 23);
-		add(btnNewButton_1);
 		
 		campDespDigitada = new JTextField();
 		campDespDigitada.setBounds(135, 88, 296, 20);
