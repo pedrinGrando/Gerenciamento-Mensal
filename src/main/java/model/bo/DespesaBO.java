@@ -18,4 +18,14 @@ public class DespesaBO {
 		return despDAO.consultarDespesaDAO(despesaVO, userOnline);
 	}
 
+	public DespesaVO inserirDespesaBO(DespesaVO despesa) {
+		
+		return despDAO.inserirDespesaDAO(despesa);
+	}
+
+	public boolean removerDespController(UsuarioVO userLogado, String text) {
+		
+		return despDAO.removerDespDAO(userLogado, text);
+	}
+
 }

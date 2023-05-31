@@ -1,6 +1,7 @@
 package model.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -73,6 +74,57 @@ public class DespesaDAO {
 		return despesa;
 		
 		
+		
+	}
+
+	public DespesaVO inserirDespesaDAO(DespesaVO despesa) {
+		
+		String query ="INSERT INTO despesa (idusuario, despnome, valor) VALUES (?, ?, ?)";
+		Connection conn = Banco.getConnection();
+		PreparedStatement pstmt = Banco.getPreparedStatementWithPk(conn, query);
+		try {
+			pstmt.setInt(1, despesa.getIdUsuario());
+			pstmt.setString(2, despesa.getDespNome());
+			pstmt.setDouble(3, despesa.getValor());
+			pstmt.execute();
+			ResultSet resultado = pstmt.getGeneratedKeys();	
+			if(resultado.next()) {
+				despesa.setIdDespesa(Integer.parseInt(resultado.getString(1)));
+			}
+			
+		} catch (SQLException erro) {
+			System.out.println("Erro ao executar a query do método inserirDespesaDAO");
+			System.out.println("Erro: " + erro.getMessage());
+		}finally {
+			Banco.closeStatement(pstmt);
+			Banco.closeConnection(conn);
+		}
+		return despesa;
+	
+	}
+
+	public boolean removerDespDAO(UsuarioVO userLogado, String text) {
+
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		boolean retorno = false;
+		
+		String query = "DELETE FROM despesa " 
+				+ " WHERE idusuario = " + userLogado.getIdUsuario()
+				+ " AND divnome = '" + text +"' ";
+		
+		try {
+			if(stmt.executeUpdate(query) == 1) {
+				retorno = true;
+			}
+		} catch (SQLException erro) {
+			System.out.println("Erro ao executar a query do método removerDespDAO");
+			System.out.println("Erro: " + erro.getMessage());	
+		} finally {
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return retorno;
 		
 	}
 

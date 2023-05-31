@@ -22,9 +22,13 @@ import java.awt.event.ActionEvent;
 public class MenuPrincipal extends JFrame {
 
 	private JPanel contentPane;
+	
+	// Paineis separados
 	private PainelVerConta painelVerConta;
 	private PainelAlterarDados painelAlterarDados;
 	private PainelConsultarDespesa painelConsultarDesp;
+	private PainelAdicionarDespesa painelInserirDesp;
+	
 	UsuarioController usuarioController = new UsuarioController();
 
 	/**
@@ -138,13 +142,21 @@ public class MenuPrincipal extends JFrame {
 				setContentPane(painelConsultarDesp);
 				revalidate();
 				
-				
 			}
 		});
 		mntmConsultarDesp.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		mnNewMenu_2.add(mntmConsultarDesp);
 		
 		JMenuItem mntmInserirNovaDespesa = new JMenuItem("Inserir nova ");
+		mntmInserirNovaDespesa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				painelInserirDesp = new PainelAdicionarDespesa(userOnline);
+				setContentPane(painelInserirDesp);
+				revalidate();
+				
+			}
+		});
 		mntmInserirNovaDespesa.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		mnNewMenu_2.add(mntmInserirNovaDespesa);
 		
@@ -157,6 +169,16 @@ public class MenuPrincipal extends JFrame {
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmCalculoMensal = new JMenuItem("Cálculo mensal");
+		mntmCalculoMensal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				
+				
+				
+			}
+		});
 		mntmCalculoMensal.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		mnNewMenu_1.add(mntmCalculoMensal);
 		

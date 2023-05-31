@@ -18,4 +18,14 @@ public class DespesaController {
 		return despBO.consultarDespesaBO(despesaVO, userOnline);
 	}
 
+	public DespesaVO inserirDespesaController(DespesaVO despesa) {
+		
+		return despBO.inserirDespesaBO(despesa);
+	}
+
+	public boolean removerDespesaController(UsuarioVO userLogado, String text) {
+		
+		return despBO.removerDespController(userLogado, text);
+	}
+
 }
