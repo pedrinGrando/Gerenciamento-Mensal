@@ -42,16 +42,16 @@ public class DespesaDAO {
 	
 	}
 
-	public DespesaVO consultarDespesaDAO(DespesaVO despesaVO, UsuarioVO userOnline) {
+	public DespesaVO consultarDespesaDAO(String string, UsuarioVO userOnline) {
 		
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
 		DespesaVO despesa = new DespesaVO();
 		
-		String query = "SELECT idespesa, idusuario, despnome, valor "
+		String query = "SELECT iddespesa, idusuario, despnome, valor "
 				+ "FROM DESPESA "
-				+ "WHERE despnome like '" + despesaVO.getDespNome() + "'"
+				+ "WHERE despnome like '" + string + "'"
 				+ "AND idusuario = " +userOnline.getIdUsuario();
 		
 		try {
@@ -111,7 +111,7 @@ public class DespesaDAO {
 		
 		String query = "DELETE FROM despesa " 
 				+ " WHERE idusuario = " + userLogado.getIdUsuario()
-				+ " AND divnome = '" + text +"' ";
+				+ " AND despnome = '" + text +"' ";
 		
 		try {
 			if(stmt.executeUpdate(query) == 1) {

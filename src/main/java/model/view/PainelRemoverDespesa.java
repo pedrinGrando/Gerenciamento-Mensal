@@ -28,7 +28,6 @@ public class PainelRemoverDespesa extends JPanel {
 	private JLabel lblNewLabel_1;
 	private JButton btn_removerDespesa;
 	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
 	private JButton btn_voltar;
 	
 	DespesaController despesaController = new DespesaController();
@@ -73,15 +72,6 @@ public class PainelRemoverDespesa extends JPanel {
 		lblNewLabel_2.setBounds(95, 74, 279, 14);
 		add(lblNewLabel_2);
 		
-		lblNewLabel_3 = new JLabel("GS -Gerenciador de salário ");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
-		lblNewLabel_3.setBounds(292, 232, 190, 14);
-		add(lblNewLabel_3);
-		
-		btn_voltar.setBackground(new Color(192, 192, 192));
-		btn_voltar.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btn_voltar.setBounds(0, 223, 32, 23);
-		add(btn_voltar);
     }
 		
 }

@@ -8,7 +8,7 @@ public class TabelaController {
 	
 	TabelaBO tabBO = new TabelaBO();
 
-	public TabelaVO salvarDadosTabelaDAO(UsuarioVO userLogado, TabelaVO tabela) {
+	public TabelaVO salvarDadosTabelaController(UsuarioVO userLogado, TabelaVO tabela) {
 		
 		return tabBO.salvarDadosTabelaBO(userLogado, tabela);
 	}
@@ -17,5 +17,6 @@ public class TabelaController {
 		
 		return tabBO.consultarMesBO(tabelaVO);
 	}
+
 
 }

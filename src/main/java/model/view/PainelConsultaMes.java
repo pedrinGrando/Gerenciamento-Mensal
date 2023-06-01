@@ -35,12 +35,6 @@ public class PainelConsultaMes extends JPanel {
 
         setLayout(null);
 		
-	
-		btnNewButton.setBackground(new Color(64, 128, 128));
-		btnNewButton.setFont(new Font("Tahoma", Font.ITALIC, 10));
-		btnNewButton.setBounds(0, 403, 32, 19);
-		add(btnNewButton);
-		
 		lblNewLabel_1 = new JLabel("Consulta de mês regular");
 		lblNewLabel_1.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 16));
 		lblNewLabel_1.setBounds(151, 11, 236, 30);

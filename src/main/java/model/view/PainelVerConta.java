@@ -27,6 +27,19 @@ import model.vo.UsuarioVO;
 public class PainelVerConta extends JPanel {
 	private DespesaController despController;
 	private UsuarioController userController;
+	private JButton btnNewButton_2;
+	private JLabel despesas_label;
+	private JLabel salario_label;
+	private JLabel email_label;
+	private JLabel cpf_label;
+	private JLabel nome_label;
+	private JLabel lblNewLabel_5;
+	private JLabel lblNewLabel_4;
+	private JLabel labelPrincipal_nome;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_1;
+	private double desc = 0;
 
 	/**
 	 * Create the panel.
@@ -35,73 +48,74 @@ public class PainelVerConta extends JPanel {
 
 		setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("Nome Completo :");
+		lblNewLabel_1 = new JLabel("Nome Completo :");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		lblNewLabel_1.setBounds(10, 72, 119, 14);
 		add(lblNewLabel_1);
 		
-		JLabel labelPrincipal_nome = new JLabel("Seus dados");
+		labelPrincipal_nome = new JLabel("Seus dados");
 		labelPrincipal_nome.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 18));
 		labelPrincipal_nome.setBounds(236, 11, 205, 25);
 		add(labelPrincipal_nome);
 		
-		JLabel lblNewLabel_2 = new JLabel("CPF :");
+		lblNewLabel_2 = new JLabel("CPF :");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		lblNewLabel_2.setBounds(10, 97, 46, 14);
 		add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Email :");
+		lblNewLabel_3 = new JLabel("Email :");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		lblNewLabel_3.setBounds(10, 122, 72, 14);
 		add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("Salário Bruto : ");
+		lblNewLabel_4 = new JLabel("Salário Bruto : ");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		lblNewLabel_4.setBounds(10, 147, 96, 14);
 		add(lblNewLabel_4);
 		
-		JLabel lblNewLabel_5 = new JLabel("Despesas Totais : ");
+		lblNewLabel_5 = new JLabel("Despesas Totais : ");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		lblNewLabel_5.setBounds(10, 172, 127, 14);
 		add(lblNewLabel_5);
 		
-		JLabel nome_label = new JLabel("");
+		nome_label = new JLabel("");
 		nome_label.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		nome_label.setBounds(123, 72, 340, 14);
 		add(nome_label);
 		
 		nome_label.setText(userOnline.getNome());
 		
-		JLabel cpf_label = new JLabel("");
+		cpf_label = new JLabel("");
 		cpf_label.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		cpf_label.setBounds(55, 97, 163, 14);
 		add(cpf_label);
 		
 		cpf_label.setText(userOnline.getCpf());
 		
-		JLabel email_label = new JLabel("");
+		email_label = new JLabel("");
 		email_label.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		email_label.setBounds(55, 122, 179, 14);
 		add(email_label);
 		
 		email_label.setText(userOnline.getEmail());
 		
-		JLabel salario_label = new JLabel("");
+		salario_label = new JLabel("");
 		salario_label.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		salario_label.setBounds(104, 147, 383, 14);
 		add(salario_label);
 		
 		salario_label.setText("R$ "+userOnline.getSalariol());
 		
-		JLabel despesas_label = new JLabel("");
+		despesas_label = new JLabel("");
 		despesas_label.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		despesas_label.setBounds(123, 172, 416, 14);
 		add(despesas_label);
 		
-		//double desc = despController.calcularDescontoTotalController(userOnline);
-		//despesas_label.setText("R$ "+desc);
+		desc = despController.calcularDescontoTotalController(userOnline);
 		
-		JButton btnNewButton_2 = new JButton("Excluir conta");
+		despesas_label.setText(""+desc);
+		
+	    btnNewButton_2 = new JButton("Excluir conta");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean retorn = false;

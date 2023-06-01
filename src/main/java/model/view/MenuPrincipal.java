@@ -31,6 +31,7 @@ public class MenuPrincipal extends JFrame {
 	private PainelCalculoMensal painelCalculoMensal;
 	private PainelConsultaMes painelConsultaMes;
 	private PainelTabelaCompleta painelTabelaCompleta;
+	private PainelRemoverDespesa painelRemoverDespesa;
 	
 	UsuarioController usuarioController = new UsuarioController();
 
@@ -164,6 +165,16 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu_2.add(mntmInserirNovaDespesa);
 		
 		JMenuItem mntmRemoverDesp = new JMenuItem("Remover despesa");
+		mntmRemoverDesp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				painelRemoverDespesa = new PainelRemoverDespesa(userOnline);
+				setContentPane(painelRemoverDespesa);
+				revalidate();
+				
+			
+			}
+		});
 		mntmRemoverDesp.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		mnNewMenu_2.add(mntmRemoverDesp);
 		

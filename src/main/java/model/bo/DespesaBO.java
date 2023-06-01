@@ -13,9 +13,9 @@ public class DespesaBO {
 		return despDAO.calcularDescontoTotalDAO(userOnline);
 	}
 
-	public DespesaVO consultarDespesaBO(DespesaVO despesaVO, UsuarioVO userOnline) {
+	public DespesaVO consultarDespesaBO(String string, UsuarioVO userOnline) {
 		
-		return despDAO.consultarDespesaDAO(despesaVO, userOnline);
+		return despDAO.consultarDespesaDAO(string, userOnline);
 	}
 
 	public DespesaVO inserirDespesaBO(DespesaVO despesa) {

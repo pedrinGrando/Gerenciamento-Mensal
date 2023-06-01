@@ -41,18 +41,12 @@ public class PainelAdicionarDespesa extends JPanel {
 	 */
 	public PainelAdicionarDespesa(final UsuarioVO userLogado) {
 
-		
 		setLayout(null);
 		
 		lblNewLabel_1 = new JLabel(" Inserira os dados da despesa nova  ");
 		lblNewLabel_1.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 14));
 		lblNewLabel_1.setBounds(115, 36, 253, 14);
 		add(lblNewLabel_1);
-		
-		btnNewButton.setBackground(new Color(64, 128, 128));
-		btnNewButton.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btnNewButton.setBounds(0, 245, 37, 23);
-		add(btnNewButton);
 		
 		nomeDespesa_camp = new JTextField();
 		nomeDespesa_camp.setBounds(152, 100, 131, 20);

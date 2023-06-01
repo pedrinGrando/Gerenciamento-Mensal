@@ -13,9 +13,9 @@ public class DespesaController {
 		return despBO.calcularDescontoTotalBO(userOnline);
 	}
 
-	public DespesaVO consultarDespesaController(DespesaVO despesaVO, UsuarioVO userOnline) {
+	public DespesaVO consultarDespesaController(String string, UsuarioVO userOnline) {
 		
-		return despBO.consultarDespesaBO(despesaVO, userOnline);
+		return despBO.consultarDespesaBO(string, userOnline);
 	}
 
 	public DespesaVO inserirDespesaController(DespesaVO despesa) {

@@ -14,7 +14,7 @@ public class TabelaDAO {
 
 	public TabelaVO salvarDadosTabelaDAO(UsuarioVO userLogado, TabelaVO tabela) {
 		
-		String query ="INSERT INTO tabela (idusuario, mes, ano, totalrest, saldo) VALUES (?, ?, ?, ?, ?)";
+		String query ="INSERT INTO tabelamensal (idusuario, mes, ano, totalrest, saldo) VALUES (?, ?, ?, ?, ?)";
 		
 		Connection conn = Banco.getConnection();
 		PreparedStatement pstmt = Banco.getPreparedStatementWithPk(conn, query);
