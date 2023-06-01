@@ -2,6 +2,9 @@ package controller;
 
 import model.vo.TabelaVO;
 import model.vo.UsuarioVO;
+
+import java.util.ArrayList;
+
 import model.bo.*;
 
 public class TabelaController {
@@ -16,6 +19,11 @@ public class TabelaController {
 	public TabelaVO consultarMesController(TabelaVO tabelaVO) {
 		
 		return tabBO.consultarMesBO(tabelaVO);
+	}
+
+	public ArrayList<TabelaVO> consultarTodasController() {
+		
+		return tabBO.consultarTabelaBO();
 	}
 
 

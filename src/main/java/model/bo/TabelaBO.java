@@ -2,6 +2,9 @@ package model.bo;
 
 import model.vo.TabelaVO;
 import model.vo.UsuarioVO;
+
+import java.util.ArrayList;
+
 import model.dao.*;
 
 public class TabelaBO {
@@ -18,6 +21,12 @@ public class TabelaBO {
 	public TabelaVO consultarMesBO(TabelaVO tabelaVO) {
 		
 		return tabDAO.consultarMesTabelaDAO(tabelaVO);
+	}
+
+
+	public ArrayList<TabelaVO> consultarTabelaBO() {
+		// TODO Auto-generated method stub
+		return tabDAO.consultarTabelaCompletaDAO(null);
 	}
 
 }
