@@ -17,6 +17,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
 public class MenuPrincipal extends JFrame {
@@ -88,9 +89,15 @@ public class MenuPrincipal extends JFrame {
 		mntmAtualizarDados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				painelAlterarDados = new PainelAlterarDados(userOnline);
-				setContentPane(painelAlterarDados);
-				revalidate(); 
+				try {
+					painelAlterarDados = new PainelAlterarDados(userOnline);
+					setContentPane(painelAlterarDados);
+					revalidate(); 
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			
 			}
 		});
@@ -219,7 +226,6 @@ public class MenuPrincipal extends JFrame {
 				painelTabelaCompleta = new PainelTabelaCompleta(userOnline);
 				setContentPane(painelTabelaCompleta);
 				revalidate();
-				
 				
 			}
 		});

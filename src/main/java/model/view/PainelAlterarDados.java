@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,10 +19,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 import model.vo.UsuarioVO;
 import controller.UsuarioController;
 import model.view.*;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JPasswordField;
 
 public class PainelAlterarDados extends JPanel {
 	private JTextField novoNome_camp;
@@ -39,14 +44,18 @@ public class PainelAlterarDados extends JPanel {
 	private JTextField ruaCampo;
 	private JTextField campBairro;
 	private JTextField campNumero;
-	private JTextField campCep;
-	private JTextField campEstado;
 	private JTextField campCIdade;
+	private JComboBox cbEstados;
+	private JFormattedTextField cepCamp;
+	private JPasswordField senhaAtualAtualizar;
+	private JPasswordField novaSenhaAtualizar;
+	private MaskFormatter mascaraCEP;
 
 	/**
 	 * Create the panel.
+	 * @throws ParseException 
 	 */
-	public PainelAlterarDados(final UsuarioVO userLogado) {
+	public PainelAlterarDados(final UsuarioVO userLogado) throws ParseException {
 		
 	    setLayout(null);
 		
@@ -54,6 +63,9 @@ public class PainelAlterarDados extends JPanel {
 		lblNewLabel_1.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 15));
 		lblNewLabel_1.setBounds(33, 55, 260, 14);
 		add(lblNewLabel_1);
+		
+		mascaraCEP = new MaskFormatter("#####-###");
+		mascaraCEP.setValueContainsLiteralCharacters(false);
 		
 		novoNome_camp = new JTextField();
 		novoNome_camp.setBounds(10, 112, 192, 20);
@@ -76,6 +88,14 @@ public class PainelAlterarDados extends JPanel {
 		lblNewLabel_2.setBounds(10, 98, 163, 14);
 		add(lblNewLabel_2);
 		
+		cbEstados = new JComboBox();
+		cbEstados.setBounds(377, 180, 80, 22);
+		add(cbEstados);
+		
+		cepCamp = new JFormattedTextField(mascaraCEP);
+		cepCamp.setBounds(377, 112, 114, 20);
+		add(cepCamp);
+		
 		lblNewLabel_3 = new JLabel("E-mail");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.ITALIC, 9));
 		lblNewLabel_3.setBounds(10, 153, 163, 14);
@@ -87,7 +107,7 @@ public class PainelAlterarDados extends JPanel {
 		add(lblNewLabel_4);
 		
 		novoBruto_camp = new JTextField();
-		novoBruto_camp.setBounds(38, 271, 102, 20);
+		novoBruto_camp.setBounds(35, 271, 102, 20);
 		add(novoBruto_camp);
 		novoBruto_camp.setColumns(10);
 		
@@ -125,7 +145,7 @@ public class PainelAlterarDados extends JPanel {
 		});
 		btnNewButton_1.setBackground(new Color(192, 192, 192));
 		btnNewButton_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btnNewButton_1.setBounds(483, 422, 105, 23);
+		btnNewButton_1.setBounds(514, 448, 105, 23);
 		add(btnNewButton_1);
 		
 		ruaCampo = new JTextField();
@@ -148,16 +168,6 @@ public class PainelAlterarDados extends JPanel {
 		add(campNumero);
 		campNumero.setColumns(10);
 		
-		campCep = new JTextField();
-		campCep.setBounds(377, 112, 105, 20);
-		add(campCep);
-		campCep.setColumns(10);
-		
-		campEstado = new JTextField();
-		campEstado.setBounds(377, 167, 192, 20);
-		add(campEstado);
-		campEstado.setColumns(10);
-		
 		JLabel lblBairro = new JLabel("Bairro");
 		lblBairro.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblBairro.setBounds(10, 370, 46, 14);
@@ -179,7 +189,7 @@ public class PainelAlterarDados extends JPanel {
 		add(lblEstado);
 		
 		campCIdade = new JTextField();
-		campCIdade.setBounds(377, 226, 192, 20);
+		campCIdade.setBounds(377, 226, 171, 20);
 		add(campCIdade);
 		campCIdade.setColumns(10);
 		
@@ -187,5 +197,24 @@ public class PainelAlterarDados extends JPanel {
 		lblCidade.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblCidade.setBounds(377, 213, 46, 14);
 		add(lblCidade);
+		
+		
+		JLabel lblNewLabel = new JLabel("Senha atual : ");
+		lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblNewLabel.setBounds(377, 274, 102, 14);
+		add(lblNewLabel);
+		
+		senhaAtualAtualizar = new JPasswordField();
+		senhaAtualAtualizar.setBounds(377, 288, 102, 20);
+		add(senhaAtualAtualizar);
+		
+		JLabel lblNewLabel_7 = new JLabel("Nova senha : ");
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblNewLabel_7.setBounds(377, 328, 102, 14);
+		add(lblNewLabel_7);
+		
+		novaSenhaAtualizar = new JPasswordField();
+		novaSenhaAtualizar.setBounds(377, 343, 102, 20);
+		add(novaSenhaAtualizar);
 	}
 }

@@ -24,9 +24,9 @@ public class TabelaBO {
 	}
 
 
-	public ArrayList<TabelaVO> consultarTabelaBO() {
+	public ArrayList<TabelaVO> consultarTabelaBO(TabelaVO tabelaVO) {
 		// TODO Auto-generated method stub
-		return tabDAO.consultarTabelaCompletaDAO(null);
+		return tabDAO.consultarTabelaCompletaDAO(tabelaVO);
 	}
 
 }

@@ -10,6 +10,8 @@ import javax.swing.text.MaskFormatter;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 import java.awt.Font;
 import java.awt.Window;
@@ -24,18 +26,18 @@ import controller.*;
 import exceptions.CampoInvalidoException;
 
 import javax.swing.JPasswordField;
+import javax.swing.JComboBox;
+import java.awt.Color;
 
 public class TelaCadastro extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField campoNome;
 	private JTextField emailCamp;
-	private JTextField salarioCamp;
 	private JTextField loginCamp;
 	private JTextField ruaCamp;
 	private JTextField bairroCamp;
 	private JTextField campNumero;
-	private JTextField campEstado;
     UsuarioController usuarioController = new UsuarioController();
     UsuarioVO usuario = new UsuarioVO();
     EnderecoVO endereco = new EnderecoVO();
@@ -66,6 +68,7 @@ public class TelaCadastro extends JFrame {
 	private JPasswordField campSenha;
 	private JPasswordField confirmCampSenha;
 	private JTextField campCidade;
+	private JTextField salarioCamp;
 
 	/**
 	 * Launch the application.
@@ -147,11 +150,6 @@ public class TelaCadastro extends JFrame {
 		lblNewLabel_3.setBounds(20, 164, 63, 14);
 		contentPane.add(lblNewLabel_3);
 		
-		salarioCamp = new JTextField();
-		salarioCamp.setBounds(126, 211, 122, 20);
-		contentPane.add(salarioCamp);
-		salarioCamp.setColumns(10);
-		
 		lblNewLabel_4 = new JLabel("Salário líquido: ");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNewLabel_4.setBounds(20, 214, 92, 14);
@@ -229,18 +227,13 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(lblNewLabel_11);
 		
 		cepCamp = new JFormattedTextField(mascaraCEP);
-		cepCamp.setBounds(65, 474, 122, 20);
+		cepCamp.setBounds(76, 474, 122, 20);
 		contentPane.add(cepCamp);
 		
 		lblNewLabel_12 = new JLabel("CEP : ");
 		lblNewLabel_12.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNewLabel_12.setBounds(20, 477, 46, 14);
 		contentPane.add(lblNewLabel_12);
-		
-		campEstado = new JTextField();
-		campEstado.setBounds(538, 350, 86, 20);
-		contentPane.add(campEstado);
-		campEstado.setColumns(10);
 		
 	    campCidade = new JTextField();
 		campCidade.setBounds(538, 394, 187, 20);
@@ -251,6 +244,16 @@ public class TelaCadastro extends JFrame {
 		lblNewLabel_13.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNewLabel_13.setBounds(468, 353, 46, 14);
 		contentPane.add(lblNewLabel_13);
+		
+		JComboBox cbEstados = new JComboBox();
+		cbEstados.setBackground(new Color(192, 192, 192));
+		cbEstados.setBounds(538, 349, 78, 22);
+		contentPane.add(cbEstados);
+		
+		salarioCamp = new JTextField();
+		salarioCamp.setBounds(105, 211, 143, 20);
+		contentPane.add(salarioCamp);
+		salarioCamp.setColumns(10);
 		
 		lblNewLabel_14 = new JLabel("Cidade : ");
 		lblNewLabel_14.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -312,7 +315,7 @@ public class TelaCadastro extends JFrame {
 				endereco.setRua(ruaCamp.getText());
 				endereco.setNumero(Integer.parseInt(campNumero.getText()));
 				endereco.setCidade(campCidade.getText());
-				endereco.setEstado(campEstado.getText());
+				//endereco.setEstado(cbEstados.getSelectedItem());
 				
 				endereco = enderecoController.cadastrarEnderecoController(endereco);
 				
@@ -322,6 +325,10 @@ public class TelaCadastro extends JFrame {
 		btnNewButton_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		btnNewButton_1.setBounds(383, 591, 100, 23);
 		contentPane.add(btnNewButton_1);
+		
+		
+		
+		
 		
 			}
 		}

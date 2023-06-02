@@ -21,9 +21,9 @@ public class TabelaController {
 		return tabBO.consultarMesBO(tabelaVO);
 	}
 
-	public ArrayList<TabelaVO> consultarTodasController() {
+	public ArrayList<TabelaVO> consultarTodasController(TabelaVO tabelaVO) {
 		
-		return tabBO.consultarTabelaBO();
+		return tabBO.consultarTabelaBO(tabelaVO);
 	}
 
 

@@ -1,85 +1,106 @@
 package model.view;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.MaskFormatter;
 
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
-
-import model.vo.TabelaVO;
+import controller.EnderecoController;
+import exceptions.EnderecoInvalidoException;
+import model.vo.EnderecoVO;
+import controller.TabelaController;
 import model.vo.*;
-import controller.*;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+
+import exceptions.EnderecoInvalidoException;
 
 public class PainelTabelaCompleta extends JPanel {
 
-	/**
-	 * Create the panel.
-	 */
-	
-		private JTable tblConsultas;
+	//Atributos da tela (componentes visuais)
+		private JTable tblTabelas;
+		private JButton btnBuscar;
+		private JButton btnEditar;
+		private JButton btnExcluir;
+		
+		//Objeto usado para armazenar o endereço que o usuário selecionar na tabela (tblEnderecos)
+		private TabelaVO tabelaSelecionada = new TabelaVO();
+		private EnderecoController tabelaController = new EnderecoController();
+		//Lista para armezenar os endereços consultados no banco
 		private ArrayList<TabelaVO> tabelas;
-		private String[] nomesColunas = { "Mês", "Ano", "Restante", "Saldo Final" };
-		private JTextField txtNome;
-		private MaskFormatter mascaraCpf;
-		private JFormattedTextField txtCPF;
-		
-		//componentes externos -> dependência "LGoodDatePicker" foi adicionada no pom.xml
-		
-		
-		TabelaController tabelaController = new TabelaController();
-		TabelaVO tabelaSelecionada;
-		
-		
-		private void limparTabelaConsultas() {
-			tblConsultas.setModel(new DefaultTableModel(new Object[][] { nomesColunas, }, nomesColunas));
+		private String[] nomesColunas = { "#", "Nome", "Mês", "Ano", "Total restante", "Saldo Final" };
+	
+		//Métodos usados no JTable
+		private void limparTabela() {
+			tblTabelas.setModel(new DefaultTableModel(new Object[][] { nomesColunas, }, 
+					nomesColunas));
 		}
 
-		private void atualizarTabela() {
-			this.limparTabelaConsultas();
- 
-			DefaultTableModel model = (DefaultTableModel) tblConsultas.getModel();
+		//Chamado sempre no "Buscar"
+		private void atualizarTabelaEnderecos(UsuarioVO userOnline) {
+			this.limparTabela();
 
+			TabelaVO tabelaVO = new TabelaVO();
+			tabelaVO.setIdUsuario(userOnline.getIdUsuario());
+			
+			TabelaController tabelaController = new TabelaController();
+			tabelas = (ArrayList<TabelaVO>) tabelaController.consultarTodasController(tabelaVO);
+			
+			DefaultTableModel model = (DefaultTableModel) tblTabelas.getModel();
+			//Preenche os valores na tabela linha a linha
 			for (TabelaVO t : tabelas) {
-				Object[] novaLinhaDaTabela = new Object[4];
+				Object[] novaLinhaDaTabela = new Object[7];
 				novaLinhaDaTabela[0] = t.getMes();
-				novaLinhaDaTabela[1] = t.getAno();
-				novaLinhaDaTabela[2] = t.getTotalRest();
-				novaLinhaDaTabela[3] = t.getSaldoFinal();
-				
+				novaLinhaDaTabela[1] = t.getMes();
+				novaLinhaDaTabela[2] = t.getAno();
+				novaLinhaDaTabela[3] = t.getTotalRest();
+				novaLinhaDaTabela[4] = t.getSaldoFinal();
+
 				model.addRow(novaLinhaDaTabela);
 			}
 		}
 		
-		private void buscarTelefones() {
-			this.tabelas = tabelaController.consultarTodasController();
-			this.atualizarTabela();
-		}
+	/**
+	 * Create the panel.
+	 */
+	public PainelTabelaCompleta(final UsuarioVO userOnline) {
 		
-		public PainelTabelaCompleta(final UsuarioVO userOnline) {
-			
-			setLayout(new FormLayout(new ColumnSpec[] {
-					FormSpecs.RELATED_GAP_COLSPEC,
-					ColumnSpec.decode("default:grow"),},
-				new RowSpec[] {
-					FormSpecs.RELATED_GAP_ROWSPEC,
-					FormSpecs.DEFAULT_ROWSPEC,
-					FormSpecs.RELATED_GAP_ROWSPEC,
-					RowSpec.decode("default:grow"),}));
-			
-			        tblConsultas = new JTable();
-					add(tblConsultas, "2, 4, fill, fill");
-					buscarTelefones();
-		}
+		//setBackground(new Color(0, 0, 0));
+		setBackground(new Color(0, 0, 0));
+		setLayout(null);
+		btnBuscar = new JButton("Buscar Todos");
+		btnBuscar.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		btnBuscar.setBackground(new Color(192, 192, 192));
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				atualizarTabelaEnderecos(userOnline);
+			}
+		});
+		btnBuscar.setBounds(253, 21, 145, 35);
+		add(btnBuscar);
+		
+		tblTabelas = new JTable();
+		this.limparTabela();
+		tblTabelas.setBounds(15, 70, 655, 350);
+		
+		
+		add(tblTabelas);
 	}
-			
-	
-
+		
+}
