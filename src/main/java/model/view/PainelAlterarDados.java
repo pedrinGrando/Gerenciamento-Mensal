@@ -22,7 +22,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
 import model.vo.UsuarioVO;
+import model.vo.*;
 import controller.UsuarioController;
+import controller.EnderecoController;
 import model.view.*;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -35,12 +37,16 @@ public class PainelAlterarDados extends JPanel {
 	private JComponent lblNewLabel_2;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
-	private JTextField novoBruto_camp;
+	private JTextField novoSalarioL;
 	private JLabel lblNewLabel_5;
 	private JLabel lblNewLabel_6;
 	private JButton btnNewButton_1;
+	
 	UsuarioController usuarioController = new UsuarioController();
 	UsuarioVO userAtualizado = new UsuarioVO();
+	EnderecoVO endAtualizado = new EnderecoVO();
+	EnderecoController enderecoController = new EnderecoController();
+	
 	private JTextField ruaCampo;
 	private JTextField campBairro;
 	private JTextField campNumero;
@@ -58,6 +64,10 @@ public class PainelAlterarDados extends JPanel {
 	public PainelAlterarDados(final UsuarioVO userLogado) throws ParseException {
 		
 	    setLayout(null);
+	    
+	    EnderecoVO estado = new EnderecoVO();
+	    estado.setIdEndereco(userLogado.getIdUsuario());
+	    estado = enderecoController.consultarEnderecoPorId(estado);
 		
 		JLabel lblNewLabel_1 = new JLabel("Atualização de dados");
 		lblNewLabel_1.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 15));
@@ -67,20 +77,27 @@ public class PainelAlterarDados extends JPanel {
 		mascaraCEP = new MaskFormatter("#####-###");
 		mascaraCEP.setValueContainsLiteralCharacters(false);
 		
+		String[] listaEstados = {estado.getEstado(),"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS"
+				+ "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
+		
 		novoNome_camp = new JTextField();
 		novoNome_camp.setBounds(10, 112, 192, 20);
 		add(novoNome_camp);
 		novoNome_camp.setColumns(10);
+		novoNome_camp.setText(userLogado.getNome());
 		
 		novoEmail_camp = new JTextField();
 		novoEmail_camp.setBounds(10, 167, 192, 20);
 		add(novoEmail_camp);
 		novoEmail_camp.setColumns(10);
+		novoEmail_camp.setText(userLogado.getEmail());
 		
 		novoUser_camp = new JTextField();
 		novoUser_camp.setBounds(10, 226, 192, 20);
 		add(novoUser_camp);
 		novoUser_camp.setColumns(10);
+		novoUser_camp.setText(userLogado.getLogin());
+		
 		
 	    lblNewLabel_2 = new JLabel("Nome Completo");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.ITALIC, 9));
@@ -88,13 +105,15 @@ public class PainelAlterarDados extends JPanel {
 		lblNewLabel_2.setBounds(10, 98, 163, 14);
 		add(lblNewLabel_2);
 		
-		cbEstados = new JComboBox();
+		cbEstados = new JComboBox(listaEstados);
+		cbEstados.setBackground(new Color(192, 192, 192));
 		cbEstados.setBounds(377, 180, 80, 22);
 		add(cbEstados);
 		
 		cepCamp = new JFormattedTextField(mascaraCEP);
 		cepCamp.setBounds(377, 112, 114, 20);
 		add(cepCamp);
+		cepCamp.setText(estado.getCep());
 		
 		lblNewLabel_3 = new JLabel("E-mail");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.ITALIC, 9));
@@ -106,15 +125,28 @@ public class PainelAlterarDados extends JPanel {
 		lblNewLabel_4.setBounds(10, 213, 163, 14);
 		add(lblNewLabel_4);
 		
-		novoBruto_camp = new JTextField();
-		novoBruto_camp.setBounds(35, 271, 102, 20);
-		add(novoBruto_camp);
-		novoBruto_camp.setColumns(10);
+		novoSalarioL = new JTextField();
+		novoSalarioL.setBounds(35, 271, 102, 20);
+		add(novoSalarioL);
+		novoSalarioL.setColumns(10);
+		novoSalarioL.setText(""+userLogado.getSalariol());
 		
 		lblNewLabel_5 = new JLabel("Salário líquido");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.ITALIC, 10));
 		lblNewLabel_5.setBounds(10, 257, 96, 14);
 		add(lblNewLabel_5);
+		
+		campNumero = new JTextField();
+		campNumero.setBounds(10, 438, 86, 20);
+		add(campNumero);
+		campNumero.setColumns(10);
+		campNumero.setText(""+estado.getNumero());
+		
+		campCIdade = new JTextField();
+		campCIdade.setBounds(377, 226, 171, 20);
+		add(campCIdade);
+		campCIdade.setColumns(10);
+		campCIdade.setText(estado.getCidade());
 		
 		lblNewLabel_6 = new JLabel("R$");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -126,20 +158,31 @@ public class PainelAlterarDados extends JPanel {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//INSERINDO NOVOS DADOS
-				//userAtualizado.setBruto(Double.parseDouble(novoBruto_camp.getText()));
+				//INSERINDO NOVOS DADOS 
+				userAtualizado.setSalariol(Double.parseDouble(novoSalarioL.getText()));
 				userAtualizado.setEmail(novoEmail_camp.getText());
 				userAtualizado.setNome(novoNome_camp.getText());
 				userAtualizado.setLogin(novoUser_camp.getText());
+				userAtualizado.setSenha(novaSenhaAtualizar.getText());
 				userAtualizado.setIdUsuario(userLogado.getIdUsuario());
 				
-				//boolean result = usuarioController.atualizarUsuarioController(userAtualizado);
+				// ENDERECO
+				endAtualizado.setBairro(campBairro.getText());
+				endAtualizado.setCep(cepCamp.getText());
+				endAtualizado.setRua(ruaCampo.getText());
+				endAtualizado.setIdUsuario(userAtualizado.getIdUsuario());
+				endAtualizado.setEstado((String) cbEstados.getSelectedItem());
+				endAtualizado.setCidade(campCIdade.getText());
+				endAtualizado.setNumero(Integer.parseInt(campNumero.getText()));
 				
-				//if (result) {
-					JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!", "GS - Gerenciador de Salário", JOptionPane.INFORMATION_MESSAGE);
-				//} else {
-					JOptionPane.showMessageDialog(null, "Não foi possível alterar!", "GS - Gerenciador de Salário", JOptionPane.WARNING_MESSAGE);
-				//}
+				boolean result = usuarioController.atualizarUsuarioController(userAtualizado);
+				boolean result2 = enderecoController.atualizarEndController(endAtualizado);
+				
+				if (result && result2) {
+					JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "Não foi possível alterar!", "GS - Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+				}
 					
 			}
 		});
@@ -152,6 +195,7 @@ public class PainelAlterarDados extends JPanel {
 		ruaCampo.setBounds(10, 325, 192, 20);
 		add(ruaCampo);
 		ruaCampo.setColumns(10);
+		ruaCampo.setText(estado.getRua());
 		
 		JLabel lblRua = new JLabel("Rua ");
 		lblRua.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -162,11 +206,8 @@ public class PainelAlterarDados extends JPanel {
 		campBairro.setBounds(10, 383, 192, 20);
 		add(campBairro);
 		campBairro.setColumns(10);
+		campBairro.setText(estado.getBairro());
 		
-		campNumero = new JTextField();
-		campNumero.setBounds(10, 438, 86, 20);
-		add(campNumero);
-		campNumero.setColumns(10);
 		
 		JLabel lblBairro = new JLabel("Bairro");
 		lblBairro.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -188,10 +229,6 @@ public class PainelAlterarDados extends JPanel {
 		lblEstado.setBounds(377, 153, 46, 14);
 		add(lblEstado);
 		
-		campCIdade = new JTextField();
-		campCIdade.setBounds(377, 226, 171, 20);
-		add(campCIdade);
-		campCIdade.setColumns(10);
 		
 		JLabel lblCidade = new JLabel("Cidade");
 		lblCidade.setFont(new Font("Tahoma", Font.ITALIC, 11));

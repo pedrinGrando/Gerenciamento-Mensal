@@ -21,4 +21,9 @@ public class UsuarioBO {
 		return userDAO.excluirContaDAO(userOnline);
 	}
 
+	public boolean atualizarUsuarioBO(UsuarioVO userAtualizado) {
+		
+		return userDAO.atualizarUsuarioDAO(userAtualizado);
+	}
+
 }

@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 import model.vo.*;
 import controller.*;
@@ -69,6 +70,7 @@ public class TelaCadastro extends JFrame {
 	private JPasswordField confirmCampSenha;
 	private JTextField campCidade;
 	private JTextField salarioCamp;
+	private JComboBox cbEstados;
 
 	/**
 	 * Launch the application.
@@ -100,6 +102,9 @@ public class TelaCadastro extends JFrame {
 		
 		mascaraCEP = new MaskFormatter("#####-###");
 		mascaraCpf.setValueContainsLiteralCharacters(false);
+		
+		String[] listaEstados = {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS"
+				+ "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
 		
 		setTitle("Gerenciamento-Mensal | Cadastro");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -245,7 +250,7 @@ public class TelaCadastro extends JFrame {
 		lblNewLabel_13.setBounds(468, 353, 46, 14);
 		contentPane.add(lblNewLabel_13);
 		
-		JComboBox cbEstados = new JComboBox();
+		cbEstados = new JComboBox(listaEstados);
 		cbEstados.setBackground(new Color(192, 192, 192));
 		cbEstados.setBounds(538, 349, 78, 22);
 		contentPane.add(cbEstados);
@@ -284,10 +289,11 @@ public class TelaCadastro extends JFrame {
 	
 				
 				// inserindo dados nos objetos 
+				LocalDate data = LocalDate.of(2002, 12, 12);
 				
 				usuario.setNome(campoNome.getText());
 				usuario.setEmail(emailCamp.getText());
-				usuario.setDataNasci(null);
+				usuario.setDataNasci(data);
 			    usuario.setLogin(loginCamp.getText());
 			    usuario.setSenha(confirmCampSenha.getText());
 			    usuario.setSalariol(Double.parseDouble(salarioCamp.getText()));
@@ -315,7 +321,7 @@ public class TelaCadastro extends JFrame {
 				endereco.setRua(ruaCamp.getText());
 				endereco.setNumero(Integer.parseInt(campNumero.getText()));
 				endereco.setCidade(campCidade.getText());
-				//endereco.setEstado(cbEstados.getSelectedItem());
+				endereco.setEstado((String) cbEstados.getSelectedItem());
 				
 				endereco = enderecoController.cadastrarEnderecoController(endereco);
 				
@@ -325,10 +331,6 @@ public class TelaCadastro extends JFrame {
 		btnNewButton_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		btnNewButton_1.setBounds(383, 591, 100, 23);
 		contentPane.add(btnNewButton_1);
-		
-		
-		
-		
 		
 			}
 		}

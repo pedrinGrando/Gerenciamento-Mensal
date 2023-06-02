@@ -21,10 +21,13 @@ public class UsuarioController {
 	}
 
 	public void cadastrarUsuarioController(UsuarioVO usuario) {
-		
-		
-		
+			
 
+	}
+
+	public boolean atualizarUsuarioController(UsuarioVO userAtualizado) {
+		
+		return userBO.atualizarUsuarioBO(userAtualizado);
 	}
 
 }

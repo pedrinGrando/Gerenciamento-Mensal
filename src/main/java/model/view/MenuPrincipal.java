@@ -98,7 +98,6 @@ public class MenuPrincipal extends JFrame {
 					e1.printStackTrace();
 				}
 				
-			
 			}
 		});
 		mntmAtualizarDados.setFont(new Font("Segoe UI", Font.ITALIC, 12));

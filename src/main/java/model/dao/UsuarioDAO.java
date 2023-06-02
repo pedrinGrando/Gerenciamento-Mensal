@@ -102,5 +102,33 @@ public class UsuarioDAO {
 		}
 		return retorno;
 	}
+	
+	public boolean atualizarUsuarioDAO(UsuarioVO usuarioAtualizado) {
+		
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		boolean retorno = false;
+		
+		String query = "UPDATE usuario SET nome = " + usuarioAtualizado.getNome()
+				+ ", email = '" + usuarioAtualizado.getEmail()
+				+ "', salariol = '" + usuarioAtualizado.getSalariol()
+				+ "', login = '" + usuarioAtualizado.getLogin()
+				+ "', senha = '" + usuarioAtualizado.getSenha()
+				+ "' WHERE idusuario = " + usuarioAtualizado.getIdUsuario();
+		 
+		try {
+			if(stmt.executeUpdate(query) == 1) {
+				retorno = true;
+			}
+		} catch (SQLException erro) {
+			System.out.println("Erro ao executar a query do método atualizarUsuarioDAO");
+			System.out.println("Erro: " + erro.getMessage());	
+		} finally {
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return retorno;
+		
+	}
 
 }
