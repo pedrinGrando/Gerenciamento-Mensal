@@ -9,7 +9,7 @@ public class UsuarioVO {
 	private int tipoUsuario;
 	private String nome;
 	private String cpf;
-	private LocalDate DataNasci;
+	private LocalDate dataNasci;
 	private String email;
 	private double salariol;
 	private String login;
@@ -23,7 +23,7 @@ public class UsuarioVO {
 		this.tipoUsuario = tipoUsuario;
 		this.nome = nome;
 		this.cpf = cpf;
-		DataNasci = dataNasci;
+		dataNasci = dataNasci;
 		this.email = email;
 		this.salariol = salariol;
 		this.login = login;
@@ -68,11 +68,11 @@ public class UsuarioVO {
 	}
 
 	public LocalDate getDataNasci() {
-		return DataNasci;
+		return dataNasci;
 	}
 
 	public void setDataNasci(LocalDate dataNasci) {
-		DataNasci = dataNasci;
+		dataNasci = dataNasci;
 	}
 
 	public String getEmail() {

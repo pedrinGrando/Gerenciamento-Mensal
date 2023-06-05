@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
+
+import com.github.lgooddatepicker.components.DatePicker;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -43,11 +46,13 @@ public class TelaCadastro extends JFrame {
     UsuarioVO usuario = new UsuarioVO();
     EnderecoVO endereco = new EnderecoVO();
     EnderecoController enderecoController = new EnderecoController();
+    
 	private MaskFormatter mascaraCpf;
 	private MaskFormatter mascaraData;
 	private MaskFormatter mascaraCEP;
 	private JFormattedTextField cpfCamp;
-	private JFormattedTextField dataNasciCamp;
+	private DatePicker dataNasciCamp;
+	
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
@@ -125,7 +130,7 @@ public class TelaCadastro extends JFrame {
 		cpfCamp.setBounds(105, 67, 254, 20);
 		contentPane.add(cpfCamp);
 		
-		dataNasciCamp = new JFormattedTextField(mascaraData);
+		dataNasciCamp = new DatePicker();
 		dataNasciCamp.setBounds(136, 111, 223, 20);
 		contentPane.add(dataNasciCamp);
 		
@@ -289,11 +294,11 @@ public class TelaCadastro extends JFrame {
 	
 				
 				// inserindo dados nos objetos 
-				LocalDate data = LocalDate.of(2002, 12, 12);
+			
 				
 				usuario.setNome(campoNome.getText());
 				usuario.setEmail(emailCamp.getText());
-				usuario.setDataNasci(data);
+				usuario.setDataNasci(dataNasciCamp.getDate());
 			    usuario.setLogin(loginCamp.getText());
 			    usuario.setSenha(confirmCampSenha.getText());
 			    usuario.setSalariol(Double.parseDouble(salarioCamp.getText()));
