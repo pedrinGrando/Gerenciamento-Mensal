@@ -61,7 +61,7 @@ public class MenuPrincipal extends JFrame {
 		setTitle("Gerenciamento Mensal | Menu");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 741, 558);
+		setBounds(100, 100, 710, 558);
 		setLocationRelativeTo(null);
 		
 		JMenuBar menuBar = new JMenuBar();

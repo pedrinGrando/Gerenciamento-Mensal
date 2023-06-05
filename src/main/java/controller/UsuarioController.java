@@ -20,9 +20,9 @@ public class UsuarioController {
 		return userBO.excluirContaBO(userOnline);
 	}
 
-	public void cadastrarUsuarioController(UsuarioVO usuario) {
+	public UsuarioVO cadastrarUsuarioController(UsuarioVO usuario) {
 			
-
+         return userBO.cadastrarUsuarioBO(usuario);
 	}
 
 	public boolean atualizarUsuarioController(UsuarioVO userAtualizado) {

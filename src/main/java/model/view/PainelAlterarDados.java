@@ -56,6 +56,15 @@ public class PainelAlterarDados extends JPanel {
 	private JPasswordField senhaAtualAtualizar;
 	private JPasswordField novaSenhaAtualizar;
 	private MaskFormatter mascaraCEP;
+	private JLabel lblNewLabel_1;
+	private JLabel lblRua;
+	private JLabel lblBairro;
+	private JLabel lblNumero;
+	private JLabel lblCep;
+	private JLabel lblEstado;
+	private JComponent lblCidade;
+	private JComponent lblNewLabel;
+	private JLabel lblNewLabel_7;
 
 	/**
 	 * Create the panel.
@@ -64,18 +73,19 @@ public class PainelAlterarDados extends JPanel {
 	public PainelAlterarDados(final UsuarioVO userLogado) throws ParseException {
 		
 	    setLayout(null);
-	    
-	    EnderecoVO estado = new EnderecoVO();
-	    estado.setIdEndereco(userLogado.getIdUsuario());
-	    estado = enderecoController.consultarEnderecoPorId(estado);
+	   
 		
-		JLabel lblNewLabel_1 = new JLabel("Atualização de dados");
+		lblNewLabel_1 = new JLabel("Atualização de dados");
 		lblNewLabel_1.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 15));
 		lblNewLabel_1.setBounds(33, 55, 260, 14);
 		add(lblNewLabel_1);
 		
 		mascaraCEP = new MaskFormatter("#####-###");
 		mascaraCEP.setValueContainsLiteralCharacters(false);
+		
+		    EnderecoVO estado = new EnderecoVO();
+		    estado.setIdEndereco(userLogado.getIdUsuario());
+		    estado = enderecoController.consultarEnderecoPorId(estado);
 		
 		String[] listaEstados = {estado.getEstado(),"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS"
 				+ "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
@@ -197,7 +207,7 @@ public class PainelAlterarDados extends JPanel {
 		ruaCampo.setColumns(10);
 		ruaCampo.setText(estado.getRua());
 		
-		JLabel lblRua = new JLabel("Rua ");
+		lblRua = new JLabel("Rua ");
 		lblRua.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblRua.setBounds(10, 312, 46, 14);
 		add(lblRua);
@@ -209,34 +219,34 @@ public class PainelAlterarDados extends JPanel {
 		campBairro.setText(estado.getBairro());
 		
 		
-		JLabel lblBairro = new JLabel("Bairro");
+		lblBairro = new JLabel("Bairro");
 		lblBairro.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblBairro.setBounds(10, 370, 46, 14);
 		add(lblBairro);
 		
-		JLabel lblNumero = new JLabel("Número");
+		lblNumero = new JLabel("Número");
 		lblNumero.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNumero.setBounds(10, 426, 46, 14);
 		add(lblNumero);
 		
-		JLabel lblCep = new JLabel("CEP");
+		lblCep = new JLabel("CEP");
 		lblCep.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblCep.setBounds(377, 98, 46, 14);
 		add(lblCep);
 		
-		JLabel lblEstado = new JLabel("Estado");
+		lblEstado = new JLabel("Estado");
 		lblEstado.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblEstado.setBounds(377, 153, 46, 14);
 		add(lblEstado);
 		
 		
-		JLabel lblCidade = new JLabel("Cidade");
+	    lblCidade = new JLabel("Cidade");
 		lblCidade.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblCidade.setBounds(377, 213, 46, 14);
 		add(lblCidade);
 		
 		
-		JLabel lblNewLabel = new JLabel("Senha atual : ");
+		lblNewLabel = new JLabel("Senha atual : ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNewLabel.setBounds(377, 274, 102, 14);
 		add(lblNewLabel);
@@ -245,7 +255,7 @@ public class PainelAlterarDados extends JPanel {
 		senhaAtualAtualizar.setBounds(377, 288, 102, 20);
 		add(senhaAtualAtualizar);
 		
-		JLabel lblNewLabel_7 = new JLabel("Nova senha : ");
+		lblNewLabel_7 = new JLabel("Nova senha : ");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNewLabel_7.setBounds(377, 328, 102, 14);
 		add(lblNewLabel_7);

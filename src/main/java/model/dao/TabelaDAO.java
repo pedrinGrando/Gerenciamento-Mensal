@@ -52,7 +52,7 @@ public class TabelaDAO {
 	
 		String query = "SELECT idtabela, idusuario, mes, ano, totalrestmes, "
 				+ "saldofinal "
-				+ "FROM TABELA "
+				+ "FROM tabelamensal "
 				+ "WHERE mes = '" + tabelaVO.getMes() +"'"
 				+ "AND idusuario = " + tabelaVO.getIdUsuario();
 		

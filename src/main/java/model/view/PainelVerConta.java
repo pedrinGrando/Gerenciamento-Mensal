@@ -104,9 +104,9 @@ public class PainelVerConta extends JPanel {
 		add(cpf_label);
 		
 		//CRIPTROGRAFA O CPF
-		String cpfCrip = userOnline.getCpf().substring(1, 4);
+		String cpfCrip = userOnline.getCpf().substring(0, 3);
 		
-		cpf_label.setText(cpfCrip + "******");
+		cpf_label.setText(cpfCrip + ".***.***-**");
 		
 		email_label = new JLabel("");
 		email_label.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -127,8 +127,6 @@ public class PainelVerConta extends JPanel {
 		lblDataNasci.setBounds(148, 181, 124, 14);
 		add(lblDataNasci);
 		
-		lblDataNasci.setText(""+userOnline.getDataNasci());
-		
 		lblNewLabel_5 = new JLabel("Data de nascimento : ");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		lblNewLabel_5.setBounds(10, 181, 148, 14);
@@ -148,49 +146,49 @@ public class PainelVerConta extends JPanel {
 		
 		lblNewLabel_8 = new JLabel("Estado : ");
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_8.setBounds(295, 72, 65, 14);
+		lblNewLabel_8.setBounds(295, 82, 65, 14);
 		add(lblNewLabel_8);
 		
 		lblEstado = new JLabel("");
 		lblEstado.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblEstado.setBounds(370, 72, 130, 14);
+		lblEstado.setBounds(344, 82, 65, 14);
 		add(lblEstado);
 		
 		lblEstado.setText(endereco.getEstado());
 		
 		lblNewLabel_10 = new JLabel("Cidade : ");
 		lblNewLabel_10.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_10.setBounds(295, 97, 65, 14);
+		lblNewLabel_10.setBounds(295, 122, 65, 14);
 		add(lblNewLabel_10);
 		
 		
 		lblCidade = new JLabel("");
 		lblCidade.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblCidade.setBounds(370, 97, 119, 14);
+		lblCidade.setBounds(354, 122, 145, 14);
 		add(lblCidade);
 		
 		lblCidade.setText(endereco.getCidade());
 		
 		lblNewLabel_12 = new JLabel("Rua :");
 		lblNewLabel_12.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_12.setBounds(295, 135, 65, 14);
+		lblNewLabel_12.setBounds(295, 158, 65, 14);
 		add(lblNewLabel_12);
 		
 		lblRua = new JLabel("");
 		lblRua.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblRua.setBounds(337, 135, 234, 14);
+		lblRua.setBounds(337, 158, 234, 14);
 		add(lblRua);
 		
 		lblRua.setText(endereco.getRua());
 		
 		lblNewLabel_14 = new JLabel("CEP : ");
 		lblNewLabel_14.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_14.setBounds(295, 172, 65, 14);
+		lblNewLabel_14.setBounds(295, 206, 65, 14);
 		add(lblNewLabel_14);
 		
 		lblCEP = new JLabel("");
 		lblCEP.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblCEP.setBounds(349, 172, 140, 14);
+		lblCEP.setBounds(337, 206, 140, 14);
 		add(lblCEP);
 		
 		lblCEP.setText(endereco.getCep());

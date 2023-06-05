@@ -15,7 +15,7 @@ public class EnderecoDAO {
 
 	public EnderecoVO cadastrarEnderecoDAO(EnderecoVO endereco) {
 		
-		String query ="INSERT INTO endereco (rua, bairro, numero, cep, estado, cidade, senha) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String query ="INSERT INTO endereco (idusuario, rua, bairro, numero, cep, estado, cidade) VALUES (?, ?, ?, ?, ?, ?, ?)";
 				
 		Connection conn = Banco.getConnection();
 		PreparedStatement pstmt = Banco.getPreparedStatementWithPk(conn, query);

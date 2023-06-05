@@ -102,9 +102,6 @@ public class TelaCadastro extends JFrame {
 		mascaraCpf = new MaskFormatter("###.###.###-##");
 		mascaraCpf.setValueContainsLiteralCharacters(false);
 		
-		mascaraData = new MaskFormatter("##/##/####");
-		mascaraCpf.setValueContainsLiteralCharacters(false);
-		
 		mascaraCEP = new MaskFormatter("#####-###");
 		mascaraCpf.setValueContainsLiteralCharacters(false);
 		
@@ -131,6 +128,8 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(cpfCamp);
 		
 		dataNasciCamp = new DatePicker();
+		dataNasciCamp.getComponentToggleCalendarButton().setBackground(new Color(192, 192, 192));
+		dataNasciCamp.getComponentDateTextField().setBackground(new Color(192, 192, 192));
 		dataNasciCamp.setBounds(136, 111, 223, 20);
 		contentPane.add(dataNasciCamp);
 		
@@ -271,11 +270,22 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(lblNewLabel_14);
 		
 		btnNewButton = new JButton("Voltar");
+		btnNewButton.setBackground(new Color(192, 192, 192));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// retorna para a tela de login 
+				dispose();
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+				
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		btnNewButton.setBounds(282, 591, 100, 23);
 		contentPane.add(btnNewButton);
 		
 		btnNewButton_1 = new JButton("Cadastrar");
+		btnNewButton_1.setBackground(new Color(192, 192, 192));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -292,33 +302,18 @@ public class TelaCadastro extends JFrame {
 							"Erro", JOptionPane.ERROR_MESSAGE); 
 				}
 	
-				
 				// inserindo dados nos objetos 
 			
-				
 				usuario.setNome(campoNome.getText());
 				usuario.setEmail(emailCamp.getText());
 				usuario.setDataNasci(dataNasciCamp.getDate());
 			    usuario.setLogin(loginCamp.getText());
 			    usuario.setSenha(confirmCampSenha.getText());
 			    usuario.setSalariol(Double.parseDouble(salarioCamp.getText()));
-				
-				usuarioController.cadastrarUsuarioController(usuario);
-				endereco = this.cadastrarEndereco(usuario);
-				
-				if (usuario.getIdUsuario() != 0) {
-					JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", 
-							"Sucesso", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null, "Não foi possível cadastrar o usuário!", 
-							"Sucesso", JOptionPane.ERROR_MESSAGE);
-					
-				}
-				
-			}
-
-			private EnderecoVO cadastrarEndereco(UsuarioVO usuario) {
-				EnderecoVO endereco = new EnderecoVO();
+			    
+                EnderecoVO endereco = new EnderecoVO();
+                
+                System.out.println(usuario.getDataNasci());
 				
 				endereco.setIdUsuario(usuario.getIdUsuario());
 				endereco.setBairro(bairroCamp.getText());
@@ -328,10 +323,19 @@ public class TelaCadastro extends JFrame {
 				endereco.setCidade(campCidade.getText());
 				endereco.setEstado((String) cbEstados.getSelectedItem());
 				
+				usuarioController.cadastrarUsuarioController(usuario);
 				endereco = enderecoController.cadastrarEnderecoController(endereco);
 				
-				return endereco;
+				if (usuario.getIdUsuario() != 0 && endereco.getIdEndereco() != 0) {
+					JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", 
+							"Sucesso", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "Não foi possível cadastrar o usuário!", 
+							"Sucesso", JOptionPane.ERROR_MESSAGE);
+				}
+				
 			}
+
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		btnNewButton_1.setBounds(383, 591, 100, 23);

@@ -44,7 +44,7 @@ public class PainelTabelaCompleta extends JPanel {
 		private EnderecoController tabelaController = new EnderecoController();
 		//Lista para armezenar os endereços consultados no banco
 		private ArrayList<TabelaVO> tabelas;
-		private String[] nomesColunas = { "#", "Nome", "Mês", "Ano", "Total restante", "Saldo Final" };
+		private String[] nomesColunas = { "Nome", "Mês", "Ano", "Total restante", "Saldo final" };
 	
 		//Métodos usados no JTable
 		private void limparTabela() {
@@ -66,7 +66,7 @@ public class PainelTabelaCompleta extends JPanel {
 			//Preenche os valores na tabela linha a linha
 			for (TabelaVO t : tabelas) {
 				Object[] novaLinhaDaTabela = new Object[7];
-				novaLinhaDaTabela[0] = t.getMes();
+				novaLinhaDaTabela[0] = userOnline.getNome();
 				novaLinhaDaTabela[1] = t.getMes();
 				novaLinhaDaTabela[2] = t.getAno();
 				novaLinhaDaTabela[3] = t.getTotalRest();
@@ -82,7 +82,7 @@ public class PainelTabelaCompleta extends JPanel {
 	public PainelTabelaCompleta(final UsuarioVO userOnline) {
 		
 		//setBackground(new Color(0, 0, 0));
-		setBackground(new Color(0, 0, 0));
+		setBackground(new Color(192, 192, 192));
 		setLayout(null);
 		btnBuscar = new JButton("Buscar Todos");
 		btnBuscar.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -92,15 +92,19 @@ public class PainelTabelaCompleta extends JPanel {
 				atualizarTabelaEnderecos(userOnline);
 			}
 		});
-		btnBuscar.setBounds(253, 21, 145, 35);
+		btnBuscar.setBounds(460, 22, 145, 23);
 		add(btnBuscar);
 		
 		tblTabelas = new JTable();
 		this.limparTabela();
-		tblTabelas.setBounds(15, 70, 655, 350);
+		tblTabelas.setBounds(10, 68, 655, 350);
 		
 		
 		add(tblTabelas);
-	}
 		
+		JButton btnFiltrar = new JButton("");
+		btnFiltrar.setBackground(new Color(192, 192, 192));
+		btnFiltrar.setBounds(604, 22, 33, 23);
+		add(btnFiltrar);
+	}
 }

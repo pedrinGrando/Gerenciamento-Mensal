@@ -23,7 +23,7 @@ public class UsuarioVO {
 		this.tipoUsuario = tipoUsuario;
 		this.nome = nome;
 		this.cpf = cpf;
-		dataNasci = dataNasci;
+		this.dataNasci = dataNasci;
 		this.email = email;
 		this.salariol = salariol;
 		this.login = login;
@@ -72,7 +72,7 @@ public class UsuarioVO {
 	}
 
 	public void setDataNasci(LocalDate dataNasci) {
-		dataNasci = dataNasci;
+		this.dataNasci = dataNasci;
 	}
 
 	public String getEmail() {
@@ -114,5 +114,6 @@ public class UsuarioVO {
 	public void setDespesas(ArrayList<DespesaVO> despesas) {
 		this.despesas = despesas;
 	}
+	
 	
 }

@@ -52,7 +52,7 @@ public class UsuarioDAO {
 	}
 	
 	public UsuarioVO cadastrarUsuarioDAO(UsuarioVO usuario) {
-		String query ="INSERT INTO usuario (tipousuario, nome, cpf, datanasci, email, salariol, login, "
+		String query ="INSERT INTO usuario (tipousuario, nome, cpf, datanasci, email, salariol, login,"
 				+ " senha ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		Connection conn = Banco.getConnection();
 		PreparedStatement pstmt = Banco.getPreparedStatementWithPk(conn, query);
@@ -109,10 +109,10 @@ public class UsuarioDAO {
 		Statement stmt = Banco.getStatement(conn);
 		boolean retorno = false;
 		
-		String query = "UPDATE usuario SET nome = " + usuarioAtualizado.getNome()
-				+ ", email = '" + usuarioAtualizado.getEmail()
-				+ "', salariol = '" + usuarioAtualizado.getSalariol()
-				+ "', login = '" + usuarioAtualizado.getLogin()
+		String query = "UPDATE usuario SET nome = '" + usuarioAtualizado.getNome()
+				+ "', email = '" + usuarioAtualizado.getEmail()
+				+ "', salariol = " + usuarioAtualizado.getSalariol()
+				+ ", login = '" + usuarioAtualizado.getLogin()
 				+ "', senha = '" + usuarioAtualizado.getSenha()
 				+ "' WHERE idusuario = " + usuarioAtualizado.getIdUsuario();
 		 

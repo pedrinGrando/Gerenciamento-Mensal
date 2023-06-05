@@ -118,8 +118,9 @@ public class PainelConsultaMes extends JPanel {
 		lblNewLabel_4.setBounds(52, 221, 78, 14);
 		add(lblNewLabel_4);
 		
-		JLabel lblAno = new JLabel("New label");
-		lblAno.setBounds(111, 221, 46, 14);
+		JLabel lblAno = new JLabel("");
+		lblAno.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblAno.setBounds(111, 221, 87, 14);
 		add(lblAno);
 		
 		JLabel lblNewLabel_6 = new JLabel("Total restante no mês :  R$ ");
@@ -127,8 +128,9 @@ public class PainelConsultaMes extends JPanel {
 		lblNewLabel_6.setBounds(43, 288, 155, 14);
 		add(lblNewLabel_6);
 		
-		JLabel lblTotalRest = new JLabel("New label");
-		lblTotalRest.setBounds(211, 288, 113, 14);
+		JLabel lblTotalRest = new JLabel("");
+		lblTotalRest.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblTotalRest.setBounds(211, 288, 125, 14);
 		add(lblTotalRest);
 		
 		JLabel lblNewLabel_8 = new JLabel("Saldo final :  R$ ");
@@ -136,8 +138,9 @@ public class PainelConsultaMes extends JPanel {
 		lblNewLabel_8.setBounds(43, 363, 114, 14);
 		add(lblNewLabel_8);
 		
-		JLabel lblSaldoFinal = new JLabel("New label");
-		lblSaldoFinal.setBounds(184, 363, 102, 14);
+		JLabel lblSaldoFinal = new JLabel("");
+		lblSaldoFinal.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblSaldoFinal.setBounds(151, 363, 102, 14);
 		add(lblSaldoFinal);
 		
 		

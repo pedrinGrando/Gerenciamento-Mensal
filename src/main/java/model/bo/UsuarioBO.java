@@ -26,4 +26,9 @@ public class UsuarioBO {
 		return userDAO.atualizarUsuarioDAO(userAtualizado);
 	}
 
+	public UsuarioVO cadastrarUsuarioBO(UsuarioVO usuario) {
+		
+		return userDAO.cadastrarUsuarioDAO(usuario);
+	}
+
 }
