@@ -96,6 +96,7 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu.add(mntmVerConta);
 		
 		JMenuItem mntmAtualizarDados = new JMenuItem("Atualizar dados ");
+		mntmAtualizarDados.setBackground(new Color(255, 255, 255));
 		mntmAtualizarDados.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
 		mntmAtualizarDados.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/pencil.png")));
 		mntmAtualizarDados.addActionListener(new ActionListener() {
@@ -116,6 +117,7 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu.add(mntmAtualizarDados);
 		
 		JMenuItem mntmTrocarConta = new JMenuItem("Trocar usuário");
+		mntmTrocarConta.setBackground(new Color(255, 255, 255));
 		mntmTrocarConta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0));
 		mntmTrocarConta.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/refresh.png")));
 		mntmTrocarConta.addActionListener(new ActionListener() {
@@ -132,6 +134,7 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu.add(mntmTrocarConta);
 		
 		JMenuItem mntmEncerrarConta = new JMenuItem("Encerrar conta");
+		mntmEncerrarConta.setBackground(new Color(255, 255, 255));
 		mntmEncerrarConta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
 		mntmEncerrarConta.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/cross.png")));
 		mntmEncerrarConta.addActionListener(new ActionListener() {
@@ -162,6 +165,7 @@ public class MenuPrincipal extends JFrame {
 		menuBar.add(mnNewMenu_2);
 		
 		JMenuItem mntmConsultarDesp = new JMenuItem("Consultar");
+		mntmConsultarDesp.setBackground(new Color(255, 255, 255));
 		mntmConsultarDesp.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/search.png")));
 		mntmConsultarDesp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -176,6 +180,7 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu_2.add(mntmConsultarDesp);
 		
 		JMenuItem mntmInserirNovaDespesa = new JMenuItem("Inserir nova ");
+		mntmInserirNovaDespesa.setBackground(new Color(255, 255, 255));
 		mntmInserirNovaDespesa.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/add.png")));
 		mntmInserirNovaDespesa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -190,6 +195,7 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu_2.add(mntmInserirNovaDespesa);
 		
 		JMenuItem mntmRemoverDesp = new JMenuItem("Remover despesa");
+		mntmRemoverDesp.setBackground(new Color(255, 255, 255));
 		mntmRemoverDesp.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/remove.png")));
 		mntmRemoverDesp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -210,6 +216,7 @@ public class MenuPrincipal extends JFrame {
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmCalculoMensal = new JMenuItem("Cálculo mensal");
+		mntmCalculoMensal.setBackground(new Color(255, 255, 255));
 		mntmCalculoMensal.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/chart-histogram.png")));
 		mntmCalculoMensal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -229,6 +236,7 @@ public class MenuPrincipal extends JFrame {
 		menuBar.add(mnNewMenu_3);
 		
 		JMenuItem mntmMesEsp = new JMenuItem("Mês específico");
+		mntmMesEsp.setBackground(new Color(255, 255, 255));
 		mntmMesEsp.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/calendar (1).png")));
 		mntmMesEsp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -274,7 +282,7 @@ public class MenuPrincipal extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Made by Pedro A/Gabriel (48988471534)");
 		lblNewLabel.setFont(new Font("Yu Gothic UI", Font.ITALIC, 9));
-		lblNewLabel.setBounds(294, 11, 299, 14);
+		lblNewLabel.setBounds(275, 11, 299, 14);
 		panel.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("");

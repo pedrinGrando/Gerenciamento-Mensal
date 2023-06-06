@@ -28,12 +28,15 @@ import java.awt.event.ActionEvent;
 import model.vo.*;
 import controller.*;
 import exceptions.CampoInvalidoException;
+import exceptions.CpfJaUtilizadoException;
 
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
 
 public class TelaCadastro extends JFrame {
 
@@ -117,21 +120,26 @@ public class TelaCadastro extends JFrame {
 		setBounds(100, 100, 761, 594);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		campoNome = new JTextField();
+		campoNome.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		campoNome.setBounds(105, 24, 254, 20);
 		contentPane.add(campoNome);
 		campoNome.setColumns(10);
 		
 		cpfCamp = new JFormattedTextField(mascaraCpf);
+		cpfCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		cpfCamp.setBounds(105, 67, 254, 20);
 		contentPane.add(cpfCamp);
 		
 		dataNasciCamp = new DatePicker();
+		dataNasciCamp.getComponentToggleCalendarButton().setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		dataNasciCamp.getComponentDateTextField().setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		dataNasciCamp.getComponentToggleCalendarButton().setText("");
 		dataNasciCamp.getComponentToggleCalendarButton().setIcon(new ImageIcon(TelaCadastro.class.getResource("/icons/calendario16px.png")));
 		dataNasciCamp.getComponentToggleCalendarButton().setBackground(new Color(192, 192, 192));
@@ -156,6 +164,7 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		emailCamp = new JTextField();
+		emailCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		emailCamp.setBounds(105, 161, 254, 20);
 		contentPane.add(emailCamp);
 		emailCamp.setColumns(10);
@@ -176,6 +185,7 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(lblNewLabel_5);
 		
 		loginCamp = new JTextField();
+		loginCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		loginCamp.setBounds(126, 258, 122, 20);
 		contentPane.add(loginCamp);
 		loginCamp.setColumns(10);
@@ -204,14 +214,17 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(lblNewLabel_16);
 		
 		campSenha = new JPasswordField();
+		campSenha.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		campSenha.setBounds(578, 24, 92, 20);
 		contentPane.add(campSenha);
 		
 		confirmCampSenha = new JPasswordField();
+		confirmCampSenha.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		confirmCampSenha.setBounds(582, 64, 95, 20);
 		contentPane.add(confirmCampSenha);
 		
 		ruaCamp = new JTextField();
+		ruaCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		ruaCamp.setBounds(65, 350, 254, 20);
 		contentPane.add(ruaCamp);
 		ruaCamp.setColumns(10);
@@ -222,6 +235,7 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(lblNewLabel_9);
 		
 		bairroCamp = new JTextField();
+		bairroCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		bairroCamp.setBounds(65, 394, 254, 20);
 		contentPane.add(bairroCamp);
 		bairroCamp.setColumns(10);
@@ -232,6 +246,7 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(lblNewLabel_10);
 		
 		campNumero = new JTextField();
+		campNumero.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		campNumero.setBounds(76, 437, 111, 20);
 		contentPane.add(campNumero);
 		campNumero.setColumns(10);
@@ -242,6 +257,7 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(lblNewLabel_11);
 		
 		cepCamp = new JFormattedTextField(mascaraCEP);
+		cepCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		cepCamp.setBounds(76, 474, 122, 20);
 		contentPane.add(cepCamp);
 		
@@ -251,6 +267,7 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(lblNewLabel_12);
 		
 	    campCidade = new JTextField();
+	    campCidade.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		campCidade.setBounds(538, 394, 187, 20);
 		contentPane.add(campCidade);
 		campCidade.setColumns(10);
@@ -261,11 +278,13 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(lblNewLabel_13);
 		
 		cbEstados = new JComboBox(listaEstados);
+		cbEstados.setBorder(null);
 		cbEstados.setBackground(new Color(192, 192, 192));
 		cbEstados.setBounds(538, 349, 63, 22);
 		contentPane.add(cbEstados);
 		
 		salarioCamp = new JTextField();
+		salarioCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		salarioCamp.setBounds(105, 211, 143, 20);
 		contentPane.add(salarioCamp);
 		salarioCamp.setColumns(10);
@@ -276,8 +295,9 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(lblNewLabel_14);
 		
 		btnNewButton = new JButton("Voltar");
+		btnNewButton.setBorder(null);
 		btnNewButton.setIcon(new ImageIcon(TelaCadastro.class.getResource("/icons/back.png")));
-		btnNewButton.setBackground(new Color(192, 192, 192));
+		btnNewButton.setBackground(new Color(0, 255, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// retorna para a tela de login 
@@ -292,8 +312,9 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		btnNewButton_1 = new JButton("Cadastrar");
+		btnNewButton_1.setBorder(null);
 		btnNewButton_1.setIcon(new ImageIcon(TelaCadastro.class.getResource("/icons/diskette.png")));
-		btnNewButton_1.setBackground(new Color(192, 192, 192));
+		btnNewButton_1.setBackground(new Color(0, 255, 255));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -320,9 +341,14 @@ public class TelaCadastro extends JFrame {
 			    //METODO PARA VERIFICAR SENHA 
 			    this.verificarSenhasDigitadas(campSenha.getText(), confirmCampSenha.getText());
 			    
+			    try {
 			    //cadastramento no banco, chamando validacoes
 			    if (usuario.getSenha() != null) {
 			    	usuarioController.cadastrarUsuarioController(usuario);
+			      }
+			    } catch (CpfJaUtilizadoException | CampoInvalidoException excecao) {
+			    	JOptionPane.showMessageDialog(null, excecao.getMessage(), 
+							"Erro", JOptionPane.WARNING_MESSAGE); 
 			    }
 			    
 			    //INICIA O OBJETO DE ENDERECO
@@ -337,7 +363,11 @@ public class TelaCadastro extends JFrame {
 				endereco.setEstado((String) cbEstados.getSelectedItem());
 				
 				 //cadastramento no banco, chamando validacoes
-				endereco = enderecoController.cadastrarEnderecoController(endereco);
+				try {
+					endereco = enderecoController.cadastrarEnderecoController(endereco);
+				} catch (CampoInvalidoException e2) {
+					JOptionPane.showMessageDialog(null, "Informe os seguintes campos\n " + e2.getMessage());
+				}
 				
 				if (usuario.getIdUsuario() != 0 && endereco.getIdEndereco() != 0) {
 					JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", 
@@ -345,8 +375,7 @@ public class TelaCadastro extends JFrame {
 				} else {
 					JOptionPane.showMessageDialog(null, "Não foi possível cadastrar o usuário!", 
 							"Sucesso", JOptionPane.ERROR_MESSAGE);
-				}
-				
+				}	
 			}
 
 			private void verificarSenhasDigitadas(String text, String text2) {

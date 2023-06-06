@@ -188,12 +188,6 @@ public class TelaLogin extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
-				
-				
-				
-				
-				
 			}
 		});
 		btnNewButton.setBackground(new Color(192, 192, 192));

@@ -25,6 +25,8 @@ import model.vo.*;
 import controller.*;
 import javax.swing.JTextField;
 import java.text.DecimalFormat;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
 
 
 public class PainelCalculoMensal extends JPanel {
@@ -66,37 +68,39 @@ public class PainelCalculoMensal extends JPanel {
 	 * Create the panel.
 	 */
 	public PainelCalculoMensal(final UsuarioVO userLogado) {
+		setBackground(new Color(0, 255, 255));
 
 		setLayout(null);
 		
 		campSaldo = new JTextField();
-		campSaldo.setBounds(196, 93, 147, 20);
+		campSaldo.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		campSaldo.setBounds(208, 93, 147, 20);
 		add(campSaldo);
 		campSaldo.setColumns(10);
 		
 		lblMesConsulta = new JLabel("");
 		lblMesConsulta.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblMesConsulta.setBounds(71, 267, 106, 14);
+		lblMesConsulta.setBounds(60, 267, 106, 14);
 		add(lblMesConsulta);
 		
 		lblAnoConsultado = new JLabel("");
 		lblAnoConsultado.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblAnoConsultado.setBounds(80, 322, 97, 14);
+		lblAnoConsultado.setBounds(60, 322, 97, 14);
 		add(lblAnoConsultado);
 		
 		lblSaldoGuardado = new JLabel("");
 		lblSaldoGuardado.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblSaldoGuardado.setBounds(126, 396, 85, 14);
+		lblSaldoGuardado.setBounds(114, 372, 85, 14);
 		add(lblSaldoGuardado);
 		
 		lblSaldoRest = new JLabel("");
 		lblSaldoRest.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblSaldoRest.setBounds(401, 267, 115, 14);
+		lblSaldoRest.setBounds(385, 267, 115, 14);
 		add(lblSaldoRest);
 		
 		lblTotalDesc = new JLabel("");
 		lblTotalDesc.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblTotalDesc.setBounds(421, 322, 115, 14);
+		lblTotalDesc.setBounds(404, 322, 115, 14);
 		add(lblTotalDesc);
 		
 		lblSaldoFinal = new JLabel("");
@@ -104,15 +108,17 @@ public class PainelCalculoMensal extends JPanel {
 		lblSaldoFinal.setBounds(369, 386, 126, 14);
 		add(lblSaldoFinal);
 		
-		btnGerarCalculo = new JButton("Gerar cálculo mensal");
+		btnGerarCalculo = new JButton("");
+		btnGerarCalculo.setIcon(new ImageIcon(PainelCalculoMensal.class.getResource("/icons/chart-histogram.png")));
+		btnGerarCalculo.setBorder(null);
 		btnGerarCalculo.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
-		btnGerarCalculo.setBackground(new Color(192, 192, 192));
+		btnGerarCalculo.setBackground(new Color(0, 255, 255));
 		btnGerarCalculo.addActionListener(new ActionListener() {
 		
-
 			public void actionPerformed(ActionEvent e) {
 			
 			    double saldo = Double.parseDouble(campSaldo.getText());
+			    
 				double rest = userLogado.getSalariol() + saldo;
 				
 				double desc  = despController.calcularDescontoTotalController(userLogado);
@@ -139,11 +145,12 @@ public class PainelCalculoMensal extends JPanel {
 
 		});
 		setLayout(null);
-		btnGerarCalculo.setBounds(30, 133, 147, 21);
+		btnGerarCalculo.setBounds(372, 93, 46, 21);
 		add(btnGerarCalculo);
 		
 		btn_salvarDados = new JButton("");
-		btn_salvarDados.setIcon(new ImageIcon("C:\\Users\\GETIN\\Desktop\\Gerenciador de salário(GS)\\GerenciadorSalario\\img\\saveIcon.png"));
+		btn_salvarDados.setBorder(null);
+		btn_salvarDados.setIcon(new ImageIcon(PainelCalculoMensal.class.getResource("/icons/diskette.png")));
 		btn_salvarDados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -166,30 +173,31 @@ public class PainelCalculoMensal extends JPanel {
 				
 			}
 		});
-		btn_salvarDados.setBackground(new Color(192, 192, 192));
+		btn_salvarDados.setBackground(new Color(0, 255, 255));
 		btn_salvarDados.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
-		btn_salvarDados.setBounds(600, 484, 53, 29);
+		btn_salvarDados.setBounds(586, 427, 53, 29);
 		add(btn_salvarDados);
 		
 		lblNewLabel = new JLabel("Cálculo Mensal do mês de : ");
-		lblNewLabel.setFont(new Font("Trebuchet MS", Font.PLAIN, 15));
+		lblNewLabel.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 15));
 		lblNewLabel.setBounds(114, 11, 205, 46);
 		add(lblNewLabel);
 		
 		lblMesAtual = new JLabel("");
-		lblMesAtual.setBounds(304, 13, 191, 46);
+		lblMesAtual.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 15));
+		lblMesAtual.setBounds(309, 13, 191, 46);
 		add(lblMesAtual);
 		lblMesAtual.setText(mes.toUpperCase());
 		
 		lblNewLabel_1 = new JLabel("Informe o saldo restante : R$ ");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		lblNewLabel_1.setBounds(30, 96, 181, 14);
 		add(lblNewLabel_1);
 		
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 0));
-		panel.setBounds(0, 202, 677, 10);
+		panel.setBounds(0, 185, 677, 10);
 		add(panel);
 		
 		lblNewLabel_2 = new JLabel("Mês : ");
@@ -220,7 +228,7 @@ public class PainelCalculoMensal extends JPanel {
 		
 		lblNewLabel_7 = new JLabel("Guardado : R$ ");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_7.setBounds(24, 396, 127, 14);
+		lblNewLabel_7.setBounds(24, 372, 127, 14);
 		add(lblNewLabel_7);
 		
 	

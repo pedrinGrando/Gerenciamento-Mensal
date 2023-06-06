@@ -1,5 +1,6 @@
 package model.bo;
 
+import exceptions.CpfJaUtilizadoException;
 import model.dao.UsuarioDAO;
 import model.vo.UsuarioVO;
 
@@ -26,8 +27,13 @@ public class UsuarioBO {
 		return userDAO.atualizarUsuarioDAO(userAtualizado);
 	}
 
-	public UsuarioVO cadastrarUsuarioBO(UsuarioVO usuario) {
+	public UsuarioVO cadastrarUsuarioBO(UsuarioVO usuario) throws CpfJaUtilizadoException{
 		
+		if (userDAO.cpfJaUtilizado(usuario.getCpf())) {
+			throw new CpfJaUtilizadoException("Este CPF já está cadastrado!");
+		}
+		
+		//SE ESTIVER CORRETO SALVA O USUARIO
 		return userDAO.cadastrarUsuarioDAO(usuario);
 	}
 

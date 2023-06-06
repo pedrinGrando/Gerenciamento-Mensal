@@ -30,6 +30,7 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 
 import exceptions.EnderecoInvalidoException;
+import javax.swing.JLabel;
 
 public class PainelTabelaCompleta extends JPanel {
 
@@ -45,6 +46,7 @@ public class PainelTabelaCompleta extends JPanel {
 		//Lista para armezenar os endereços consultados no banco
 		private ArrayList<TabelaVO> tabelas;
 		private String[] nomesColunas = { "Nome", "Mês", "Ano", "Total restante", "Saldo final" };
+		private JLabel lblNewLabel;
 	
 		//Métodos usados no JTable
 		private void limparTabela() {
@@ -82,20 +84,22 @@ public class PainelTabelaCompleta extends JPanel {
 	public PainelTabelaCompleta(final UsuarioVO userOnline) {
 		
 		//setBackground(new Color(0, 0, 0));
-		setBackground(new Color(192, 192, 192));
+		setBackground(new Color(0, 255, 255));
 		setLayout(null);
 		btnBuscar = new JButton("Buscar Todos");
-		btnBuscar.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btnBuscar.setBackground(new Color(192, 192, 192));
+		btnBuscar.setBorder(null);
+		btnBuscar.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		btnBuscar.setBackground(new Color(0, 255, 255));
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				atualizarTabelaEnderecos(userOnline);
 			}
 		});
-		btnBuscar.setBounds(460, 22, 145, 23);
+		btnBuscar.setBounds(486, 22, 91, 23);
 		add(btnBuscar);
 		
 		tblTabelas = new JTable();
+		tblTabelas.setForeground(new Color(0, 0, 0));
 		this.limparTabela();
 		tblTabelas.setBounds(10, 68, 655, 350);
 		
@@ -103,9 +107,15 @@ public class PainelTabelaCompleta extends JPanel {
 		add(tblTabelas);
 		
 		JButton btnFiltrar = new JButton("");
+		btnFiltrar.setBorder(null);
 		btnFiltrar.setIcon(new ImageIcon(PainelTabelaCompleta.class.getResource("/icons/filter.png")));
-		btnFiltrar.setBackground(new Color(192, 192, 192));
-		btnFiltrar.setBounds(604, 22, 33, 23);
+		btnFiltrar.setBackground(new Color(0, 255, 255));
+		btnFiltrar.setBounds(572, 22, 33, 23);
 		add(btnFiltrar);
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(PainelTabelaCompleta.class.getResource("/icons/bank.png")));
+		lblNewLabel.setBounds(637, 440, 49, 24);
+		add(lblNewLabel);
 	}
 }

@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import model.vo.*;
 import controller.*;
 import javax.swing.JProgressBar;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
 
 public class PainelConsultaMes extends JPanel {
 	private JComponent btnNewButton;
@@ -32,6 +34,7 @@ public class PainelConsultaMes extends JPanel {
 	 * @param userOnline 
 	 */
 	public PainelConsultaMes(final UsuarioVO userOnline) {
+		setBackground(new Color(0, 255, 255));
 
         setLayout(null);
 		
@@ -41,6 +44,8 @@ public class PainelConsultaMes extends JPanel {
 		add(lblNewLabel_1);
 		
 		btnNewButton_1 = new JButton("");
+		btnNewButton_1.setBorder(null);
+		btnNewButton_1.setIcon(new ImageIcon(PainelConsultaMes.class.getResource("/icons/search.png")));
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -79,17 +84,18 @@ public class PainelConsultaMes extends JPanel {
 				
 			}
 		});
-		btnNewButton_1.setBackground(new Color(192, 192, 192));
-		btnNewButton_1.setBounds(309, 73, 27, 23);
+		btnNewButton_1.setBackground(new Color(0, 255, 255));
+		btnNewButton_1.setBounds(360, 73, 27, 23);
 		add(btnNewButton_1);
 		
 		lblNewLabel_2 = new JLabel("Informe o mês a ser consultado : ");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
-		lblNewLabel_2.setBounds(8, 73, 222, 23);
+		lblNewLabel_2.setBounds(58, 73, 222, 23);
 		add(lblNewLabel_2);
 	
 		mesDigitadoCamp = new JTextField();
-		mesDigitadoCamp.setBounds(182, 76, 117, 20);
+		mesDigitadoCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		mesDigitadoCamp.setBounds(233, 76, 117, 20);
 		add(mesDigitadoCamp);
 		mesDigitadoCamp.setColumns(10);
 		
@@ -142,6 +148,11 @@ public class PainelConsultaMes extends JPanel {
 		lblSaldoFinal.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblSaldoFinal.setBounds(151, 363, 102, 14);
 		add(lblSaldoFinal);
+		
+		JLabel lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.setIcon(new ImageIcon(PainelConsultaMes.class.getResource("/icons/bank.png")));
+		lblNewLabel_5.setBounds(503, 394, 34, 30);
+		add(lblNewLabel_5);
 		
 		
 	}

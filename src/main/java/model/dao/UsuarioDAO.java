@@ -131,4 +131,31 @@ public class UsuarioDAO {
 		
 	}
 
+	public boolean cpfJaUtilizado(String cpf) {
+		
+		boolean cpfJaUtilizado = false;
+		Connection conexao = Banco.getConnection();
+		String sql = " select count(*) from usuario "
+				   + " where cpf = ? ";
+		
+		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
+		try {
+			query.setString(1, cpf);
+			ResultSet resultado = query.executeQuery();
+			
+			if(resultado.next()) {
+				cpfJaUtilizado = resultado.getInt(1) > 0;
+			}
+		}catch (Exception e) {
+			System.out.println("Erro ao verificar uso do CPF " + cpf 
+					+ "\n Causa:" + e.getMessage());
+		}finally {
+			Banco.closePreparedStatement(query);
+			Banco.closeConnection(conexao);
+		}
+		
+		return cpfJaUtilizado;
+		
+	}
+
 }
