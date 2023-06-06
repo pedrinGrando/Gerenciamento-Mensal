@@ -256,7 +256,7 @@ public class TelaCadastro extends JFrame {
 		
 		cbEstados = new JComboBox(listaEstados);
 		cbEstados.setBackground(new Color(192, 192, 192));
-		cbEstados.setBounds(538, 349, 78, 22);
+		cbEstados.setBounds(538, 349, 63, 22);
 		contentPane.add(cbEstados);
 		
 		salarioCamp = new JTextField();
@@ -308,12 +308,17 @@ public class TelaCadastro extends JFrame {
 				usuario.setEmail(emailCamp.getText());
 				usuario.setDataNasci(dataNasciCamp.getDate());
 			    usuario.setLogin(loginCamp.getText());
-			    usuario.setSenha(confirmCampSenha.getText());
 			    usuario.setSalariol(Double.parseDouble(salarioCamp.getText()));
+			    //METODO PARA VERIFICAR SENHA 
+			    this.verificarSenhasDigitadas(campSenha.getText(), confirmCampSenha.getText());
 			    
+			    //cadastramento no banco, chamando validacoes
+			    if (usuario.getSenha() != null) {
+			    	usuarioController.cadastrarUsuarioController(usuario);
+			    }
+			    
+			    //INICIA O OBJETO DE ENDERECO
                 EnderecoVO endereco = new EnderecoVO();
-                
-                System.out.println(usuario.getDataNasci());
 				
 				endereco.setIdUsuario(usuario.getIdUsuario());
 				endereco.setBairro(bairroCamp.getText());
@@ -323,7 +328,7 @@ public class TelaCadastro extends JFrame {
 				endereco.setCidade(campCidade.getText());
 				endereco.setEstado((String) cbEstados.getSelectedItem());
 				
-				usuarioController.cadastrarUsuarioController(usuario);
+				 //cadastramento no banco, chamando validacoes
 				endereco = enderecoController.cadastrarEnderecoController(endereco);
 				
 				if (usuario.getIdUsuario() != 0 && endereco.getIdEndereco() != 0) {
@@ -332,6 +337,17 @@ public class TelaCadastro extends JFrame {
 				} else {
 					JOptionPane.showMessageDialog(null, "Não foi possível cadastrar o usuário!", 
 							"Sucesso", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+
+			private void verificarSenhasDigitadas(String text, String text2) {
+			
+				if (text.equals(text2)) {
+					usuario.setSenha(text2);
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "Senhas não coincidem!", "Gerenciamento-Mensal" ,JOptionPane.ERROR_MESSAGE);
 				}
 				
 			}

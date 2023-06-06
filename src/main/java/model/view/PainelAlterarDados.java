@@ -141,6 +141,10 @@ public class PainelAlterarDados extends JPanel {
 		novoSalarioL.setColumns(10);
 		novoSalarioL.setText(""+userLogado.getSalariol());
 		
+		senhaAtualAtualizar = new JPasswordField();
+		senhaAtualAtualizar.setBounds(377, 288, 102, 20);
+		add(senhaAtualAtualizar);
+		
 		lblNewLabel_5 = new JLabel("Salário líquido");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.ITALIC, 10));
 		lblNewLabel_5.setBounds(10, 257, 96, 14);
@@ -158,6 +162,10 @@ public class PainelAlterarDados extends JPanel {
 		campCIdade.setColumns(10);
 		campCIdade.setText(estado.getCidade());
 		
+		novaSenhaAtualizar = new JPasswordField();
+		novaSenhaAtualizar.setBounds(377, 343, 102, 20);
+		add(novaSenhaAtualizar);
+		
 		lblNewLabel_6 = new JLabel("R$");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lblNewLabel_6.setBounds(10, 274, 13, 14);
@@ -168,12 +176,18 @@ public class PainelAlterarDados extends JPanel {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				boolean result = false;
+				boolean result2 = false;
+				
 				//INSERINDO NOVOS DADOS 
 				userAtualizado.setSalariol(Double.parseDouble(novoSalarioL.getText()));
 				userAtualizado.setEmail(novoEmail_camp.getText());
 				userAtualizado.setNome(novoNome_camp.getText());
 				userAtualizado.setLogin(novoUser_camp.getText());
-				userAtualizado.setSenha(novaSenhaAtualizar.getText());
+				
+				//VERIFICAR SENHA DIGITADA
+				result = this.verificarSenha(senhaAtualAtualizar.getText());
+				
 				userAtualizado.setIdUsuario(userLogado.getIdUsuario());
 				
 				// ENDERECO
@@ -185,8 +199,8 @@ public class PainelAlterarDados extends JPanel {
 				endAtualizado.setCidade(campCIdade.getText());
 				endAtualizado.setNumero(Integer.parseInt(campNumero.getText()));
 				
-				boolean result = usuarioController.atualizarUsuarioController(userAtualizado);
-				boolean result2 = enderecoController.atualizarEndController(endAtualizado);
+				 result = usuarioController.atualizarUsuarioController(userAtualizado);
+				 result2 = enderecoController.atualizarEndController(endAtualizado);
 				
 				if (result && result2) {
 					JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
@@ -195,10 +209,27 @@ public class PainelAlterarDados extends JPanel {
 				}
 					
 			}
+
+			private boolean verificarSenha(String text) {
+
+				boolean retorno = false;
+				
+               if (text.equals(userLogado.getSenha())) {
+            	   userAtualizado.setSenha(text);
+            	   retorno = true;
+               } else {
+            	   JOptionPane.showMessageDialog(null, "Senha incorreta!", "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+            	   
+            	   retorno = false;
+               }
+				
+		
+				return retorno;
+			}
 		});
 		btnNewButton_1.setBackground(new Color(192, 192, 192));
 		btnNewButton_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btnNewButton_1.setBounds(514, 448, 105, 23);
+		btnNewButton_1.setBounds(474, 437, 105, 23);
 		add(btnNewButton_1);
 		
 		ruaCampo = new JTextField();
@@ -251,17 +282,12 @@ public class PainelAlterarDados extends JPanel {
 		lblNewLabel.setBounds(377, 274, 102, 14);
 		add(lblNewLabel);
 		
-		senhaAtualAtualizar = new JPasswordField();
-		senhaAtualAtualizar.setBounds(377, 288, 102, 20);
-		add(senhaAtualAtualizar);
 		
 		lblNewLabel_7 = new JLabel("Nova senha : ");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNewLabel_7.setBounds(377, 328, 102, 14);
 		add(lblNewLabel_7);
 		
-		novaSenhaAtualizar = new JPasswordField();
-		novaSenhaAtualizar.setBounds(377, 343, 102, 20);
-		add(novaSenhaAtualizar);
+		
 	}
 }
