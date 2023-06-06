@@ -35,32 +35,30 @@ public class UsuarioController {
           String mensagemValidacao = "";
 		
 		if(u.getNome() == null || u.getNome().trim().length() < 3) {
-			mensagemValidacao += "Nome inválido \n";
+			mensagemValidacao += " Nome inválido \n";
 		}
 		
-		if(u.getCpf().isEmpty() || u.getCpf() == null) {
-			mensagemValidacao += "CPF é obrigatório";
-		}
+		mensagemValidacao += validarCpf(u);
 		
 		if(u.getLogin().isEmpty() || u.getLogin() == null) {
-			mensagemValidacao += "Login é obrigatório";
+			mensagemValidacao += " Login é obrigatório";
 		}
 		
 		if(u.getSenha().isEmpty() || u.getSenha() == null) {
-			mensagemValidacao += "Senha é obrigatória";
+			mensagemValidacao += " Senha é obrigatória";
 		}
 		
 		if(u.getSenha().length() < 6 || !u.getSenha().contains("0123456789")) {
-			mensagemValidacao += "Senha digitada inválida";
+			mensagemValidacao += " Senha digitada inválida";
 			
 		} 
 		
 		if(u.getSalariol() <= 0 ) {
-			mensagemValidacao += "O salário é obrigatório";
+			mensagemValidacao += " O salário é obrigatório";
 		}
 		
-		if(u.getDataNasci().getYear() < 2005 ) {
-			mensagemValidacao += "É necessário ter 18 anos para o cadastro!";
+		if(u.getDataNasci().getYear() > 2005 ) {
+			mensagemValidacao += " É necessário ter 18 anos para o cadastro!";
 		}
 		
 		
@@ -68,6 +66,24 @@ public class UsuarioController {
 			throw new CampoInvalidoException(mensagemValidacao);
 		}
 		
+	}
+
+	private String validarCpf(UsuarioVO u) {
+	
+         String validacao = "";
+		
+		if(u.getCpf() == null) {
+			validacao += "CPF é obrigatório \n" ;
+		}else {
+			String cpfSemMascara = u.getCpf().replace(".", "");
+			cpfSemMascara = u.getCpf().replace("-", "");
+			u.setCpf(cpfSemMascara);
+			if(u.getCpf().length() != 11) {
+				validacao += "CPF deve possuir 11 dígitos\n" ;	
+			}
+		}
+		
+		return validacao;
 	}
 
 	public boolean atualizarUsuarioController(UsuarioVO userAtualizado) {
