@@ -103,6 +103,7 @@ public class PainelTabelaCompleta extends JPanel {
 		add(tblTabelas);
 		
 		JButton btnFiltrar = new JButton("");
+		btnFiltrar.setIcon(new ImageIcon(PainelTabelaCompleta.class.getResource("/icons/filter.png")));
 		btnFiltrar.setBackground(new Color(192, 192, 192));
 		btnFiltrar.setBounds(604, 22, 33, 23);
 		add(btnFiltrar);

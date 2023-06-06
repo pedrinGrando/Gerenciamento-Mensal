@@ -94,7 +94,7 @@ public class PainelAdicionarDespesa extends JPanel {
 		});
 		btn_inserir_camp.setBackground(new Color(192, 192, 192));
 		btn_inserir_camp.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		btn_inserir_camp.setBounds(169, 236, 121, 23);
+		btn_inserir_camp.setBounds(152, 202, 121, 23);
 		add(btn_inserir_camp);
 		
 	}

@@ -139,7 +139,7 @@ public class PainelCalculoMensal extends JPanel {
 
 		});
 		setLayout(null);
-		btnGerarCalculo.setBounds(24, 135, 147, 21);
+		btnGerarCalculo.setBounds(30, 133, 147, 21);
 		add(btnGerarCalculo);
 		
 		btn_salvarDados = new JButton("");

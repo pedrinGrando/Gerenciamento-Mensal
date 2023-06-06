@@ -19,6 +19,10 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
+import javax.swing.KeyStroke;
+import java.awt.event.KeyEvent;
 
 public class MenuPrincipal extends JFrame {
 
@@ -57,6 +61,7 @@ public class MenuPrincipal extends JFrame {
 	 * @param userLogado 
 	 */
 	public MenuPrincipal(final UsuarioVO userOnline) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/icons/bank.png")));
 		setBackground(new Color(255, 255, 255));
 		setTitle("Gerenciamento Mensal | Menu");
 		setResizable(false);
@@ -65,13 +70,18 @@ public class MenuPrincipal extends JFrame {
 		setLocationRelativeTo(null);
 		
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBackground(new Color(255, 255, 255));
 		setJMenuBar(menuBar);
 		
 		JMenu mnNewMenu = new JMenu("Conta");
+		mnNewMenu.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/user.png")));
 		mnNewMenu.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmVerConta = new JMenuItem("Ver conta ");
+		mntmVerConta.setBackground(new Color(255, 255, 255));
+		mntmVerConta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
+		mntmVerConta.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/account.png")));
 		mntmVerConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -86,6 +96,8 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu.add(mntmVerConta);
 		
 		JMenuItem mntmAtualizarDados = new JMenuItem("Atualizar dados ");
+		mntmAtualizarDados.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
+		mntmAtualizarDados.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/pencil.png")));
 		mntmAtualizarDados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -104,6 +116,8 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu.add(mntmAtualizarDados);
 		
 		JMenuItem mntmTrocarConta = new JMenuItem("Trocar usuário");
+		mntmTrocarConta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0));
+		mntmTrocarConta.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/refresh.png")));
 		mntmTrocarConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -118,6 +132,8 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu.add(mntmTrocarConta);
 		
 		JMenuItem mntmEncerrarConta = new JMenuItem("Encerrar conta");
+		mntmEncerrarConta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
+		mntmEncerrarConta.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/cross.png")));
 		mntmEncerrarConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean retorn = false;
@@ -141,10 +157,12 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu.add(mntmEncerrarConta);
 		
 		JMenu mnNewMenu_2 = new JMenu("Despesas");
+		mnNewMenu_2.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/expenses.png")));
 		mnNewMenu_2.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
 		menuBar.add(mnNewMenu_2);
 		
 		JMenuItem mntmConsultarDesp = new JMenuItem("Consultar");
+		mntmConsultarDesp.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/search.png")));
 		mntmConsultarDesp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -158,6 +176,7 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu_2.add(mntmConsultarDesp);
 		
 		JMenuItem mntmInserirNovaDespesa = new JMenuItem("Inserir nova ");
+		mntmInserirNovaDespesa.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/add.png")));
 		mntmInserirNovaDespesa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -171,6 +190,7 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu_2.add(mntmInserirNovaDespesa);
 		
 		JMenuItem mntmRemoverDesp = new JMenuItem("Remover despesa");
+		mntmRemoverDesp.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/remove.png")));
 		mntmRemoverDesp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -185,10 +205,12 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu_2.add(mntmRemoverDesp);
 		
 		JMenu mnNewMenu_1 = new JMenu("Cálculos");
+		mnNewMenu_1.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/chart-histogram.png")));
 		mnNewMenu_1.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmCalculoMensal = new JMenuItem("Cálculo mensal");
+		mntmCalculoMensal.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/chart-histogram.png")));
 		mntmCalculoMensal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -202,10 +224,12 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu_1.add(mntmCalculoMensal);
 		
 		JMenu mnNewMenu_3 = new JMenu("Tabela");
+		mnNewMenu_3.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/cells.png")));
 		mnNewMenu_3.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
 		menuBar.add(mnNewMenu_3);
 		
 		JMenuItem mntmMesEsp = new JMenuItem("Mês específico");
+		mntmMesEsp.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/calendar (1).png")));
 		mntmMesEsp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -219,6 +243,7 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu_3.add(mntmMesEsp);
 		
 		JMenuItem mntmTabelaCompleta = new JMenuItem("Tabela completa");
+		mntmTabelaCompleta.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/cells.png")));
 		mntmTabelaCompleta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -232,9 +257,11 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu_3.add(mntmTabelaCompleta);
 		
 		JMenu mnNewMenu_4 = new JMenu("Sobre");
+		mnNewMenu_4.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/info.png")));
 		mnNewMenu_4.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
 		menuBar.add(mnNewMenu_4);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -249,5 +276,15 @@ public class MenuPrincipal extends JFrame {
 		lblNewLabel.setFont(new Font("Yu Gothic UI", Font.ITALIC, 9));
 		lblNewLabel.setBounds(294, 11, 299, 14);
 		panel.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/bankColor2.png")));
+		lblNewLabel_1.setBounds(206, 44, 275, 326);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Sistema para gerenciamento de despesas mensais individuais ");
+		lblNewLabel_2.setFont(new Font("Source Code Pro Black", Font.ITALIC, 11));
+		lblNewLabel_2.setBounds(122, 356, 449, 14);
+		contentPane.add(lblNewLabel_2);
 	}
 }

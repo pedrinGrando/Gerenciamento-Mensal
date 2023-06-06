@@ -32,6 +32,8 @@ import exceptions.CampoInvalidoException;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 import java.awt.Color;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class TelaCadastro extends JFrame {
 
@@ -98,6 +100,8 @@ public class TelaCadastro extends JFrame {
 	 * @throws ParseException 
 	 */
 	public TelaCadastro() throws ParseException {
+		setResizable(false);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaCadastro.class.getResource("/icons/bank.png")));
 		
 		mascaraCpf = new MaskFormatter("###.###.###-##");
 		mascaraCpf.setValueContainsLiteralCharacters(false);
@@ -110,7 +114,7 @@ public class TelaCadastro extends JFrame {
 		
 		setTitle("Gerenciamento-Mensal | Cadastro");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 791, 653);
+		setBounds(100, 100, 761, 594);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -128,6 +132,8 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(cpfCamp);
 		
 		dataNasciCamp = new DatePicker();
+		dataNasciCamp.getComponentToggleCalendarButton().setText("");
+		dataNasciCamp.getComponentToggleCalendarButton().setIcon(new ImageIcon(TelaCadastro.class.getResource("/icons/calendario16px.png")));
 		dataNasciCamp.getComponentToggleCalendarButton().setBackground(new Color(192, 192, 192));
 		dataNasciCamp.getComponentDateTextField().setBackground(new Color(192, 192, 192));
 		dataNasciCamp.setBounds(136, 111, 223, 20);
@@ -270,6 +276,7 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(lblNewLabel_14);
 		
 		btnNewButton = new JButton("Voltar");
+		btnNewButton.setIcon(new ImageIcon(TelaCadastro.class.getResource("/icons/back.png")));
 		btnNewButton.setBackground(new Color(192, 192, 192));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -281,10 +288,11 @@ public class TelaCadastro extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btnNewButton.setBounds(282, 591, 100, 23);
+		btnNewButton.setBounds(257, 527, 115, 23);
 		contentPane.add(btnNewButton);
 		
 		btnNewButton_1 = new JButton("Cadastrar");
+		btnNewButton_1.setIcon(new ImageIcon(TelaCadastro.class.getResource("/icons/diskette.png")));
 		btnNewButton_1.setBackground(new Color(192, 192, 192));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -354,7 +362,7 @@ public class TelaCadastro extends JFrame {
 
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btnNewButton_1.setBounds(383, 591, 100, 23);
+		btnNewButton_1.setBounds(371, 527, 128, 23);
 		contentPane.add(btnNewButton_1);
 		
 			}
