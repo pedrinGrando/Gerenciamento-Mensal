@@ -23,6 +23,8 @@ import javax.swing.border.EmptyBorder;
 import model.vo.*;
 import controller.*;
 import javax.swing.JTextField;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
 
 
 public class PainelConsultarDespesa extends JPanel {
@@ -55,6 +57,7 @@ public class PainelConsultarDespesa extends JPanel {
 	 * @param userOnline 
 	 */
 	public PainelConsultarDespesa(final UsuarioVO userOnline) {
+		setBackground(new Color(0, 255, 255));
 		setLayout(null);
 		
 		lblNewLabel_6 = new JLabel(" Consultar de despesa ");
@@ -64,6 +67,7 @@ public class PainelConsultarDespesa extends JPanel {
 		
 		
 		campDespDigitada = new JTextField();
+		campDespDigitada.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		campDespDigitada.setBounds(135, 88, 296, 20);
 		add(campDespDigitada);
 		campDespDigitada.setColumns(10);
@@ -84,7 +88,7 @@ public class PainelConsultarDespesa extends JPanel {
 		add(lblNewLabel_1);
 		
 		lblNome = new JLabel("");
-		lblNome.setBounds(101, 203, 209, 14);
+		lblNome.setBounds(73, 203, 209, 14);
 		add(lblNome);
 		
 		lblNewLabel_3 = new JLabel("Despesa : ");
@@ -93,7 +97,7 @@ public class PainelConsultarDespesa extends JPanel {
 		add(lblNewLabel_3);
 		
 		lblDespesa = new JLabel("");
-		lblDespesa.setBounds(101, 247, 250, 14);
+		lblDespesa.setBounds(87, 247, 250, 14);
 		add(lblDespesa);
 		
 		lblNewLabel_5 = new JLabel("Valor : ");
@@ -102,10 +106,13 @@ public class PainelConsultarDespesa extends JPanel {
 		add(lblNewLabel_5);
 		
 		lblValor = new JLabel("");
-		lblValor.setBounds(101, 288, 227, 14);
+		lblValor.setBounds(73, 288, 227, 14);
 		add(lblValor);
 		
 		btnConsultar = new JButton("");
+		btnConsultar.setBorder(null);
+		btnConsultar.setBackground(new Color(0, 255, 255));
+		btnConsultar.setIcon(new ImageIcon(PainelConsultarDespesa.class.getResource("/icons/search.png")));
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -130,6 +137,11 @@ public class PainelConsultarDespesa extends JPanel {
 		});
 		btnConsultar.setBounds(441, 87, 39, 23);
 		add(btnConsultar);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(PainelConsultarDespesa.class.getResource("/icons/bank.png")));
+		lblNewLabel_2.setBounds(644, 492, 32, 32);
+		add(lblNewLabel_2);
 		
 	}
 }

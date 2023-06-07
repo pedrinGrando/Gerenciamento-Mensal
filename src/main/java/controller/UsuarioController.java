@@ -4,10 +4,12 @@ import exceptions.CampoInvalidoException;
 import exceptions.CpfJaUtilizadoException;
 import model.bo.UsuarioBO;
 import model.vo.UsuarioVO;
+import model.dao.*;
 
 public class UsuarioController {
 	
 	UsuarioBO userBO = new UsuarioBO();
+	UsuarioDAO userDAO  = new UsuarioDAO();
 
 	public UsuarioVO realizarLoginController(UsuarioVO userOnline) {
 		UsuarioVO usuarioVO = new UsuarioVO();
@@ -89,6 +91,11 @@ public class UsuarioController {
 	public boolean atualizarUsuarioController(UsuarioVO userAtualizado) {
 		
 		return userBO.atualizarUsuarioBO(userAtualizado);
+	}
+
+	public UsuarioVO consultarUserPorNome(String text, String cpf) {
+		
+		return userDAO.consultarUsuarioPorNomeDAO(text, cpf);
 	}
 
 }

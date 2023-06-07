@@ -22,6 +22,8 @@ import javax.swing.border.EmptyBorder;
 import model.view.*;
 import model.vo.*;
 import controller.DespesaController;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
 
 
 public class PainelAdicionarDespesa extends JPanel {
@@ -34,12 +36,14 @@ public class PainelAdicionarDespesa extends JPanel {
 	
 	DespesaController despController = new DespesaController();
 	DespesaVO despesa = new DespesaVO();
+	private final JLabel lblNewLabel = new JLabel("");
 	
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelAdicionarDespesa(final UsuarioVO userLogado) {
+		setBackground(new Color(0, 255, 255));
 
 		setLayout(null);
 		
@@ -49,12 +53,14 @@ public class PainelAdicionarDespesa extends JPanel {
 		add(lblNewLabel_1);
 		
 		nomeDespesa_camp = new JTextField();
-		nomeDespesa_camp.setBounds(152, 100, 131, 20);
+		nomeDespesa_camp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		nomeDespesa_camp.setBounds(142, 97, 131, 20);
 		add(nomeDespesa_camp);
 		nomeDespesa_camp.setColumns(10);
 		
 		valorDespesaCamp = new JTextField();
-		valorDespesaCamp.setBounds(152, 146, 131, 20);
+		valorDespesaCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		valorDespesaCamp.setBounds(142, 146, 131, 20);
 		add(valorDespesaCamp);
 		valorDespesaCamp.setColumns(10);
 		
@@ -65,12 +71,13 @@ public class PainelAdicionarDespesa extends JPanel {
 		
 		lblNewLabel_4 = new JLabel("Valor R$ : ");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
-		lblNewLabel_4.setBounds(58, 149, 106, 14);
+		lblNewLabel_4.setBounds(80, 149, 106, 14);
 		add(lblNewLabel_4);
 		
 		
 		JButton btn_inserir_camp = new JButton(" Inserir ");
-		btn_inserir_camp.setIcon(new ImageIcon("C:\\Users\\GETIN\\Desktop\\Gerenciador de salário(GS)\\GerenciadorSalario\\img\\inserirIcon.png"));
+		btn_inserir_camp.setBorder(null);
+		btn_inserir_camp.setIcon(new ImageIcon(PainelAdicionarDespesa.class.getResource("/icons/add.png")));
 		btn_inserir_camp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -92,10 +99,13 @@ public class PainelAdicionarDespesa extends JPanel {
 				
 			}
 		});
-		btn_inserir_camp.setBackground(new Color(192, 192, 192));
+		btn_inserir_camp.setBackground(new Color(0, 255, 255));
 		btn_inserir_camp.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		btn_inserir_camp.setBounds(152, 202, 121, 23);
+		btn_inserir_camp.setBounds(142, 177, 140, 31);
 		add(btn_inserir_camp);
+		lblNewLabel.setIcon(new ImageIcon(PainelAdicionarDespesa.class.getResource("/icons/bank.png")));
+		lblNewLabel.setBounds(492, 334, 36, 31);
+		add(lblNewLabel);
 		
 	}
 

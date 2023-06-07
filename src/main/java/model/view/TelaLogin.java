@@ -172,7 +172,6 @@ public class TelaLogin extends JFrame {
 					e1.printStackTrace();
 				}
 				
-				
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -188,6 +187,15 @@ public class TelaLogin extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+			dispose();	
+			TelaRecuperacaoSenha tela;
+			try {
+				tela = new TelaRecuperacaoSenha();
+				tela.setVisible(true);
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			   }
 			}
 		});
 		btnNewButton.setBackground(new Color(192, 192, 192));

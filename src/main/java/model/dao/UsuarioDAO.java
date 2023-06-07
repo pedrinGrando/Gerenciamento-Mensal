@@ -158,4 +158,43 @@ public class UsuarioDAO {
 		
 	}
 
+	public UsuarioVO consultarUsuarioPorNomeDAO(String text, String cpf) {
+		
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		UsuarioVO usuarioConsultado = new UsuarioVO();
+		
+		String query = "SELECT u.idusuario, u.tipousuario, u.nome, u.cpf, u.datanasci, "
+				+ "u.email, u.salariol, u.login, u.senha "
+				+ "FROM USUARIO u "
+				+ "WHERE u.nome = '" + text +"' "
+				+ "AND u.cpf = " + cpf;
+		
+		try {
+			resultado = stmt.executeQuery(query);
+			while(resultado.next()) {
+				usuarioConsultado.setIdUsuario(Integer.parseInt(resultado.getString(1)));
+				usuarioConsultado.setTipoUsuario(Integer.parseInt(resultado.getString(2)));
+				usuarioConsultado.setNome(resultado.getString(3));
+				usuarioConsultado.setCpf(resultado.getString(4));
+				usuarioConsultado.setDataNasci(LocalDate.parse(resultado.getString(5), 
+						DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+				usuarioConsultado.setEmail(resultado.getString(6));
+				usuarioConsultado.setSalariol(resultado.getDouble(7));
+				usuarioConsultado.setLogin(resultado.getString(8));
+				usuarioConsultado.setSenha(resultado.getString(9));
+			}
+		} catch (SQLException erro) {
+			System.out.println("Erro ao executar a query do método consultarUsuarioPorNomeDAO");
+			System.out.println("Erro: " + erro.getMessage());
+		}finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return usuarioConsultado;
+
+	}
+
 }
