@@ -83,16 +83,21 @@ public class PainelAdicionarDespesa extends JPanel {
 				
 				//INSERE DADOS AO NOVO OBJETO
 				LocalDate dataAtual = LocalDate.now();
-			
-				despesa.setIdUsuario(userLogado.getIdUsuario());
-				despesa.setDespNome(nomeDespesa_camp.getText());
-				despesa.setValor(Double.parseDouble(valorDespesaCamp.getText()));
 				
-				//INSERE DESPESA NOVA AO BANCO
-			    despesa = despController.inserirDespesaController(despesa);
-				
+				if (nomeDespesa_camp.getText().isBlank() || nomeDespesa_camp.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios! ", "Gerenciamento-Mensal", JOptionPane.WARNING_MESSAGE);
+				} else if (valorDespesaCamp.getText().isEmpty() || valorDespesaCamp.getText().isEmpty() ) {
+					JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios! ", "Gerenciamento-Mensal", JOptionPane.WARNING_MESSAGE);
+				} else {
+					despesa.setIdUsuario(userLogado.getIdUsuario());
+					despesa.setDespNome(nomeDespesa_camp.getText());
+					despesa.setValor(Double.parseDouble(valorDespesaCamp.getText()));
+					//INSERE DESPESA NOVA AO BANCO
+					 despesa = despController.inserirDespesaController(despesa);
+				}
+								
 				if (despesa.getIdDespesa() != 0) {
-					JOptionPane.showMessageDialog(null, "Despesa nova inserida com sucesso! ", "Gerenciamento-Mensal", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Despesa nova inserida com sucesso! ", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "Não foi possível inserir! ", "Gerenciamento-Mensal", JOptionPane.WARNING_MESSAGE);
 				}

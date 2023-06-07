@@ -88,6 +88,7 @@ public class PainelConsultarDespesa extends JPanel {
 		add(lblNewLabel_1);
 		
 		lblNome = new JLabel("");
+		lblNome.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNome.setBounds(73, 203, 209, 14);
 		add(lblNome);
 		
@@ -97,6 +98,7 @@ public class PainelConsultarDespesa extends JPanel {
 		add(lblNewLabel_3);
 		
 		lblDespesa = new JLabel("");
+		lblDespesa.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblDespesa.setBounds(87, 247, 250, 14);
 		add(lblDespesa);
 		
@@ -106,6 +108,7 @@ public class PainelConsultarDespesa extends JPanel {
 		add(lblNewLabel_5);
 		
 		lblValor = new JLabel("");
+		lblValor.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblValor.setBounds(73, 288, 227, 14);
 		add(lblValor);
 		
@@ -116,22 +119,21 @@ public class PainelConsultarDespesa extends JPanel {
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				despesaVO = despController.consultarDespesaController(campDespDigitada.getText(), userOnline);
-				
-				lblNome = new JLabel("New label");
-				lblNome.setBounds(101, 203, 209, 14);
-				add(lblNome);
-				lblNome.setText(userOnline.getNome());
-				
-				lblDespesa = new JLabel("New label");
-				lblDespesa.setBounds(101, 247, 250, 14);
-				add(lblDespesa);
-				lblDespesa.setText(despesaVO.getDespNome());
-				
-				lblValor = new JLabel("New label");
-				lblValor.setBounds(101, 288, 227, 14);
-				add(lblValor);
-				lblValor.setText("R$ "+despesaVO.getValor());
+				if (campDespDigitada.getText().isBlank() || campDespDigitada.getText().isEmpty()) {
+					
+					JOptionPane.showMessageDialog(null, "O nome é obrigratório", "Gerenciamento-Mensal", JOptionPane.WARNING_MESSAGE);
+					
+				} else {
+					despesaVO = despController.consultarDespesaController(campDespDigitada.getText(), userOnline);
+					
+					lblNome.setText(userOnline.getNome());
+					
+					lblDespesa.setText(despesaVO.getDespNome());
+					
+					lblValor.setText("R$ "+despesaVO.getValor());
+					
+					
+				}
 				
 			}
 		});

@@ -7,8 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.vo.DespesaVO;
+import model.vo.TabelaVO;
 import model.vo.UsuarioVO;
 
 public class DespesaDAO {
@@ -125,6 +128,41 @@ public class DespesaDAO {
 			Banco.closeConnection(conn);
 		}
 		return retorno;
+		
+	}
+
+	public List<DespesaVO> consultarTodasDAO(UsuarioVO userOnline) {
+		
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		ArrayList<DespesaVO> despesasCadastradas = new ArrayList<>(); 
+		
+
+		String query = "SELECT iddespesa, idusuario, despnome, valor "
+				+ "FROM despesa "
+				+ "WHERE idusuario = " + userOnline.getIdUsuario();
+		
+		try {
+			resultado = stmt.executeQuery(query);
+			while(resultado.next()) {
+				DespesaVO despesa = new DespesaVO();
+				despesa.setIdDespesa(Integer.parseInt(resultado.getString(1)));
+				despesa.setIdUsuario(Integer.parseInt(resultado.getString(2)));
+				despesa.setDespNome(resultado.getString(3));
+				despesa.setValor(Double.parseDouble(resultado.getString(4)));
+				despesasCadastradas.add(despesa);
+			}
+		} catch (SQLException erro) {
+			System.out.println("Erro ao executar a query do método consultarTodasDAO");
+			System.out.println("Erro: " + erro.getMessage());
+		}finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+
+          return despesasCadastradas;
 		
 	}
 

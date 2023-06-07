@@ -3,10 +3,14 @@ package controller;
 import model.vo.DespesaVO;
 import model.vo.UsuarioVO;
 import model.bo.*;
+import java.util.ArrayList;
+import java.util.List;
+import model.dao.*;
 
 public class DespesaController {
 	
 	DespesaBO despBO = new DespesaBO();
+	DespesaDAO despDAO = new DespesaDAO();
 	
 	public double calcularDescontoTotalController(UsuarioVO userOnline) {
 		
@@ -26,6 +30,11 @@ public class DespesaController {
 	public boolean removerDespesaController(UsuarioVO userLogado, String text) {
 		
 		return despBO.removerDespController(userLogado, text);
+	}
+
+	public List<DespesaVO> consultarTodosController(UsuarioVO userOnline) {
+		
+		return despDAO.consultarTodasDAO(userOnline);
 	}
 
 }

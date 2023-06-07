@@ -61,10 +61,12 @@ public class PainelRemoverDespesa extends JPanel {
 		btn_removerDespesa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if (despesaController.removerDespesaController(userLogado, nomeDespesa_camp.getText())) {
-					JOptionPane.showMessageDialog(null, "Despesa removida com sucesso!", "GS - Gerenciador de salário", JOptionPane.INFORMATION_MESSAGE);
-				}else {
+				if (nomeDespesa_camp.getText().isEmpty() || nomeDespesa_camp.getText().isBlank()) {
+					JOptionPane.showMessageDialog(null, "O nome é obrigatório!", "Gerenciador-Mensal", JOptionPane.INFORMATION_MESSAGE);
 					
+				}else  {
+					despesaController.removerDespesaController(userLogado, nomeDespesa_camp.getText());
+					JOptionPane.showMessageDialog(null, "Despesa removida com sucesso!", "Gerenciador-Mensal", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
