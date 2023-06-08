@@ -42,7 +42,7 @@ public class PainelAlterarDados extends JPanel {
 	private JComponent lblNewLabel_2;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
-	private JTextField novoSalarioL;
+	private JNumberFormatField novoSalarioL;
 	private JLabel lblNewLabel_5;
 	private JLabel lblNewLabel_6;
 	private JButton btnNewButton_1;
@@ -151,7 +151,7 @@ public class PainelAlterarDados extends JPanel {
 		lblNewLabel_4.setBounds(10, 187, 163, 14);
 		add(lblNewLabel_4);
 		
-		novoSalarioL = new JTextField();
+		novoSalarioL = new JNumberFormatField();
 		novoSalarioL.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		novoSalarioL.setBounds(35, 245, 102, 20);
 		add(novoSalarioL);
@@ -203,7 +203,7 @@ public class PainelAlterarDados extends JPanel {
 				boolean result2 = false;
 				
 				//INSERINDO NOVOS DADOS 
-				userAtualizado.setSalariol(Double.parseDouble(novoSalarioL.getText()));
+				userAtualizado.setSalariol(Double.parseDouble(novoSalarioL.getText().replace(",", ".")));
 				userAtualizado.setEmail(novoEmail_camp.getText());
 				userAtualizado.setNome(novoNome_camp.getText());
 				userAtualizado.setLogin(novoUser_camp.getText());

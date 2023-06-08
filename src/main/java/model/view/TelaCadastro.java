@@ -79,7 +79,7 @@ public class TelaCadastro extends JFrame {
 	private JPasswordField campSenha;
 	private JPasswordField confirmCampSenha;
 	private JTextField campCidade;
-	private JTextField salarioCamp;
+	private JNumberFormatField salarioCamp;
 	private JComboBox cbEstados;
 
 	/**
@@ -186,7 +186,7 @@ public class TelaCadastro extends JFrame {
 		
 		loginCamp = new JTextField();
 		loginCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		loginCamp.setBounds(126, 258, 122, 20);
+		loginCamp.setBounds(105, 258, 143, 20);
 		contentPane.add(loginCamp);
 		loginCamp.setColumns(10);
 		
@@ -215,7 +215,7 @@ public class TelaCadastro extends JFrame {
 		
 		campSenha = new JPasswordField();
 		campSenha.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		campSenha.setBounds(578, 24, 92, 20);
+		campSenha.setBounds(585, 24, 92, 20);
 		contentPane.add(campSenha);
 		
 		confirmCampSenha = new JPasswordField();
@@ -247,7 +247,7 @@ public class TelaCadastro extends JFrame {
 		
 		campNumero = new JTextField();
 		campNumero.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		campNumero.setBounds(76, 437, 111, 20);
+		campNumero.setBounds(76, 437, 122, 20);
 		contentPane.add(campNumero);
 		campNumero.setColumns(10);
 		
@@ -283,7 +283,7 @@ public class TelaCadastro extends JFrame {
 		cbEstados.setBounds(538, 349, 63, 22);
 		contentPane.add(cbEstados);
 		
-		salarioCamp = new JTextField();
+		salarioCamp = new JNumberFormatField();
 		salarioCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		salarioCamp.setBounds(105, 211, 143, 20);
 		contentPane.add(salarioCamp);
@@ -337,7 +337,7 @@ public class TelaCadastro extends JFrame {
 				usuario.setEmail(emailCamp.getText());
 				usuario.setDataNasci(dataNasciCamp.getDate());
 			    usuario.setLogin(loginCamp.getText());
-			    usuario.setSalariol(Double.parseDouble(salarioCamp.getText()));
+			    usuario.setSalariol(Double.parseDouble(salarioCamp.getText().replace(",", ".")));
 			    //METODO PARA VERIFICAR SENHA 
 			    this.verificarSenhasDigitadas(campSenha.getText(), confirmCampSenha.getText());
 			    

@@ -45,7 +45,7 @@ public class PainelCalculoMensal extends JPanel {
 	   Locale brasil = new Locale("pt", "BR");
 	   DateTimeFormatter fout1 = DateTimeFormatter.ofPattern("EEEE", brasil);
 	   String mes = (dataAtual.getMonth().getDisplayName(TextStyle.FULL, brasil));
-	   private JTextField campSaldo;
+	   private JNumberFormatField campSaldo;
 	   
 	private JButton btn_salvarDados;
 	private JComponent lblNewLabel;
@@ -72,7 +72,7 @@ public class PainelCalculoMensal extends JPanel {
 
 		setLayout(null);
 		
-		campSaldo = new JTextField();
+		campSaldo = new JNumberFormatField();
 		campSaldo.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		campSaldo.setBounds(208, 93, 147, 20);
 		add(campSaldo);
@@ -115,16 +115,15 @@ public class PainelCalculoMensal extends JPanel {
 		btnGerarCalculo.setBackground(new Color(0, 255, 255));
 		btnGerarCalculo.addActionListener(new ActionListener() {
 		
-			public void actionPerformed(ActionEvent e) {
+			    public void actionPerformed(ActionEvent e) {
 			
-			    double saldo = Double.parseDouble(campSaldo.getText());
+			    double saldo = Double.parseDouble(campSaldo.getText().replace(",", "."));
 			    
 				double rest = userLogado.getSalariol() + saldo;
 				
 				double desc  = despController.calcularDescontoTotalController(userLogado);
 				
 				double saldoFinal = rest - desc; 
-				
 				
 				//EXIBICAO FINAL
 				lblMesConsulta.setText(mes);

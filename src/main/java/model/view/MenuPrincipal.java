@@ -37,6 +37,7 @@ public class MenuPrincipal extends JFrame {
 	private PainelConsultaMes painelConsultaMes;
 	private PainelTabelaCompleta painelTabelaCompleta;
 	private PainelRemoverDespesa painelRemoverDespesa;
+	private PainelAlterarDespesa painelAlterarDespesa;
 	
 	UsuarioController usuarioController = new UsuarioController();
 
@@ -176,6 +177,21 @@ public class MenuPrincipal extends JFrame {
 				
 			}
 		});
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Editar ");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				painelAlterarDespesa = new PainelAlterarDespesa(userOnline);
+				setContentPane(painelAlterarDespesa);
+				revalidate();
+				
+			}
+		});
+		mntmNewMenuItem.setBackground(new Color(255, 255, 255));
+		mntmNewMenuItem.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/pencil.png")));
+		mntmNewMenuItem.setFont(new Font("Segoe UI", Font.ITALIC, 12));
+		mnNewMenu_2.add(mntmNewMenuItem);
 		mntmConsultarDesp.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		mnNewMenu_2.add(mntmConsultarDesp);
 		

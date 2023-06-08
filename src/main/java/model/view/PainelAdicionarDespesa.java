@@ -27,10 +27,11 @@ import javax.swing.border.BevelBorder;
 
 
 public class PainelAdicionarDespesa extends JPanel {
+	
 	private JLabel lblNewLabel_1;
 	private JButton btnNewButton;
 	private JTextField nomeDespesa_camp;
-	private JTextField valorDespesaCamp;
+	private JNumberFormatField valorDespesaCamp;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
 	
@@ -58,7 +59,7 @@ public class PainelAdicionarDespesa extends JPanel {
 		add(nomeDespesa_camp);
 		nomeDespesa_camp.setColumns(10);
 		
-		valorDespesaCamp = new JTextField();
+		valorDespesaCamp = new JNumberFormatField();
 		valorDespesaCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		valorDespesaCamp.setBounds(142, 146, 131, 20);
 		add(valorDespesaCamp);
@@ -91,7 +92,7 @@ public class PainelAdicionarDespesa extends JPanel {
 				} else {
 					despesa.setIdUsuario(userLogado.getIdUsuario());
 					despesa.setDespNome(nomeDespesa_camp.getText());
-					despesa.setValor(Double.parseDouble(valorDespesaCamp.getText()));
+					despesa.setValor(Double.parseDouble(valorDespesaCamp.getText().replace(",", ".")));
 					//INSERE DESPESA NOVA AO BANCO
 					 despesa = despController.inserirDespesaController(despesa);
 				}

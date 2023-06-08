@@ -18,11 +18,13 @@ import model.vo.UsuarioVO;
 import controller.DespesaController;
 
 import javax.swing.border.BevelBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PainelAlterarDespesa extends JPanel {
 	
 	private JTextField campNome;
-	private JTextField campValor;
+	private JNumberFormatField campValor;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
@@ -55,17 +57,16 @@ public class PainelAlterarDespesa extends JPanel {
 		add(panel);
 		
 		
-		
 		lblNewLabel_2 = new JLabel("Seleciona a despesa que deseja alterar  "+userOnline.getLogin());
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_2.setBounds(21, 62, 255, 14);
+		lblNewLabel_2.setBounds(21, 62, 278, 14);
 		add(lblNewLabel_2);
 		
 		List<DespesaVO> despesasCadastradas = despController.consultarTodosController(userOnline);
 		
 		cbDespesas = new JComboBox(despesasCadastradas.toArray());
 		cbDespesas.setBackground(new Color(192, 192, 192));
-		cbDespesas.setBounds(285, 58, 110, 22);
+		cbDespesas.setBounds(290, 58, 110, 22);
 		add(cbDespesas);
 		
 		campNome = new JTextField();
@@ -84,13 +85,18 @@ public class PainelAlterarDespesa extends JPanel {
 		lblNewLabel_4.setBounds(21, 315, 59, 14);
 		add(lblNewLabel_4);
 		
-		campValor = new JTextField();
+		campValor = new JNumberFormatField();
 		campValor.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		campValor.setBounds(90, 312, 119, 20);
 		add(campValor);
 		campValor.setColumns(10);
 		
 		btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			}
+		});
 		btnNewButton.setIcon(new ImageIcon(PainelAlterarDespesa.class.getResource("/icons/diskette.png")));
 		btnNewButton.setBorder(null);
 		btnNewButton.setBackground(new Color(0, 255, 255));
