@@ -37,4 +37,9 @@ public class DespesaController {
 		return despDAO.consultarTodasDAO(userOnline);
 	}
 
+	public boolean atualizarDespController(DespesaVO despesaAtualizar) {
+		
+		return despBO.atualizarDespBO(despesaAtualizar);
+	}
+
 }

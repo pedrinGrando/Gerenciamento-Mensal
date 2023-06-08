@@ -205,7 +205,7 @@ public class TelaCadastro extends JFrame {
 		
 		JLabel lblNewLabel_15 = new JLabel("Senha : ");
 		lblNewLabel_15.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_15.setBounds(505, 27, 63, 14);
+		lblNewLabel_15.setBounds(526, 27, 63, 14);
 		contentPane.add(lblNewLabel_15);
 		
 		JLabel lblNewLabel_16 = new JLabel("Confirme a senha: ");
@@ -215,7 +215,7 @@ public class TelaCadastro extends JFrame {
 		
 		campSenha = new JPasswordField();
 		campSenha.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		campSenha.setBounds(585, 24, 92, 20);
+		campSenha.setBounds(582, 24, 95, 20);
 		contentPane.add(campSenha);
 		
 		confirmCampSenha = new JPasswordField();
@@ -225,7 +225,7 @@ public class TelaCadastro extends JFrame {
 		
 		ruaCamp = new JTextField();
 		ruaCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		ruaCamp.setBounds(65, 350, 254, 20);
+		ruaCamp.setBounds(76, 350, 254, 20);
 		contentPane.add(ruaCamp);
 		ruaCamp.setColumns(10);
 		
@@ -236,7 +236,7 @@ public class TelaCadastro extends JFrame {
 		
 		bairroCamp = new JTextField();
 		bairroCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		bairroCamp.setBounds(65, 394, 254, 20);
+		bairroCamp.setBounds(76, 394, 254, 20);
 		contentPane.add(bairroCamp);
 		bairroCamp.setColumns(10);
 		
@@ -284,6 +284,7 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(cbEstados);
 		
 		salarioCamp = new JNumberFormatField();
+		salarioCamp.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		salarioCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		salarioCamp.setBounds(105, 211, 143, 20);
 		contentPane.add(salarioCamp);
@@ -318,6 +319,9 @@ public class TelaCadastro extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				 String valor1 = "";
+				
+				
 				// DEFININDO TIPO DE USUARIO DE ACORDO COM A REGRA 
 				usuario.setTipoUsuario(2);
 				
@@ -337,7 +341,10 @@ public class TelaCadastro extends JFrame {
 				usuario.setEmail(emailCamp.getText());
 				usuario.setDataNasci(dataNasciCamp.getDate());
 			    usuario.setLogin(loginCamp.getText());
-			    usuario.setSalariol(Double.parseDouble(salarioCamp.getText().replace(",", ".")));
+			    
+			    valor1 = salarioCamp.getText().replace(",", ".");
+			    
+			    usuario.setSalariol(Double.parseDouble(valor1.replace("R$", "")));
 			    //METODO PARA VERIFICAR SENHA 
 			    this.verificarSenhasDigitadas(campSenha.getText(), confirmCampSenha.getText());
 			    

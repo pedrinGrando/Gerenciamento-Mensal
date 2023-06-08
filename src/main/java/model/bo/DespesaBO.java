@@ -28,4 +28,9 @@ public class DespesaBO {
 		return despDAO.removerDespDAO(userLogado, text);
 	}
 
+	public boolean atualizarDespBO(DespesaVO despesaAtualizar) {
+		
+		return despDAO.atualizarDespDAO(despesaAtualizar);
+	}
+
 }

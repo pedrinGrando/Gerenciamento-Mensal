@@ -117,7 +117,9 @@ public class PainelCalculoMensal extends JPanel {
 		
 			    public void actionPerformed(ActionEvent e) {
 			
-			    double saldo = Double.parseDouble(campSaldo.getText().replace(",", "."));
+			    String valor1 = campSaldo.getText().replace(",", ".");
+			    	
+			    double saldo = Double.parseDouble(valor1.replace("R$", ""));
 			    
 				double rest = userLogado.getSalariol() + saldo;
 				

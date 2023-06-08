@@ -166,4 +166,30 @@ public class DespesaDAO {
 		
 	}
 
+	public boolean atualizarDespDAO(DespesaVO despesaAtualizar) {
+		
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		boolean retorno = false;
+		
+		String query = "UPDATE despesa SET despnome = '" + despesaAtualizar.getDespNome()
+				+ "', valor = " + despesaAtualizar.getValor()
+				+ " WHERE idusuario = " + despesaAtualizar.getIdUsuario()
+		        + " AND despnome = '" + despesaAtualizar.getDespNome() + "' ";
+		 
+		try {
+			if(stmt.executeUpdate(query) == 1) {
+				retorno = true;
+			}
+		} catch (SQLException erro) {
+			System.out.println("Erro ao executar a query do método atualizarDespDAO");
+			System.out.println("Erro: " + erro.getMessage());	
+		} finally {
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return retorno;
+	
+	}
+
 }

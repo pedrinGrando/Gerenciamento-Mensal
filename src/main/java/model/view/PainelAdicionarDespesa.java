@@ -82,6 +82,10 @@ public class PainelAdicionarDespesa extends JPanel {
 		btn_inserir_camp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				String valor1 = "";
+				
+				
+				
 				//INSERE DADOS AO NOVO OBJETO
 				LocalDate dataAtual = LocalDate.now();
 				
@@ -92,7 +96,10 @@ public class PainelAdicionarDespesa extends JPanel {
 				} else {
 					despesa.setIdUsuario(userLogado.getIdUsuario());
 					despesa.setDespNome(nomeDespesa_camp.getText());
-					despesa.setValor(Double.parseDouble(valorDespesaCamp.getText().replace(",", ".")));
+					
+					valor1 = valorDespesaCamp.getText().replace(",", ".");
+					
+					despesa.setValor(Double.parseDouble(valor1.replace("R$", "")));
 					//INSERE DESPESA NOVA AO BANCO
 					 despesa = despController.inserirDespesaController(despesa);
 				}
@@ -110,7 +117,7 @@ public class PainelAdicionarDespesa extends JPanel {
 		btn_inserir_camp.setBounds(142, 177, 140, 31);
 		add(btn_inserir_camp);
 		lblNewLabel.setIcon(new ImageIcon(PainelAdicionarDespesa.class.getResource("/icons/bank.png")));
-		lblNewLabel.setBounds(492, 334, 36, 31);
+		lblNewLabel.setBounds(577, 460, 36, 31);
 		add(lblNewLabel);
 		
 	}

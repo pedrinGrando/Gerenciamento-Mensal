@@ -199,11 +199,16 @@ public class PainelAlterarDados extends JPanel {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				String valor1 = "";
+				
 				boolean result = false;
 				boolean result2 = false;
 				
 				//INSERINDO NOVOS DADOS 
-				userAtualizado.setSalariol(Double.parseDouble(novoSalarioL.getText().replace(",", ".")));
+				
+				valor1 = novoSalarioL.getText().replace(",", ".");
+				
+				userAtualizado.setSalariol(Double.parseDouble(valor1.replace("R$", "")));
 				userAtualizado.setEmail(novoEmail_camp.getText());
 				userAtualizado.setNome(novoNome_camp.getText());
 				userAtualizado.setLogin(novoUser_camp.getText());
