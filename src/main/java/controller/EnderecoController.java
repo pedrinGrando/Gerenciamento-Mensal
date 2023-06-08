@@ -1,9 +1,14 @@
 package controller;
 
 import model.vo.EnderecoVO;
+import model.vo.TabelaVO;
 import model.vo.UsuarioVO;
+
+import java.util.ArrayList;
+
 import exceptions.CampoInvalidoException;
 import model.bo.*;
+import model.seletor.TabelaSeletor;
 
 public class EnderecoController {
 
@@ -52,5 +57,6 @@ public class EnderecoController {
 		
 		return enderecoBO.consultarEnderecoBO(endereco);
 	}
+
 
 }

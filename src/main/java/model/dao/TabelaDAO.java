@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
+import model.seletor.TabelaSeletor;
 import model.vo.TabelaVO;
 import model.vo.UsuarioVO;
 
@@ -113,5 +115,83 @@ public class TabelaDAO {
 	return tabela_completaVO;
 	
   }
+
+	public ArrayList<TabelaVO> consultarComFiltrosDAO(TabelaSeletor tabSeletor) {
+		
+		ArrayList<TabelaVO> tabelas = new ArrayList<TabelaVO>();
+		Connection conexao = Banco.getConnection();
+		String sql = " select * from tabelamensal ";
+		
+		if(tabSeletor.temFiltro()) {
+			sql = preencherFiltros(sql, tabSeletor);
+		}
+		
+		//if(tabSeletor.temPaginacao()) {
+			//sql += " LIMIT "  + tabSeletor.getLimite()
+				// + " OFFSET " + tabSeletor.getOffset();  
+		//}
+		
+		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
+		try {
+			ResultSet resultado = query.executeQuery();
+			
+			while(resultado.next()) {
+				TabelaVO clienteBuscado = montarTabelaComResultadoDoBanco(resultado);
+				tabelas.add(clienteBuscado);
+			}
+			
+		}catch (Exception e) {
+			System.out.println("Erro ao buscar todas as tabelas. \n Causa:" + e.getMessage());
+		}finally {
+			Banco.closePreparedStatement(query);
+			Banco.closeConnection(conexao);
+		}
+		
+		return tabelas;
+	
+	}
+
+	private TabelaVO montarTabelaComResultadoDoBanco(ResultSet resultado) throws SQLException {
+
+		TabelaVO tabelaBuscada = new TabelaVO();
+		tabelaBuscada.setIdTabela(resultado.getInt("idtabela"));
+		tabelaBuscada.setIdUsuario(resultado.getInt("idusuario"));
+		tabelaBuscada.setMes(resultado.getString("mes"));
+		tabelaBuscada.setAno(resultado.getInt("ano"));
+		tabelaBuscada.setTotalRest(resultado.getDouble("totalrestmes"));
+		tabelaBuscada.setSaldoFinal(resultado.getDouble("saldofinal"));
+		
+		return tabelaBuscada;
+		
+	}
+
+	private String preencherFiltros(String sql, TabelaSeletor tabSeletor) {
+		
+		boolean primeiro = true;
+		
+		if(tabSeletor.getMes() != null && !tabSeletor.getMes().trim().isEmpty()) {
+			if(primeiro) {
+				sql += " WHERE ";
+			} else {
+				sql += " AND ";
+			}
+			
+			sql += " mes LIKE '%" + tabSeletor.getMes() + "%'";
+			primeiro = false;
+		}
+		
+		if(tabSeletor.getAno() != 0 && !(tabSeletor.getAno() > 0)) {
+			if(primeiro) {
+				sql += " WHERE ";
+			} else {
+				sql += " AND ";
+			}
+			sql += " ano = " + tabSeletor.getAno();
+			primeiro = false;
+		}
+		
+		
+		return sql;
+	}
     
 }

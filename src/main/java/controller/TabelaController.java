@@ -6,6 +6,7 @@ import model.vo.UsuarioVO;
 import java.util.ArrayList;
 
 import model.bo.*;
+import model.seletor.TabelaSeletor;
 
 public class TabelaController {
 	
@@ -24,6 +25,11 @@ public class TabelaController {
 	public ArrayList<TabelaVO> consultarTodasController(TabelaVO tabelaVO) {
 		
 		return tabBO.consultarTabelaBO(tabelaVO);
+	}
+
+	public ArrayList<TabelaVO> consultarComFiltros(TabelaSeletor tabSeletor) {
+		// TODO Auto-generated method stub
+		return tabBO.consultarComFiltrosBO(tabSeletor);
 	}
 
 

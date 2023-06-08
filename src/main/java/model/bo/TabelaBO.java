@@ -6,6 +6,7 @@ import model.vo.UsuarioVO;
 import java.util.ArrayList;
 
 import model.dao.*;
+import model.seletor.TabelaSeletor;
 
 public class TabelaBO {
 
@@ -27,6 +28,12 @@ public class TabelaBO {
 	public ArrayList<TabelaVO> consultarTabelaBO(TabelaVO tabelaVO) {
 		// TODO Auto-generated method stub
 		return tabDAO.consultarTabelaCompletaDAO(tabelaVO);
+	}
+
+
+	public ArrayList<TabelaVO> consultarComFiltrosBO(TabelaSeletor tabSeletor) {
+		
+		return tabDAO.consultarComFiltrosDAO(tabSeletor);
 	}
 
 }
