@@ -20,7 +20,6 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.EnderecoController;
 import exceptions.EnderecoInvalidoException;
-import model.vo.EnderecoVO;
 import controller.TabelaController;
 import model.seletor.TabelaSeletor;
 import model.vo.*;
@@ -34,6 +33,7 @@ import exceptions.EnderecoInvalidoException;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
@@ -52,12 +52,17 @@ public class PainelTabelaCompleta extends JPanel {
 		private ArrayList<TabelaVO> tabelas;
 		private String[] nomesColunas = { "Nome", "Mês", "Ano", "Total restante", "Saldo final" };
 		private JLabel lblNewLabel;
-		private JTextField campAno;
 		private TabelaSeletor tabSeletor = new TabelaSeletor();
 		private JLabel lblNewLabel_1;
-		private JLabel lblNewLabel_2;
 		private JComboBox cbMeses;
 		private JButton btnFiltrar;
+		private final int TAMANHO_PAGINA = 5;
+		private int paginaAtual = 1;
+		private int totalPaginas = 0;
+		private TabelaSeletor seletor = new TabelaSeletor();
+		private JButton btnVoltarPagina;
+		private JButton btnAvancarPagina;
+		private JLabel lblPaginacao;
 	
 		//Métodos usados no JTable
 		private void limparTabela() {
@@ -103,19 +108,20 @@ public class PainelTabelaCompleta extends JPanel {
 		btnBuscar.setBackground(new Color(0, 255, 255));
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				buscarTabelaComFiltro(userOnline);
 				atualizarTabelaMeses(userOnline);
 			}
 		});
 		btnBuscar.setBounds(567, 22, 69, 23);
 		add(btnBuscar);
 		
-		String[] meses = {"Janeiro", "Ferereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"
-				,"Novembro", "Dezembro"};
+		String[] meses = {"janeiro", "ferereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro"
+				,"novembro", "dezembro"};
 		
 		tblTabelas = new JTable();
 		tblTabelas.setForeground(new Color(0, 0, 0));
 		this.limparTabela();
-		tblTabelas.setBounds(10, 68, 655, 350);
+		tblTabelas.setBounds(10, 66, 655, 350);
 		
 		add(tblTabelas);
 		
@@ -123,7 +129,6 @@ public class PainelTabelaCompleta extends JPanel {
 		btnFiltrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				buscarTabelaComFiltro(userOnline);
-				atualizarTabelaMeses(userOnline);
 				
 			}
 		});
@@ -144,35 +149,83 @@ public class PainelTabelaCompleta extends JPanel {
 		cbMeses.setBounds(143, 22, 100, 22);
 		add(cbMeses);
 		
-		campAno = new JTextField();
-		campAno.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		campAno.setBounds(267, 22, 91, 22);
-		add(campAno);
-		campAno.setColumns(10);
-		
 		lblNewLabel_1 = new JLabel("Mês");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNewLabel_1.setBounds(143, 11, 46, 14);
 		add(lblNewLabel_1);
 		
-		lblNewLabel_2 = new JLabel("Ano");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_2.setBounds(267, 11, 46, 14);
-		add(lblNewLabel_2);
+		btnVoltarPagina = new JButton("<< Voltar");
+		btnVoltarPagina.setBorder(null);
+		btnVoltarPagina.setBackground(new Color(255, 255, 255));
+		btnVoltarPagina.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		btnVoltarPagina.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				paginaAtual--;
+				buscarTabelaComFiltro(userOnline);
+				//lblPaginacao.setText(paginaAtual + " / " + totalPaginas);
+				btnVoltarPagina.setEnabled(paginaAtual > 1);
+				btnAvancarPagina.setEnabled(paginaAtual < totalPaginas);
+			}
+		});
+		btnVoltarPagina.setEnabled(false);
+		btnVoltarPagina.setBounds(162, 427, 128, 23);
+		add(btnVoltarPagina);
 		
+		btnAvancarPagina = new JButton("Avançar >>");
+		btnAvancarPagina.setBorder(null);
+		btnAvancarPagina.setBackground(new Color(255, 255, 255));
+		btnAvancarPagina.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		btnAvancarPagina.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				paginaAtual++;
+				buscarTabelaComFiltro(userOnline);
+				//lblPaginacao.setText(paginaAtual + " / " + totalPaginas);
+				btnVoltarPagina.setEnabled(paginaAtual > 1);
+				btnAvancarPagina.setEnabled(paginaAtual < totalPaginas);
+			}
+		});
+		btnAvancarPagina.setBounds(355, 427, 128, 23);
+		add(btnAvancarPagina);
 		
+		lblPaginacao = new JLabel("1 / " + totalPaginas);
+		lblPaginacao.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblPaginacao.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPaginacao.setBounds(281, 427, 77, 23);
+		add(lblPaginacao);
 		
+		atualizarQuantidadePaginas();
+		
+	}
+	
+	
+	
+	private void atualizarQuantidadePaginas() {
+		//Cálculo do total de páginas (poderia ser feito no backend)
+		int totalRegistros = tabelaController.contarTotalRegistrosComFiltros(seletor);
+		
+		//QUOCIENTE da divisão inteira
+		totalPaginas = totalRegistros / TAMANHO_PAGINA;
+		
+		//RESTO da divisão inteira
+		if(totalRegistros % TAMANHO_PAGINA > 0) { 
+			totalPaginas++;
+		}
+		
+		//lblPaginacao.setText(paginaAtual + " / " + totalPaginas);
 	}
 
 	 protected void buscarTabelaComFiltro(UsuarioVO userOnline) {
 		tabSeletor = new TabelaSeletor();
-		//seletor.setLimite(TAMANHO_PAGINA);
-		//seletor.setPagina(paginaAtual);
+		tabSeletor.setLimite(TAMANHO_PAGINA);
+		tabSeletor.setPagina(paginaAtual);
 		tabSeletor.setMes((String) cbMeses.getSelectedItem());
-		//tabSeletor.setAno(Integer.parseInt(campAno.getText()));
+		//tabSeletor.setMes(campMes.getText());
+		//tabSeletor.setAno(campMes.getText());
 
 		tabelas = (ArrayList<TabelaVO>) tabelaController.consultarComFiltros(tabSeletor);
 		atualizarTabelaMeses(userOnline);
-		//atualizarQuantidadePaginas();
+		atualizarQuantidadePaginas();
 	}
+
+	
 }

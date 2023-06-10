@@ -32,5 +32,10 @@ public class TabelaController {
 		return tabBO.consultarComFiltrosBO(tabSeletor);
 	}
 
+	public int contarTotalRegistrosComFiltros(TabelaSeletor seletor) {
+		
+		return tabBO.contarTotalRegistrosComFiltros(seletor);
+	}
+
 
 }

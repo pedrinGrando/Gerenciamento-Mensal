@@ -24,7 +24,7 @@ public class TabelaDAO {
 		try {
 			pstmt.setInt(1, userLogado.getIdUsuario());
 			pstmt.setString(2, tabela.getMes());
-			pstmt.setInt(3, tabela.getAno());
+			pstmt.setString(3, tabela.getAno());
 			pstmt.setDouble(4, tabela.getTotalRest());
 			pstmt.setDouble(5, tabela.getSaldoFinal());
 			pstmt.execute();
@@ -64,7 +64,7 @@ public class TabelaDAO {
 				tabela.setIdTabela(Integer.parseInt(resultado.getString(1)));
 				tabela.setIdUsuario(Integer.parseInt(resultado.getString(2)));
 				tabela.setMes(resultado.getString(3));
-				tabela.setAno(Integer.parseInt(resultado.getString(4)));
+				tabela.setAno(resultado.getString(4));
 				tabela.setTotalRest(Double.parseDouble(resultado.getString(5)));
 				tabela.setSaldoFinal(Double.parseDouble(resultado.getString(6)));
 			}
@@ -97,7 +97,7 @@ public class TabelaDAO {
 			tabela.setIdTabela(Integer.parseInt(resultado.getString(1)));
 			tabela.setIdUsuario(Integer.parseInt(resultado.getString(2)));
 			tabela.setMes(resultado.getString(3));
-			tabela.setAno(Integer.parseInt(resultado.getString(4)));
+			tabela.setAno(resultado.getString(4));
 			tabela.setTotalRest(Double.parseDouble(resultado.getString(5)));
 			tabela.setSaldoFinal(Double.parseDouble(resultado.getString(6)));
 			
@@ -120,16 +120,17 @@ public class TabelaDAO {
 		
 		ArrayList<TabelaVO> tabelas = new ArrayList<TabelaVO>();
 		Connection conexao = Banco.getConnection();
-		String sql = " select * from tabelamensal ";
+		String sql = " SELECT * FROM tabelamensal "
+				+ "WHERE mes = '" + tabSeletor.getMes() + "' ";
 		
-		if(tabSeletor.temFiltro()) {
-			sql = preencherFiltros(sql, tabSeletor);
-		}
-		
-		//if(tabSeletor.temPaginacao()) {
-			//sql += " LIMIT "  + tabSeletor.getLimite()
-				// + " OFFSET " + tabSeletor.getOffset();  
+		//if(tabSeletor.temFiltro()) {
+			//sql = preencherFiltros(sql, tabSeletor);
 		//}
+		
+		if(tabSeletor.temPaginacao()) {
+			sql += " LIMIT "  + tabSeletor.getLimite()
+				 + " OFFSET " + tabSeletor.getOffset();  
+		}
 		
 		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
 		try {
@@ -157,7 +158,7 @@ public class TabelaDAO {
 		tabelaBuscada.setIdTabela(resultado.getInt("idtabela"));
 		tabelaBuscada.setIdUsuario(resultado.getInt("idusuario"));
 		tabelaBuscada.setMes(resultado.getString("mes"));
-		tabelaBuscada.setAno(resultado.getInt("ano"));
+		tabelaBuscada.setAno(resultado.getString("ano"));
 		tabelaBuscada.setTotalRest(resultado.getDouble("totalrestmes"));
 		tabelaBuscada.setSaldoFinal(resultado.getDouble("saldofinal"));
 		
@@ -171,18 +172,17 @@ public class TabelaDAO {
 		
 		if(tabSeletor.getMes() != null && !tabSeletor.getMes().trim().isEmpty()) {
 			if(primeiro) {
-				sql += " WHERE ";
+				sql += " WHERE tabelamensal.mes = '" + tabSeletor.getMes() + "' ";
 			} else {
 				sql += " AND ";
 			}
-			
-			sql += " mes LIKE '%" + tabSeletor.getMes() + "%'";
+
 			primeiro = false;
 		}
 		
-		if(tabSeletor.getAno() != 0 && !(tabSeletor.getAno() > 0)) {
+		if(tabSeletor.getAno() != null && (!tabSeletor.getAno().trim().isEmpty())) {
 			if(primeiro) {
-				sql += " WHERE ";
+				sql += " WHERE ano = " + tabSeletor.getAno();
 			} else {
 				sql += " AND ";
 			}
@@ -190,8 +190,37 @@ public class TabelaDAO {
 			primeiro = false;
 		}
 		
-		
 		return sql;
+	}
+
+	public int contarTotalRegistrosComFiltros(TabelaSeletor seletor) {
+		
+		int total = 0;
+		Connection conexao = Banco.getConnection();
+		String sql = " select count(*) from tabelamensal ";
+		
+		if(seletor.temFiltro()) {
+			sql = preencherFiltros(sql, seletor);
+		}
+		
+		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
+		try {
+			ResultSet resultado = query.executeQuery();
+			
+			if(resultado.next()) {
+				total = resultado.getInt(1);
+			}
+		}catch (Exception e) {
+			System.out.println("Erro contar o total de clientes" 
+					+ "\n Causa:" + e.getMessage());
+		}finally {
+			Banco.closePreparedStatement(query);
+			Banco.closeConnection(conexao);
+		}
+		
+		return total;
+		
+		
 	}
     
 }

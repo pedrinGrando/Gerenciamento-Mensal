@@ -80,12 +80,12 @@ public class PainelCalculoMensal extends JPanel {
 		
 		lblMesConsulta = new JLabel("");
 		lblMesConsulta.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblMesConsulta.setBounds(60, 267, 106, 14);
+		lblMesConsulta.setBounds(60, 267, 91, 14);
 		add(lblMesConsulta);
 		
 		lblAnoConsultado = new JLabel("");
 		lblAnoConsultado.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblAnoConsultado.setBounds(60, 322, 97, 14);
+		lblAnoConsultado.setBounds(60, 322, 85, 14);
 		add(lblAnoConsultado);
 		
 		lblSaldoGuardado = new JLabel("");
@@ -100,12 +100,12 @@ public class PainelCalculoMensal extends JPanel {
 		
 		lblTotalDesc = new JLabel("");
 		lblTotalDesc.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblTotalDesc.setBounds(404, 322, 115, 14);
+		lblTotalDesc.setBounds(400, 322, 115, 14);
 		add(lblTotalDesc);
 		
 		lblSaldoFinal = new JLabel("");
 		lblSaldoFinal.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblSaldoFinal.setBounds(369, 386, 126, 14);
+		lblSaldoFinal.setBounds(361, 386, 126, 14);
 		add(lblSaldoFinal);
 		
 		btnGerarCalculo = new JButton("");
@@ -127,21 +127,26 @@ public class PainelCalculoMensal extends JPanel {
 				
 				double saldoFinal = rest - desc; 
 				
+				// CONVERSOES DE VALORES
+				String saldoF = String.valueOf(saldo).replace(".", ",");
+				String restF = String.valueOf(rest).replace(".", ",");
+				String descF = String.valueOf(desc).replace(".", ",");
+				String saldoFinalF = String.valueOf(saldoFinal).replace(".", ",");
+				
 				//EXIBICAO FINAL
 				lblMesConsulta.setText(mes);
 				lblAnoConsultado.setText(""+dataAtual.getYear());
-				lblSaldoGuardado.setText(""+saldo);
-				lblSaldoRest.setText(""+df.format(rest));
-				lblTotalDesc.setText(""+df.format(desc));
-				lblSaldoFinal.setText(""+ df.format(saldoFinal));
+				lblSaldoGuardado.setText(saldoF);
+				lblSaldoRest.setText(restF);
+				lblTotalDesc.setText(descF);
+				lblSaldoFinal.setText(saldoFinalF);
 				
 			    //INSERCAO NO OBJETO TABELA
-				tabela.setAno(dataAtual.getYear());
+				tabela.setAno(Integer.toString(dataAtual.getDayOfYear()));
 				tabela.setIdUsuario(userLogado.getIdUsuario());
 				tabela.setTotalRest(saldo);
 			    tabela.setSaldoFinal(saldoFinal);
 			    tabela.setMes(mes);
-
 			}
 
 		});
@@ -211,23 +216,23 @@ public class PainelCalculoMensal extends JPanel {
 		lblNewLabel_3.setBounds(24, 322, 46, 14);
 		add(lblNewLabel_3);
 		
-		lblNewLabel_4 = new JLabel("Saldo restante : R$ ");
+		lblNewLabel_4 = new JLabel("Saldo restante :  R$ ");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_4.setBounds(267, 267, 124, 14);
+		lblNewLabel_4.setBounds(267, 267, 115, 14);
 		add(lblNewLabel_4);
 		
-		lblNewLabel_5 = new JLabel("Total descontado : R$ ");
+		lblNewLabel_5 = new JLabel("Total descontado :  R$ ");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_5.setBounds(267, 322, 127, 14);
+		lblNewLabel_5.setBounds(267, 322, 151, 14);
 		add(lblNewLabel_5);
 		
 		
-		lblNewLabel_6 = new JLabel("Saldo final : ");
+		lblNewLabel_6 = new JLabel("Saldo final :  R$ ");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_6.setBounds(267, 386, 106, 14);
+		lblNewLabel_6.setBounds(267, 386, 115, 14);
 		add(lblNewLabel_6);
 		
-		lblNewLabel_7 = new JLabel("Guardado : R$ ");
+		lblNewLabel_7 = new JLabel("Guardado :  R$ ");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		lblNewLabel_7.setBounds(24, 372, 127, 14);
 		add(lblNewLabel_7);

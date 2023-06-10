@@ -3,14 +3,15 @@ package model.seletor;
 public class TabelaSeletor extends BaseSeletor {
 
 	private String mes;
-	private int ano;
+	private String ano;
 	
 	
 	@Override
 	public boolean temFiltro() {
 		return (this.mes != null && this.mes.trim().length() > 0)
-				|| (this.ano != 0);				
+				|| (this.ano != null && this.ano.trim().length() > 0);				
 	}
+
 
 	public String getMes() {
 		return mes;
@@ -22,13 +23,15 @@ public class TabelaSeletor extends BaseSeletor {
 	}
 
 
-	public int getAno() {
+	public String getAno() {
 		return ano;
 	}
 
 
-	public void setAno(int ano) {
+	public void setAno(String ano) {
 		this.ano = ano;
 	}
+
+	
 
 }

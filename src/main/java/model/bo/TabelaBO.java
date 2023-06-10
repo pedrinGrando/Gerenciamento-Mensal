@@ -36,4 +36,10 @@ public class TabelaBO {
 		return tabDAO.consultarComFiltrosDAO(tabSeletor);
 	}
 
+
+	public int contarTotalRegistrosComFiltros(TabelaSeletor seletor) {
+		// TODO Auto-generated method stub
+		return tabDAO.contarTotalRegistrosComFiltros(seletor);
+	}
+
 }

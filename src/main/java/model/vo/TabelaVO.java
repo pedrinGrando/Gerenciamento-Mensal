@@ -5,11 +5,11 @@ public class TabelaVO {
 	private int idTabela;
     private int idUsuario;
     private String mes;
-    private int ano;
+    private String ano;
     private double totalRest;
     private double saldoFinal;
     
-	public TabelaVO(int idTabela, int idUsuario, String mes, int ano, double totalRest, double saldoFinal) {
+	public TabelaVO(int idTabela, int idUsuario, String mes, String ano, double totalRest, double saldoFinal) {
 		super();
 		this.idTabela = idTabela;
 		this.idUsuario = idUsuario;
@@ -21,6 +21,7 @@ public class TabelaVO {
 
 	public TabelaVO() {
 		super();
+		
 	}
 
 	public int getIdTabela() {
@@ -47,11 +48,11 @@ public class TabelaVO {
 		this.mes = mes;
 	}
 
-	public int getAno() {
+	public String getAno() {
 		return ano;
 	}
 
-	public void setAno(int ano) {
+	public void setAno(String ano) {
 		this.ano = ano;
 	}
 
@@ -70,5 +71,5 @@ public class TabelaVO {
 	public void setSaldoFinal(double saldoFinal) {
 		this.saldoFinal = saldoFinal;
 	}
-	 
+    
 }

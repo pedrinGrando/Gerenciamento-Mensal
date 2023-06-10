@@ -109,7 +109,7 @@ public class PainelConsultarDespesa extends JPanel {
 		
 		lblValor = new JLabel("");
 		lblValor.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblValor.setBounds(73, 288, 227, 14);
+		lblValor.setBounds(73, 288, 115, 14);
 		add(lblValor);
 		
 		btnConsultar = new JButton("");
@@ -130,8 +130,7 @@ public class PainelConsultarDespesa extends JPanel {
 					
 					lblDespesa.setText(despesaVO.getDespNome());
 					
-					lblValor.setText("R$ "+despesaVO.getValor());
-					
+					lblValor.setText("R$ "+ String.valueOf(despesaVO.getValor()));
 					
 				}
 				
