@@ -119,7 +119,7 @@ public class PainelConsultaMes extends JPanel {
 		
 		panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 0));
-		panel.setBounds(0, 129, 574, 10);
+		panel.setBounds(0, 129, 680, 10);
 		add(panel);
 		
 	    lblNewLabel = new JLabel("Mês consultado : ");
@@ -169,7 +169,7 @@ public class PainelConsultaMes extends JPanel {
 		
 		lblNewLabel_5 = new JLabel("");
 		lblNewLabel_5.setIcon(new ImageIcon(PainelConsultaMes.class.getResource("/icons/bank.png")));
-		lblNewLabel_5.setBounds(530, 418, 34, 30);
+		lblNewLabel_5.setBounds(636, 455, 34, 30);
 		add(lblNewLabel_5);
 		
 		

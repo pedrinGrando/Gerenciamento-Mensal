@@ -105,7 +105,7 @@ public class TelaLogin extends JFrame {
 		senhaField = new JPasswordField();
 		senhaField.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		senhaField.setBounds(181, 174, 82, 20);
+		senhaField.setBounds(181, 174, 118, 20);
 		contentPane.add(senhaField);
 		
 		btn_entrar = new JButton("Entrar");

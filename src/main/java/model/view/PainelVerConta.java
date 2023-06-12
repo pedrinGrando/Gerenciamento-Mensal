@@ -25,6 +25,10 @@ import model.dao.UsuarioDAO;
 import model.vo.UsuarioVO;
 import model.vo.*;
 import controller.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 public class PainelVerConta extends JPanel {
 	private DespesaController despController;
@@ -43,6 +47,7 @@ public class PainelVerConta extends JPanel {
 	EnderecoVO endereco = new EnderecoVO();
 	EnderecoController endController = new EnderecoController();
 	DecimalFormat formato = new DecimalFormat("#,##0.00");
+	DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	private JLabel lblDataNasci;
 	private JLabel lblNewLabel_5;
@@ -131,6 +136,11 @@ public class PainelVerConta extends JPanel {
 		lblDataNasci.setBounds(152, 245, 124, 14);
 		add(lblDataNasci);
 		
+		
+		String dataFormat = formatoData.format(userOnline.getDataNasci());
+		
+		lblDataNasci.setText(dataFormat);
+		
 		lblNewLabel_5 = new JLabel("Data de nascimento : ");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		lblNewLabel_5.setBounds(20, 245, 148, 14);
@@ -143,7 +153,7 @@ public class PainelVerConta extends JPanel {
 		
 		lblLogin = new JLabel("");
 		lblLogin.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblLogin.setBounds(73, 278, 158, 14);
+		lblLogin.setBounds(65, 278, 153, 14);
 		add(lblLogin);
 		
 		lblLogin.setText(userOnline.getLogin());
@@ -158,8 +168,6 @@ public class PainelVerConta extends JPanel {
 		lblEstado.setBounds(357, 103, 65, 14);
 		add(lblEstado);
 		
-		lblEstado.setText(endereco.getEstado());
-		
 		lblNewLabel_10 = new JLabel("Cidade : ");
 		lblNewLabel_10.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		lblNewLabel_10.setBounds(305, 143, 65, 14);
@@ -171,8 +179,6 @@ public class PainelVerConta extends JPanel {
 		lblCidade.setBounds(364, 143, 145, 14);
 		add(lblCidade);
 		
-		lblCidade.setText(endereco.getCidade());
-		
 		lblNewLabel_12 = new JLabel("Rua :");
 		lblNewLabel_12.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		lblNewLabel_12.setBounds(305, 190, 65, 14);
@@ -182,8 +188,6 @@ public class PainelVerConta extends JPanel {
 		lblRua.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblRua.setBounds(347, 190, 234, 14);
 		add(lblRua);
-		
-		lblRua.setText(endereco.getRua());
 		
 		lblNewLabel_14 = new JLabel("CEP : ");
 		lblNewLabel_14.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -195,11 +199,9 @@ public class PainelVerConta extends JPanel {
 		lblCEP.setBounds(349, 242, 140, 14);
 		add(lblCEP);
 		
-		lblCEP.setText(endereco.getCep());
-		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(PainelVerConta.class.getResource("/icons/bank.png")));
-		lblNewLabel.setBounds(623, 441, 105, 55);
+		lblNewLabel.setBounds(659, 453, 105, 55);
 		add(lblNewLabel);
 		
 	}

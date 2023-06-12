@@ -63,6 +63,7 @@ public class PainelTabelaCompleta extends JPanel {
 		private JButton btnVoltarPagina;
 		private JButton btnAvancarPagina;
 		private JLabel lblPaginacao;
+		private JComboBox cbAnos;
 	
 		//Métodos usados no JTable
 		private void limparTabela() {
@@ -74,11 +75,11 @@ public class PainelTabelaCompleta extends JPanel {
 		private void atualizarTabelaMeses(UsuarioVO userOnline) {
 			this.limparTabela();
 
-			TabelaVO tabelaVO = new TabelaVO();
-			tabelaVO.setIdUsuario(userOnline.getIdUsuario());
+			//TabelaVO tabelaVO = new TabelaVO();
+			//tabelaVO.setIdUsuario(userOnline.getIdUsuario());
 			
-			TabelaController tabelaController = new TabelaController();
-			tabelas = (ArrayList<TabelaVO>) tabelaController.consultarTodasController(tabelaVO);
+			//TabelaController tabelaController = new TabelaController();
+			//tabelas = (ArrayList<TabelaVO>) tabelaController.consultarTodasController(tabelaVO);
 			
 			DefaultTableModel model = (DefaultTableModel) tblTabelas.getModel();
 			//Preenche os valores na tabela linha a linha
@@ -102,21 +103,24 @@ public class PainelTabelaCompleta extends JPanel {
 		//setBackground(new Color(0, 0, 0));
 		setBackground(new Color(0, 255, 255));
 		setLayout(null);
-		btnBuscar = new JButton("Buscar ");
+		btnBuscar = new JButton("Tabela completa ");
 		btnBuscar.setBorder(null);
 		btnBuscar.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		btnBuscar.setBackground(new Color(0, 255, 255));
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				buscarTabelaComFiltro(userOnline);
-				atualizarTabelaMeses(userOnline);
+				//buscarTabelaComFiltro(userOnline);
+				atualizarTabelaMesesTodos(userOnline);
 			}
+
 		});
-		btnBuscar.setBounds(567, 22, 69, 23);
+		btnBuscar.setBounds(517, 22, 117, 23);
 		add(btnBuscar);
 		
 		String[] meses = {"janeiro", "ferereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro"
 				,"novembro", "dezembro"};
+		
+		String[] anos = {"2022", "2023"};
 		
 		tblTabelas = new JTable();
 		tblTabelas.setForeground(new Color(0, 0, 0));
@@ -144,6 +148,7 @@ public class PainelTabelaCompleta extends JPanel {
 		add(lblNewLabel);
 		
 		cbMeses = new JComboBox(meses);
+		cbMeses.setBorder(null);
 		cbMeses.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		cbMeses.setBackground(new Color(192, 192, 192));
 		cbMeses.setBounds(143, 22, 100, 22);
@@ -154,9 +159,10 @@ public class PainelTabelaCompleta extends JPanel {
 		lblNewLabel_1.setBounds(143, 11, 46, 14);
 		add(lblNewLabel_1);
 		
-		btnVoltarPagina = new JButton("<< Voltar");
+		btnVoltarPagina = new JButton("");
+		btnVoltarPagina.setIcon(new ImageIcon(PainelTabelaCompleta.class.getResource("/icons/back.png")));
 		btnVoltarPagina.setBorder(null);
-		btnVoltarPagina.setBackground(new Color(255, 255, 255));
+		btnVoltarPagina.setBackground(new Color(0, 255, 255));
 		btnVoltarPagina.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		btnVoltarPagina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -168,13 +174,13 @@ public class PainelTabelaCompleta extends JPanel {
 			}
 		});
 		btnVoltarPagina.setEnabled(false);
-		btnVoltarPagina.setBounds(162, 427, 128, 23);
+		btnVoltarPagina.setBounds(203, 427, 100, 23);
 		add(btnVoltarPagina);
 		
-		btnAvancarPagina = new JButton("Avançar >>");
+		btnAvancarPagina = new JButton(">");
 		btnAvancarPagina.setBorder(null);
-		btnAvancarPagina.setBackground(new Color(255, 255, 255));
-		btnAvancarPagina.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		btnAvancarPagina.setBackground(new Color(0, 255, 255));
+		btnAvancarPagina.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		btnAvancarPagina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				paginaAtual++;
@@ -184,7 +190,7 @@ public class PainelTabelaCompleta extends JPanel {
 				btnAvancarPagina.setEnabled(paginaAtual < totalPaginas);
 			}
 		});
-		btnAvancarPagina.setBounds(355, 427, 128, 23);
+		btnAvancarPagina.setBounds(349, 427, 91, 23);
 		add(btnAvancarPagina);
 		
 		lblPaginacao = new JLabel("1 / " + totalPaginas);
@@ -193,12 +199,48 @@ public class PainelTabelaCompleta extends JPanel {
 		lblPaginacao.setBounds(281, 427, 77, 23);
 		add(lblPaginacao);
 		
+		cbAnos = new JComboBox(anos);
+		cbAnos.setBorder(null);
+		cbAnos.setBackground(new Color(192, 192, 192));
+		cbAnos.setBounds(281, 22, 91, 22);
+		add(cbAnos);
+		
+		JLabel lblNewLabel_2 = new JLabel("Ano");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblNewLabel_2.setBounds(281, 11, 46, 14);
+		add(lblNewLabel_2);
+		
 		atualizarQuantidadePaginas();
 		
 	}
 	
 	
-	
+	protected void atualizarTabelaMesesTodos(UsuarioVO userOnline) {
+		
+		this.limparTabela();
+
+		TabelaVO tabelaVO = new TabelaVO();
+		tabelaVO.setIdUsuario(userOnline.getIdUsuario());
+		ArrayList<TabelaVO> tabelaCompleta;
+		
+		TabelaController tabelaController = new TabelaController();
+	    tabelaCompleta = (ArrayList<TabelaVO>) tabelaController.consultarTodasController(tabelaVO);
+		
+		DefaultTableModel model = (DefaultTableModel) tblTabelas.getModel();
+		//Preenche os valores na tabela linha a linha
+		for (TabelaVO t : tabelaCompleta) {
+			Object[] novaLinhaDaTabela = new Object[7];
+			novaLinhaDaTabela[0] = userOnline.getNome();
+			novaLinhaDaTabela[1] = t.getMes();
+			novaLinhaDaTabela[2] = t.getAno();
+			novaLinhaDaTabela[3] = t.getTotalRest();
+			novaLinhaDaTabela[4] = t.getSaldoFinal();
+
+			model.addRow(novaLinhaDaTabela);
+		}
+		
+	}
+
 	private void atualizarQuantidadePaginas() {
 		//Cálculo do total de páginas (poderia ser feito no backend)
 		int totalRegistros = tabelaController.contarTotalRegistrosComFiltros(seletor);
@@ -219,13 +261,9 @@ public class PainelTabelaCompleta extends JPanel {
 		tabSeletor.setLimite(TAMANHO_PAGINA);
 		tabSeletor.setPagina(paginaAtual);
 		tabSeletor.setMes((String) cbMeses.getSelectedItem());
-		//tabSeletor.setMes(campMes.getText());
-		//tabSeletor.setAno(campMes.getText());
-
+		tabSeletor.setAno((String) cbAnos.getSelectedItem());
 		tabelas = (ArrayList<TabelaVO>) tabelaController.consultarComFiltros(tabSeletor);
 		atualizarTabelaMeses(userOnline);
 		atualizarQuantidadePaginas();
 	}
-
-	
 }

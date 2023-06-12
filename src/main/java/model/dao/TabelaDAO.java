@@ -121,7 +121,8 @@ public class TabelaDAO {
 		ArrayList<TabelaVO> tabelas = new ArrayList<TabelaVO>();
 		Connection conexao = Banco.getConnection();
 		String sql = " SELECT * FROM tabelamensal "
-				+ "WHERE mes = '" + tabSeletor.getMes() + "' ";
+				+ "WHERE mes = '" + tabSeletor.getMes() + "' "
+				+ "AND ano = " + tabSeletor.getAno();
 		
 		//if(tabSeletor.temFiltro()) {
 			//sql = preencherFiltros(sql, tabSeletor);
@@ -137,8 +138,8 @@ public class TabelaDAO {
 			ResultSet resultado = query.executeQuery();
 			
 			while(resultado.next()) {
-				TabelaVO clienteBuscado = montarTabelaComResultadoDoBanco(resultado);
-				tabelas.add(clienteBuscado);
+				TabelaVO tabelaBuscada = montarTabelaComResultadoDoBanco(resultado);
+				tabelas.add(tabelaBuscada);
 			}
 			
 		}catch (Exception e) {
@@ -219,7 +220,6 @@ public class TabelaDAO {
 		}
 		
 		return total;
-		
 		
 	}
     

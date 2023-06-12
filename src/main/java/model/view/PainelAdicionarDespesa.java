@@ -119,7 +119,7 @@ public class PainelAdicionarDespesa extends JPanel {
 		btn_inserir_camp.setBounds(142, 177, 140, 31);
 		add(btn_inserir_camp);
 		lblNewLabel.setIcon(new ImageIcon(PainelAdicionarDespesa.class.getResource("/icons/bank.png")));
-		lblNewLabel.setBounds(577, 460, 36, 31);
+		lblNewLabel.setBounds(611, 457, 36, 31);
 		add(lblNewLabel);
 		
 	}

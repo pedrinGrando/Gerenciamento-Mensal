@@ -139,7 +139,7 @@ public class PainelAlterarDados extends JPanel {
 		cepCamp.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		cepCamp.setBounds(377, 86, 114, 20);
 		add(cepCamp);
-		cepCamp.setText(estado.getCep());
+		cepCamp.setText("");
 		
 		lblNewLabel_3 = new JLabel("E-mail");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.ITALIC, 9));
@@ -173,7 +173,6 @@ public class PainelAlterarDados extends JPanel {
 		campNumero.setBounds(10, 412, 86, 20);
 		add(campNumero);
 		campNumero.setColumns(10);
-		campNumero.setText(""+estado.getNumero());
 		
 		campCIdade = new JTextField();
 		campCIdade.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -181,7 +180,6 @@ public class PainelAlterarDados extends JPanel {
 		campCIdade.setBounds(377, 200, 171, 20);
 		add(campCIdade);
 		campCIdade.setColumns(10);
-		campCIdade.setText(estado.getCidade());
 		
 		novaSenhaAtualizar = new JPasswordField();
 		novaSenhaAtualizar.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -256,7 +254,7 @@ public class PainelAlterarDados extends JPanel {
 		});
 		btnNewButton_1.setBackground(new Color(0, 255, 255));
 		btnNewButton_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btnNewButton_1.setBounds(572, 440, 46, 23);
+		btnNewButton_1.setBounds(600, 451, 46, 23);
 		add(btnNewButton_1);
 		
 		ruaCampo = new JTextField();
@@ -265,7 +263,6 @@ public class PainelAlterarDados extends JPanel {
 		ruaCampo.setBounds(10, 299, 217, 20);
 		add(ruaCampo);
 		ruaCampo.setColumns(10);
-		ruaCampo.setText(estado.getRua());
 		
 		lblRua = new JLabel("Rua ");
 		lblRua.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -278,7 +275,6 @@ public class PainelAlterarDados extends JPanel {
 		campBairro.setBounds(10, 357, 217, 20);
 		add(campBairro);
 		campBairro.setColumns(10);
-		campBairro.setText(estado.getBairro());
 		
 		
 		lblBairro = new JLabel("Bairro");

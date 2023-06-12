@@ -143,7 +143,7 @@ public class PainelConsultarDespesa extends JPanel {
 		
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setIcon(new ImageIcon(PainelConsultarDespesa.class.getResource("/icons/bank.png")));
-		lblNewLabel_2.setBounds(644, 492, 32, 32);
+		lblNewLabel_2.setBounds(620, 452, 32, 32);
 		add(lblNewLabel_2);
 		
 	}
