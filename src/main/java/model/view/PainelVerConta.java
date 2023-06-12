@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -41,6 +42,8 @@ public class PainelVerConta extends JPanel {
 	
 	EnderecoVO endereco = new EnderecoVO();
 	EnderecoController endController = new EnderecoController();
+	DecimalFormat formato = new DecimalFormat("#,##0.00");
+	
 	private JLabel lblDataNasci;
 	private JLabel lblNewLabel_5;
 	private JLabel lblNewLabel_6;
@@ -121,7 +124,7 @@ public class PainelVerConta extends JPanel {
 		salario_label.setBounds(113, 215, 163, 14);
 		add(salario_label);
 		
-		salario_label.setText("R$ "+userOnline.getSalariol());
+		salario_label.setText("R$ "+ formato.format(userOnline.getSalariol()));
 		
 		lblDataNasci = new JLabel("");
 		lblDataNasci.setFont(new Font("Tahoma", Font.ITALIC, 11));

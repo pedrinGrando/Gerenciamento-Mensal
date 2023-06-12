@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -34,6 +35,7 @@ public class PainelConsultarDespesa extends JPanel {
 	DespesaController despController = new DespesaController();
 	private JTextField campDespDigitada;
 	private JLabel lblNewLabel;
+	DecimalFormat formato = new DecimalFormat("#,##0.00");
 
 	private JLabel lblNewLabel_6;
 
@@ -130,7 +132,7 @@ public class PainelConsultarDespesa extends JPanel {
 					
 					lblDespesa.setText(despesaVO.getDespNome());
 					
-					lblValor.setText("R$ "+ String.valueOf(despesaVO.getValor()));
+					lblValor.setText("R$ "+ formato.format(despesaVO.getValor()));
 					
 				}
 				

@@ -78,13 +78,9 @@ public class UsuarioController {
 		
 		if (u.getEmail().isEmpty() || u.getEmail().isBlank()) {
 			
-			validacao = "O email é obrigatório!";
+			validacao = "O Email é obrigatório!";
 			
-		} else if (!u.getEmail().contains("@gmail") || (!u.getEmail().contains("@hotmail"))) {
-			
-			validacao = "Este email é inválido!";
-			
-		}
+		} 
 		
 		return validacao;
 	}

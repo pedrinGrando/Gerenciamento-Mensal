@@ -37,7 +37,6 @@ public class PainelCalculoMensal extends JPanel {
 	TabelaVO tabela = new TabelaVO();
 	TabelaController tabelaController = new TabelaController();
 	DespesaController despController = new DespesaController();
-	DecimalFormat df = new DecimalFormat("0.000");
 	
 	
 	// CONVERSAO DE MES 
@@ -167,8 +166,8 @@ public class PainelCalculoMensal extends JPanel {
 				
 				String resp = JOptionPane.showInputDialog("Deseja salvar os dados do mês de junho? \n"
 						+ "Confirme os dados de " +mes +" abaixo! \n"
-								+ "Saldo restante : R$ " +df.format(tabela.getTotalRest()) +"\n"
-										+ "Saldo final : R$ " + df.format(tabela.getSaldoFinal()));
+								+ "Saldo restante : R$ " +formato.format(tabela.getTotalRest()) +"\n"
+										+ "Saldo final : R$ " + formato.format(tabela.getSaldoFinal()));
 				if (resp.equalsIgnoreCase("sim")) {
 					tabela = tabelaController.salvarDadosTabelaController(userLogado, tabela);
 					JOptionPane.showMessageDialog(null, "Dados do mês: "+mes.toUpperCase() +
