@@ -42,6 +42,8 @@ public class UsuarioController {
 		
 		mensagemValidacao += validarCpf(u);
 		
+		mensagemValidacao += validarEmail(u);
+		
 		if(u.getLogin().isEmpty() || u.getLogin() == null) {
 			mensagemValidacao += " Login é obrigatório";
 		}
@@ -50,7 +52,7 @@ public class UsuarioController {
 			mensagemValidacao += " Senha é obrigatória";
 		}
 		
-		if(u.getSenha().length() < 6 || !u.getSenha().contains("0123456789")) {
+		if(u.getSenha().length() < 6) {
 			mensagemValidacao += " Senha digitada inválida";
 			
 		} 
@@ -68,6 +70,23 @@ public class UsuarioController {
 			throw new CampoInvalidoException(mensagemValidacao);
 		}
 		
+	}
+
+	private String validarEmail(UsuarioVO u) {
+		
+		String validacao = "";
+		
+		if (u.getEmail().isEmpty() || u.getEmail().isBlank()) {
+			
+			validacao = "O email é obrigatório!";
+			
+		} else if (!u.getEmail().contains("@gmail") || (!u.getEmail().contains("@hotmail"))) {
+			
+			validacao = "Este email é inválido!";
+			
+		}
+		
+		return validacao;
 	}
 
 	private String validarCpf(UsuarioVO u) {

@@ -21,6 +21,7 @@ import controller.DespesaController;
 
 import javax.swing.border.BevelBorder;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;
 
 public class PainelAlterarDespesa extends JPanel {
@@ -38,6 +39,7 @@ public class PainelAlterarDespesa extends JPanel {
 	DespesaController despController = new DespesaController();
 	DespesaVO despesaVO = new DespesaVO();
 	DespesaVO despesaAtualizar = new DespesaVO();
+	DecimalFormat formato = new DecimalFormat("#,##0.00");
 
 	/**
 	 * Create the panel.
@@ -100,7 +102,10 @@ public class PainelAlterarDespesa extends JPanel {
 					
 					campNome.setText(nome.getDespNome());
 					
-					campValor.setText(""+despesaVO.getValor());
+					String valorG = formato.format(despesaVO.getValor());
+					String valorF = valorG.replace(".", ",");
+					
+					campValor.setText(valorF);
 				} else {
 					
 					JOptionPane.showMessageDialog(null, "Selecione pelo menos uma despesa!", "Gerenciamento-Mensal", JOptionPane.WARNING_MESSAGE);
@@ -160,8 +165,6 @@ public class PainelAlterarDespesa extends JPanel {
 		btnNewButton.setBackground(new Color(0, 255, 255));
 		btnNewButton.setBounds(219, 309, 46, 23);
 		add(btnNewButton);
-		
-	
 		
 	}
 }

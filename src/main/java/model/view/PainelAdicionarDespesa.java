@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 import javax.swing.ImageIcon;
@@ -38,6 +39,7 @@ public class PainelAdicionarDespesa extends JPanel {
 	DespesaController despController = new DespesaController();
 	DespesaVO despesa = new DespesaVO();
 	private final JLabel lblNewLabel = new JLabel("");
+	DecimalFormat formato = new DecimalFormat("#,##0.00");
 	
 
 	/**
