@@ -38,11 +38,11 @@ public class PainelVerConta extends JPanel {
 	private JLabel email_label;
 	private JLabel cpf_label;
 	private JLabel nome_label;
-	private JLabel lblNewLabel_4;
+	private JLabel telaSalario;
 	private JLabel labelPrincipal_nome;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
-	private JLabel lblNewLabel_1;
+	private JLabel telaCpf;
+	private JLabel telaEmail;
+	private JLabel telaNome;
 	
 	EnderecoVO endereco = new EnderecoVO();
 	EnderecoController endController = new EnderecoController();
@@ -50,17 +50,20 @@ public class PainelVerConta extends JPanel {
 	DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	private JLabel lblDataNasci;
-	private JLabel lblNewLabel_5;
-	private JLabel lblNewLabel_6;
+	private JLabel telaDate;
+	private JLabel telaLogin;
 	private JLabel lblLogin;
-	private JLabel lblNewLabel_8;
+	private JLabel telaEstado;
 	private JLabel lblEstado;
-	private JLabel lblNewLabel_10;
+	private JLabel telaCidade;
 	private JLabel lblCidade;
-	private JLabel lblNewLabel_12;
+	private JLabel telaRua;
 	private JLabel lblRua;
-	private JLabel lblNewLabel_14;
+	private JLabel telaCep;
 	private JLabel lblCEP;
+	private JLabel lblNewLabel;
+	private JLabel telaNumero;
+	private JLabel lblNumero;
 	
 
 	/**
@@ -75,30 +78,30 @@ public class PainelVerConta extends JPanel {
 		
 		endereco = endController.consultarEnderecoPorId(endereco);
 		
-		lblNewLabel_1 = new JLabel("Nome Completo :");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_1.setBounds(21, 103, 119, 14);
-		add(lblNewLabel_1);
+		telaNome = new JLabel("Nome Completo :");
+		telaNome.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		telaNome.setBounds(21, 103, 119, 14);
+		add(telaNome);
 		
 		labelPrincipal_nome = new JLabel("Seus dados cadastrais");
 		labelPrincipal_nome.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 18));
 		labelPrincipal_nome.setBounds(179, 26, 205, 25);
 		add(labelPrincipal_nome);
 		
-		lblNewLabel_2 = new JLabel("CPF :");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_2.setBounds(20, 143, 46, 14);
-		add(lblNewLabel_2);
+		telaCpf = new JLabel("CPF :");
+		telaCpf.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		telaCpf.setBounds(20, 143, 46, 14);
+		add(telaCpf);
 		
-		lblNewLabel_3 = new JLabel("Email :");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_3.setBounds(20, 181, 72, 14);
-		add(lblNewLabel_3);
+		telaEmail = new JLabel("Email :");
+		telaEmail.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		telaEmail.setBounds(20, 181, 72, 14);
+		add(telaEmail);
 		
-		lblNewLabel_4 = new JLabel("Salário Bruto : ");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_4.setBounds(20, 215, 96, 14);
-		add(lblNewLabel_4);
+		telaSalario = new JLabel("Salário Bruto : ");
+		telaSalario.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		telaSalario.setBounds(20, 215, 96, 14);
+		add(telaSalario);
 		
 		nome_label = new JLabel("");
 		nome_label.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -141,15 +144,15 @@ public class PainelVerConta extends JPanel {
 		
 		lblDataNasci.setText(dataFormat);
 		
-		lblNewLabel_5 = new JLabel("Data de nascimento : ");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_5.setBounds(20, 245, 148, 14);
-		add(lblNewLabel_5);
+		telaDate = new JLabel("Data de nascimento : ");
+		telaDate.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		telaDate.setBounds(20, 245, 148, 14);
+		add(telaDate);
 		
-		lblNewLabel_6 = new JLabel("Login : ");
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_6.setBounds(20, 278, 46, 14);
-		add(lblNewLabel_6);
+		telaLogin = new JLabel("Login : ");
+		telaLogin.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		telaLogin.setBounds(20, 278, 46, 14);
+		add(telaLogin);
 		
 		lblLogin = new JLabel("");
 		lblLogin.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -158,20 +161,22 @@ public class PainelVerConta extends JPanel {
 		
 		lblLogin.setText(userOnline.getLogin());
 		
-		lblNewLabel_8 = new JLabel("Estado : ");
-		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_8.setBounds(305, 103, 65, 14);
-		add(lblNewLabel_8);
+		telaEstado = new JLabel("Estado : ");
+		telaEstado.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		telaEstado.setBounds(305, 103, 65, 14);
+		add(telaEstado);
 		
 		lblEstado = new JLabel("");
 		lblEstado.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblEstado.setBounds(357, 103, 65, 14);
 		add(lblEstado);
 		
-		lblNewLabel_10 = new JLabel("Cidade : ");
-		lblNewLabel_10.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_10.setBounds(305, 143, 65, 14);
-		add(lblNewLabel_10);
+		lblEstado.setText(endereco.getEstado());
+		
+		telaCidade = new JLabel("Cidade : ");
+		telaCidade.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		telaCidade.setBounds(305, 143, 65, 14);
+		add(telaCidade);
 		
 		
 		lblCidade = new JLabel("");
@@ -179,30 +184,51 @@ public class PainelVerConta extends JPanel {
 		lblCidade.setBounds(364, 143, 145, 14);
 		add(lblCidade);
 		
-		lblNewLabel_12 = new JLabel("Rua :");
-		lblNewLabel_12.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_12.setBounds(305, 190, 65, 14);
-		add(lblNewLabel_12);
+		lblCidade.setText(endereco.getCidade());
+		
+		telaNumero = new JLabel("Número:");
+		telaNumero.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		telaNumero.setBounds(305, 267, 56, 14);
+		add(telaNumero);
+		
+		lblNumero = new JLabel("");
+		lblNumero.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblNumero.setBounds(364, 267, 115, 14);
+		add(lblNumero);
+		telaNumero = new JLabel("Número:");
+		
+		lblNumero.setText(""+endereco.getNumero());
+		
+		telaRua = new JLabel("Rua :");
+		telaRua.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		telaRua.setBounds(305, 190, 65, 14);
+		add(telaRua);
 		
 		lblRua = new JLabel("");
 		lblRua.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblRua.setBounds(347, 190, 234, 14);
 		add(lblRua);
 		
-		lblNewLabel_14 = new JLabel("CEP : ");
-		lblNewLabel_14.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_14.setBounds(305, 242, 65, 14);
-		add(lblNewLabel_14);
+		lblRua.setText(endereco.getRua());
+		
+		telaCep = new JLabel("CEP : ");
+		telaCep.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		telaCep.setBounds(305, 231, 65, 14);
+		add(telaCep);
 		
 		lblCEP = new JLabel("");
 		lblCEP.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblCEP.setBounds(349, 242, 140, 14);
+		lblCEP.setBounds(339, 231, 140, 14);
 		add(lblCEP);
 		
-		JLabel lblNewLabel = new JLabel("");
+		lblCEP.setText(endereco.getCep());
+		
+		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(PainelVerConta.class.getResource("/icons/bank.png")));
 		lblNewLabel.setBounds(659, 453, 105, 55);
 		add(lblNewLabel);
+		
+		
 		
 	}
 }

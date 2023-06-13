@@ -108,9 +108,9 @@ public class PainelTabelaCompleta extends JPanel {
 		add(btnBuscar);
 		
 		String[] meses = {"Janeiro", "Ferereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"
-				,"Novembro", "Dezembro", "Todos"};
+				,"Novembro", "Dezembro"};
 		
-		String[] anos = {"2022", "2023", "Todos"};
+		String[] anos = {"2022", "2023"};
 		
 		tblTabelas = new JTable();
 		tblTabelas.setForeground(new Color(0, 0, 0));

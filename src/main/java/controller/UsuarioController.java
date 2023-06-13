@@ -11,12 +11,35 @@ public class UsuarioController {
 	UsuarioBO userBO = new UsuarioBO();
 	UsuarioDAO userDAO  = new UsuarioDAO();
 
-	public UsuarioVO realizarLoginController(UsuarioVO userOnline) {
-		UsuarioVO usuarioVO = new UsuarioVO();
+	public UsuarioVO realizarLoginController(UsuarioVO userOnline) throws CampoInvalidoException {
 		
-		usuarioVO = userBO.realizarLoginBO(userOnline);
+		this.validarCamposObrigatoriosLogin(userOnline);
 		
-		return usuarioVO;
+		return userBO.realizarLoginBO(userOnline);
+	}
+
+	private void validarCamposObrigatoriosLogin(UsuarioVO userOnline) throws CampoInvalidoException {
+		
+		String mensagemValidacao = "";
+		
+		if (userOnline.getLogin().trim().isEmpty() || userOnline.getLogin().trim().isBlank()) {
+			
+			mensagemValidacao = "Todos os campos são obrigatórios!";
+		} 
+		
+		if (!userOnline.getSenha().trim().isEmpty() && userOnline.getSenha().trim().length() < 6) {
+			
+			mensagemValidacao = "A senha digitada é inválida!";
+		}
+		
+		if (!userOnline.getSenha().trim().isEmpty() && userOnline.getSenha().trim().length() > 6) {
+			
+			mensagemValidacao = "A senha digitada é inválida!";
+		}
+		
+		if(!mensagemValidacao.isEmpty()) {
+			throw new CampoInvalidoException(mensagemValidacao);
+		}
 	}
 
 	public boolean excluirContaController(UsuarioVO userOnline) {

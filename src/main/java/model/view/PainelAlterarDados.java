@@ -94,8 +94,8 @@ public class PainelAlterarDados extends JPanel {
 		    estado.setIdEndereco(userLogado.getIdUsuario());
 		    estado = enderecoController.consultarEnderecoPorId(estado);
 		
-		String[] listaEstados = {estado.getEstado(),"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS"
-				+ "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
+		String[] listaEstados = {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS",
+				 "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
 		
 		novoNome_camp = new JTextField();
 		novoNome_camp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -141,6 +141,8 @@ public class PainelAlterarDados extends JPanel {
 		add(cepCamp);
 		cepCamp.setText("");
 		
+		cepCamp.setText(estado.getCep());
+		
 		lblNewLabel_3 = new JLabel("E-mail");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.ITALIC, 9));
 		lblNewLabel_3.setBounds(10, 127, 163, 14);
@@ -152,6 +154,7 @@ public class PainelAlterarDados extends JPanel {
 		add(lblNewLabel_4);
 		
 		novoSalarioL = new JNumberFormatField();
+		novoSalarioL.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		novoSalarioL.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		novoSalarioL.setBounds(35, 245, 102, 20);
 		add(novoSalarioL);
@@ -173,6 +176,9 @@ public class PainelAlterarDados extends JPanel {
 		campNumero.setBounds(10, 412, 86, 20);
 		add(campNumero);
 		campNumero.setColumns(10);
+		
+		campNumero.setText(String.valueOf(estado.getNumero()));
+		
 		
 		campCIdade = new JTextField();
 		campCIdade.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -264,6 +270,8 @@ public class PainelAlterarDados extends JPanel {
 		add(ruaCampo);
 		ruaCampo.setColumns(10);
 		
+		ruaCampo.setText(estado.getRua());
+		
 		lblRua = new JLabel("Rua ");
 		lblRua.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblRua.setBounds(10, 286, 46, 14);
@@ -276,6 +284,7 @@ public class PainelAlterarDados extends JPanel {
 		add(campBairro);
 		campBairro.setColumns(10);
 		
+		campBairro.setText(estado.getBairro());
 		
 		lblBairro = new JLabel("Bairro");
 		lblBairro.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -296,7 +305,6 @@ public class PainelAlterarDados extends JPanel {
 		lblEstado.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblEstado.setBounds(377, 127, 46, 14);
 		add(lblEstado);
-		
 		
 	    lblCidade = new JLabel("Cidade");
 		lblCidade.setFont(new Font("Tahoma", Font.ITALIC, 11));

@@ -120,28 +120,10 @@ public class TabelaDAO {
 		
 		ArrayList<TabelaVO> tabelas = new ArrayList<TabelaVO>();
 		Connection conexao = Banco.getConnection();
-		String sql = "";
+		String sql = " select * from tabelamensal "
+				   + " WHERE mes = '" + tabSeletor.getMes() +"' "
+				   + " AND ano = '" +tabSeletor.getAno() +"' ";
 		
-		if(tabSeletor.getMes().equals("Todos")) {
-			sql = "SELECT * FROM tabelamensal"
-			    + " AND ano = " + tabSeletor.getAno();
-			
-		} else if (tabSeletor.getAno().equals("Todos")) {
-			sql = "SELECT * FROM tabelamensal "
-			    + "WHERE mes = '"+ tabSeletor.getMes() + "' ";
-			         
-		} else if (tabSeletor.getAno().equals("Todos") && (tabSeletor.getMes().equals("Todos"))) {
-			sql = "SELECT * FROM tabelamensal";
-		}
-		
-	   //if(tabSeletor.temFiltro()) {
-			//sql = preencherFiltros(sql, tabSeletor);
-		//}
-		
-		//if(tabSeletor.temPaginacao()) {
-		// += " LIMIT "  + tabSeletor.getLimite()
-				// + " OFFSET " + tabSeletor.getOffset();  
-		//}
 		
 		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
 		try {
@@ -183,35 +165,26 @@ public class TabelaDAO {
 		
 		if(tabSeletor.getMes() != null && !tabSeletor.getMes().trim().isEmpty()) {
 			if(primeiro) {
-				sql += " WHERE tabelamensal.mes = '" + tabSeletor.getMes() + "' ";
+				sql += " WHERE ";
 			} else {
 				sql += " AND ";
 			}
 
+			sql += " mes LIKE '%" + tabSeletor.getMes() + "%'";
 			primeiro = false;
 		}
 		
-		if(tabSeletor.getMes().equals("Todos")) {
+		if(tabSeletor.getAno() != null && !tabSeletor.getAno().trim().isEmpty()) {
 			if(primeiro) {
-				sql += "";
-			} 
-		}
-		
-		if(tabSeletor.getAno().equals("Todos")) {
-			if(primeiro) {
-				sql += "";
-			} 
-		}
-		
-		if(tabSeletor.getAno() != null && (!tabSeletor.getAno().trim().isEmpty())) {
-			if(primeiro) {
-				sql += " WHERE ano = " + tabSeletor.getAno();
+				sql += " WHERE ";
 			} else {
 				sql += " AND ";
 			}
-			sql += " ano = " + tabSeletor.getAno();
+
+			sql += " mes LIKE '%" + tabSeletor.getAno() + "%'";
 			primeiro = false;
 		}
+		
 		
 		return sql;
 	}

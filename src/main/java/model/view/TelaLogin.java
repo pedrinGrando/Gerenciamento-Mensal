@@ -10,6 +10,7 @@ import javax.swing.text.MaskFormatter;
 import model.dao.*;
 import model.vo.*;
 import controller.*;
+import exceptions.CampoInvalidoException;
 
 import javax.swing.JFormattedTextField;
 import java.awt.TextField;
@@ -24,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
@@ -31,6 +33,9 @@ import java.awt.Toolkit;
 import javax.swing.JProgressBar;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 
 public class TelaLogin extends JFrame {
 	
@@ -49,6 +54,8 @@ public class TelaLogin extends JFrame {
 	private Label label_1;
 	private JButton btnNewButton_1;
 	private JLabel lblNewLabel_2;
+	private JPanel panel;
+	private JButton btnRecuperacaoSenha;
 
 	/**
 	 * Launch the application.
@@ -116,11 +123,16 @@ public class TelaLogin extends JFrame {
 				UsuarioController userController = new UsuarioController();
 				userOnline.setLogin(loginField.getText());
 				userOnline.setSenha(senhaField.getText());
-			    userOnline = userController.realizarLoginController(userOnline);
+			    try {
+					userOnline = userController.realizarLoginController(userOnline);
+				} catch (CampoInvalidoException e1) {
+					
+	                JOptionPane.showMessageDialog(null, e1.getMessage(), "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+				}
 				
 				if (userOnline.getIdUsuario() != 0) {
 					
-					JOptionPane.showMessageDialog(null, "Login efetuado com sucesso " + userOnline.getLogin() + "!");
+					JOptionPane.showMessageDialog(null, "Login efetuado com sucesso "+userOnline.getLogin()+ "!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
 					
 					//METODO PARA TROCA DE FRAME
 					dispose();
@@ -128,22 +140,68 @@ public class TelaLogin extends JFrame {
 					menu.setVisible(true);
 					
 				} else if (userOnline.getIdUsuario() == 0) {
-					JOptionPane.showMessageDialog(null, "Usuário não encontrado!");
-				} else if (senhaField.getText().length() > 6 | senhaField.getText().length() < 6) {
-					JOptionPane.showMessageDialog(null, "Senha inválida! ");
-				}
-			
+					JOptionPane.showMessageDialog(null, "Usuário não encontrado!", "Gerenciamento-Mensal", JOptionPane.WARNING_MESSAGE);
+				} 
 		   }
 		
 	    });
 		btn_entrar.setIcon(new ImageIcon(TelaLogin.class.getResource("/icons/login.png")));
+		
+		btn_entrar.addKeyListener(new KeyListener(){
+			
+			@Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                  
+                	//REALIZACAO DO LOGIN 
+    				UsuarioController userController = new UsuarioController();
+    				userOnline.setLogin(loginField.getText());
+    				userOnline.setSenha(senhaField.getText());
+    			    try {
+    					userOnline = userController.realizarLoginController(userOnline);
+    				} catch (CampoInvalidoException e1) {
+    					
+    	                JOptionPane.showMessageDialog(null, e1.getMessage(), "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+    				}
+    				
+    				if (userOnline.getIdUsuario() != 0) {
+    					
+    					JOptionPane.showMessageDialog(null, "Login efetuado com sucesso "+userOnline.getLogin()+ "!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
+    					
+    					//METODO PARA TROCA DE FRAME
+    					dispose();
+    					MenuPrincipal menu = new MenuPrincipal(userOnline);
+    					menu.setVisible(true);
+    					
+    				} else if (userOnline.getIdUsuario() == 0) {
+    					JOptionPane.showMessageDialog(null, "Usuário não encontrado!", "Gerenciamento-Mensal", JOptionPane.WARNING_MESSAGE);
+    				} 
+                	
+                	//btn_entrar.doClick(); // Simula um clique no botão
+                }
+            }
 
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		
+		});
+	 
 		btn_entrar.setBackground(new Color(192, 192, 192));
 		btn_entrar.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		btn_entrar.setBounds(97, 221, 118, 23);
 		contentPane.add(btn_entrar);
+		btn_entrar.requestFocusInWindow();
 		
-		JPanel panel = new JPanel();
+	    panel = new JPanel();
 		panel.setBackground(new Color(0, 255, 255));
 		panel.setBounds(0, 0, 507, 104);
 		contentPane.add(panel);
@@ -181,8 +239,8 @@ public class TelaLogin extends JFrame {
 		lblNewLabel_2.setBounds(10, 319, 205, 14);
 		contentPane.add(lblNewLabel_2);
 		
-		JButton btnNewButton = new JButton("Esqueceu sua senha? ");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnRecuperacaoSenha = new JButton("Esqueceu sua senha? ");
+		btnRecuperacaoSenha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 			dispose();	
@@ -196,11 +254,11 @@ public class TelaLogin extends JFrame {
 			   }
 			}
 		});
-		btnNewButton.setBackground(new Color(192, 192, 192));
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 8));
-		btnNewButton.setBorder(null);
-		btnNewButton.setBounds(116, 246, 147, 23);
-		contentPane.add(btnNewButton);
+		btnRecuperacaoSenha.setBackground(new Color(192, 192, 192));
+		btnRecuperacaoSenha.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 8));
+		btnRecuperacaoSenha.setBorder(null);
+		btnRecuperacaoSenha.setBounds(116, 246, 147, 23);
+		contentPane.add(btnRecuperacaoSenha);
 		
 		
 	}
