@@ -60,9 +60,6 @@ public class PainelTabelaCompleta extends JPanel {
 		private int paginaAtual = 1;
 		private int totalPaginas = 0;
 		private TabelaSeletor seletor = new TabelaSeletor();
-		private JButton btnVoltarPagina;
-		private JButton btnAvancarPagina;
-		private JLabel lblPaginacao;
 		private JComboBox cbAnos;
 	
 		//Métodos usados no JTable
@@ -74,12 +71,6 @@ public class PainelTabelaCompleta extends JPanel {
 		//Chamado sempre no "Buscar"
 		private void atualizarTabelaMeses(UsuarioVO userOnline) {
 			this.limparTabela();
-
-			//TabelaVO tabelaVO = new TabelaVO();
-			//tabelaVO.setIdUsuario(userOnline.getIdUsuario());
-			
-			//TabelaController tabelaController = new TabelaController();
-			//tabelas = (ArrayList<TabelaVO>) tabelaController.consultarTodasController(tabelaVO);
 			
 			DefaultTableModel model = (DefaultTableModel) tblTabelas.getModel();
 			//Preenche os valores na tabela linha a linha
@@ -100,7 +91,6 @@ public class PainelTabelaCompleta extends JPanel {
 	 */
 	public PainelTabelaCompleta(final UsuarioVO userOnline) {
 		
-		//setBackground(new Color(0, 0, 0));
 		setBackground(new Color(0, 255, 255));
 		setLayout(null);
 		btnBuscar = new JButton("Tabela completa ");
@@ -117,15 +107,15 @@ public class PainelTabelaCompleta extends JPanel {
 		btnBuscar.setBounds(517, 22, 117, 23);
 		add(btnBuscar);
 		
-		String[] meses = {"janeiro", "ferereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro"
-				,"novembro", "dezembro"};
+		String[] meses = {"Janeiro", "Ferereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"
+				,"Novembro", "Dezembro", "Todos"};
 		
-		String[] anos = {"2022", "2023"};
+		String[] anos = {"2022", "2023", "Todos"};
 		
 		tblTabelas = new JTable();
 		tblTabelas.setForeground(new Color(0, 0, 0));
 		this.limparTabela();
-		tblTabelas.setBounds(10, 66, 655, 350);
+		tblTabelas.setBounds(10, 66, 655, 383);
 		
 		add(tblTabelas);
 		
@@ -144,7 +134,7 @@ public class PainelTabelaCompleta extends JPanel {
 		
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(PainelTabelaCompleta.class.getResource("/icons/bank.png")));
-		lblNewLabel.setBounds(637, 440, 49, 24);
+		lblNewLabel.setBounds(639, 460, 49, 24);
 		add(lblNewLabel);
 		
 		cbMeses = new JComboBox(meses);
@@ -159,47 +149,8 @@ public class PainelTabelaCompleta extends JPanel {
 		lblNewLabel_1.setBounds(143, 11, 46, 14);
 		add(lblNewLabel_1);
 		
-		btnVoltarPagina = new JButton("");
-		btnVoltarPagina.setIcon(new ImageIcon(PainelTabelaCompleta.class.getResource("/icons/back.png")));
-		btnVoltarPagina.setBorder(null);
-		btnVoltarPagina.setBackground(new Color(0, 255, 255));
-		btnVoltarPagina.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btnVoltarPagina.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				paginaAtual--;
-				buscarTabelaComFiltro(userOnline);
-				//lblPaginacao.setText(paginaAtual + " / " + totalPaginas);
-				btnVoltarPagina.setEnabled(paginaAtual > 1);
-				btnAvancarPagina.setEnabled(paginaAtual < totalPaginas);
-			}
-		});
-		btnVoltarPagina.setEnabled(false);
-		btnVoltarPagina.setBounds(203, 427, 100, 23);
-		add(btnVoltarPagina);
-		
-		btnAvancarPagina = new JButton(">");
-		btnAvancarPagina.setBorder(null);
-		btnAvancarPagina.setBackground(new Color(0, 255, 255));
-		btnAvancarPagina.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		btnAvancarPagina.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				paginaAtual++;
-				buscarTabelaComFiltro(userOnline);
-				//lblPaginacao.setText(paginaAtual + " / " + totalPaginas);
-				btnVoltarPagina.setEnabled(paginaAtual > 1);
-				btnAvancarPagina.setEnabled(paginaAtual < totalPaginas);
-			}
-		});
-		btnAvancarPagina.setBounds(349, 427, 91, 23);
-		add(btnAvancarPagina);
-		
-		lblPaginacao = new JLabel("1 / " + totalPaginas);
-		lblPaginacao.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblPaginacao.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPaginacao.setBounds(281, 427, 77, 23);
-		add(lblPaginacao);
-		
 		cbAnos = new JComboBox(anos);
+		cbAnos.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		cbAnos.setBorder(null);
 		cbAnos.setBackground(new Color(192, 192, 192));
 		cbAnos.setBounds(281, 22, 91, 22);
@@ -253,7 +204,6 @@ public class PainelTabelaCompleta extends JPanel {
 			totalPaginas++;
 		}
 		
-		//lblPaginacao.setText(paginaAtual + " / " + totalPaginas);
 	}
 
 	 protected void buscarTabelaComFiltro(UsuarioVO userOnline) {

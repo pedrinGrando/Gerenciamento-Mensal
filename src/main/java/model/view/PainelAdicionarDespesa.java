@@ -56,13 +56,13 @@ public class PainelAdicionarDespesa extends JPanel {
 		add(lblNewLabel_1);
 		
 		nomeDespesa_camp = new JTextField();
-		nomeDespesa_camp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		nomeDespesa_camp.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		nomeDespesa_camp.setBounds(142, 97, 131, 20);
 		add(nomeDespesa_camp);
 		nomeDespesa_camp.setColumns(10);
 		
 		valorDespesaCamp = new JNumberFormatField();
-		valorDespesaCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		valorDespesaCamp.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		valorDespesaCamp.setBounds(142, 146, 131, 20);
 		add(valorDespesaCamp);
 		valorDespesaCamp.setColumns(10);
@@ -72,9 +72,9 @@ public class PainelAdicionarDespesa extends JPanel {
 		lblNewLabel_3.setBounds(20, 100, 121, 14);
 		add(lblNewLabel_3);
 		
-		lblNewLabel_4 = new JLabel("Valor R$ : ");
+		lblNewLabel_4 = new JLabel("Valor : ");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
-		lblNewLabel_4.setBounds(80, 149, 106, 14);
+		lblNewLabel_4.setBounds(89, 149, 106, 14);
 		add(lblNewLabel_4);
 		
 		

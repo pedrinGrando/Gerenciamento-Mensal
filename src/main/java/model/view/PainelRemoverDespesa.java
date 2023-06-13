@@ -45,7 +45,7 @@ public class PainelRemoverDespesa extends JPanel {
 		setLayout(null);
 		
 		nomeDespesa_camp = new JTextField();
-		nomeDespesa_camp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		nomeDespesa_camp.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		nomeDespesa_camp.setBounds(49, 134, 181, 20);
 		add(nomeDespesa_camp);
 		nomeDespesa_camp.setColumns(10);

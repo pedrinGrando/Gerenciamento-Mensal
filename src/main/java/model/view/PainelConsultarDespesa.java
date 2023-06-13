@@ -26,6 +26,11 @@ import controller.*;
 import javax.swing.JTextField;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.EtchedBorder;
 
 
 public class PainelConsultarDespesa extends JPanel {
@@ -52,6 +57,7 @@ public class PainelConsultarDespesa extends JPanel {
 	private JLabel lblValor;
 
 	private JButton btnConsultar;
+
 	
 
 	/**
@@ -69,7 +75,7 @@ public class PainelConsultarDespesa extends JPanel {
 		
 		
 		campDespDigitada = new JTextField();
-		campDespDigitada.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		campDespDigitada.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		campDespDigitada.setBounds(135, 88, 296, 20);
 		add(campDespDigitada);
 		campDespDigitada.setColumns(10);
@@ -117,7 +123,7 @@ public class PainelConsultarDespesa extends JPanel {
 		btnConsultar = new JButton("");
 		btnConsultar.setBorder(null);
 		btnConsultar.setBackground(new Color(0, 255, 255));
-		btnConsultar.setIcon(new ImageIcon(PainelConsultarDespesa.class.getResource("/icons/search.png")));
+		btnConsultar.setIcon(new ImageIcon(PainelConsultarDespesa.class.getResource("/icons/loupe.png")));
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -138,7 +144,7 @@ public class PainelConsultarDespesa extends JPanel {
 				
 			}
 		});
-		btnConsultar.setBounds(441, 87, 39, 23);
+		btnConsultar.setBounds(429, 85, 39, 23);
 		add(btnConsultar);
 		
 		JLabel lblNewLabel_2 = new JLabel("");

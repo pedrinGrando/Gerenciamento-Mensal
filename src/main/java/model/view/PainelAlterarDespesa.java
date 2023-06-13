@@ -60,7 +60,7 @@ public class PainelAlterarDespesa extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 0));
-		panel.setBounds(0, 225, 696, 10);
+		panel.setBounds(0, 225, 733, 10);
 		add(panel);
 		
 		
@@ -72,18 +72,20 @@ public class PainelAlterarDespesa extends JPanel {
 		List<DespesaVO> despesasCadastradas = despController.consultarTodosController(userOnline);
 		
 		cbDespesas = new JComboBox(despesasCadastradas.toArray());
+		cbDespesas.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		cbDespesas.setBackground(new Color(192, 192, 192));
 		cbDespesas.setBounds(260, 58, 110, 22);
 		add(cbDespesas);
 		
 		campNome = new JTextField();
-		campNome.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		campNome.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		campNome.setBounds(90, 271, 119, 20);
 		add(campNome);
 		campNome.setColumns(10);
 		
 		campValor = new JNumberFormatField();
-		campValor.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		campValor.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		campValor.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		campValor.setBounds(90, 312, 119, 20);
 		add(campValor);
 		campValor.setColumns(10);
@@ -116,19 +118,19 @@ public class PainelAlterarDespesa extends JPanel {
 			}
 		});
 		btnConsultar.setBorder(null);
-		btnConsultar.setIcon(new ImageIcon(PainelAlterarDespesa.class.getResource("/icons/search.png")));
+		btnConsultar.setIcon(new ImageIcon(PainelAlterarDespesa.class.getResource("/icons/loupe.png")));
 		btnConsultar.setBackground(new Color(0, 255, 255));
-		btnConsultar.setBounds(376, 58, 40, 23);
+		btnConsultar.setBounds(376, 58, 31, 19);
 		add(btnConsultar);
 		
 		lblNewLabel_3 = new JLabel("Nome : ");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_3.setBounds(21, 274, 59, 14);
+		lblNewLabel_3.setBounds(35, 274, 59, 14);
 		add(lblNewLabel_3);
 		
 		lblNewLabel_4 = new JLabel("Valor : ");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_4.setBounds(21, 315, 59, 14);
+		lblNewLabel_4.setBounds(35, 315, 59, 14);
 		add(lblNewLabel_4);
 		
 		

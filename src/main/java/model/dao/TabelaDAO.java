@@ -120,18 +120,28 @@ public class TabelaDAO {
 		
 		ArrayList<TabelaVO> tabelas = new ArrayList<TabelaVO>();
 		Connection conexao = Banco.getConnection();
-		String sql = " SELECT * FROM tabelamensal "
-				+ "WHERE mes = '" + tabSeletor.getMes() + "' "
-				+ "AND ano = " + tabSeletor.getAno();
+		String sql = "";
 		
-		//if(tabSeletor.temFiltro()) {
+		if(tabSeletor.getMes().equals("Todos")) {
+			sql = "SELECT * FROM tabelamensal"
+			    + " AND ano = " + tabSeletor.getAno();
+			
+		} else if (tabSeletor.getAno().equals("Todos")) {
+			sql = "SELECT * FROM tabelamensal "
+			    + "WHERE mes = '"+ tabSeletor.getMes() + "' ";
+			         
+		} else if (tabSeletor.getAno().equals("Todos") && (tabSeletor.getMes().equals("Todos"))) {
+			sql = "SELECT * FROM tabelamensal";
+		}
+		
+	   //if(tabSeletor.temFiltro()) {
 			//sql = preencherFiltros(sql, tabSeletor);
 		//}
 		
-		if(tabSeletor.temPaginacao()) {
-			sql += " LIMIT "  + tabSeletor.getLimite()
-				 + " OFFSET " + tabSeletor.getOffset();  
-		}
+		//if(tabSeletor.temPaginacao()) {
+		// += " LIMIT "  + tabSeletor.getLimite()
+				// + " OFFSET " + tabSeletor.getOffset();  
+		//}
 		
 		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
 		try {
@@ -179,6 +189,18 @@ public class TabelaDAO {
 			}
 
 			primeiro = false;
+		}
+		
+		if(tabSeletor.getMes().equals("Todos")) {
+			if(primeiro) {
+				sql += "";
+			} 
+		}
+		
+		if(tabSeletor.getAno().equals("Todos")) {
+			if(primeiro) {
+				sql += "";
+			} 
 		}
 		
 		if(tabSeletor.getAno() != null && (!tabSeletor.getAno().trim().isEmpty())) {

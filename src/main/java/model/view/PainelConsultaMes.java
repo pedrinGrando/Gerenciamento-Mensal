@@ -59,7 +59,7 @@ public class PainelConsultaMes extends JPanel {
 		
 		btnConsultar = new JButton("");
 		btnConsultar.setBorder(null);
-		btnConsultar.setIcon(new ImageIcon(PainelConsultaMes.class.getResource("/icons/search.png")));
+		btnConsultar.setIcon(new ImageIcon(PainelConsultaMes.class.getResource("/icons/loupe.png")));
 		btnConsultar.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
 		btnConsultar.addActionListener(new ActionListener() {
 			private JLabel lblAno;
@@ -112,7 +112,7 @@ public class PainelConsultaMes extends JPanel {
 		add(lblNewLabel_2);
 	
 		mesDigitadoCamp = new JTextField();
-		mesDigitadoCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		mesDigitadoCamp.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		mesDigitadoCamp.setBounds(233, 76, 117, 20);
 		add(mesDigitadoCamp);
 		mesDigitadoCamp.setColumns(10);
@@ -169,7 +169,7 @@ public class PainelConsultaMes extends JPanel {
 		
 		lblNewLabel_5 = new JLabel("");
 		lblNewLabel_5.setIcon(new ImageIcon(PainelConsultaMes.class.getResource("/icons/bank.png")));
-		lblNewLabel_5.setBounds(636, 455, 34, 30);
+		lblNewLabel_5.setBounds(636, 458, 34, 30);
 		add(lblNewLabel_5);
 		
 		

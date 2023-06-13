@@ -73,7 +73,7 @@ public class PainelCalculoMensal extends JPanel {
 		setLayout(null);
 		
 		campSaldo = new JNumberFormatField();
-		campSaldo.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		campSaldo.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		campSaldo.setBounds(208, 93, 147, 20);
 		add(campSaldo);
 		campSaldo.setColumns(10);
@@ -155,7 +155,7 @@ public class PainelCalculoMensal extends JPanel {
 
 		});
 		setLayout(null);
-		btnGerarCalculo.setBounds(372, 93, 46, 21);
+		btnGerarCalculo.setBounds(361, 92, 46, 21);
 		add(btnGerarCalculo);
 		
 		btn_salvarDados = new JButton("");
@@ -199,9 +199,9 @@ public class PainelCalculoMensal extends JPanel {
 		add(lblMesAtual);
 		lblMesAtual.setText(mes.toUpperCase());
 		
-		lblNewLabel_1 = new JLabel("Informe o saldo restante : R$ ");
+		lblNewLabel_1 = new JLabel("Informe o saldo restante :  ");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_1.setBounds(30, 96, 181, 14);
+		lblNewLabel_1.setBounds(51, 96, 181, 14);
 		add(lblNewLabel_1);
 		
 		

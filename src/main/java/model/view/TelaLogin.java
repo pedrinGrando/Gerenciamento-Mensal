@@ -133,7 +133,6 @@ public class TelaLogin extends JFrame {
 					JOptionPane.showMessageDialog(null, "Senha inválida! ");
 				}
 			
-			
 		   }
 		
 	    });
