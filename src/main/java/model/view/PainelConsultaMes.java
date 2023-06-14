@@ -36,12 +36,12 @@ public class PainelConsultaMes extends JPanel {
 	private JLabel lblMes;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
-	private JLabel lblAno;
 	private JLabel lblNewLabel_6;
-	private JLabel lblTotalRest;
 	private JLabel lblNewLabel_8;
-	private JLabel lblSaldoFinal;
 	private JLabel lblNewLabel_5;
+	private JLabel lblAno;
+	private JLabel lblSaldoFinal;
+	private JLabel lblTotalRestante;
 
 	/**
 	 * Create the panel.
@@ -62,9 +62,6 @@ public class PainelConsultaMes extends JPanel {
 		btnConsultar.setIcon(new ImageIcon(PainelConsultaMes.class.getResource("/icons/loupe.png")));
 		btnConsultar.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
 		btnConsultar.addActionListener(new ActionListener() {
-			private JLabel lblAno;
-			private JLabel lblSaldoFinal;
-			private JLabel lblTotalRest;
 
 			public void actionPerformed(ActionEvent e) {
 				String mesConsultado = mesDigitadoCamp.getText();
@@ -77,26 +74,18 @@ public class PainelConsultaMes extends JPanel {
 				//VERIFICACOES
 			    if (tabelaVO.getIdTabela() == 0) {
 			    	JOptionPane.showMessageDialog(null, "Dados do mês  " + mesConsultado 
-			    			+"\n não encontrados! ", "GS - Gerenciador de salário", JOptionPane.WARNING_MESSAGE);
+			    			+"\n não encontrados! ", "GS - Gerenciador de salário", JOptionPane.ERROR_MESSAGE);
 			    } else {
 			   
 			    	JOptionPane.showMessageDialog(null, "Consulta realizada com sucesso! " + mesConsultado 
 			    			, "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
 			    	
-			    	lblAno = new JLabel("");
-					lblAno.setBounds(111, 221, 46, 14);
-					add(lblAno);
+			    	
 					lblAno.setText(""+tabelaVO.getAno());
 			    	
-					lblSaldoFinal = new JLabel("");
-					lblSaldoFinal.setBounds(184, 363, 102, 14);
-					add(lblSaldoFinal);
-					lblSaldoFinal.setText(""+ formato.format(tabelaVO.getSaldoFinal()));
+					lblSaldoFinal.setText("R$"+ formato.format(tabelaVO.getSaldoFinal()));
 			    	
-			    	lblTotalRest = new JLabel("");
-					lblTotalRest.setBounds(211, 288, 113, 14);
-					add(lblTotalRest);
-					lblTotalRest.setText("" + formato.format(tabelaVO.getTotalRest()));
+					lblTotalRestante.setText("R$" + formato.format(tabelaVO.getTotalRest()));
 			    
 			    }
 				
@@ -116,6 +105,21 @@ public class PainelConsultaMes extends JPanel {
 		mesDigitadoCamp.setBounds(233, 76, 117, 20);
 		add(mesDigitadoCamp);
 		mesDigitadoCamp.setColumns(10);
+		
+		lblAno = new JLabel("");
+		lblAno.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblAno.setBounds(81, 221, 103, 14);
+		add(lblAno);
+		
+		lblTotalRestante = new JLabel("");
+		lblTotalRestante.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblTotalRestante.setBounds(190, 264, 142, 14);
+		add(lblTotalRestante);
+		
+		lblSaldoFinal = new JLabel("");
+		lblSaldoFinal.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblSaldoFinal.setBounds(124, 309, 141, 14);
+		add(lblSaldoFinal);
 		
 		panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 0));
@@ -139,39 +143,24 @@ public class PainelConsultaMes extends JPanel {
 		
 		lblNewLabel_4 = new JLabel("Ano : ");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_4.setBounds(52, 221, 78, 14);
+		lblNewLabel_4.setBounds(43, 221, 54, 14);
 		add(lblNewLabel_4);
 		
-		lblAno = new JLabel("");
-		lblAno.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblAno.setBounds(91, 221, 87, 14);
-		add(lblAno);
-		
-		lblNewLabel_6 = new JLabel("Total restante no mês :  R$ ");
+		lblNewLabel_6 = new JLabel("Total restante no mês :  ");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_6.setBounds(43, 264, 155, 14);
+		lblNewLabel_6.setBounds(43, 264, 142, 14);
 		add(lblNewLabel_6);
 		
-		lblTotalRest = new JLabel("");
-		lblTotalRest.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblTotalRest.setBounds(202, 264, 125, 14);
-		add(lblTotalRest);
-		
-		lblNewLabel_8 = new JLabel("Saldo final :  R$ ");
+		lblNewLabel_8 = new JLabel("Saldo final :  ");
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		lblNewLabel_8.setBounds(43, 309, 114, 14);
 		add(lblNewLabel_8);
-		
-		lblSaldoFinal = new JLabel("");
-		lblSaldoFinal.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblSaldoFinal.setBounds(132, 309, 102, 14);
-		add(lblSaldoFinal);
 		
 		lblNewLabel_5 = new JLabel("");
 		lblNewLabel_5.setIcon(new ImageIcon(PainelConsultaMes.class.getResource("/icons/bank.png")));
 		lblNewLabel_5.setBounds(636, 458, 34, 30);
 		add(lblNewLabel_5);
 		
-		
+	
 	}
 }

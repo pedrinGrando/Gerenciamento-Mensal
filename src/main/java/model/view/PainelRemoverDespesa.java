@@ -46,13 +46,13 @@ public class PainelRemoverDespesa extends JPanel {
 		
 		nomeDespesa_camp = new JTextField();
 		nomeDespesa_camp.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		nomeDespesa_camp.setBounds(49, 134, 181, 20);
+		nomeDespesa_camp.setBounds(42, 94, 181, 20);
 		add(nomeDespesa_camp);
 		nomeDespesa_camp.setColumns(10);
 		
 		lblNewLabel_1 = new JLabel("Nome da despesa");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_1.setBounds(39, 117, 101, 14);
+		lblNewLabel_1.setBounds(32, 77, 101, 14);
 		add(lblNewLabel_1);
 		
 		btn_removerDespesa = new JButton("");
@@ -72,12 +72,12 @@ public class PainelRemoverDespesa extends JPanel {
 		});
 		btn_removerDespesa.setBackground(new Color(0, 255, 255));
 		btn_removerDespesa.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		btn_removerDespesa.setBounds(229, 134, 41, 23);
+		btn_removerDespesa.setBounds(222, 94, 41, 23);
 		add(btn_removerDespesa);
 		
 		lblNewLabel_2 = new JLabel(" Remover despesa cadastrada ");
 		lblNewLabel_2.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 14));
-		lblNewLabel_2.setBounds(95, 74, 279, 14);
+		lblNewLabel_2.setBounds(88, 34, 279, 14);
 		add(lblNewLabel_2);
 		
 		JPanel panel = new JPanel();
@@ -87,7 +87,7 @@ public class PainelRemoverDespesa extends JPanel {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(PainelRemoverDespesa.class.getResource("/icons/bank.png")));
-		lblNewLabel.setBounds(638, 441, 41, 34);
+		lblNewLabel.setBounds(636, 430, 41, 34);
 		add(lblNewLabel);
 		
     }

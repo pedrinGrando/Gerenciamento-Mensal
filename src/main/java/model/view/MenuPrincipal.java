@@ -23,6 +23,7 @@ import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
+import java.awt.Cursor;
 
 public class MenuPrincipal extends JFrame {
 
@@ -80,6 +81,7 @@ public class MenuPrincipal extends JFrame {
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmVerConta = new JMenuItem("Ver conta ");
+		mntmVerConta.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		mntmVerConta.setBackground(new Color(255, 255, 255));
 		mntmVerConta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		mntmVerConta.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/account.png")));

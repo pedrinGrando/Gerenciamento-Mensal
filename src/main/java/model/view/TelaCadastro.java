@@ -37,6 +37,7 @@ import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
+import javax.swing.JRadioButton;
 
 public class TelaCadastro extends JFrame {
 
@@ -75,12 +76,16 @@ public class TelaCadastro extends JFrame {
 	private Container lblNewLabel_13;
 	private JLabel lblNewLabel_14;
 	private JButton btnNewButton;
-	private JButton btnNewButton_1;
+	private JButton btnSalvar;
 	private JPasswordField campSenha;
 	private JPasswordField confirmCampSenha;
 	private JTextField campCidade;
 	private JNumberFormatField salarioCamp;
 	private JComboBox cbEstados;
+	private JRadioButton radioAceita;
+	private JRadioButton radioNaAceita;
+	private JLabel lblNewLabel_15;
+	private JLabel lblNewLabel_16;
 
 	/**
 	 * Launch the application.
@@ -125,6 +130,19 @@ public class TelaCadastro extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		radioAceita = new JRadioButton("Aceita os termos de cadastro");
+		radioAceita.setBackground(new Color(0, 255, 255));
+		radioAceita.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		radioAceita.setBounds(483, 114, 208, 23);
+		contentPane.add(radioAceita);
+		
+		radioNaAceita = new JRadioButton("Não aceita os termos de cadastro ");
+		radioNaAceita.setBackground(new Color(0, 255, 255));
+		radioNaAceita.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		radioNaAceita.setBounds(483, 140, 208, 23);
+		contentPane.add(radioNaAceita);
+		
 		
 		campoNome = new JTextField();
 		campoNome.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -203,12 +221,12 @@ public class TelaCadastro extends JFrame {
 		lblNewLabel_8.setBounds(312, 304, 115, 14);
 		contentPane.add(lblNewLabel_8);
 		
-		JLabel lblNewLabel_15 = new JLabel("Senha : ");
+		lblNewLabel_15 = new JLabel("Senha : ");
 		lblNewLabel_15.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNewLabel_15.setBounds(526, 27, 63, 14);
 		contentPane.add(lblNewLabel_15);
 		
-		JLabel lblNewLabel_16 = new JLabel("Confirme a senha: ");
+		lblNewLabel_16 = new JLabel("Confirme a senha: ");
 		lblNewLabel_16.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNewLabel_16.setBounds(483, 67, 106, 14);
 		contentPane.add(lblNewLabel_16);
@@ -312,13 +330,16 @@ public class TelaCadastro extends JFrame {
 		btnNewButton.setBounds(257, 527, 115, 23);
 		contentPane.add(btnNewButton);
 		
-		btnNewButton_1 = new JButton("Cadastrar");
-		btnNewButton_1.setBorder(null);
-		btnNewButton_1.setIcon(new ImageIcon(TelaCadastro.class.getResource("/icons/diskette.png")));
-		btnNewButton_1.setBackground(new Color(0, 255, 255));
-		btnNewButton_1.addActionListener(new ActionListener() {
+		btnSalvar = new JButton("Cadastrar");
+		btnSalvar.setBorder(null);
+		btnSalvar.setIcon(new ImageIcon(TelaCadastro.class.getResource("/icons/diskette.png")));
+		btnSalvar.setBackground(new Color(0, 255, 255));
+		//btnSalvar.setEnabled(false);
+		
+		
+		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+			
 				 String valor1 = "";
 				
 				
@@ -397,9 +418,10 @@ public class TelaCadastro extends JFrame {
 			}
 
 		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btnNewButton_1.setBounds(371, 527, 128, 23);
-		contentPane.add(btnNewButton_1);
+		btnSalvar.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		btnSalvar.setBounds(371, 527, 128, 23);
+		contentPane.add(btnSalvar);
+	
 		
 			}
 		}

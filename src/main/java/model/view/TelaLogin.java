@@ -259,7 +259,6 @@ public class TelaLogin extends JFrame {
 		btnRecuperacaoSenha.setBorder(null);
 		btnRecuperacaoSenha.setBounds(116, 246, 147, 23);
 		contentPane.add(btnRecuperacaoSenha);
-		
-		
+	
 	}
 }
