@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 
 import javax.swing.ImageIcon;
@@ -44,13 +46,13 @@ public class PainelAlterarDados extends JPanel {
 	private JLabel lblNewLabel_4;
 	private JNumberFormatField novoSalarioL;
 	private JLabel lblNewLabel_5;
-	private JLabel lblNewLabel_6;
 	private JButton btnNewButton_1;
 	
 	UsuarioController usuarioController = new UsuarioController();
 	UsuarioVO userAtualizado = new UsuarioVO();
 	EnderecoVO endAtualizado = new EnderecoVO();
 	EnderecoController enderecoController = new EnderecoController();
+	DecimalFormat formato = new DecimalFormat("#,##0.00");
 	
 	private JTextField ruaCampo;
 	private JTextField campBairro;
@@ -137,7 +139,7 @@ public class PainelAlterarDados extends JPanel {
 		cepCamp = new JFormattedTextField(mascaraCEP);
 		cepCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		cepCamp.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		cepCamp.setBounds(377, 86, 114, 20);
+		cepCamp.setBounds(377, 86, 102, 20);
 		add(cepCamp);
 		cepCamp.setText("");
 		
@@ -156,10 +158,10 @@ public class PainelAlterarDados extends JPanel {
 		novoSalarioL = new JNumberFormatField();
 		novoSalarioL.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		novoSalarioL.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		novoSalarioL.setBounds(35, 245, 102, 20);
+		novoSalarioL.setBounds(10, 245, 102, 20);
 		add(novoSalarioL);
 		novoSalarioL.setColumns(10);
-		novoSalarioL.setText(""+userLogado.getSalariol());
+		novoSalarioL.setText("");
 		
 		senhaAtualAtualizar = new JPasswordField();
 		senhaAtualAtualizar.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -173,12 +175,11 @@ public class PainelAlterarDados extends JPanel {
 		
 		campNumero = new JTextField();
 		campNumero.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		campNumero.setBounds(10, 412, 86, 20);
+		campNumero.setBounds(10, 412, 102, 20);
 		add(campNumero);
 		campNumero.setColumns(10);
 		
 		campNumero.setText(String.valueOf(estado.getNumero()));
-		
 		
 		campCIdade = new JTextField();
 		campCIdade.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -192,11 +193,6 @@ public class PainelAlterarDados extends JPanel {
 		novaSenhaAtualizar.setBounds(377, 317, 102, 20);
 		add(novaSenhaAtualizar);
 		
-		lblNewLabel_6 = new JLabel("R$");
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblNewLabel_6.setBounds(10, 248, 13, 14);
-		add(lblNewLabel_6);
-		
 		btnNewButton_1 = new JButton("");
 		btnNewButton_1.setBorder(null);
 		btnNewButton_1.setIcon(new ImageIcon(PainelAlterarDados.class.getResource("/icons/diskette.png")));
@@ -209,49 +205,51 @@ public class PainelAlterarDados extends JPanel {
 				boolean result2 = false;
 				
 				//INSERINDO NOVOS DADOS 
+				//valor1 = novoSalarioL.getText().replace(",", ".");
+				String salarioF = formato.format(novoSalarioL.getText());
 				
-				valor1 = novoSalarioL.getText().replace(",", ".");
-				
-				userAtualizado.setSalariol(Double.parseDouble(valor1.replace("R$", "")));
+				userAtualizado.setIdUsuario(userLogado.getIdUsuario());
+				userAtualizado.setSalariol(Double.parseDouble(salarioF.replace("R$", "")));
 				userAtualizado.setEmail(novoEmail_camp.getText());
 				userAtualizado.setNome(novoNome_camp.getText());
 				userAtualizado.setLogin(novoUser_camp.getText());
+				userAtualizado.setSenha(novaSenhaAtualizar.getText());
 				
-				//VERIFICAR SENHA DIGITADA
-				result = this.verificarSenha(senhaAtualAtualizar.getText());
+					//VERIFICAR SENHA DIGITADA
+					result = this.verificarSenha(senhaAtualAtualizar.getText(), novaSenhaAtualizar.getText());
+					
+						// ENDERECO
+						endAtualizado.setBairro(campBairro.getText());
+						endAtualizado.setCep(cepCamp.getText());
+						endAtualizado.setRua(ruaCampo.getText());
+						endAtualizado.setIdUsuario(userAtualizado.getIdUsuario());
+						endAtualizado.setEstado((String) cbEstados.getSelectedItem());
+						endAtualizado.setCidade(campCIdade.getText());
+						endAtualizado.setNumero(Integer.parseInt(campNumero.getText()));
 				
-				userAtualizado.setIdUsuario(userLogado.getIdUsuario());
+				if (result){
+						try {
+							usuarioController.atualizarUsuarioController(userAtualizado);
+							enderecoController.atualizarEndController(endAtualizado);
+							JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
+						} catch (SQLException e1) {
+							JOptionPane.showMessageDialog(null, "A nova senha não pode ser igual à anterior!", "GS - Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+						}
 				
-				// ENDERECO
-				endAtualizado.setBairro(campBairro.getText());
-				endAtualizado.setCep(cepCamp.getText());
-				endAtualizado.setRua(ruaCampo.getText());
-				endAtualizado.setIdUsuario(userAtualizado.getIdUsuario());
-				endAtualizado.setEstado((String) cbEstados.getSelectedItem());
-				endAtualizado.setCidade(campCIdade.getText());
-				endAtualizado.setNumero(Integer.parseInt(campNumero.getText()));
-				
-				if (result) {
-			
-					usuarioController.atualizarUsuarioController(userAtualizado);
-					enderecoController.atualizarEndController(endAtualizado);
-					JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "Não foi possível alterar!", "GS - Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
 				}
 					
 			}
 
-			private boolean verificarSenha(String text) {
+			private boolean verificarSenha(String text, String text2) {
 
 				boolean retorno = false;
 				
                if (text.equals(userLogado.getSenha())) {
-            	   userAtualizado.setSenha(text);
             	   retorno = true;
                } else {
             	   JOptionPane.showMessageDialog(null, "Senha incorreta!", "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
-            	   
             	   retorno = false;
                }
 				

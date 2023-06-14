@@ -197,4 +197,32 @@ public class UsuarioDAO {
 
 	}
 
+	public String consultarSenha(UsuarioVO userAtualizado) {
+		
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		String senhaConsultada = "";
+		
+		String query = "SELECT u.senha "
+				+ "FROM USUARIO u "
+				+ "WHERE u.idusuario = " + userAtualizado.getIdUsuario();
+				
+		try {
+			resultado = stmt.executeQuery(query);
+			while(resultado.next()) {
+				senhaConsultada = resultado.getString(1);
+			}
+		} catch (SQLException erro) {
+			System.out.println("Erro ao executar a query do método consultarSenha");
+			System.out.println("Erro: " + erro.getMessage());
+		}finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return senhaConsultada;
+	
+	}
+
 }

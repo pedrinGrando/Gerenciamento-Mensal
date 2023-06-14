@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+
 import exceptions.CampoInvalidoException;
 import exceptions.CpfJaUtilizadoException;
 import model.bo.UsuarioBO;
@@ -126,9 +128,19 @@ public class UsuarioController {
 		return validacao;
 	}
 
-	public boolean atualizarUsuarioController(UsuarioVO userAtualizado) {
+	public boolean atualizarUsuarioController(UsuarioVO userAtualizado) throws SQLException {
 		
+		this.validarSenha(userAtualizado);
 		return userBO.atualizarUsuarioBO(userAtualizado);
+	}
+
+	private void validarSenha(UsuarioVO userAtualizado) throws SQLException {
+		String senha = userDAO.consultarSenha(userAtualizado);
+		
+		if (userAtualizado.getSenha().equals(senha)) {
+			throw new SQLException();
+		}
+		
 	}
 
 	public UsuarioVO consultarUserPorNome(String text, String cpf) {

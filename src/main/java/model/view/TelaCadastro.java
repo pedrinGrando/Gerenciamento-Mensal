@@ -342,7 +342,6 @@ public class TelaCadastro extends JFrame {
 			
 				 String valor1 = "";
 				
-				
 				// DEFININDO TIPO DE USUARIO DE ACORDO COM A REGRA 
 				usuario.setTipoUsuario(2);
 				

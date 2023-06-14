@@ -20,6 +20,7 @@ import javax.swing.JComponent;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
@@ -199,7 +200,12 @@ public class TelaRecuperacaoSenha extends JFrame {
 				if (verificarSenhasDig(senhaNova.getText(), senhaNovaConfirm.getText())) {
 					
 					usuarioConsultado.setSenha(senhaNovaConfirm.getText());
-					updatePass = userController.atualizarUsuarioController(usuarioConsultado);
+					try {
+						updatePass = userController.atualizarUsuarioController(usuarioConsultado);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, e1.getMessage(), "GS - Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+					}
 					JOptionPane.showMessageDialog(null, "Senha atualizada com sucesso!", "Gerenciamento-Mensal", 
                 			JOptionPane.INFORMATION_MESSAGE);
 				} else {
@@ -218,8 +224,7 @@ public class TelaRecuperacaoSenha extends JFrame {
 				}
 				
 				return retorno;
-				
-				
+			
 			}
 
 		});
