@@ -5,8 +5,10 @@ import model.vo.UsuarioVO;
 
 import java.util.ArrayList;
 
+import exceptions.CampoInvalidoException;
 import model.bo.*;
 import model.seletor.TabelaSeletor;
+import model.geradorPlanilhas.*;
 
 public class TabelaController {
 	
@@ -35,6 +37,16 @@ public class TabelaController {
 	public int contarTotalRegistrosComFiltros(TabelaSeletor seletor) {
 		
 		return tabBO.contarTotalRegistrosComFiltros(seletor);
+	}
+
+	public String gerarPlanilha(ArrayList<TabelaVO> tabelas, String caminhoEscolhido) throws CampoInvalidoException {
+		
+		if(tabelas == null || caminhoEscolhido == null || caminhoEscolhido.trim().isEmpty()) {
+			throw new CampoInvalidoException("Preencha todos os campos");
+		}
+		
+		GeradorPlanilha gerador = new GeradorPlanilha();
+		return gerador.gerarPlanilhaClientes(tabelas, caminhoEscolhido);
 	}
 
 

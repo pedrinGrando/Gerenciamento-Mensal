@@ -19,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controller.EnderecoController;
+import exceptions.CampoInvalidoException;
 import exceptions.EnderecoInvalidoException;
 import controller.TabelaController;
 import model.seletor.TabelaSeletor;
@@ -36,6 +37,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
+import javax.swing.JFileChooser;
 
 public class PainelTabelaCompleta extends JPanel {
 
@@ -160,6 +162,34 @@ public class PainelTabelaCompleta extends JPanel {
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNewLabel_2.setBounds(281, 11, 46, 14);
 		add(lblNewLabel_2);
+		
+		JButton btnGerarPlanilha = new JButton("Gerar planilha");
+		btnGerarPlanilha.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JFileChooser janelaSelecaoDestinoArquivo = new JFileChooser();
+				janelaSelecaoDestinoArquivo.setDialogTitle("Selecione um destino para a planilha...");
+
+				int opcaoSelecionada = janelaSelecaoDestinoArquivo.showSaveDialog(null);
+				if (opcaoSelecionada == JFileChooser.APPROVE_OPTION) {
+					String caminhoEscolhido = janelaSelecaoDestinoArquivo.getSelectedFile().getAbsolutePath();
+					String resultado;
+					try {
+						resultado = tabelaController.gerarPlanilha(tabelas, caminhoEscolhido);
+						JOptionPane.showMessageDialog(null, resultado);
+					} catch (CampoInvalidoException e1) {
+						JOptionPane.showConfirmDialog(null, e1.getMessage(), "Atenção", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+				
+				
+			}
+		});
+		btnGerarPlanilha.setBorder(null);
+		btnGerarPlanilha.setBackground(new Color(0, 255, 255));
+		btnGerarPlanilha.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		btnGerarPlanilha.setBounds(493, 461, 135, 23);
+		add(btnGerarPlanilha);
 		
 		atualizarQuantidadePaginas();
 		

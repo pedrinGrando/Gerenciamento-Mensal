@@ -92,7 +92,7 @@ public class PainelConsultaMes extends JPanel {
 			}
 		});
 		btnConsultar.setBackground(new Color(0, 255, 255));
-		btnConsultar.setBounds(360, 73, 27, 23);
+		btnConsultar.setBounds(353, 73, 34, 23);
 		add(btnConsultar);
 		
 		lblNewLabel_2 = new JLabel("Informe o mês a ser consultado : ");
@@ -128,7 +128,7 @@ public class PainelConsultaMes extends JPanel {
 		
 	    lblNewLabel = new JLabel("Mês consultado : ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel.setBounds(81, 150, 117, 14);
+		lblNewLabel.setBounds(58, 150, 117, 14);
 		add(lblNewLabel);
 		
 		lblMes = new JLabel("New label");

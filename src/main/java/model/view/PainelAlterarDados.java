@@ -26,6 +26,7 @@ import javax.swing.text.MaskFormatter;
 import model.vo.UsuarioVO;
 import model.vo.*;
 import controller.UsuarioController;
+import exceptions.CampoInvalidoException;
 import controller.EnderecoController;
 import model.view.*;
 import javax.swing.JComboBox;
@@ -232,9 +233,9 @@ public class PainelAlterarDados extends JPanel {
 							usuarioController.atualizarUsuarioController(userAtualizado);
 							enderecoController.atualizarEndController(endAtualizado);
 							JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
-						} catch (SQLException e1) {
+						} catch (SQLException | CampoInvalidoException e1) {
 							JOptionPane.showMessageDialog(null, "A nova senha não pode ser igual à anterior!", "GS - Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
-						}
+						} 
 				
 				} else {
 					JOptionPane.showMessageDialog(null, "Não foi possível alterar!", "GS - Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
@@ -320,7 +321,6 @@ public class PainelAlterarDados extends JPanel {
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNewLabel_7.setBounds(377, 302, 102, 14);
 		add(lblNewLabel_7);
-		
 		
 	}
 }

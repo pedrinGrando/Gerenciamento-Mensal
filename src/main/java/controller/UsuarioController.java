@@ -128,18 +128,23 @@ public class UsuarioController {
 		return validacao;
 	}
 
-	public boolean atualizarUsuarioController(UsuarioVO userAtualizado) throws SQLException {
+	public boolean atualizarUsuarioController(UsuarioVO userAtualizado) throws SQLException, CampoInvalidoException {
 		
 		this.validarSenha(userAtualizado);
 		return userBO.atualizarUsuarioBO(userAtualizado);
 	}
 
-	private void validarSenha(UsuarioVO userAtualizado) throws SQLException {
+	private void validarSenha(UsuarioVO userAtualizado) throws SQLException, CampoInvalidoException {
+		
 		String senha = userDAO.consultarSenha(userAtualizado);
+		String mensagemValidacao = "";
 		
 		if (userAtualizado.getSenha().equals(senha)) {
 			throw new SQLException();
-		}
+		} else if (userAtualizado.getSenha().length() < 6 || userAtualizado.getSenha().length() > 6) {
+			mensagemValidacao = "Senha inválida!";
+			throw new CampoInvalidoException(mensagemValidacao);
+		} 
 		
 	}
 

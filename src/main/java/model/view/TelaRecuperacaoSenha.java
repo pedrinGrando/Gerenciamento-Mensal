@@ -26,6 +26,8 @@ import java.awt.event.ActionEvent;
 
 import model.vo.*;
 import controller.*;
+import exceptions.CampoInvalidoException;
+
 import javax.swing.JFormattedTextField;
 
 public class TelaRecuperacaoSenha extends JFrame {
@@ -202,7 +204,7 @@ public class TelaRecuperacaoSenha extends JFrame {
 					usuarioConsultado.setSenha(senhaNovaConfirm.getText());
 					try {
 						updatePass = userController.atualizarUsuarioController(usuarioConsultado);
-					} catch (SQLException e1) {
+					} catch (SQLException | CampoInvalidoException e1) {
 						// TODO Auto-generated catch block
 						JOptionPane.showMessageDialog(null, e1.getMessage(), "GS - Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
 					}

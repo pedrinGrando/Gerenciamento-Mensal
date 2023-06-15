@@ -225,7 +225,7 @@ public class PainelVerConta extends JPanel {
 		
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(PainelVerConta.class.getResource("/icons/bank.png")));
-		lblNewLabel.setBounds(659, 453, 105, 55);
+		lblNewLabel.setBounds(661, 447, 105, 55);
 		add(lblNewLabel);
 		
 		
