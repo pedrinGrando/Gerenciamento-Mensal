@@ -171,7 +171,7 @@ public class PainelVerConta extends JPanel {
 		lblEstado.setBounds(357, 103, 65, 14);
 		add(lblEstado);
 		
-		lblEstado.setText(endereco.getEstado());
+		lblEstado.setText(endereco.getUf());
 		
 		telaCidade = new JLabel("Cidade : ");
 		telaCidade.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -184,7 +184,7 @@ public class PainelVerConta extends JPanel {
 		lblCidade.setBounds(364, 143, 145, 14);
 		add(lblCidade);
 		
-		lblCidade.setText(endereco.getCidade());
+		lblCidade.setText(endereco.getLocalidade());
 		
 		telaNumero = new JLabel("Número:");
 		telaNumero.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -209,7 +209,7 @@ public class PainelVerConta extends JPanel {
 		lblRua.setBounds(347, 190, 234, 14);
 		add(lblRua);
 		
-		lblRua.setText(endereco.getRua());
+		lblRua.setText(endereco.getLogradouro());
 		
 		telaCep = new JLabel("CEP : ");
 		telaCep.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -227,9 +227,7 @@ public class PainelVerConta extends JPanel {
 		lblNewLabel.setIcon(new ImageIcon(PainelVerConta.class.getResource("/icons/bank.png")));
 		lblNewLabel.setBounds(661, 447, 105, 55);
 		add(lblNewLabel);
-		
-		
-		
+
 	}
 }
 

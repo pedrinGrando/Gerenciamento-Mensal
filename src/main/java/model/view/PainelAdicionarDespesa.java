@@ -86,8 +86,6 @@ public class PainelAdicionarDespesa extends JPanel {
 				
 				String valor1 = "";
 				
-				
-				
 				//INSERE DADOS AO NOVO OBJETO
 				LocalDate dataAtual = LocalDate.now();
 				
@@ -99,7 +97,8 @@ public class PainelAdicionarDespesa extends JPanel {
 					despesa.setIdUsuario(userLogado.getIdUsuario());
 					despesa.setDespNome(nomeDespesa_camp.getText());
 					
-					valor1 = valorDespesaCamp.getText().replace(",", ".");
+					valor1 = valorDespesaCamp.getText().replace(".", "");
+					valor1 = valor1.replace(",", ".");
 					
 					despesa.setValor(Double.parseDouble(valor1.replace("R$", "")));
 					//INSERE DESPESA NOVA AO BANCO

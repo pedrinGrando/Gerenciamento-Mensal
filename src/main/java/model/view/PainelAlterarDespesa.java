@@ -111,9 +111,7 @@ public class PainelAlterarDespesa extends JPanel {
 				} else {
 					
 					JOptionPane.showMessageDialog(null, "Selecione pelo menos uma despesa!", "Gerenciamento-Mensal", JOptionPane.WARNING_MESSAGE);
-					
 				}
-				
 				
 			}
 		});
@@ -145,7 +143,8 @@ public class PainelAlterarDespesa extends JPanel {
 				
 				despesaAtualizar.setIdUsuario(userOnline.getIdUsuario());
 				
-				valor1 = campValor.getText().replace(",", ".");
+				valor1 = campValor.getText().replace(".", "");
+				valor1 = valor1.replace(",", ".");
 				
 				despesaAtualizar.setValor(Double.parseDouble(valor1.replace("R$", "")));
 				
@@ -157,7 +156,6 @@ public class PainelAlterarDespesa extends JPanel {
 			    } else {
 			    	
 			    	JOptionPane.showMessageDialog(null, "Preencha todos os campos!", "Gerenciamento-Mensal", JOptionPane.WARNING_MESSAGE);
-			   
 			    }
 				
 			}

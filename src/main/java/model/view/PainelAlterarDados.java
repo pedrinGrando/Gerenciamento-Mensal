@@ -206,11 +206,11 @@ public class PainelAlterarDados extends JPanel {
 				boolean result2 = false;
 				
 				//INSERINDO NOVOS DADOS 
-				//valor1 = novoSalarioL.getText().replace(",", ".");
-				String salarioF = formato.format(novoSalarioL.getText());
+				valor1 = novoSalarioL.getText().replace(".", "");
+				valor1 = valor1.replace(",", ".");
 				
 				userAtualizado.setIdUsuario(userLogado.getIdUsuario());
-				userAtualizado.setSalariol(Double.parseDouble(salarioF.replace("R$", "")));
+				userAtualizado.setSalariol(Double.parseDouble(valor1.replace("R$", "")));
 				userAtualizado.setEmail(novoEmail_camp.getText());
 				userAtualizado.setNome(novoNome_camp.getText());
 				userAtualizado.setLogin(novoUser_camp.getText());
@@ -222,10 +222,10 @@ public class PainelAlterarDados extends JPanel {
 						// ENDERECO
 						endAtualizado.setBairro(campBairro.getText());
 						endAtualizado.setCep(cepCamp.getText());
-						endAtualizado.setRua(ruaCampo.getText());
+						endAtualizado.setLogradouro(ruaCampo.getText());
 						endAtualizado.setIdUsuario(userAtualizado.getIdUsuario());
-						endAtualizado.setEstado((String) cbEstados.getSelectedItem());
-						endAtualizado.setCidade(campCIdade.getText());
+						endAtualizado.setUf((String) cbEstados.getSelectedItem());
+						endAtualizado.setLocalidade(campCIdade.getText());
 						endAtualizado.setNumero(Integer.parseInt(campNumero.getText()));
 				
 				if (result){
@@ -269,7 +269,7 @@ public class PainelAlterarDados extends JPanel {
 		add(ruaCampo);
 		ruaCampo.setColumns(10);
 		
-		ruaCampo.setText(estado.getRua());
+		ruaCampo.setText(estado.getLocalidade());
 		
 		lblRua = new JLabel("Rua ");
 		lblRua.setFont(new Font("Tahoma", Font.ITALIC, 11));

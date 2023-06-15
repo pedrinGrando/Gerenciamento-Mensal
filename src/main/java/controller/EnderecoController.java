@@ -26,10 +26,10 @@ public class EnderecoController {
        String mensagemValidacao = "";
 		
 		mensagemValidacao += validarString(endereco.getCep(), "CEP");
-		mensagemValidacao += validarString(endereco.getRua(), "Rua");
+		mensagemValidacao += validarString(endereco.getLogradouro(), "Rua");
 		mensagemValidacao += validarString(endereco.getBairro(), "Bairro");
-		mensagemValidacao += validarString(endereco.getCidade(), "Cidade");
-		mensagemValidacao += validarString(endereco.getEstado(), "Estado");
+		mensagemValidacao += validarString(endereco.getLocalidade(), "Cidade");
+		mensagemValidacao += validarString(endereco.getUf(), "Estado");
 		
 		if(!mensagemValidacao.isEmpty()) {
 			throw new CampoInvalidoException(mensagemValidacao);

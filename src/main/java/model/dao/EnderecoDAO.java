@@ -15,18 +15,18 @@ public class EnderecoDAO {
 
 	public EnderecoVO cadastrarEnderecoDAO(EnderecoVO endereco) {
 		
-		String query ="INSERT INTO endereco (idusuario, rua, bairro, numero, cep, estado, cidade) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String query ="INSERT INTO endereco (idusuario, logradouro, bairro, numero, cep, uf, localidade) VALUES (?, ?, ?, ?, ?, ?, ?)";
 				
 		Connection conn = Banco.getConnection();
 		PreparedStatement pstmt = Banco.getPreparedStatementWithPk(conn, query);
 		try {
 			pstmt.setInt(1, endereco.getIdUsuario());
-			pstmt.setString(2, endereco.getRua());
+			pstmt.setString(2, endereco.getLogradouro());
 			pstmt.setString(3, endereco.getBairro());
 			pstmt.setObject(4, endereco.getNumero());
 			pstmt.setString(5, endereco.getCep());
-			pstmt.setString(6, endereco.getEstado());
-			pstmt.setString(7, endereco.getCidade());
+			pstmt.setString(6, endereco.getUf());
+			pstmt.setString(7, endereco.getLocalidade());
 			pstmt.execute();
 			ResultSet resultado = pstmt.getGeneratedKeys();	
 			if(resultado.next()) {
@@ -51,12 +51,12 @@ public class EnderecoDAO {
 		boolean retorno = false;
 		
 		String query = "UPDATE endereco SET idusuario = " + endAtualizado.getIdUsuario()
-				+ ", rua = '" + endAtualizado.getRua()
+				+ ", rua = '" + endAtualizado.getLogradouro()
 				+ "', bairro = '" + endAtualizado.getBairro()
 				+ "', numero = '" + endAtualizado.getNumero()
 				+ "', cep = '" + endAtualizado.getCep()
-				+ "', estado = '" + endAtualizado.getEstado()
-				+ "', cidade = '" + endAtualizado.getCidade()
+				+ "', estado = '" + endAtualizado.getUf()
+				+ "', cidade = '" + endAtualizado.getLocalidade()
 				+ "' WHERE idusuario = " + endAtualizado.getIdUsuario();
 		 
 		try {
@@ -80,22 +80,22 @@ public class EnderecoDAO {
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
 		
-		String query = "SELECT u.idendereco, u.idusuario, u.rua, u.bairro, u.numero, "
-				+ "u.cep, u.estado, u.cidade "
-				+ "FROM ENDERECO u "
-				+ "WHERE u.idusuario = " + endereco.getIdUsuario();
+		String query = "SELECT e.idendereco, e.idusuario, e.logradouro, e.bairro, e.numero, "
+				+ "e.cep, e.uf, e.localidade "
+				+ "FROM ENDERECO e "
+				+ "WHERE e.idusuario = " + endereco.getIdUsuario();
 		
 		try {
 			resultado = stmt.executeQuery(query);
 			while(resultado.next()) {
 				endereco.setIdEndereco(Integer.parseInt(resultado.getString(1)));
 				endereco.setIdUsuario(Integer.parseInt(resultado.getString(2)));
-				endereco.setRua(resultado.getString(3));
+				endereco.setLogradouro(resultado.getString(3));
 				endereco.setBairro(resultado.getString(4));
 				endereco.setNumero(Integer.parseInt(resultado.getString(5)));
 				endereco.setCep(resultado.getString(6));
-				endereco.setEstado(resultado.getString(7));
-				endereco.setCidade(resultado.getString(8));
+				endereco.setUf(resultado.getString(7));
+				endereco.setLocalidade(resultado.getString(8));
 			}
 		} catch (SQLException erro) {
 			System.out.println("Erro ao executar a query do método consultarEnderecoDAO");

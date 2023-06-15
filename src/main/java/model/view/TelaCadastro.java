@@ -42,6 +42,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.JRadioButton;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JCheckBox;
+import model.dao.*;
 
 public class TelaCadastro extends JFrame {
 
@@ -52,10 +54,13 @@ public class TelaCadastro extends JFrame {
 	private JTextField ruaCamp;
 	private JTextField bairroCamp;
 	private JTextField campNumero;
+	
     UsuarioController usuarioController = new UsuarioController();
     UsuarioVO usuario = new UsuarioVO();
     EnderecoVO endereco = new EnderecoVO();
+    EnderecoVO endPorCEP = new EnderecoVO();
     EnderecoController enderecoController = new EnderecoController();
+    ViaCEP viaCep = new ViaCEP();
     
 	private MaskFormatter mascaraCpf;
 	private MaskFormatter mascaraData;
@@ -86,10 +91,10 @@ public class TelaCadastro extends JFrame {
 	private JTextField campCidade;
 	private JNumberFormatField salarioCamp;
 	private JComboBox cbEstados;
-	private JRadioButton radioAceita;
-	private JRadioButton radioNaAceita;
 	private JLabel lblNewLabel_15;
 	private JLabel lblNewLabel_16;
+	private JCheckBox cbxAceitaTermos;
+	private JButton btnBuscarCEP;
 
 	/**
 	 * Launch the application.
@@ -121,7 +126,7 @@ public class TelaCadastro extends JFrame {
 		mascaraCEP = new MaskFormatter("#####-###");
 		mascaraCpf.setValueContainsLiteralCharacters(false);
 		
-		String[] listaEstados = {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS",
+		final String[] listaEstados = {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS",
 				 "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
 		
 		setTitle("Gerenciamento-Mensal | Cadastro");
@@ -135,39 +140,32 @@ public class TelaCadastro extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		radioAceita = new JRadioButton("Aceita os termos de cadastro");
-		radioAceita.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnSalvar.setEnabled(true);
-			}
-		});
-		radioAceita.setBackground(new Color(0, 255, 255));
-		radioAceita.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		radioAceita.setBounds(483, 114, 208, 23);
-		contentPane.add(radioAceita);
-		
-		radioNaAceita = new JRadioButton("Não aceita os termos de cadastro ");
-		radioNaAceita.setBackground(new Color(0, 255, 255));
-		radioNaAceita.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		radioNaAceita.setBounds(483, 140, 208, 23);
-		radioNaAceita.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnSalvar.setEnabled(true);
-			}
-		});
-		contentPane.add(radioNaAceita);
-		
 		ButtonGroup grupoAceite = new ButtonGroup();
-		grupoAceite.add(radioAceita);
-		grupoAceite.add(radioNaAceita);
 		
 		campoNome = new JTextField();
+		campoNome.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		campoNome.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		campoNome.setBounds(105, 24, 254, 20);
 		contentPane.add(campoNome);
 		campoNome.setColumns(10);
 		
+		cbxAceitaTermos = new JCheckBox("Aceita os termos de cadastro");
+		cbxAceitaTermos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnSalvar.setEnabled(true);
+				if(!cbxAceitaTermos.isSelected()) {
+					btnSalvar.setEnabled(false);
+				}
+			}
+		});
+		cbxAceitaTermos.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		cbxAceitaTermos.setBackground(new Color(0, 255, 255));
+		cbxAceitaTermos.setBorder(null);
+		cbxAceitaTermos.setBounds(520, 110, 194, 23);
+		contentPane.add(cbxAceitaTermos);
+		
 		cpfCamp = new JFormattedTextField(mascaraCpf);
+		cpfCamp.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		cpfCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		cpfCamp.setBounds(105, 67, 254, 20);
 		contentPane.add(cpfCamp);
@@ -199,6 +197,7 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		emailCamp = new JTextField();
+		emailCamp.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		emailCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		emailCamp.setBounds(105, 161, 254, 20);
 		contentPane.add(emailCamp);
@@ -220,6 +219,7 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(lblNewLabel_5);
 		
 		loginCamp = new JTextField();
+		loginCamp.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		loginCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		loginCamp.setBounds(105, 258, 143, 20);
 		contentPane.add(loginCamp);
@@ -259,17 +259,19 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(confirmCampSenha);
 		
 		ruaCamp = new JTextField();
+		ruaCamp.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		ruaCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		ruaCamp.setBounds(76, 350, 254, 20);
+		ruaCamp.setBounds(76, 432, 254, 20);
 		contentPane.add(ruaCamp);
 		ruaCamp.setColumns(10);
 		
 		lblNewLabel_9 = new JLabel("Rua :");
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_9.setBounds(20, 353, 46, 14);
+		lblNewLabel_9.setBounds(20, 435, 46, 14);
 		contentPane.add(lblNewLabel_9);
 		
 		bairroCamp = new JTextField();
+		bairroCamp.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		bairroCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		bairroCamp.setBounds(76, 394, 254, 20);
 		contentPane.add(bairroCamp);
@@ -281,27 +283,30 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(lblNewLabel_10);
 		
 		campNumero = new JTextField();
+		campNumero.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		campNumero.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		campNumero.setBounds(76, 437, 122, 20);
+		campNumero.setBounds(76, 474, 122, 20);
 		contentPane.add(campNumero);
 		campNumero.setColumns(10);
 		
 		lblNewLabel_11 = new JLabel("Número :");
 		lblNewLabel_11.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_11.setBounds(20, 440, 46, 14);
+		lblNewLabel_11.setBounds(20, 477, 46, 14);
 		contentPane.add(lblNewLabel_11);
 		
 		cepCamp = new JFormattedTextField(mascaraCEP);
+		cepCamp.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		cepCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		cepCamp.setBounds(76, 474, 122, 20);
+		cepCamp.setBounds(76, 350, 122, 20);
 		contentPane.add(cepCamp);
 		
 		lblNewLabel_12 = new JLabel("CEP : ");
 		lblNewLabel_12.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_12.setBounds(20, 477, 46, 14);
+		lblNewLabel_12.setBounds(20, 353, 46, 14);
 		contentPane.add(lblNewLabel_12);
 		
 	    campCidade = new JTextField();
+	    campCidade.setFont(new Font("Tahoma", Font.ITALIC, 11));
 	    campCidade.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		campCidade.setBounds(538, 394, 187, 20);
 		contentPane.add(campCidade);
@@ -340,12 +345,42 @@ public class TelaCadastro extends JFrame {
 				dispose();
 				TelaLogin tela = new TelaLogin();
 				tela.setVisible(true);
-				
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		btnNewButton.setBounds(257, 527, 115, 23);
 		contentPane.add(btnNewButton);
+		
+		btnBuscarCEP = new JButton("");
+		btnBuscarCEP.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				this.limparCampos();
+				
+				//Traz os dados do endereco via Cep/API
+				
+				endPorCEP = viaCep.gerarEnderecoViaCEP(cepCamp.getText());
+				
+				ruaCamp.setText(endPorCEP.getLogradouro());
+				campCidade.setText(endPorCEP.getLocalidade());
+				bairroCamp.setText(endPorCEP.getBairro());
+				listaEstados[0] += endPorCEP.getUf();
+				
+			}
+
+			private void limparCampos() {
+				
+				ruaCamp.setText("");
+				campCidade.setText("");
+				bairroCamp.setText("");
+				
+			}
+		});
+		btnBuscarCEP.setBackground(new Color(0, 255, 255));
+		btnBuscarCEP.setBorder(null);
+		btnBuscarCEP.setIcon(new ImageIcon(TelaCadastro.class.getResource("/icons/loupe.png")));
+		btnBuscarCEP.setBounds(201, 349, 24, 23);
+		contentPane.add(btnBuscarCEP);
 		
 		btnSalvar = new JButton("Cadastrar");
 		btnSalvar.setBorder(null);
@@ -353,6 +388,10 @@ public class TelaCadastro extends JFrame {
 		btnSalvar.setBackground(new Color(0, 255, 255));
 		btnSalvar.setEnabled(false);
 		
+		ruaCamp.setText(endPorCEP.getLogradouro());
+		campCidade.setText(endPorCEP.getLocalidade());
+		bairroCamp.setText(endPorCEP.getBairro());
+		listaEstados[0] += endPorCEP.getUf();
 		
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -403,10 +442,10 @@ public class TelaCadastro extends JFrame {
 				endereco.setIdUsuario(usuario.getIdUsuario());
 				endereco.setBairro(bairroCamp.getText());
 				endereco.setCep(cepCamp.getText());
-				endereco.setRua(ruaCamp.getText());
+				endereco.setLogradouro(ruaCamp.getText());
 				endereco.setNumero(Integer.parseInt(campNumero.getText()));
-				endereco.setCidade(campCidade.getText());
-				endereco.setEstado((String) cbEstados.getSelectedItem());
+				endereco.setLocalidade(campCidade.getText());
+				endereco.setUf((String) cbEstados.getSelectedItem());
 				
 				 //cadastramento no banco, chamando validacoes
 				try {
@@ -439,7 +478,6 @@ public class TelaCadastro extends JFrame {
 		btnSalvar.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		btnSalvar.setBounds(371, 527, 128, 23);
 		contentPane.add(btnSalvar);
-	
 		
 			}
 		}

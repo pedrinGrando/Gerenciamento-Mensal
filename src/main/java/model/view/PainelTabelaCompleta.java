@@ -53,7 +53,6 @@ public class PainelTabelaCompleta extends JPanel {
 		//Lista para armezenar os endereços consultados no banco
 		private ArrayList<TabelaVO> tabelas;
 		private String[] nomesColunas = { "Nome", "Mês", "Ano", "Total restante", "Saldo final" };
-		private JLabel lblNewLabel;
 		private TabelaSeletor tabSeletor = new TabelaSeletor();
 		private JLabel lblNewLabel_1;
 		private JComboBox cbMeses;
@@ -134,11 +133,6 @@ public class PainelTabelaCompleta extends JPanel {
 		btnFiltrar.setBounds(632, 22, 33, 23);
 		add(btnFiltrar);
 		
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(PainelTabelaCompleta.class.getResource("/icons/bank.png")));
-		lblNewLabel.setBounds(639, 460, 49, 24);
-		add(lblNewLabel);
-		
 		cbMeses = new JComboBox(meses);
 		cbMeses.setBorder(null);
 		cbMeses.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -163,7 +157,8 @@ public class PainelTabelaCompleta extends JPanel {
 		lblNewLabel_2.setBounds(281, 11, 46, 14);
 		add(lblNewLabel_2);
 		
-		JButton btnGerarPlanilha = new JButton("Gerar planilha");
+		JButton btnGerarPlanilha = new JButton("");
+		btnGerarPlanilha.setIcon(new ImageIcon(PainelTabelaCompleta.class.getResource("/icons/xls.png")));
 		btnGerarPlanilha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -188,7 +183,7 @@ public class PainelTabelaCompleta extends JPanel {
 		btnGerarPlanilha.setBorder(null);
 		btnGerarPlanilha.setBackground(new Color(0, 255, 255));
 		btnGerarPlanilha.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		btnGerarPlanilha.setBounds(493, 461, 135, 23);
+		btnGerarPlanilha.setBounds(625, 452, 40, 39);
 		add(btnGerarPlanilha);
 		
 		atualizarQuantidadePaginas();

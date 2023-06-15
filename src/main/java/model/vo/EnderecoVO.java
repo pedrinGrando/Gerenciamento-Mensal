@@ -4,24 +4,24 @@ public class EnderecoVO {
 
 	private int idEndereco;
 	private int idUsuario;
-	private String rua;
+	private String logradouro;
 	private String bairro;
 	private int numero;
 	private String cep;
-	private String estado;
-	private String cidade;
+	private String uf;
+	private String localidade;
 	
-	public EnderecoVO(int idEndereco, int idUsuario, String rua, String bairro, int numero, String cep, String estado,
-			String cidade) {
+	public EnderecoVO(int idEndereco, int idUsuario, String logradouro, String bairro, int numero, String cep,
+			String uf, String localidade) {
 		super();
 		this.idEndereco = idEndereco;
 		this.idUsuario = idUsuario;
-		this.rua = rua;
+		this.logradouro = logradouro;
 		this.bairro = bairro;
 		this.numero = numero;
 		this.cep = cep;
-		this.estado = estado;
-		this.cidade = cidade;
+		this.uf = uf;
+		this.localidade = localidade;
 	}
 
 	public EnderecoVO() {
@@ -44,12 +44,12 @@ public class EnderecoVO {
 		this.idUsuario = idUsuario;
 	}
 
-	public String getRua() {
-		return rua;
+	public String getLogradouro() {
+		return logradouro;
 	}
 
-	public void setRua(String rua) {
-		this.rua = rua;
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
 	}
 
 	public String getBairro() {
@@ -76,21 +76,20 @@ public class EnderecoVO {
 		this.cep = cep;
 	}
 
-	public String getEstado() {
-		return estado;
+	public String getUf() {
+		return uf;
 	}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
 
-	public String getCidade() {
-		return cidade;
+	public String getLocalidade() {
+		return localidade;
 	}
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
+	public void setLocalidade(String localidade) {
+		this.localidade = localidade;
 	}
-
 	
 }
