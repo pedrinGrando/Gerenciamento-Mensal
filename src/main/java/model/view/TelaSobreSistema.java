@@ -8,6 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.vo.UsuarioVO;
+
 import java.awt.Toolkit;
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -24,7 +27,7 @@ public class TelaSobreSistema extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			TelaSobreSistema dialog = new TelaSobreSistema();
+			TelaSobreSistema dialog = new TelaSobreSistema(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -35,7 +38,7 @@ public class TelaSobreSistema extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public TelaSobreSistema() {
+	public TelaSobreSistema(final UsuarioVO userLogado) {
 		setModal(true);
 		setTitle("Gerenciamento Mensal | Sobre o Sistema");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaSobreSistema.class.getResource("/icons/bank (1).png")));
@@ -56,6 +59,8 @@ public class TelaSobreSistema extends JDialog {
 			okButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					dispose();
+					MenuPrincipal menu = new MenuPrincipal(userLogado);
+					menu.setVisible(true);
 				}
 			});
 			okButton.setActionCommand("OK");

@@ -28,6 +28,7 @@ import model.vo.*;
 import controller.UsuarioController;
 import exceptions.CampoInvalidoException;
 import controller.EnderecoController;
+import model.dao.*;
 import model.view.*;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -54,6 +55,8 @@ public class PainelAlterarDados extends JPanel {
 	EnderecoVO endAtualizado = new EnderecoVO();
 	EnderecoController enderecoController = new EnderecoController();
 	DecimalFormat formato = new DecimalFormat("#,##0.00");
+	ViaCEP viaCep = new ViaCEP();
+	EnderecoVO endPorCEP = new EnderecoVO();
 	
 	private JTextField ruaCampo;
 	private JTextField campBairro;
@@ -73,6 +76,7 @@ public class PainelAlterarDados extends JPanel {
 	private JComponent lblCidade;
 	private JComponent lblNewLabel;
 	private JLabel lblNewLabel_7;
+	private JButton btnBuscarCep;
 
 	/**
 	 * Create the panel.
@@ -137,10 +141,29 @@ public class PainelAlterarDados extends JPanel {
 		cbEstados.setBounds(377, 154, 80, 22);
 		add(cbEstados);
 		
+		btnBuscarCep = new JButton("");
+		btnBuscarCep.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				endPorCEP = viaCep.gerarEnderecoViaCEP(cepCamp.getText());
+				
+				//insere os valores do cep
+				campBairro.setText(endPorCEP.getBairro());
+				ruaCampo.setText(endPorCEP.getLogradouro());
+				campCIdade.setText(endPorCEP.getLocalidade());
+				
+			}
+		});
+		btnBuscarCep.setBackground(new Color(0, 255, 255));
+		btnBuscarCep.setBorder(null);
+		btnBuscarCep.setIcon(new ImageIcon(PainelAlterarDados.class.getResource("/icons/loupe.png")));
+		btnBuscarCep.setBounds(114, 298, 37, 23);
+		add(btnBuscarCep);
+		
 		cepCamp = new JFormattedTextField(mascaraCEP);
 		cepCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		cepCamp.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		cepCamp.setBounds(377, 86, 102, 20);
+		cepCamp.setBounds(10, 299, 102, 20);
 		add(cepCamp);
 		cepCamp.setText("");
 		
@@ -176,7 +199,7 @@ public class PainelAlterarDados extends JPanel {
 		
 		campNumero = new JTextField();
 		campNumero.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		campNumero.setBounds(10, 412, 102, 20);
+		campNumero.setBounds(377, 86, 171, 20);
 		add(campNumero);
 		campNumero.setColumns(10);
 		
@@ -265,7 +288,7 @@ public class PainelAlterarDados extends JPanel {
 		ruaCampo = new JTextField();
 		ruaCampo.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		ruaCampo.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		ruaCampo.setBounds(10, 299, 217, 20);
+		ruaCampo.setBounds(10, 414, 217, 20);
 		add(ruaCampo);
 		ruaCampo.setColumns(10);
 		
@@ -273,7 +296,7 @@ public class PainelAlterarDados extends JPanel {
 		
 		lblRua = new JLabel("Rua ");
 		lblRua.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblRua.setBounds(10, 286, 46, 14);
+		lblRua.setBounds(10, 400, 46, 14);
 		add(lblRua);
 		
 		campBairro = new JTextField();
@@ -292,12 +315,12 @@ public class PainelAlterarDados extends JPanel {
 		
 		lblNumero = new JLabel("Número");
 		lblNumero.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNumero.setBounds(10, 400, 46, 14);
+		lblNumero.setBounds(377, 72, 46, 14);
 		add(lblNumero);
 		
 		lblCep = new JLabel("CEP");
 		lblCep.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblCep.setBounds(377, 72, 46, 14);
+		lblCep.setBounds(10, 287, 46, 14);
 		add(lblCep);
 		
 		lblEstado = new JLabel("Estado");
@@ -321,6 +344,7 @@ public class PainelAlterarDados extends JPanel {
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNewLabel_7.setBounds(377, 302, 102, 14);
 		add(lblNewLabel_7);
+		
 		
 	}
 }

@@ -291,14 +291,15 @@ public class MenuPrincipal extends JFrame {
 		mntmSobre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				    dispose();
 				   //Tela com informações sobre os istema sendo exibida em modal
-		           TelaSobreSistema tela = new TelaSobreSistema();
+		           TelaSobreSistema tela = new TelaSobreSistema(userOnline);
 		           tela.setVisible(true);
 				
 			}
 		});
 		mntmSobre.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-		mntmSobre.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/about.png")));
+		mntmSobre.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/about (1).png")));
 		mntmSobre.setBackground(new Color(255, 255, 255));
 		mnNewMenu_4.add(mntmSobre);
 		contentPane = new JPanel();
