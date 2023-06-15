@@ -79,7 +79,7 @@ public class TelaRecuperacaoSenha extends JFrame {
 		setTitle("Gerenciamento-Mensal | Recuperação de senha ");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaRecuperacaoSenha.class.getResource("/icons/bank.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 527, 463);
+		setBounds(100, 100, 480, 467);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 255, 255));
@@ -92,13 +92,14 @@ public class TelaRecuperacaoSenha extends JFrame {
 		mascaraCpf.setValueContainsLiteralCharacters(false);
 		
 		cpfDigitadoCamp = new JFormattedTextField(mascaraCpf);
+		cpfDigitadoCamp.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		cpfDigitadoCamp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		cpfDigitadoCamp.setBounds(126, 100, 254, 20);
+		cpfDigitadoCamp.setBounds(94, 106, 254, 20);
 		contentPane.add(cpfDigitadoCamp);
 		
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(TelaRecuperacaoSenha.class.getResource("/icons/bank.png")));
-		lblNewLabel.setBounds(479, 394, 32, 30);
+		lblNewLabel.setBounds(432, 394, 32, 30);
 		contentPane.add(lblNewLabel);
 		
 		JPanel panel = new JPanel();
@@ -108,17 +109,18 @@ public class TelaRecuperacaoSenha extends JFrame {
 		
 		lblNewLabel_1 = new JLabel("Nome completo : ");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_1.setBounds(200, 22, 104, 14);
+		lblNewLabel_1.setBounds(168, 28, 104, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		lblNewLabel_2 = new JLabel("Informe seu CPF : ");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
-		lblNewLabel_2.setBounds(204, 81, 241, 14);
+		lblNewLabel_2.setBounds(172, 87, 241, 14);
 		contentPane.add(lblNewLabel_2);
 		
 		campNome = new JTextField();
+		campNome.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		campNome.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		campNome.setBounds(126, 47, 254, 20);
+		campNome.setBounds(94, 53, 254, 20);
 		contentPane.add(campNome);
 		campNome.setColumns(10);
 		
@@ -177,7 +179,7 @@ public class TelaRecuperacaoSenha extends JFrame {
 					
 					// realiza troca de senha 
 					btnSalvar.setEnabled(true);
-					lblConsultado.setText("Tudo certo " + usuarioConsultado.getLogin() + "! Agora altere sua senha.");
+					lblConsultado.setText("Tudo certo " + usuarioConsultado.getLogin() + " ! Agora altere sua senha.");
 					
 				} else {
 					
@@ -191,7 +193,7 @@ public class TelaRecuperacaoSenha extends JFrame {
 		btnChecarSenha.setIcon(new ImageIcon(TelaRecuperacaoSenha.class.getResource("/icons/padlock.png")));
 		btnChecarSenha.setBackground(new Color(0, 255, 255));
 		btnChecarSenha.setBorder(null);
-		btnChecarSenha.setBounds(390, 93, 57, 44);
+		btnChecarSenha.setBounds(358, 87, 32, 46);
 		contentPane.add(btnChecarSenha);
 		
 		btnSalvar = new JButton("");
@@ -233,7 +235,7 @@ public class TelaRecuperacaoSenha extends JFrame {
 		btnSalvar.setBorder(null);
 		btnSalvar.setBackground(new Color(0, 255, 255));
 		btnSalvar.setIcon(new ImageIcon(TelaRecuperacaoSenha.class.getResource("/icons/diskette.png")));
-		btnSalvar.setBounds(323, 314, 57, 44);
+		btnSalvar.setBounds(323, 318, 57, 44);
 		contentPane.add(btnSalvar);
 		
 		btnNewButton = new JButton("");

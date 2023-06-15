@@ -18,15 +18,14 @@ public class GeradorPlanilha {
 	
 	public String gerarPlanilhaClientes(List<TabelaVO> tabelas, String destinoArquivo) {
 		HSSFWorkbook arquivoExcel = new HSSFWorkbook();
-		HSSFSheet abaPlanilha = arquivoExcel.createSheet("Clientes");
+		HSSFSheet abaPlanilha = arquivoExcel.createSheet("Tabela");
 		
 		HSSFRow linhaCabecalho = abaPlanilha.createRow(0);
 		linhaCabecalho.createCell(0).setCellValue("Nome");
-		linhaCabecalho.createCell(1).setCellValue("CPF");
-		linhaCabecalho.createCell(2).setCellValue("Data de Nascimento");
-		linhaCabecalho.createCell(3).setCellValue("Endereço resumido (Cidade - UF)");
-		linhaCabecalho.createCell(4).setCellValue("Quantidade de telefones");
-		linhaCabecalho.createCell(5).setCellValue("Ativo?");
+		linhaCabecalho.createCell(1).setCellValue("Mês");
+		linhaCabecalho.createCell(2).setCellValue("Ano");
+		linhaCabecalho.createCell(3).setCellValue("Total restante");
+		linhaCabecalho.createCell(4).setCellValue("Saldo final");
 		
 		int contadorLinhas = 1;
 		for(TabelaVO t: tabelas) {

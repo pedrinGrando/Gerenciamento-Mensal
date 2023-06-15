@@ -286,6 +286,21 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu_4.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/info.png")));
 		mnNewMenu_4.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
 		menuBar.add(mnNewMenu_4);
+		
+		JMenuItem mntmSobre = new JMenuItem("Sobre o sistema ");
+		mntmSobre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				   //Tela com informações sobre os istema sendo exibida em modal
+		           TelaSobreSistema tela = new TelaSobreSistema();
+		           tela.setVisible(true);
+				
+			}
+		});
+		mntmSobre.setFont(new Font("Segoe UI", Font.ITALIC, 12));
+		mntmSobre.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/about.png")));
+		mntmSobre.setBackground(new Color(255, 255, 255));
+		mnNewMenu_4.add(mntmSobre);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

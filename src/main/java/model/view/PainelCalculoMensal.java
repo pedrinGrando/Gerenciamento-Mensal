@@ -197,7 +197,7 @@ public class PainelCalculoMensal extends JPanel {
 		});
 		btn_salvarDados.setBackground(new Color(0, 255, 255));
 		btn_salvarDados.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
-		btn_salvarDados.setBounds(624, 430, 53, 29);
+		btn_salvarDados.setBounds(624, 440, 53, 29);
 		add(btn_salvarDados);
 		
 		lblNewLabel = new JLabel("Cálculo Mensal do mês de : ");
@@ -218,7 +218,7 @@ public class PainelCalculoMensal extends JPanel {
 		
 	    panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 0));
-		panel.setBounds(0, 185, 677, 10);
+		panel.setBounds(0, 185, 721, 10);
 		add(panel);
 		
 		
