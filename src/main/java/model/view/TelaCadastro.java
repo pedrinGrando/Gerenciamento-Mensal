@@ -33,11 +33,15 @@ import exceptions.CpfJaUtilizadoException;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 import java.awt.Color;
+
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.JRadioButton;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class TelaCadastro extends JFrame {
 
@@ -132,6 +136,11 @@ public class TelaCadastro extends JFrame {
 		contentPane.setLayout(null);
 		
 		radioAceita = new JRadioButton("Aceita os termos de cadastro");
+		radioAceita.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnSalvar.setEnabled(true);
+			}
+		});
 		radioAceita.setBackground(new Color(0, 255, 255));
 		radioAceita.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		radioAceita.setBounds(483, 114, 208, 23);
@@ -141,8 +150,16 @@ public class TelaCadastro extends JFrame {
 		radioNaAceita.setBackground(new Color(0, 255, 255));
 		radioNaAceita.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		radioNaAceita.setBounds(483, 140, 208, 23);
+		radioNaAceita.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnSalvar.setEnabled(true);
+			}
+		});
 		contentPane.add(radioNaAceita);
 		
+		ButtonGroup grupoAceite = new ButtonGroup();
+		grupoAceite.add(radioAceita);
+		grupoAceite.add(radioNaAceita);
 		
 		campoNome = new JTextField();
 		campoNome.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -334,7 +351,7 @@ public class TelaCadastro extends JFrame {
 		btnSalvar.setBorder(null);
 		btnSalvar.setIcon(new ImageIcon(TelaCadastro.class.getResource("/icons/diskette.png")));
 		btnSalvar.setBackground(new Color(0, 255, 255));
-		//btnSalvar.setEnabled(false);
+		btnSalvar.setEnabled(false);
 		
 		
 		btnSalvar.addActionListener(new ActionListener() {
@@ -362,9 +379,11 @@ public class TelaCadastro extends JFrame {
 				usuario.setDataNasci(dataNasciCamp.getDate());
 			    usuario.setLogin(loginCamp.getText());
 			    
-			    valor1 = salarioCamp.getText().replace(",", ".");
+			    valor1 = salarioCamp.getText().replace(".", "");
+			    valor1 = valor1.replace(",", ".");
 			    
 			    usuario.setSalariol(Double.parseDouble(valor1.replace("R$", "")));
+			    
 			    //METODO PARA VERIFICAR SENHA 
 			    this.verificarSenhasDigitadas(campSenha.getText(), confirmCampSenha.getText());
 			    
