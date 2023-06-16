@@ -5,6 +5,8 @@ import model.vo.UsuarioVO;
 import model.bo.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import exceptions.CampoInvalidoException;
 import model.dao.*;
 
 public class DespesaController {
@@ -17,9 +19,28 @@ public class DespesaController {
 		return despBO.calcularDescontoTotalBO(userOnline);
 	}
 
-	public DespesaVO consultarDespesaController(String string, UsuarioVO userOnline) {
+	public DespesaVO consultarDespesaController(String string, UsuarioVO userOnline) throws CampoInvalidoException {
+		
+		this.validarCamposDespesa(string);
 		
 		return despBO.consultarDespesaBO(string, userOnline);
+	}
+
+	private void validarCamposDespesa(String string) throws CampoInvalidoException {
+		
+		String mensagem = "";
+		
+		if (string.trim().isEmpty() || string.trim().isBlank()) {
+			
+			mensagem = "O campo nome é obrigatório!";
+		}
+		
+		if (!mensagem.isEmpty()) {
+			
+			throw new CampoInvalidoException(mensagem);
+			
+		}
+		
 	}
 
 	public DespesaVO inserirDespesaController(DespesaVO despesa) {
