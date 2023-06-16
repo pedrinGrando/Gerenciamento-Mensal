@@ -39,9 +39,9 @@ public class TelaRecuperacaoSenha extends JFrame {
 	private JFormattedTextField cpfDigitadoCamp;
 	private MaskFormatter mascaraCpf;
 
-	
     UsuarioVO usuarioConsultado = new UsuarioVO();
     UsuarioController userController = new UsuarioController();
+    
     boolean updatePass = false;
 	private JLabel lblIcon;
 	private JLabel visaoNome;
@@ -52,6 +52,7 @@ public class TelaRecuperacaoSenha extends JFrame {
 	private JButton btnSalvar;
 	private JButton btnChecarSenha;
 	private JButton btnVoltar;
+	private JPanel panel;
 	
     
 
@@ -102,7 +103,7 @@ public class TelaRecuperacaoSenha extends JFrame {
 		lblIcon.setBounds(432, 394, 32, 30);
 		contentPane.add(lblIcon);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 0));
 		panel.setBounds(0, 193, 521, 10);
 		contentPane.add(panel);
@@ -253,8 +254,6 @@ public class TelaRecuperacaoSenha extends JFrame {
 		btnVoltar.setIcon(new ImageIcon(TelaRecuperacaoSenha.class.getResource("/icons/back.png")));
 		btnVoltar.setBounds(-11, 401, 57, 23);
 		contentPane.add(btnVoltar);
-		
-	    
 		
 	}
 }

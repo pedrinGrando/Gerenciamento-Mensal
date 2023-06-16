@@ -42,6 +42,8 @@ public class MenuPrincipal extends JFrame {
 	
 	UsuarioController usuarioController = new UsuarioController();
 
+	private JMenuItem mntmTabelaCompleta;
+
 	/**
 	 * Launch the application.
 	 */
@@ -268,7 +270,7 @@ public class MenuPrincipal extends JFrame {
 		mntmMesEsp.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		mnNewMenu_3.add(mntmMesEsp);
 		
-		JMenuItem mntmTabelaCompleta = new JMenuItem("Tabela completa");
+	    mntmTabelaCompleta = new JMenuItem("Tabela completa");
 		mntmTabelaCompleta.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/cells.png")));
 		mntmTabelaCompleta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -328,5 +330,6 @@ public class MenuPrincipal extends JFrame {
 		lblTItuloPrincipal.setFont(new Font("Source Code Pro Black", Font.ITALIC, 11));
 		lblTItuloPrincipal.setBounds(122, 356, 449, 14);
 		contentPane.add(lblTItuloPrincipal);
+		
 	}
 }

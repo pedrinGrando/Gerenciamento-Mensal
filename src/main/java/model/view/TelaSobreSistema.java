@@ -16,12 +16,13 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import model.vo.*;
 
 public class TelaSobreSistema extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JButton okButton;
-
+	
 	/**
 	 * Launch the application.
 	 */

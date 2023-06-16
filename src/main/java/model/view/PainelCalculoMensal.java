@@ -220,7 +220,5 @@ public class PainelCalculoMensal extends JPanel {
 		panel.setBackground(new Color(0, 0, 0));
 		panel.setBounds(0, 185, 721, 10);
 		add(panel);
-		
-		
 	}
 }

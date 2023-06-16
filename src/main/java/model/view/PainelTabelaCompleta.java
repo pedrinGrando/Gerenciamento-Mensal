@@ -228,9 +228,7 @@ public class PainelTabelaCompleta extends JPanel {
 		if(totalRegistros % TAMANHO_PAGINA > 0) { 
 			totalPaginas++;
 		}
-		
 	}
-
 	 protected void buscarTabelaComFiltro(UsuarioVO userOnline) {
 		tabSeletor = new TabelaSeletor();
 		tabSeletor.setLimite(TAMANHO_PAGINA);

@@ -32,7 +32,6 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
 
-
 public class PainelConsultarDespesa extends JPanel {
 	private JComponent btnNewButton_1;
 	
@@ -151,6 +150,5 @@ public class PainelConsultarDespesa extends JPanel {
 		lblNewLabel_2.setIcon(new ImageIcon(PainelConsultarDespesa.class.getResource("/icons/bank.png")));
 		lblNewLabel_2.setBounds(620, 452, 32, 32);
 		add(lblNewLabel_2);
-		
 	}
 }

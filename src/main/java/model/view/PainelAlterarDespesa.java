@@ -40,6 +40,7 @@ public class PainelAlterarDespesa extends JPanel {
 	DespesaVO despesaVO = new DespesaVO();
 	DespesaVO despesaAtualizar = new DespesaVO();
 	DecimalFormat formato = new DecimalFormat("#,##0.00");
+	private JPanel panel;
 
 	/**
 	 * Create the panel.
@@ -58,11 +59,10 @@ public class PainelAlterarDespesa extends JPanel {
 		lblTitulo.setBounds(223, 11, 242, 19);
 		add(lblTitulo);
 		
-		JPanel panel = new JPanel();
+	    panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 0));
 		panel.setBounds(0, 225, 733, 10);
 		add(panel);
-		
 		
 		visaoTItulo = new JLabel("Seleciona a despesa que deseja alterar  "+userOnline.getLogin());
 		visaoTItulo.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -165,6 +165,5 @@ public class PainelAlterarDespesa extends JPanel {
 		btnEditar.setBackground(new Color(0, 255, 255));
 		btnEditar.setBounds(219, 309, 46, 23);
 		add(btnEditar);
-		
 	}
 }

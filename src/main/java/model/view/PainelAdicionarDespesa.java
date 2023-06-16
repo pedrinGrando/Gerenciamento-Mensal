@@ -41,7 +41,6 @@ public class PainelAdicionarDespesa extends JPanel {
 	private final JLabel lblIcon = new JLabel("");
 	DecimalFormat formato = new DecimalFormat("#,##0.00");
 	
-
 	/**
 	 * Create the panel.
 	 */

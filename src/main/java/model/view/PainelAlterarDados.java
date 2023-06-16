@@ -42,6 +42,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
 public class PainelAlterarDados extends JPanel {
+	
 	private JTextField novoNome_camp;
 	private JTextField novoEmail_camp;
 	private JTextField novoUser_camp;
@@ -340,18 +341,15 @@ public class PainelAlterarDados extends JPanel {
 		lblCidade.setBounds(377, 187, 46, 14);
 		add(lblCidade);
 		
-		
 		visaoSenha = new JLabel("Senha atual : ");
 		visaoSenha.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		visaoSenha.setBounds(377, 248, 102, 14);
 		add(visaoSenha);
 		
-		
 		visaoNovaSenha = new JLabel("Nova senha : ");
 		visaoNovaSenha.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		visaoNovaSenha.setBounds(377, 302, 102, 14);
 		add(visaoNovaSenha);
-		
 		
 	}
 }

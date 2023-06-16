@@ -23,7 +23,6 @@ import model.vo.*;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
-
 public class PainelRemoverDespesa extends JPanel {
 
 	private JTextField nomeDespesa_camp;
@@ -89,7 +88,6 @@ public class PainelRemoverDespesa extends JPanel {
 		lblIcon.setIcon(new ImageIcon(PainelRemoverDespesa.class.getResource("/icons/bank.png")));
 		lblIcon.setBounds(636, 430, 41, 34);
 		add(lblIcon);
-		
     }
 }
 

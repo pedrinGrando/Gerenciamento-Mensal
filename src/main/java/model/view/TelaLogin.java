@@ -45,17 +45,17 @@ public class TelaLogin extends JFrame {
 	 
 	 UsuarioVO userOnline = new UsuarioVO();
 	
-	private JPanel contentPane;
-	private JTextField loginField;
-	private JPasswordField senhaField;
-	private JButton btn_entrar;
-	private JLabel lblTitulo;
-	private Label visaoUser;
-	private Label visaoPass;
-	private JButton btnCadastrar;
-	private JLabel lblSobre;
-	private JPanel panel;
-	private JButton btnRecuperacaoSenha;
+		private JPanel contentPane;
+		private JTextField loginField;
+		private JPasswordField senhaField;
+		private JButton btn_entrar;
+		private JLabel lblTitulo;
+		private Label visaoUser;
+		private Label visaoPass;
+		private JButton btnCadastrar;
+		private JLabel lblSobre;
+		private JPanel panel;
+		private JButton btnRecuperacaoSenha;
 
 	/**
 	 * Launch the application.
