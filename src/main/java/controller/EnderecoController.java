@@ -4,15 +4,19 @@ import model.vo.EnderecoVO;
 import model.vo.TabelaVO;
 import model.vo.UsuarioVO;
 
+import java.net.SocketException;
 import java.util.ArrayList;
 
 import exceptions.CampoInvalidoException;
+import exceptions.EnderecoInvalidoException;
 import model.bo.*;
+import model.dao.ViaCEP;
 import model.seletor.TabelaSeletor;
 
 public class EnderecoController {
 
 	EnderecoBO enderecoBO = new EnderecoBO();
+	ViaCEP viaCep = new ViaCEP();
 	
 	public EnderecoVO cadastrarEnderecoController(EnderecoVO endereco) throws CampoInvalidoException {
 	
@@ -56,6 +60,31 @@ public class EnderecoController {
 	public EnderecoVO consultarEnderecoPorId(EnderecoVO endereco) {
 		
 		return enderecoBO.consultarEnderecoBO(endereco);
+	}
+	
+	public EnderecoVO buscarViaCepController(String cep) throws EnderecoInvalidoException, SocketException {
+		
+		this.validarCEP(cep);
+		return viaCep.gerarEnderecoViaCEP(cep);
+		
+	}
+
+	private void validarCEP(String cep) throws EnderecoInvalidoException, SocketException {
+		
+		String mensagemValidacao = "";
+		
+		if (cep.trim().isEmpty() || cep.trim().isBlank()) {
+			mensagemValidacao = "Endereço não encontrado!";
+		} 
+		
+		if (cep == null) {
+			mensagemValidacao = "Endereço não encontrado!";
+		}
+		
+		if(!mensagemValidacao.isEmpty()) {
+			throw new SocketException(mensagemValidacao);
+		}
+		
 	}
 
 

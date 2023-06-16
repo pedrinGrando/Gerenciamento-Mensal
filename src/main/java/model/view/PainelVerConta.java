@@ -61,7 +61,7 @@ public class PainelVerConta extends JPanel {
 	private JLabel lblRua;
 	private JLabel telaCep;
 	private JLabel lblCEP;
-	private JLabel lblNewLabel;
+	private JLabel lblIcon;
 	private JLabel telaNumero;
 	private JLabel lblNumero;
 	
@@ -223,10 +223,10 @@ public class PainelVerConta extends JPanel {
 		
 		lblCEP.setText(endereco.getCep());
 		
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(PainelVerConta.class.getResource("/icons/bank.png")));
-		lblNewLabel.setBounds(661, 447, 105, 55);
-		add(lblNewLabel);
+		lblIcon = new JLabel("");
+		lblIcon.setIcon(new ImageIcon(PainelVerConta.class.getResource("/icons/bank.png")));
+		lblIcon.setBounds(661, 447, 105, 55);
+		add(lblIcon);
 
 	}
 }

@@ -29,16 +29,16 @@ import javax.swing.border.BevelBorder;
 
 public class PainelAdicionarDespesa extends JPanel {
 	
-	private JLabel lblNewLabel_1;
+	private JLabel visaoTitulo;
 	private JButton btnNewButton;
 	private JTextField nomeDespesa_camp;
 	private JNumberFormatField valorDespesaCamp;
-	private JLabel lblNewLabel_3;
-	private JLabel lblNewLabel_4;
+	private JLabel visaoNome;
+	private JLabel visaoValor;
 	
 	DespesaController despController = new DespesaController();
 	DespesaVO despesa = new DespesaVO();
-	private final JLabel lblNewLabel = new JLabel("");
+	private final JLabel lblIcon = new JLabel("");
 	DecimalFormat formato = new DecimalFormat("#,##0.00");
 	
 
@@ -50,10 +50,10 @@ public class PainelAdicionarDespesa extends JPanel {
 
 		setLayout(null);
 		
-		lblNewLabel_1 = new JLabel(" Inserira os dados da despesa nova  ");
-		lblNewLabel_1.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 14));
-		lblNewLabel_1.setBounds(115, 36, 253, 14);
-		add(lblNewLabel_1);
+		visaoTitulo = new JLabel(" Inserira os dados da despesa nova  ");
+		visaoTitulo.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 14));
+		visaoTitulo.setBounds(115, 36, 253, 14);
+		add(visaoTitulo);
 		
 		nomeDespesa_camp = new JTextField();
 		nomeDespesa_camp.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -67,15 +67,15 @@ public class PainelAdicionarDespesa extends JPanel {
 		add(valorDespesaCamp);
 		valorDespesaCamp.setColumns(10);
 		
-		lblNewLabel_3 = new JLabel("Nome para a despesa : ");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
-		lblNewLabel_3.setBounds(20, 100, 121, 14);
-		add(lblNewLabel_3);
+		visaoNome = new JLabel("Nome para a despesa : ");
+		visaoNome.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
+		visaoNome.setBounds(20, 100, 121, 14);
+		add(visaoNome);
 		
-		lblNewLabel_4 = new JLabel("Valor : ");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
-		lblNewLabel_4.setBounds(89, 149, 106, 14);
-		add(lblNewLabel_4);
+		visaoValor = new JLabel("Valor : ");
+		visaoValor.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
+		visaoValor.setBounds(89, 149, 106, 14);
+		add(visaoValor);
 		
 		
 		JButton btn_inserir_camp = new JButton(" Inserir ");
@@ -117,9 +117,9 @@ public class PainelAdicionarDespesa extends JPanel {
 		btn_inserir_camp.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		btn_inserir_camp.setBounds(142, 177, 140, 31);
 		add(btn_inserir_camp);
-		lblNewLabel.setIcon(new ImageIcon(PainelAdicionarDespesa.class.getResource("/icons/bank.png")));
-		lblNewLabel.setBounds(611, 457, 36, 31);
-		add(lblNewLabel);
+		lblIcon.setIcon(new ImageIcon(PainelAdicionarDespesa.class.getResource("/icons/bank.png")));
+		lblIcon.setBounds(611, 457, 36, 31);
+		add(lblIcon);
 		
 	}
 

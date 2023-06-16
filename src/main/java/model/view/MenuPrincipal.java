@@ -180,8 +180,8 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Editar ");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
+		JMenuItem mntmEditarDesp = new JMenuItem("Editar ");
+		mntmEditarDesp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				painelAlterarDespesa = new PainelAlterarDespesa(userOnline);
@@ -190,10 +190,10 @@ public class MenuPrincipal extends JFrame {
 				
 			}
 		});
-		mntmNewMenuItem.setBackground(new Color(255, 255, 255));
-		mntmNewMenuItem.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/pencil.png")));
-		mntmNewMenuItem.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-		mnNewMenu_2.add(mntmNewMenuItem);
+		mntmEditarDesp.setBackground(new Color(255, 255, 255));
+		mntmEditarDesp.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/pencil.png")));
+		mntmEditarDesp.setFont(new Font("Segoe UI", Font.ITALIC, 12));
+		mnNewMenu_2.add(mntmEditarDesp);
 		mntmConsultarDesp.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		mnNewMenu_2.add(mntmConsultarDesp);
 		
@@ -314,19 +314,19 @@ public class MenuPrincipal extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Made by Pedro A/Gabriel (48988471534)");
-		lblNewLabel.setFont(new Font("Yu Gothic UI", Font.ITALIC, 9));
-		lblNewLabel.setBounds(275, 11, 299, 14);
-		panel.add(lblNewLabel);
+		JLabel lblContato = new JLabel("Made by Pedro A/Gabriel (48988471534)");
+		lblContato.setFont(new Font("Yu Gothic UI", Font.ITALIC, 9));
+		lblContato.setBounds(275, 11, 299, 14);
+		panel.add(lblContato);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/bankColor2.png")));
-		lblNewLabel_1.setBounds(206, 44, 275, 326);
-		contentPane.add(lblNewLabel_1);
+		JLabel lblIconPrincipal = new JLabel("");
+		lblIconPrincipal.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/bankColor2.png")));
+		lblIconPrincipal.setBounds(206, 44, 275, 326);
+		contentPane.add(lblIconPrincipal);
 		
-		JLabel lblNewLabel_2 = new JLabel("Sistema para gerenciamento de despesas mensais individuais ");
-		lblNewLabel_2.setFont(new Font("Source Code Pro Black", Font.ITALIC, 11));
-		lblNewLabel_2.setBounds(122, 356, 449, 14);
-		contentPane.add(lblNewLabel_2);
+		JLabel lblTItuloPrincipal = new JLabel("Sistema para gerenciamento de despesas mensais individuais ");
+		lblTItuloPrincipal.setFont(new Font("Source Code Pro Black", Font.ITALIC, 11));
+		lblTItuloPrincipal.setBounds(122, 356, 449, 14);
+		contentPane.add(lblTItuloPrincipal);
 	}
 }

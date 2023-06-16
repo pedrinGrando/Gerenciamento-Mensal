@@ -54,7 +54,7 @@ public class PainelTabelaCompleta extends JPanel {
 		private ArrayList<TabelaVO> tabelas;
 		private String[] nomesColunas = { "Nome", "Mês", "Ano", "Total restante", "Saldo final" };
 		private TabelaSeletor tabSeletor = new TabelaSeletor();
-		private JLabel lblNewLabel_1;
+		private JLabel lblMesFiltro;
 		private JComboBox cbMeses;
 		private JButton btnFiltrar;
 		private final int TAMANHO_PAGINA = 5;
@@ -140,10 +140,10 @@ public class PainelTabelaCompleta extends JPanel {
 		cbMeses.setBounds(143, 22, 100, 22);
 		add(cbMeses);
 		
-		lblNewLabel_1 = new JLabel("Mês");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_1.setBounds(143, 11, 46, 14);
-		add(lblNewLabel_1);
+		lblMesFiltro = new JLabel("Mês");
+		lblMesFiltro.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblMesFiltro.setBounds(143, 11, 46, 14);
+		add(lblMesFiltro);
 		
 		cbAnos = new JComboBox(anos);
 		cbAnos.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -152,10 +152,10 @@ public class PainelTabelaCompleta extends JPanel {
 		cbAnos.setBounds(281, 22, 91, 22);
 		add(cbAnos);
 		
-		JLabel lblNewLabel_2 = new JLabel("Ano");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_2.setBounds(281, 11, 46, 14);
-		add(lblNewLabel_2);
+		JLabel lblAnoFiltro = new JLabel("Ano");
+		lblAnoFiltro.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblAnoFiltro.setBounds(281, 11, 46, 14);
+		add(lblAnoFiltro);
 		
 		JButton btnGerarPlanilha = new JButton("");
 		btnGerarPlanilha.setIcon(new ImageIcon(PainelTabelaCompleta.class.getResource("/icons/xls.png")));

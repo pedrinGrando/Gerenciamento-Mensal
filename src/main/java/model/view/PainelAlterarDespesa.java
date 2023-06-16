@@ -28,13 +28,13 @@ public class PainelAlterarDespesa extends JPanel {
 	
 	private JTextField campNome;
 	private JNumberFormatField campValor;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
+	private JLabel lblIcon;
+	private JLabel lblTitulo;
+	private JLabel visaoTItulo;
 	private JComboBox cbDespesas;
-	private JLabel lblNewLabel_3;
-	private JLabel lblNewLabel_4;
-	private JButton btnNewButton;
+	private JLabel visaoNome;
+	private JLabel visaoValor;
+	private JButton btnEditar;
 	
 	DespesaController despController = new DespesaController();
 	DespesaVO despesaVO = new DespesaVO();
@@ -48,15 +48,15 @@ public class PainelAlterarDespesa extends JPanel {
 		setBackground(new Color(0, 255, 255));
 		setLayout(null);
 		
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(PainelAlterarDespesa.class.getResource("/icons/bank.png")));
-		lblNewLabel.setBounds(650, 505, 31, 39);
-		add(lblNewLabel);
+		lblIcon = new JLabel("");
+		lblIcon.setIcon(new ImageIcon(PainelAlterarDespesa.class.getResource("/icons/bank.png")));
+		lblIcon.setBounds(650, 505, 31, 39);
+		add(lblIcon);
 		
-		lblNewLabel_1 = new JLabel("Atualização de despesa ");
-		lblNewLabel_1.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 13));
-		lblNewLabel_1.setBounds(223, 11, 242, 19);
-		add(lblNewLabel_1);
+		lblTitulo = new JLabel("Atualização de despesa ");
+		lblTitulo.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 13));
+		lblTitulo.setBounds(223, 11, 242, 19);
+		add(lblTitulo);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 0));
@@ -64,10 +64,10 @@ public class PainelAlterarDespesa extends JPanel {
 		add(panel);
 		
 		
-		lblNewLabel_2 = new JLabel("Seleciona a despesa que deseja alterar  "+userOnline.getLogin());
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_2.setBounds(21, 62, 278, 14);
-		add(lblNewLabel_2);
+		visaoTItulo = new JLabel("Seleciona a despesa que deseja alterar  "+userOnline.getLogin());
+		visaoTItulo.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		visaoTItulo.setBounds(21, 62, 278, 14);
+		add(visaoTItulo);
 		
 		List<DespesaVO> despesasCadastradas = despController.consultarTodosController(userOnline);
 		
@@ -121,19 +121,19 @@ public class PainelAlterarDespesa extends JPanel {
 		btnConsultar.setBounds(376, 58, 31, 19);
 		add(btnConsultar);
 		
-		lblNewLabel_3 = new JLabel("Nome : ");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_3.setBounds(35, 274, 59, 14);
-		add(lblNewLabel_3);
+		visaoNome = new JLabel("Nome : ");
+		visaoNome.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		visaoNome.setBounds(35, 274, 59, 14);
+		add(visaoNome);
 		
-		lblNewLabel_4 = new JLabel("Valor : ");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_4.setBounds(35, 315, 59, 14);
-		add(lblNewLabel_4);
+		visaoValor = new JLabel("Valor : ");
+		visaoValor.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		visaoValor.setBounds(35, 315, 59, 14);
+		add(visaoValor);
 		
 		
-		btnNewButton = new JButton("");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnEditar = new JButton("");
+		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				boolean att = false;
@@ -160,11 +160,11 @@ public class PainelAlterarDespesa extends JPanel {
 				
 			}
 		});
-		btnNewButton.setIcon(new ImageIcon(PainelAlterarDespesa.class.getResource("/icons/diskette.png")));
-		btnNewButton.setBorder(null);
-		btnNewButton.setBackground(new Color(0, 255, 255));
-		btnNewButton.setBounds(219, 309, 46, 23);
-		add(btnNewButton);
+		btnEditar.setIcon(new ImageIcon(PainelAlterarDespesa.class.getResource("/icons/diskette.png")));
+		btnEditar.setBorder(null);
+		btnEditar.setBackground(new Color(0, 255, 255));
+		btnEditar.setBounds(219, 309, 46, 23);
+		add(btnEditar);
 		
 	}
 }

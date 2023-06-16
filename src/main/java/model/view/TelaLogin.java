@@ -49,11 +49,11 @@ public class TelaLogin extends JFrame {
 	private JTextField loginField;
 	private JPasswordField senhaField;
 	private JButton btn_entrar;
-	private JLabel lblNewLabel;
-	private Label label;
-	private Label label_1;
-	private JButton btnNewButton_1;
-	private JLabel lblNewLabel_2;
+	private JLabel lblTitulo;
+	private Label visaoUser;
+	private Label visaoPass;
+	private JButton btnCadastrar;
+	private JLabel lblSobre;
 	private JPanel panel;
 	private JButton btnRecuperacaoSenha;
 
@@ -93,15 +93,15 @@ public class TelaLogin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		label = new Label("Usuário :");
-		label.setFont(new Font("Dialog", Font.ITALIC, 10));
-		label.setBounds(113, 149, 62, 12);
-		contentPane.add(label);
+		visaoUser = new Label("Usuário :");
+		visaoUser.setFont(new Font("Dialog", Font.ITALIC, 10));
+		visaoUser.setBounds(113, 149, 62, 12);
+		contentPane.add(visaoUser);
 		
-        label_1 = new Label("Senha :");
-		label_1.setFont(new Font("Dialog", Font.ITALIC, 10));
-		label_1.setBounds(113, 167, 62, 27);
-		contentPane.add(label_1);
+        visaoPass = new Label("Senha :");
+		visaoPass.setFont(new Font("Dialog", Font.ITALIC, 10));
+		visaoPass.setBounds(113, 167, 62, 27);
+		contentPane.add(visaoPass);
 		
 		loginField = new JTextField();
 		loginField.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -207,15 +207,15 @@ public class TelaLogin extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		lblNewLabel = new JLabel("Entre com suas credenciais");
-		lblNewLabel.setBounds(108, 47, 319, 14);
-		panel.add(lblNewLabel);
-		lblNewLabel.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 18));
+		lblTitulo = new JLabel("Entre com suas credenciais");
+		lblTitulo.setBounds(108, 47, 319, 14);
+		panel.add(lblTitulo);
+		lblTitulo.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 18));
 		
-		btnNewButton_1 = new JButton("Cadastro");
-		btnNewButton_1.setIcon(new ImageIcon(TelaLogin.class.getResource("/icons/add-user.png")));
-		btnNewButton_1.setBackground(new Color(192, 192, 192));
-		btnNewButton_1.addActionListener(new ActionListener() {
+		btnCadastrar = new JButton("Cadastro");
+		btnCadastrar.setIcon(new ImageIcon(TelaLogin.class.getResource("/icons/add-user.png")));
+		btnCadastrar.setBackground(new Color(192, 192, 192));
+		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				//Chama a tela de cadastro
@@ -230,14 +230,14 @@ public class TelaLogin extends JFrame {
 				}
 			}
 		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		btnNewButton_1.setBounds(228, 221, 124, 23);
-		contentPane.add(btnNewButton_1);
+		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		btnCadastrar.setBounds(228, 221, 124, 23);
+		contentPane.add(btnCadastrar);
 		
-		lblNewLabel_2 = new JLabel("Gerenciamento-Mensal/login");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.ITALIC, 8));
-		lblNewLabel_2.setBounds(10, 319, 205, 14);
-		contentPane.add(lblNewLabel_2);
+		lblSobre = new JLabel("Gerenciamento-Mensal/login");
+		lblSobre.setFont(new Font("Tahoma", Font.ITALIC, 8));
+		lblSobre.setBounds(10, 319, 205, 14);
+		contentPane.add(lblSobre);
 		
 		btnRecuperacaoSenha = new JButton("Esqueceu sua senha? ");
 		btnRecuperacaoSenha.addActionListener(new ActionListener() {

@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.SocketException;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -27,6 +28,7 @@ import model.vo.UsuarioVO;
 import model.vo.*;
 import controller.UsuarioController;
 import exceptions.CampoInvalidoException;
+import exceptions.EnderecoInvalidoException;
 import controller.EnderecoController;
 import model.dao.*;
 import model.view.*;
@@ -43,12 +45,12 @@ public class PainelAlterarDados extends JPanel {
 	private JTextField novoNome_camp;
 	private JTextField novoEmail_camp;
 	private JTextField novoUser_camp;
-	private JComponent lblNewLabel_2;
-	private JLabel lblNewLabel_3;
-	private JLabel lblNewLabel_4;
+	private JComponent visaoNome;
+	private JLabel visaoEmail;
+	private JLabel visaoLogin;
 	private JNumberFormatField novoSalarioL;
-	private JLabel lblNewLabel_5;
-	private JButton btnNewButton_1;
+	private JLabel visaoSalarioLiquido;
+	private JButton btnSalvar;
 	
 	UsuarioController usuarioController = new UsuarioController();
 	UsuarioVO userAtualizado = new UsuarioVO();
@@ -67,15 +69,15 @@ public class PainelAlterarDados extends JPanel {
 	private JPasswordField senhaAtualAtualizar;
 	private JPasswordField novaSenhaAtualizar;
 	private MaskFormatter mascaraCEP;
-	private JLabel lblNewLabel_1;
+	private JLabel lblTitulo;
 	private JLabel lblRua;
 	private JLabel lblBairro;
 	private JLabel lblNumero;
 	private JLabel lblCep;
 	private JLabel lblEstado;
 	private JComponent lblCidade;
-	private JComponent lblNewLabel;
-	private JLabel lblNewLabel_7;
+	private JComponent visaoSenha;
+	private JLabel visaoNovaSenha;
 	private JButton btnBuscarCep;
 
 	/**
@@ -89,10 +91,10 @@ public class PainelAlterarDados extends JPanel {
 		
 	    setLayout(null);
 	   
-		lblNewLabel_1 = new JLabel("Alteração de dados cadastrais ");
-		lblNewLabel_1.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 15));
-		lblNewLabel_1.setBounds(33, 29, 260, 14);
-		add(lblNewLabel_1);
+		lblTitulo = new JLabel("Alteração de dados cadastrais ");
+		lblTitulo.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 15));
+		lblTitulo.setBounds(33, 29, 260, 14);
+		add(lblTitulo);
 		
 		mascaraCEP = new MaskFormatter("#####-###");
 		mascaraCEP.setValueContainsLiteralCharacters(false);
@@ -129,11 +131,11 @@ public class PainelAlterarDados extends JPanel {
 		novoUser_camp.setText(userLogado.getLogin());
 		
 		
-	    lblNewLabel_2 = new JLabel("Nome Completo");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.ITALIC, 9));
-		lblNewLabel_2.setToolTipText("");
-		lblNewLabel_2.setBounds(10, 72, 163, 14);
-		add(lblNewLabel_2);
+	    visaoNome = new JLabel("Nome Completo");
+		visaoNome.setFont(new Font("Tahoma", Font.ITALIC, 9));
+		visaoNome.setToolTipText("");
+		visaoNome.setBounds(10, 72, 163, 14);
+		add(visaoNome);
 		
 		cbEstados = new JComboBox(listaEstados);
 		cbEstados.setBorder(null);
@@ -145,7 +147,12 @@ public class PainelAlterarDados extends JPanel {
 		btnBuscarCep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				endPorCEP = viaCep.gerarEnderecoViaCEP(cepCamp.getText());
+				try {
+					endPorCEP = enderecoController.buscarViaCepController(cepCamp.getText());
+				} catch (EnderecoInvalidoException | SocketException e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, e1.getMessage(), "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+				}
 				
 				//insere os valores do cep
 				campBairro.setText(endPorCEP.getBairro());
@@ -169,15 +176,15 @@ public class PainelAlterarDados extends JPanel {
 		
 		cepCamp.setText(estado.getCep());
 		
-		lblNewLabel_3 = new JLabel("E-mail");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.ITALIC, 9));
-		lblNewLabel_3.setBounds(10, 127, 163, 14);
-		add(lblNewLabel_3);
+		visaoEmail = new JLabel("E-mail");
+		visaoEmail.setFont(new Font("Tahoma", Font.ITALIC, 9));
+		visaoEmail.setBounds(10, 127, 163, 14);
+		add(visaoEmail);
 		
-		lblNewLabel_4 = new JLabel("Login");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.ITALIC, 9));
-		lblNewLabel_4.setBounds(10, 187, 163, 14);
-		add(lblNewLabel_4);
+		visaoLogin = new JLabel("Login");
+		visaoLogin.setFont(new Font("Tahoma", Font.ITALIC, 9));
+		visaoLogin.setBounds(10, 187, 163, 14);
+		add(visaoLogin);
 		
 		novoSalarioL = new JNumberFormatField();
 		novoSalarioL.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -192,10 +199,10 @@ public class PainelAlterarDados extends JPanel {
 		senhaAtualAtualizar.setBounds(377, 262, 102, 20);
 		add(senhaAtualAtualizar);
 		
-		lblNewLabel_5 = new JLabel("Salário líquido");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.ITALIC, 10));
-		lblNewLabel_5.setBounds(10, 231, 96, 14);
-		add(lblNewLabel_5);
+		visaoSalarioLiquido = new JLabel("Salário líquido");
+		visaoSalarioLiquido.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		visaoSalarioLiquido.setBounds(10, 231, 96, 14);
+		add(visaoSalarioLiquido);
 		
 		campNumero = new JTextField();
 		campNumero.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -217,10 +224,10 @@ public class PainelAlterarDados extends JPanel {
 		novaSenhaAtualizar.setBounds(377, 317, 102, 20);
 		add(novaSenhaAtualizar);
 		
-		btnNewButton_1 = new JButton("");
-		btnNewButton_1.setBorder(null);
-		btnNewButton_1.setIcon(new ImageIcon(PainelAlterarDados.class.getResource("/icons/diskette.png")));
-		btnNewButton_1.addActionListener(new ActionListener() {
+		btnSalvar = new JButton("");
+		btnSalvar.setBorder(null);
+		btnSalvar.setIcon(new ImageIcon(PainelAlterarDados.class.getResource("/icons/diskette.png")));
+		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				String valor1 = "";
@@ -280,10 +287,10 @@ public class PainelAlterarDados extends JPanel {
 				return retorno;
 			}
 		});
-		btnNewButton_1.setBackground(new Color(0, 255, 255));
-		btnNewButton_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btnNewButton_1.setBounds(600, 451, 46, 23);
-		add(btnNewButton_1);
+		btnSalvar.setBackground(new Color(0, 255, 255));
+		btnSalvar.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		btnSalvar.setBounds(600, 451, 46, 23);
+		add(btnSalvar);
 		
 		ruaCampo = new JTextField();
 		ruaCampo.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -334,16 +341,16 @@ public class PainelAlterarDados extends JPanel {
 		add(lblCidade);
 		
 		
-		lblNewLabel = new JLabel("Senha atual : ");
-		lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel.setBounds(377, 248, 102, 14);
-		add(lblNewLabel);
+		visaoSenha = new JLabel("Senha atual : ");
+		visaoSenha.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		visaoSenha.setBounds(377, 248, 102, 14);
+		add(visaoSenha);
 		
 		
-		lblNewLabel_7 = new JLabel("Nova senha : ");
-		lblNewLabel_7.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_7.setBounds(377, 302, 102, 14);
-		add(lblNewLabel_7);
+		visaoNovaSenha = new JLabel("Nova senha : ");
+		visaoNovaSenha.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		visaoNovaSenha.setBounds(377, 302, 102, 14);
+		add(visaoNovaSenha);
 		
 		
 	}

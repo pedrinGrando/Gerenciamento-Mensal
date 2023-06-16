@@ -39,20 +39,20 @@ public class PainelConsultarDespesa extends JPanel {
 	DespesaVO despesaVO = new DespesaVO();
 	DespesaController despController = new DespesaController();
 	private JTextField campDespDigitada;
-	private JLabel lblNewLabel;
+	private JLabel visaoNome;
 	DecimalFormat formato = new DecimalFormat("#,##0.00");
 
-	private JLabel lblNewLabel_6;
+	private JLabel lblTitulo;
 
-	private JLabel lblNewLabel_1;
+	private JLabel lblNomeConsult;
 
 	private JLabel lblNome;
 
-	private JLabel lblNewLabel_3;
+	private JLabel lblDespConsult;
 
 	private JLabel lblDespesa;
 
-	private JLabel lblNewLabel_5;
+	private JLabel lblValorConsult;
 
 	private JLabel lblValor;
 
@@ -68,10 +68,10 @@ public class PainelConsultarDespesa extends JPanel {
 		setBackground(new Color(0, 255, 255));
 		setLayout(null);
 		
-		lblNewLabel_6 = new JLabel(" Consultar de despesa ");
-		lblNewLabel_6.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel_6.setBounds(168, 24, 183, 23);
-		add(lblNewLabel_6);
+		lblTitulo = new JLabel(" Consultar de despesa ");
+		lblTitulo.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 16));
+		lblTitulo.setBounds(168, 24, 183, 23);
+		add(lblTitulo);
 		
 		
 		campDespDigitada = new JTextField();
@@ -80,40 +80,40 @@ public class PainelConsultarDespesa extends JPanel {
 		add(campDespDigitada);
 		campDespDigitada.setColumns(10);
 		
-		lblNewLabel = new JLabel("Nome da despesa :");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel.setBounds(20, 91, 115, 14);
-		add(lblNewLabel);
+		visaoNome = new JLabel("Nome da despesa :");
+		visaoNome.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		visaoNome.setBounds(20, 91, 115, 14);
+		add(visaoNome);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 0));
 		panel.setBounds(0, 145, 700, 14);
 		add(panel);
 		
-		lblNewLabel_1 = new JLabel("Nome : ");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_1.setBounds(20, 203, 71, 14);
-		add(lblNewLabel_1);
+		lblNomeConsult = new JLabel("Nome : ");
+		lblNomeConsult.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		lblNomeConsult.setBounds(20, 203, 71, 14);
+		add(lblNomeConsult);
 		
 		lblNome = new JLabel("");
 		lblNome.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNome.setBounds(73, 203, 209, 14);
 		add(lblNome);
 		
-		lblNewLabel_3 = new JLabel("Despesa : ");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_3.setBounds(20, 247, 71, 14);
-		add(lblNewLabel_3);
+		lblDespConsult = new JLabel("Despesa : ");
+		lblDespConsult.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		lblDespConsult.setBounds(20, 247, 71, 14);
+		add(lblDespConsult);
 		
 		lblDespesa = new JLabel("");
 		lblDespesa.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblDespesa.setBounds(87, 247, 250, 14);
 		add(lblDespesa);
 		
-		lblNewLabel_5 = new JLabel("Valor : ");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_5.setBounds(20, 288, 71, 14);
-		add(lblNewLabel_5);
+		lblValorConsult = new JLabel("Valor : ");
+		lblValorConsult.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		lblValorConsult.setBounds(20, 288, 71, 14);
+		add(lblValorConsult);
 		
 		lblValor = new JLabel("");
 		lblValor.setFont(new Font("Tahoma", Font.ITALIC, 11));

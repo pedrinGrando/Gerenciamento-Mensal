@@ -55,7 +55,7 @@ public class PainelCalculoMensal extends JPanel {
 	   DecimalFormat formato = new DecimalFormat("#,##0.00");
 	   
 		private JButton btn_salvarDados;
-		private JComponent lblNewLabel;
+		private JComponent lblTitulo;
 		private JLabel lblMesAtual;
 		private JLabel visaoSaldo;
 		private JTable tblCalculo;
@@ -200,10 +200,10 @@ public class PainelCalculoMensal extends JPanel {
 		btn_salvarDados.setBounds(624, 440, 53, 29);
 		add(btn_salvarDados);
 		
-		lblNewLabel = new JLabel("Cálculo Mensal do mês de : ");
-		lblNewLabel.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 15));
-		lblNewLabel.setBounds(114, 11, 205, 46);
-		add(lblNewLabel);
+		lblTitulo = new JLabel("Cálculo Mensal do mês de : ");
+		lblTitulo.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 15));
+		lblTitulo.setBounds(114, 11, 205, 46);
+		add(lblTitulo);
 		
 		lblMesAtual = new JLabel("");
 		lblMesAtual.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 15));
