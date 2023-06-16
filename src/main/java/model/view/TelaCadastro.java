@@ -29,6 +29,7 @@ import model.vo.*;
 import controller.*;
 import exceptions.CampoInvalidoException;
 import exceptions.CpfJaUtilizadoException;
+import exceptions.EnderecoInvalidoException;
 
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
@@ -42,6 +43,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.JRadioButton;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.net.SocketException;
+
 import javax.swing.JCheckBox;
 import model.dao.*;
 
@@ -68,31 +71,31 @@ public class TelaCadastro extends JFrame {
 	private JFormattedTextField cpfCamp;
 	private DatePicker dataNasciCamp;
 	
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
-	private JLabel lblNewLabel_4;
-	private JLabel lblNewLabel_5;
+	private JLabel visaoNome;
+	private JLabel visaoCpf;
+	private JLabel visaoData;
+	private JLabel visaoEmail;
+	private JLabel visaoSalario;
+	private JLabel visaoLogin;
 	private JLabel lblNewLabel_6;
 	private JLabel lblNewLabel_7;
 	private JLabel lblNewLabel_8;
-	private Container lblNewLabel_9;
-	private JLabel lblNewLabel_10;
-	private Container lblNewLabel_11;
+	private Container visaoRua;
+	private JLabel visaoBairro;
+	private Container visaoNumero;
 	private JFormattedTextField cepCamp;
-	private JLabel lblNewLabel_12;
-	private Container lblNewLabel_13;
-	private JLabel lblNewLabel_14;
-	private JButton btnNewButton;
+	private JLabel visaoCep;
+	private Container visaoEstado;
+	private JLabel visaoCidade;
+	private JButton btnVoltar;
 	private JButton btnSalvar;
 	private JPasswordField campSenha;
 	private JPasswordField confirmCampSenha;
 	private JTextField campCidade;
 	private JNumberFormatField salarioCamp;
 	private JComboBox cbEstados;
-	private JLabel lblNewLabel_15;
-	private JLabel lblNewLabel_16;
+	private JLabel visaoSenha;
+	private JLabel visaoConfirmSenha;
 	private JCheckBox cbxAceitaTermos;
 	private JButton btnBuscarCEP;
 
@@ -146,8 +149,21 @@ public class TelaCadastro extends JFrame {
 		campoNome.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		campoNome.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		campoNome.setBounds(105, 24, 254, 20);
-		contentPane.add(campoNome);
 		campoNome.setColumns(10);
+		
+		// Adiciona um ouvinte de eventos de teclado ao campo//IMPEDE NUMEROS
+		campoNome.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                
+                // Verifica se o caractere é um número
+                if (Character.isDigit(c)) {
+                    e.consume(); // Impede que o caractere seja inserido
+                }
+            }
+        });
+		contentPane.add(campoNome);
 		
 		cbxAceitaTermos = new JCheckBox("Aceita os termos de cadastro");
 		cbxAceitaTermos.addActionListener(new ActionListener() {
@@ -180,21 +196,20 @@ public class TelaCadastro extends JFrame {
 		dataNasciCamp.setBounds(136, 111, 223, 20);
 		contentPane.add(dataNasciCamp);
 		
-
-	    lblNewLabel = new JLabel("Nome : ");
-		lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel.setBounds(20, 27, 46, 14);
-		contentPane.add(lblNewLabel);
+	    visaoNome = new JLabel("Nome : ");
+		visaoNome.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		visaoNome.setBounds(20, 27, 46, 14);
+		contentPane.add(visaoNome);
 		
-		lblNewLabel_1 = new JLabel("CPF :");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_1.setBounds(20, 70, 46, 14);
-		contentPane.add(lblNewLabel_1);
+		visaoCpf = new JLabel("CPF :");
+		visaoCpf.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		visaoCpf.setBounds(20, 70, 46, 14);
+		contentPane.add(visaoCpf);
 		
-		lblNewLabel_2 = new JLabel("Data de Nascimento : ");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_2.setBounds(20, 114, 106, 14);
-		contentPane.add(lblNewLabel_2);
+		visaoData = new JLabel("Data de Nascimento : ");
+		visaoData.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		visaoData.setBounds(20, 114, 106, 14);
+		contentPane.add(visaoData);
 		
 		emailCamp = new JTextField();
 		emailCamp.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -203,20 +218,20 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(emailCamp);
 		emailCamp.setColumns(10);
 		
-		lblNewLabel_3 = new JLabel("Email : ");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_3.setBounds(20, 164, 63, 14);
-		contentPane.add(lblNewLabel_3);
+		visaoEmail = new JLabel("Email : ");
+		visaoEmail.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		visaoEmail.setBounds(20, 164, 63, 14);
+		contentPane.add(visaoEmail);
 		
-		lblNewLabel_4 = new JLabel("Salário líquido: ");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_4.setBounds(20, 214, 92, 14);
-		contentPane.add(lblNewLabel_4);
+		visaoSalario = new JLabel("Salário líquido: ");
+		visaoSalario.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		visaoSalario.setBounds(20, 214, 92, 14);
+		contentPane.add(visaoSalario);
 		
-		lblNewLabel_5 = new JLabel("Login : ");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_5.setBounds(20, 261, 46, 14);
-		contentPane.add(lblNewLabel_5);
+		visaoLogin = new JLabel("Login : ");
+		visaoLogin.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		visaoLogin.setBounds(20, 261, 46, 14);
+		contentPane.add(visaoLogin);
 		
 		loginCamp = new JTextField();
 		loginCamp.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -238,15 +253,15 @@ public class TelaCadastro extends JFrame {
 		lblNewLabel_8.setBounds(312, 304, 115, 14);
 		contentPane.add(lblNewLabel_8);
 		
-		lblNewLabel_15 = new JLabel("Senha : ");
-		lblNewLabel_15.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_15.setBounds(526, 27, 63, 14);
-		contentPane.add(lblNewLabel_15);
+		visaoSenha = new JLabel("Senha : ");
+		visaoSenha.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		visaoSenha.setBounds(526, 27, 63, 14);
+		contentPane.add(visaoSenha);
 		
-		lblNewLabel_16 = new JLabel("Confirme a senha: ");
-		lblNewLabel_16.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_16.setBounds(483, 67, 106, 14);
-		contentPane.add(lblNewLabel_16);
+		visaoConfirmSenha = new JLabel("Confirme a senha: ");
+		visaoConfirmSenha.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		visaoConfirmSenha.setBounds(483, 67, 106, 14);
+		contentPane.add(visaoConfirmSenha);
 		
 		campSenha = new JPasswordField();
 		campSenha.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -265,10 +280,10 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(ruaCamp);
 		ruaCamp.setColumns(10);
 		
-		lblNewLabel_9 = new JLabel("Rua :");
-		lblNewLabel_9.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_9.setBounds(20, 435, 46, 14);
-		contentPane.add(lblNewLabel_9);
+		visaoRua = new JLabel("Rua :");
+		visaoRua.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		visaoRua.setBounds(20, 435, 46, 14);
+		contentPane.add(visaoRua);
 		
 		bairroCamp = new JTextField();
 		bairroCamp.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -277,22 +292,35 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(bairroCamp);
 		bairroCamp.setColumns(10);
 		
-		lblNewLabel_10 = new JLabel("Bairro :");
-		lblNewLabel_10.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_10.setBounds(20, 397, 46, 14);
-		contentPane.add(lblNewLabel_10);
+		visaoBairro = new JLabel("Bairro :");
+		visaoBairro.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		visaoBairro.setBounds(20, 397, 46, 14);
+		contentPane.add(visaoBairro);
 		
 		campNumero = new JTextField();
 		campNumero.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		campNumero.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		campNumero.setBounds(76, 474, 122, 20);
-		contentPane.add(campNumero);
 		campNumero.setColumns(10);
 		
-		lblNewLabel_11 = new JLabel("Número :");
-		lblNewLabel_11.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_11.setBounds(20, 477, 46, 14);
-		contentPane.add(lblNewLabel_11);
+		// Adiciona um ouvinte de eventos de teclado ao campo//IMPEDE RETORNO DE LETRAS
+		campNumero.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                
+                // Verifica se o caractere não é uma letra
+                if (Character.isLetter(c)) {
+                    e.consume(); // Impede que o caractere seja inserido
+                }
+            }
+        });
+		contentPane.add(campNumero);
+		
+		visaoNumero = new JLabel("Número :");
+		visaoNumero.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		visaoNumero.setBounds(20, 477, 46, 14);
+		contentPane.add(visaoNumero);
 		
 		cepCamp = new JFormattedTextField(mascaraCEP);
 		cepCamp.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -300,10 +328,10 @@ public class TelaCadastro extends JFrame {
 		cepCamp.setBounds(76, 350, 122, 20);
 		contentPane.add(cepCamp);
 		
-		lblNewLabel_12 = new JLabel("CEP : ");
-		lblNewLabel_12.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_12.setBounds(20, 353, 46, 14);
-		contentPane.add(lblNewLabel_12);
+		visaoCep = new JLabel("CEP : ");
+		visaoCep.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		visaoCep.setBounds(20, 353, 46, 14);
+		contentPane.add(visaoCep);
 		
 	    campCidade = new JTextField();
 	    campCidade.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -312,10 +340,10 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(campCidade);
 		campCidade.setColumns(10);
 		
-		lblNewLabel_13 = new JLabel("Estado : ");
-		lblNewLabel_13.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_13.setBounds(468, 353, 46, 14);
-		contentPane.add(lblNewLabel_13);
+		visaoEstado = new JLabel("Estado : ");
+		visaoEstado.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		visaoEstado.setBounds(468, 353, 46, 14);
+		contentPane.add(visaoEstado);
 		
 		cbEstados = new JComboBox(listaEstados);
 		cbEstados.setBorder(null);
@@ -330,16 +358,16 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(salarioCamp);
 		salarioCamp.setColumns(10);
 		
-		lblNewLabel_14 = new JLabel("Cidade : ");
-		lblNewLabel_14.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_14.setBounds(468, 397, 60, 14);
-		contentPane.add(lblNewLabel_14);
+		visaoCidade = new JLabel("Cidade : ");
+		visaoCidade.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		visaoCidade.setBounds(468, 397, 60, 14);
+		contentPane.add(visaoCidade);
 		
-		btnNewButton = new JButton("Voltar");
-		btnNewButton.setBorder(null);
-		btnNewButton.setIcon(new ImageIcon(TelaCadastro.class.getResource("/icons/back.png")));
-		btnNewButton.setBackground(new Color(0, 255, 255));
-		btnNewButton.addActionListener(new ActionListener() {
+		btnVoltar = new JButton("Voltar");
+		btnVoltar.setBorder(null);
+		btnVoltar.setIcon(new ImageIcon(TelaCadastro.class.getResource("/icons/back.png")));
+		btnVoltar.setBackground(new Color(0, 255, 255));
+		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// retorna para a tela de login 
 				dispose();
@@ -347,9 +375,9 @@ public class TelaCadastro extends JFrame {
 				tela.setVisible(true);
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btnNewButton.setBounds(257, 527, 115, 23);
-		contentPane.add(btnNewButton);
+		btnVoltar.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		btnVoltar.setBounds(257, 527, 115, 23);
+		contentPane.add(btnVoltar);
 		
 		btnBuscarCEP = new JButton("");
 		btnBuscarCEP.addActionListener(new ActionListener() {
@@ -359,12 +387,15 @@ public class TelaCadastro extends JFrame {
 				
 				//Traz os dados do endereco via Cep/API
 				
-				endPorCEP = viaCep.gerarEnderecoViaCEP(cepCamp.getText());
-				
+				try {
+					endPorCEP = enderecoController.buscarViaCepController(cepCamp.getText());
+				} catch (EnderecoInvalidoException | SocketException excessao) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "Endereço não encontrado!", "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+				}
 				ruaCamp.setText(endPorCEP.getLogradouro());
 				campCidade.setText(endPorCEP.getLocalidade());
 				bairroCamp.setText(endPorCEP.getBairro());
-				listaEstados[0] += endPorCEP.getUf();
 				
 			}
 
