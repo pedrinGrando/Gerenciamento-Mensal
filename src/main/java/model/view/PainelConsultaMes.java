@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 
 import javax.swing.ImageIcon;
@@ -24,7 +26,7 @@ public class PainelConsultaMes extends JPanel {
 	private JComponent btnNewButton;
 	private JLabel lblNewLabel_1;
 	private JButton btnConsultar;
-	private JLabel lblNewLabel_2;
+	private JLabel lblTitulo;
 	
 	TabelaVO tabelaVO = new TabelaVO();
 	TabelaController tabelaController = new TabelaController();
@@ -32,13 +34,13 @@ public class PainelConsultaMes extends JPanel {
 	
 	private JTextField mesDigitadoCamp;
 	private JPanel panel;
-	private JLabel lblNewLabel;
+	private JLabel lblSubTitulo;
 	private JLabel lblMes;
 	private JLabel lblNewLabel_3;
-	private JLabel lblNewLabel_4;
-	private JLabel lblNewLabel_6;
-	private JLabel lblNewLabel_8;
-	private JLabel lblNewLabel_5;
+	private JLabel visaoAno;
+	private JLabel visaoTotalRestante;
+	private JLabel visaoSaldoFinal;
+	private JLabel lblIcon;
 	private JLabel lblAno;
 	private JLabel lblSaldoFinal;
 	private JLabel lblTotalRestante;
@@ -91,20 +93,33 @@ public class PainelConsultaMes extends JPanel {
 				
 			}
 		});
-		btnConsultar.setBackground(new Color(0, 255, 255));
-		btnConsultar.setBounds(353, 73, 34, 23);
+		btnConsultar.setBackground(new Color(255, 255, 255));
+		btnConsultar.setBounds(346, 76, 34, 20);
 		add(btnConsultar);
 		
-		lblNewLabel_2 = new JLabel("Informe o mês a ser consultado : ");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
-		lblNewLabel_2.setBounds(58, 73, 222, 23);
-		add(lblNewLabel_2);
+		lblTitulo = new JLabel("Informe o mês a ser consultado : ");
+		lblTitulo.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
+		lblTitulo.setBounds(58, 73, 222, 23);
+		add(lblTitulo);
 	
 		mesDigitadoCamp = new JTextField();
-		mesDigitadoCamp.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		mesDigitadoCamp.setBorder(null);
 		mesDigitadoCamp.setBounds(233, 76, 117, 20);
-		add(mesDigitadoCamp);
 		mesDigitadoCamp.setColumns(10);
+		
+		// Adiciona um ouvinte de eventos de teclado ao campo//IMPEDE NUMEROS
+		mesDigitadoCamp.addKeyListener(new KeyAdapter() {
+		            @Override
+		            public void keyTyped(KeyEvent e) {
+		                char c = e.getKeyChar();
+		                
+		                // Verifica se o caractere é um número
+		                if (Character.isDigit(c)) {
+		                    e.consume(); // Impede que o caractere seja inserido
+		                }
+		            }
+		        });
+				add(mesDigitadoCamp);
 		
 		lblAno = new JLabel("");
 		lblAno.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -126,14 +141,14 @@ public class PainelConsultaMes extends JPanel {
 		panel.setBounds(0, 129, 680, 10);
 		add(panel);
 		
-	    lblNewLabel = new JLabel("Mês consultado : ");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel.setBounds(58, 150, 117, 14);
-		add(lblNewLabel);
+	    lblSubTitulo = new JLabel("Mês consultado : ");
+		lblSubTitulo.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		lblSubTitulo.setBounds(58, 150, 117, 14);
+		add(lblSubTitulo);
 		
 		lblMes = new JLabel("New label");
 		lblMes.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblMes.setBounds(190, 150, 175, 14);
+		lblMes.setBounds(175, 150, 175, 14);
 		add(lblMes);
 		lblMes.setText(mesDigitadoCamp.getText());
 		
@@ -141,26 +156,24 @@ public class PainelConsultaMes extends JPanel {
 		lblNewLabel_3.setBounds(43, 160, 418, 14);
 		add(lblNewLabel_3);
 		
-		lblNewLabel_4 = new JLabel("Ano : ");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_4.setBounds(43, 221, 54, 14);
-		add(lblNewLabel_4);
+		visaoAno = new JLabel("Ano : ");
+		visaoAno.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		visaoAno.setBounds(43, 221, 54, 14);
+		add(visaoAno);
 		
-		lblNewLabel_6 = new JLabel("Total restante no mês :  ");
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_6.setBounds(43, 264, 142, 14);
-		add(lblNewLabel_6);
+		visaoTotalRestante = new JLabel("Total restante no mês :  ");
+		visaoTotalRestante.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		visaoTotalRestante.setBounds(43, 264, 142, 14);
+		add(visaoTotalRestante);
 		
-		lblNewLabel_8 = new JLabel("Saldo final :  ");
-		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_8.setBounds(43, 309, 114, 14);
-		add(lblNewLabel_8);
+		visaoSaldoFinal = new JLabel("Saldo final :  ");
+		visaoSaldoFinal.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		visaoSaldoFinal.setBounds(43, 309, 114, 14);
+		add(visaoSaldoFinal);
 		
-		lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon(PainelConsultaMes.class.getResource("/icons/bank.png")));
-		lblNewLabel_5.setBounds(636, 458, 34, 30);
-		add(lblNewLabel_5);
-		
-	
+		lblIcon = new JLabel("");
+		lblIcon.setIcon(new ImageIcon(PainelConsultaMes.class.getResource("/icons/bank.png")));
+		lblIcon.setBounds(636, 458, 34, 30);
+		add(lblIcon);
 	}
 }
