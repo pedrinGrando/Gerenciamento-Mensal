@@ -20,6 +20,8 @@ import javax.swing.JComponent;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
@@ -39,19 +41,20 @@ public class TelaRecuperacaoSenha extends JFrame {
 	private JFormattedTextField cpfDigitadoCamp;
 	private MaskFormatter mascaraCpf;
 
-	
     UsuarioVO usuarioConsultado = new UsuarioVO();
     UsuarioController userController = new UsuarioController();
+    
     boolean updatePass = false;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
+	private JLabel lblIcon;
+	private JLabel visaoNome;
+	private JLabel visaoCPF;
 	private JLabel lblConsultado;
-	private JLabel lblSenhaNova;
-	private JLabel lblConfirmSenha;
+	private JLabel visaoNovaSenha;
+	private JLabel visaoConfirmSenha;
 	private JButton btnSalvar;
 	private JButton btnChecarSenha;
-	private JButton btnNewButton;
+	private JButton btnVoltar;
+	private JPanel panel;
 	
     
 
@@ -97,32 +100,46 @@ public class TelaRecuperacaoSenha extends JFrame {
 		cpfDigitadoCamp.setBounds(94, 106, 254, 20);
 		contentPane.add(cpfDigitadoCamp);
 		
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(TelaRecuperacaoSenha.class.getResource("/icons/bank.png")));
-		lblNewLabel.setBounds(432, 394, 32, 30);
-		contentPane.add(lblNewLabel);
+		lblIcon = new JLabel("");
+		lblIcon.setIcon(new ImageIcon(TelaRecuperacaoSenha.class.getResource("/icons/bank.png")));
+		lblIcon.setBounds(432, 394, 32, 30);
+		contentPane.add(lblIcon);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 0));
 		panel.setBounds(0, 193, 521, 10);
 		contentPane.add(panel);
 		
-		lblNewLabel_1 = new JLabel("Nome completo : ");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_1.setBounds(168, 28, 104, 14);
-		contentPane.add(lblNewLabel_1);
+		visaoNome = new JLabel("Nome completo : ");
+		visaoNome.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		visaoNome.setBounds(168, 28, 104, 14);
+		contentPane.add(visaoNome);
 		
-		lblNewLabel_2 = new JLabel("Informe seu CPF : ");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
-		lblNewLabel_2.setBounds(172, 87, 241, 14);
-		contentPane.add(lblNewLabel_2);
+		visaoCPF = new JLabel("Informe seu CPF : ");
+		visaoCPF.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
+		visaoCPF.setBounds(168, 84, 241, 14);
+		contentPane.add(visaoCPF);
 		
 		campNome = new JTextField();
 		campNome.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		campNome.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		campNome.setBounds(94, 53, 254, 20);
-		contentPane.add(campNome);
 		campNome.setColumns(10);
+		
+		// Adiciona um ouvinte de eventos de teclado ao campo//Impede numeros 
+		campNome.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                
+                // Verifica se o caractere é um número
+                if (Character.isDigit(c)) {
+                    e.consume(); // Impede que o caractere seja inserido
+                }
+            }
+        });
+		
+		contentPane.add(campNome);
 		
 		lblConsultado = new JLabel("");
 		lblConsultado.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -139,15 +156,15 @@ public class TelaRecuperacaoSenha extends JFrame {
 		senhaNovaConfirm.setBounds(208, 329, 117, 20);
 		contentPane.add(senhaNovaConfirm);
 		
-		lblSenhaNova = new JLabel("Nova senha : ");
-		lblSenhaNova.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblSenhaNova.setBounds(122, 267, 104, 14);
-		contentPane.add(lblSenhaNova);
+		visaoNovaSenha = new JLabel("Nova senha : ");
+		visaoNovaSenha.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		visaoNovaSenha.setBounds(122, 267, 104, 14);
+		contentPane.add(visaoNovaSenha);
 		
-		lblConfirmSenha = new JLabel("Confirme a senha : ");
-		lblConfirmSenha.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblConfirmSenha.setBounds(94, 332, 132, 14);
-		contentPane.add(lblConfirmSenha);
+		visaoConfirmSenha = new JLabel("Confirme a senha : ");
+		visaoConfirmSenha.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		visaoConfirmSenha.setBounds(94, 332, 132, 14);
+		contentPane.add(visaoConfirmSenha);
 		
 		btnChecarSenha = new JButton("");
 		btnChecarSenha.addActionListener(new ActionListener() {
@@ -193,7 +210,7 @@ public class TelaRecuperacaoSenha extends JFrame {
 		btnChecarSenha.setIcon(new ImageIcon(TelaRecuperacaoSenha.class.getResource("/icons/padlock.png")));
 		btnChecarSenha.setBackground(new Color(0, 255, 255));
 		btnChecarSenha.setBorder(null);
-		btnChecarSenha.setBounds(358, 87, 32, 46);
+		btnChecarSenha.setBounds(358, 66, 32, 46);
 		contentPane.add(btnChecarSenha);
 		
 		btnSalvar = new JButton("");
@@ -235,11 +252,11 @@ public class TelaRecuperacaoSenha extends JFrame {
 		btnSalvar.setBorder(null);
 		btnSalvar.setBackground(new Color(0, 255, 255));
 		btnSalvar.setIcon(new ImageIcon(TelaRecuperacaoSenha.class.getResource("/icons/diskette.png")));
-		btnSalvar.setBounds(323, 318, 57, 44);
+		btnSalvar.setBounds(320, 316, 57, 44);
 		contentPane.add(btnSalvar);
 		
-		btnNewButton = new JButton("");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnVoltar = new JButton("");
+		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				dispose();
@@ -248,13 +265,11 @@ public class TelaRecuperacaoSenha extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBorder(null);
-		btnNewButton.setBackground(new Color(0, 255, 255));
-		btnNewButton.setIcon(new ImageIcon(TelaRecuperacaoSenha.class.getResource("/icons/back.png")));
-		btnNewButton.setBounds(-11, 401, 57, 23);
-		contentPane.add(btnNewButton);
-		
-	    
+		btnVoltar.setBorder(null);
+		btnVoltar.setBackground(new Color(0, 255, 255));
+		btnVoltar.setIcon(new ImageIcon(TelaRecuperacaoSenha.class.getResource("/icons/back.png")));
+		btnVoltar.setBounds(-11, 401, 57, 23);
+		contentPane.add(btnVoltar);
 		
 	}
 }
