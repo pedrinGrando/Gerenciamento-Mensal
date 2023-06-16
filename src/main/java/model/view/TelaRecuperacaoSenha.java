@@ -20,6 +20,8 @@ import javax.swing.JComponent;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
@@ -122,8 +124,22 @@ public class TelaRecuperacaoSenha extends JFrame {
 		campNome.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		campNome.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		campNome.setBounds(94, 53, 254, 20);
-		contentPane.add(campNome);
 		campNome.setColumns(10);
+		
+		// Adiciona um ouvinte de eventos de teclado ao campo//Impede numeros 
+		campNome.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                
+                // Verifica se o caractere é um número
+                if (Character.isDigit(c)) {
+                    e.consume(); // Impede que o caractere seja inserido
+                }
+            }
+        });
+		
+		contentPane.add(campNome);
 		
 		lblConsultado = new JLabel("");
 		lblConsultado.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));

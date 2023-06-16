@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import model.vo.*;
+import javax.swing.JLabel;
 
 public class TelaSobreSistema extends JDialog {
 
@@ -67,6 +68,10 @@ public class TelaSobreSistema extends JDialog {
 			okButton.setActionCommand("OK");
 			getRootPane().setDefaultButton(okButton);
 		}
+		
+		JLabel lblImagem = new JLabel("");
+		lblImagem.setIcon(new ImageIcon(TelaSobreSistema.class.getResource("/icons/sobreSistema.png")));
+		lblImagem.setBounds(29, 35, 537, 347);
+		contentPanel.add(lblImagem);
 	}
-
 }

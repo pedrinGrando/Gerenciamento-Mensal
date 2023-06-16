@@ -18,9 +18,12 @@ import javax.swing.border.SoftBevelBorder;
 import model.vo.DespesaVO;
 import model.vo.UsuarioVO;
 import controller.DespesaController;
+import exceptions.CampoInvalidoException;
 
 import javax.swing.border.BevelBorder;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;
 
@@ -41,6 +44,7 @@ public class PainelAlterarDespesa extends JPanel {
 	DespesaVO despesaAtualizar = new DespesaVO();
 	DecimalFormat formato = new DecimalFormat("#,##0.00");
 	private JPanel panel;
+	private JButton btnConsultar;
 
 	/**
 	 * Create the panel.
@@ -51,7 +55,7 @@ public class PainelAlterarDespesa extends JPanel {
 		
 		lblIcon = new JLabel("");
 		lblIcon.setIcon(new ImageIcon(PainelAlterarDespesa.class.getResource("/icons/bank.png")));
-		lblIcon.setBounds(650, 505, 31, 39);
+		lblIcon.setBounds(650, 433, 31, 39);
 		add(lblIcon);
 		
 		lblTitulo = new JLabel("Atualização de despesa ");
@@ -80,8 +84,21 @@ public class PainelAlterarDespesa extends JPanel {
 		campNome = new JTextField();
 		campNome.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		campNome.setBounds(90, 271, 119, 20);
-		add(campNome);
 		campNome.setColumns(10);
+		
+		// Adiciona um ouvinte de eventos de teclado ao campo
+		campNome.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                
+                // Verifica se o caractere é um número
+                if (Character.isDigit(c)) {
+                    e.consume(); // Impede que o caractere seja inserido
+                }
+            }
+        });
+		add(campNome);
 		
 		campValor = new JNumberFormatField();
 		campValor.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -90,9 +107,7 @@ public class PainelAlterarDespesa extends JPanel {
 		add(campValor);
 		campValor.setColumns(10);
 		
-		
-		
-		JButton btnConsultar = new JButton("");
+	    btnConsultar = new JButton("");
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -100,8 +115,11 @@ public class PainelAlterarDespesa extends JPanel {
 				DespesaVO nome = (DespesaVO) cbDespesas.getSelectedItem();
 				
 				if (nome != null) {
-					despesaVO = despController.consultarDespesaController(nome.getDespNome(), userOnline);
-					
+					try {
+						despesaVO = despController.consultarDespesaController(nome.getDespNome(), userOnline);
+					} catch (CampoInvalidoException e1) {
+						JOptionPane.showMessageDialog(null, "Selecione pelo menos uma despesa!", "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+					}
 					campNome.setText(nome.getDespNome());
 					
 					String valorG = formato.format(despesaVO.getValor());
@@ -130,7 +148,6 @@ public class PainelAlterarDespesa extends JPanel {
 		visaoValor.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		visaoValor.setBounds(35, 315, 59, 14);
 		add(visaoValor);
-		
 		
 		btnEditar = new JButton("");
 		btnEditar.addActionListener(new ActionListener() {

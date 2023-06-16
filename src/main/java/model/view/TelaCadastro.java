@@ -149,8 +149,21 @@ public class TelaCadastro extends JFrame {
 		campoNome.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		campoNome.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		campoNome.setBounds(105, 24, 254, 20);
-		contentPane.add(campoNome);
 		campoNome.setColumns(10);
+		
+		// Adiciona um ouvinte de eventos de teclado ao campo//IMPEDE NUMEROS
+		campoNome.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                
+                // Verifica se o caractere é um número
+                if (Character.isDigit(c)) {
+                    e.consume(); // Impede que o caractere seja inserido
+                }
+            }
+        });
+		contentPane.add(campoNome);
 		
 		cbxAceitaTermos = new JCheckBox("Aceita os termos de cadastro");
 		cbxAceitaTermos.addActionListener(new ActionListener() {
@@ -183,7 +196,6 @@ public class TelaCadastro extends JFrame {
 		dataNasciCamp.setBounds(136, 111, 223, 20);
 		contentPane.add(dataNasciCamp);
 		
-
 	    visaoNome = new JLabel("Nome : ");
 		visaoNome.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		visaoNome.setBounds(20, 27, 46, 14);
@@ -289,8 +301,21 @@ public class TelaCadastro extends JFrame {
 		campNumero.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		campNumero.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		campNumero.setBounds(76, 474, 122, 20);
-		contentPane.add(campNumero);
 		campNumero.setColumns(10);
+		
+		// Adiciona um ouvinte de eventos de teclado ao campo//IMPEDE RETORNO DE LETRAS
+		campNumero.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                
+                // Verifica se o caractere não é uma letra
+                if (Character.isLetter(c)) {
+                    e.consume(); // Impede que o caractere seja inserido
+                }
+            }
+        });
+		contentPane.add(campNumero);
 		
 		visaoNumero = new JLabel("Número :");
 		visaoNumero.setFont(new Font("Tahoma", Font.ITALIC, 11));

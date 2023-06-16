@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.net.SocketException;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -111,8 +113,21 @@ public class PainelAlterarDados extends JPanel {
 		novoNome_camp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		novoNome_camp.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		novoNome_camp.setBounds(10, 86, 217, 20);
-		add(novoNome_camp);
 		novoNome_camp.setColumns(10);
+		
+		// Adiciona um ouvinte de eventos de teclado ao campo
+		novoNome_camp.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                
+                // Verifica se o caractere é um número
+                if (Character.isDigit(c)) {
+                    e.consume(); // Impede que o caractere seja inserido
+                }
+            }
+        });
+		add(novoNome_camp);
 		novoNome_camp.setText(userLogado.getNome());
 		
 		novoEmail_camp = new JTextField();
@@ -208,9 +223,24 @@ public class PainelAlterarDados extends JPanel {
 		campNumero = new JTextField();
 		campNumero.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		campNumero.setBounds(377, 86, 171, 20);
-		add(campNumero);
 		campNumero.setColumns(10);
 		
+		// Adiciona um ouvinte de eventos de teclado ao campo//impede letras
+		campNumero.addKeyListener(new KeyAdapter() {
+	            @Override
+	            public void keyTyped(KeyEvent e) {
+	                char c = e.getKeyChar();
+	                
+	                // Verifica se o caractere não é uma letra
+	                if (Character.isLetter(c)) {
+	                    e.consume(); // Impede que o caractere seja inserido
+	                }
+	            }
+	        });
+		
+		
+		
+		add(campNumero);
 		campNumero.setText(String.valueOf(estado.getNumero()));
 		
 		campCIdade = new JTextField();

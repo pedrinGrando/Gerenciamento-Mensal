@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 
 import javax.swing.ImageIcon;
@@ -91,8 +93,8 @@ public class PainelConsultaMes extends JPanel {
 				
 			}
 		});
-		btnConsultar.setBackground(new Color(0, 255, 255));
-		btnConsultar.setBounds(353, 73, 34, 23);
+		btnConsultar.setBackground(new Color(255, 255, 255));
+		btnConsultar.setBounds(346, 76, 34, 20);
 		add(btnConsultar);
 		
 		lblTitulo = new JLabel("Informe o mês a ser consultado : ");
@@ -101,10 +103,23 @@ public class PainelConsultaMes extends JPanel {
 		add(lblTitulo);
 	
 		mesDigitadoCamp = new JTextField();
-		mesDigitadoCamp.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		mesDigitadoCamp.setBorder(null);
 		mesDigitadoCamp.setBounds(233, 76, 117, 20);
-		add(mesDigitadoCamp);
 		mesDigitadoCamp.setColumns(10);
+		
+		// Adiciona um ouvinte de eventos de teclado ao campo//IMPEDE NUMEROS
+		mesDigitadoCamp.addKeyListener(new KeyAdapter() {
+		            @Override
+		            public void keyTyped(KeyEvent e) {
+		                char c = e.getKeyChar();
+		                
+		                // Verifica se o caractere é um número
+		                if (Character.isDigit(c)) {
+		                    e.consume(); // Impede que o caractere seja inserido
+		                }
+		            }
+		        });
+				add(mesDigitadoCamp);
 		
 		lblAno = new JLabel("");
 		lblAno.setFont(new Font("Tahoma", Font.ITALIC, 11));

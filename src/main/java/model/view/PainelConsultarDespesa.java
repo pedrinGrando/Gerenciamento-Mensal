@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -23,6 +25,8 @@ import javax.swing.border.EmptyBorder;
 
 import model.vo.*;
 import controller.*;
+import exceptions.CampoInvalidoException;
+
 import javax.swing.JTextField;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
@@ -72,12 +76,24 @@ public class PainelConsultarDespesa extends JPanel {
 		lblTitulo.setBounds(168, 24, 183, 23);
 		add(lblTitulo);
 		
-		
 		campDespDigitada = new JTextField();
-		campDespDigitada.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		campDespDigitada.setBounds(135, 88, 296, 20);
-		add(campDespDigitada);
+		campDespDigitada.setBorder(null);
+		campDespDigitada.setBounds(135, 88, 173, 20);
 		campDespDigitada.setColumns(10);
+		
+		// Adiciona um ouvinte de eventos de teclado ao campo
+		campDespDigitada.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                
+                // Verifica se o caractere é um número
+                if (Character.isDigit(c)) {
+                    e.consume(); // Impede que o caractere seja inserido
+                }
+            }
+        });
+		add(campDespDigitada);
 		
 		visaoNome = new JLabel("Nome da despesa :");
 		visaoNome.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -121,29 +137,38 @@ public class PainelConsultarDespesa extends JPanel {
 		
 		btnConsultar = new JButton("");
 		btnConsultar.setBorder(null);
-		btnConsultar.setBackground(new Color(0, 255, 255));
+		btnConsultar.setBackground(new Color(255, 255, 255));
 		btnConsultar.setIcon(new ImageIcon(PainelConsultarDespesa.class.getResource("/icons/loupe.png")));
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if (campDespDigitada.getText().isBlank() || campDespDigitada.getText().isEmpty()) {
-					
-					JOptionPane.showMessageDialog(null, "O nome é obrigratório", "Gerenciamento-Mensal", JOptionPane.WARNING_MESSAGE);
-					
-				} else {
+				String despNome = campDespDigitada.getText();
+				
+				try {
 					despesaVO = despController.consultarDespesaController(campDespDigitada.getText(), userOnline);
 					
-					lblNome.setText(userOnline.getNome());
+					if (despesaVO.getIdDespesa() == 0) {
+						
+						JOptionPane.showMessageDialog(null, "Despesa " + despNome+ " \nnão encontrada!", "", JOptionPane.ERROR_MESSAGE);
+						
+					} else {
+					
+                    lblNome.setText(userOnline.getNome());
 					
 					lblDespesa.setText(despesaVO.getDespNome());
 					
 					lblValor.setText("R$ "+ formato.format(despesaVO.getValor()));
+					}
+                  
+				} catch (CampoInvalidoException e1) {
 					
+					JOptionPane.showMessageDialog(null, "Despesa não encontrada!"
+							, "GS - Gerenciador de salário", JOptionPane.WARNING_MESSAGE);
 				}
 				
 			}
 		});
-		btnConsultar.setBounds(429, 85, 39, 23);
+		btnConsultar.setBounds(303, 88, 38, 20);
 		add(btnConsultar);
 		
 		JLabel lblNewLabel_2 = new JLabel("");

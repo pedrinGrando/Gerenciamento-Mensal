@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -46,8 +48,20 @@ public class PainelRemoverDespesa extends JPanel {
 		nomeDespesa_camp = new JTextField();
 		nomeDespesa_camp.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		nomeDespesa_camp.setBounds(42, 94, 181, 20);
-		add(nomeDespesa_camp);
 		nomeDespesa_camp.setColumns(10);
+		
+		nomeDespesa_camp.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                
+                // Verifica se o caractere é um número
+                if (Character.isDigit(c)) {
+                    e.consume(); // Impede que o caractere seja inserido
+                }
+            }
+        });
+		add(nomeDespesa_camp);
 		
 		visaoNome = new JLabel("Nome da despesa");
 		visaoNome.setFont(new Font("Tahoma", Font.ITALIC, 11));
