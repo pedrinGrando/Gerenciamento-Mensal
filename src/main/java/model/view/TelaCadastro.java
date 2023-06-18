@@ -77,9 +77,9 @@ public class TelaCadastro extends JFrame {
 	private JLabel visaoEmail;
 	private JLabel visaoSalario;
 	private JLabel visaoLogin;
-	private JLabel lblNewLabel_6;
-	private JLabel lblNewLabel_7;
-	private JLabel lblNewLabel_8;
+	private JLabel linha2;
+	private JLabel linhas;
+	private JLabel lblEndereco;
 	private Container visaoRua;
 	private JLabel visaoBairro;
 	private Container visaoNumero;
@@ -240,18 +240,18 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(loginCamp);
 		loginCamp.setColumns(10);
 		
-		lblNewLabel_6 = new JLabel("_______________________________________________________");
-		lblNewLabel_6.setBounds(399, 304, 423, 14);
-		contentPane.add(lblNewLabel_6);
+		linha2 = new JLabel("_______________________________________________________");
+		linha2.setBounds(399, 304, 423, 14);
+		contentPane.add(linha2);
 		
-		lblNewLabel_7 = new JLabel("______________________________________________");
-		lblNewLabel_7.setBounds(29, 304, 290, 14);
-		contentPane.add(lblNewLabel_7);
+		linhas = new JLabel("______________________________________________");
+		linhas.setBounds(29, 304, 290, 14);
+		contentPane.add(linhas);
 		
-		lblNewLabel_8 = new JLabel("Seu endereço ");
-		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_8.setBounds(312, 304, 115, 14);
-		contentPane.add(lblNewLabel_8);
+		lblEndereco = new JLabel("Seu endereço ");
+		lblEndereco.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		lblEndereco.setBounds(312, 304, 115, 14);
+		contentPane.add(lblEndereco);
 		
 		visaoSenha = new JLabel("Senha : ");
 		visaoSenha.setFont(new Font("Tahoma", Font.ITALIC, 11));
