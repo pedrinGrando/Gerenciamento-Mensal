@@ -23,6 +23,7 @@ public class TelaSobreSistema extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JButton okButton;
+	private JLabel lblImagem;
 	
 	/**
 	 * Launch the application.
@@ -69,7 +70,7 @@ public class TelaSobreSistema extends JDialog {
 			getRootPane().setDefaultButton(okButton);
 		}
 		
-		JLabel lblImagem = new JLabel("");
+		lblImagem = new JLabel("");
 		lblImagem.setIcon(new ImageIcon(TelaSobreSistema.class.getResource("/icons/sobreSistema.png")));
 		lblImagem.setBounds(29, 35, 537, 347);
 		contentPanel.add(lblImagem);

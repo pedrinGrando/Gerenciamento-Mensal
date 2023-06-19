@@ -19,14 +19,31 @@ public class TabelaController {
 		return tabBO.salvarDadosTabelaBO(userLogado, tabela);
 	}
 
-	public TabelaVO consultarMesController(TabelaVO tabelaVO) {
+	public TabelaVO consultarMesController(TabelaVO tabelaVO) throws CampoInvalidoException {
 		
+		this.validarCampoMes(tabelaVO);
 		return tabBO.consultarMesBO(tabelaVO);
 	}
 
 	public ArrayList<TabelaVO> consultarTodasController(TabelaVO tabelaVO) {
 		
+		
 		return tabBO.consultarTabelaBO(tabelaVO);
+	}
+
+	private void validarCampoMes(TabelaVO tabelaVO) throws CampoInvalidoException {
+		
+		String mensagem = "";
+		
+		if (tabelaVO.getMes().trim().isEmpty() || tabelaVO.getMes().trim().isBlank()) {
+			mensagem = "O campo mês é obrigatório!";
+		}
+		
+		if (!mensagem.trim().isEmpty()) {
+			throw new CampoInvalidoException(mensagem);
+		}
+		
+		
 	}
 
 	public ArrayList<TabelaVO> consultarComFiltros(TabelaSeletor tabSeletor) {

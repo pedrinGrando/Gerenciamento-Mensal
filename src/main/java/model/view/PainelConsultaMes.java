@@ -18,6 +18,8 @@ import javax.swing.JTextField;
 
 import model.vo.*;
 import controller.*;
+import exceptions.CampoInvalidoException;
+
 import javax.swing.JProgressBar;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
@@ -44,6 +46,7 @@ public class PainelConsultaMes extends JPanel {
 	private JLabel lblAno;
 	private JLabel lblSaldoFinal;
 	private JLabel lblTotalRestante;
+	private JLabel lblErro;
 
 	/**
 	 * Create the panel.
@@ -59,6 +62,12 @@ public class PainelConsultaMes extends JPanel {
 		lblNewLabel_1.setBounds(151, 11, 236, 30);
 		add(lblNewLabel_1);
 		
+		lblMes = new JLabel("New label");
+		lblMes.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblMes.setBounds(157, 150, 175, 14);
+		add(lblMes);
+		lblMes.setText("");
+		
 		btnConsultar = new JButton("");
 		btnConsultar.setBorder(null);
 		btnConsultar.setIcon(new ImageIcon(PainelConsultaMes.class.getResource("/icons/loupe.png")));
@@ -66,30 +75,36 @@ public class PainelConsultaMes extends JPanel {
 		btnConsultar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				
+				lblErro.setText("");
 				String mesConsultado = mesDigitadoCamp.getText();
 				
 				tabelaVO.setMes(mesConsultado);
 				tabelaVO.setIdUsuario(userOnline.getIdUsuario());
 				
-				//CONSULTANDO MES
-				tabelaVO = tabelaController.consultarMesController(tabelaVO);
-				//VERIFICACOES
-			    if (tabelaVO.getIdTabela() == 0) {
-			    	JOptionPane.showMessageDialog(null, "Dados do mês  " + mesConsultado 
-			    			+"\n não encontrados! ", "GS - Gerenciador de salário", JOptionPane.ERROR_MESSAGE);
-			    } else {
-			   
-			    	JOptionPane.showMessageDialog(null, "Consulta realizada com sucesso! " + mesConsultado 
-			    			, "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
-			    	
-			    	
-					lblAno.setText(""+tabelaVO.getAno());
-			    	
-					lblSaldoFinal.setText("R$"+ formato.format(tabelaVO.getSaldoFinal()));
-			    	
-					lblTotalRestante.setText("R$" + formato.format(tabelaVO.getTotalRest()));
-			    
-			    }
+				try {
+					tabelaVO = tabelaController.consultarMesController(tabelaVO);
+                    if (tabelaVO.getIdTabela() == 0) {
+						
+						JOptionPane.showMessageDialog(null, "Dados do mês: " + mesConsultado+ " \nnão encontradOS!", "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+						
+					} else {
+						
+						lblMes.setText(mesConsultado);
+					
+						lblAno.setText(""+tabelaVO.getAno());
+						
+						lblSaldoFinal.setText("R$"+ formato.format(tabelaVO.getSaldoFinal()));
+						
+						lblTotalRestante.setText("R$" + formato.format(tabelaVO.getTotalRest()));
+					}
+					
+				} catch (CampoInvalidoException e1) {
+					
+					lblErro.setText("O nome é obrigatório!");
+					
+				}
+				
 				
 			}
 		});
@@ -101,6 +116,12 @@ public class PainelConsultaMes extends JPanel {
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
 		lblTitulo.setBounds(58, 73, 222, 23);
 		add(lblTitulo);
+		
+		lblErro = new JLabel("");
+		lblErro.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblErro.setForeground(new Color(255, 0, 0));
+		lblErro.setBounds(322, 98, 139, 20);
+		add(lblErro);
 	
 		mesDigitadoCamp = new JTextField();
 		mesDigitadoCamp.setBorder(null);
@@ -128,12 +149,12 @@ public class PainelConsultaMes extends JPanel {
 		
 		lblTotalRestante = new JLabel("");
 		lblTotalRestante.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblTotalRestante.setBounds(190, 264, 142, 14);
+		lblTotalRestante.setBounds(181, 264, 142, 14);
 		add(lblTotalRestante);
 		
 		lblSaldoFinal = new JLabel("");
 		lblSaldoFinal.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblSaldoFinal.setBounds(124, 309, 141, 14);
+		lblSaldoFinal.setBounds(114, 309, 141, 14);
 		add(lblSaldoFinal);
 		
 		panel = new JPanel();
@@ -145,12 +166,6 @@ public class PainelConsultaMes extends JPanel {
 		lblSubTitulo.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		lblSubTitulo.setBounds(58, 150, 117, 14);
 		add(lblSubTitulo);
-		
-		lblMes = new JLabel("New label");
-		lblMes.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblMes.setBounds(175, 150, 175, 14);
-		add(lblMes);
-		lblMes.setText(mesDigitadoCamp.getText());
 		
 		lblNewLabel_3 = new JLabel("____________________________________________________");
 		lblNewLabel_3.setBounds(43, 160, 418, 14);
@@ -175,5 +190,6 @@ public class PainelConsultaMes extends JPanel {
 		lblIcon.setIcon(new ImageIcon(PainelConsultaMes.class.getResource("/icons/bank.png")));
 		lblIcon.setBounds(636, 458, 34, 30);
 		add(lblIcon);
+		
 	}
 }
