@@ -62,6 +62,7 @@ public class PainelTabelaCompleta extends JPanel {
 		private int totalPaginas = 0;
 		private TabelaSeletor seletor = new TabelaSeletor();
 		private JComboBox cbAnos;
+		private JLabel lblErro;
 	
 		//Métodos usados no JTable
 		private void limparTabela() {
@@ -101,7 +102,9 @@ public class PainelTabelaCompleta extends JPanel {
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//buscarTabelaComFiltro(userOnline);
-				atualizarTabelaMesesTodos(userOnline);
+				
+					atualizarTabelaMesesTodos(userOnline);
+			
 			}
 
 		});
@@ -116,7 +119,7 @@ public class PainelTabelaCompleta extends JPanel {
 		tblTabelas = new JTable();
 		tblTabelas.setForeground(new Color(0, 0, 0));
 		this.limparTabela();
-		tblTabelas.setBounds(10, 66, 655, 383);
+		tblTabelas.setBounds(10, 56, 655, 383);
 		
 		add(tblTabelas);
 		
@@ -139,6 +142,12 @@ public class PainelTabelaCompleta extends JPanel {
 		cbMeses.setBackground(new Color(192, 192, 192));
 		cbMeses.setBounds(143, 22, 100, 22);
 		add(cbMeses);
+		
+		lblErro = new JLabel("");
+		lblErro.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblErro.setForeground(new Color(255, 0, 0));
+		lblErro.setBounds(271, 444, 224, 23);
+		add(lblErro);
 		
 		lblMesFiltro = new JLabel("Mês");
 		lblMesFiltro.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -193,6 +202,7 @@ public class PainelTabelaCompleta extends JPanel {
 	
 	protected void atualizarTabelaMesesTodos(UsuarioVO userOnline) {
 		
+		lblErro.setText("");
 		this.limparTabela();
 
 		TabelaVO tabelaVO = new TabelaVO();
@@ -230,12 +240,18 @@ public class PainelTabelaCompleta extends JPanel {
 		}
 	}
 	 protected void buscarTabelaComFiltro(UsuarioVO userOnline) {
+		lblErro.setText("");
 		tabSeletor = new TabelaSeletor();
 		tabSeletor.setLimite(TAMANHO_PAGINA);
 		tabSeletor.setPagina(paginaAtual);
 		tabSeletor.setMes((String) cbMeses.getSelectedItem());
 		tabSeletor.setAno((String) cbAnos.getSelectedItem());
 		tabelas = (ArrayList<TabelaVO>) tabelaController.consultarComFiltros(tabSeletor);
+		
+		if (tabelas.size() == 0) {
+			lblErro.setText("Nenhum dado encontrado!");
+		}
+		
 		atualizarTabelaMeses(userOnline);
 		atualizarQuantidadePaginas();
 	}
