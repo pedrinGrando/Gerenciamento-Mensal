@@ -21,11 +21,10 @@ public class GeradorPlanilha {
 		HSSFSheet abaPlanilha = arquivoExcel.createSheet("Tabela");
 		
 		HSSFRow linhaCabecalho = abaPlanilha.createRow(0);
-		linhaCabecalho.createCell(0).setCellValue("Nome");
-		linhaCabecalho.createCell(1).setCellValue("Mês");
-		linhaCabecalho.createCell(2).setCellValue("Ano");
-		linhaCabecalho.createCell(3).setCellValue("Total restante");
-		linhaCabecalho.createCell(4).setCellValue("Saldo final");
+		linhaCabecalho.createCell(0).setCellValue("Mês");
+		linhaCabecalho.createCell(1).setCellValue("Ano");
+		linhaCabecalho.createCell(2).setCellValue("Total restante");
+		linhaCabecalho.createCell(3).setCellValue("Saldo final");
 		
 		int contadorLinhas = 1;
 		for(TabelaVO t: tabelas) {
