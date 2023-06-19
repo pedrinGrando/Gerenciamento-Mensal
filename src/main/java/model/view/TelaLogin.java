@@ -56,6 +56,7 @@ public class TelaLogin extends JFrame {
 		private JLabel lblSobre;
 		private JPanel panel;
 		private JButton btnRecuperacaoSenha;
+		private JLabel lblErro;
 
 	/**
 	 * Launch the application.
@@ -119,29 +120,32 @@ public class TelaLogin extends JFrame {
 		btn_entrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//REALIZACAO DO LOGIN 
+				lblErro.setText("");
+            	//REALIZACAO DO LOGIN 
 				UsuarioController userController = new UsuarioController();
 				userOnline.setLogin(loginField.getText());
 				userOnline.setSenha(senhaField.getText());
 			    try {
 					userOnline = userController.realizarLoginController(userOnline);
+					
+					if (userOnline.getIdUsuario() != 0) {
+    					
+    					JOptionPane.showMessageDialog(null, "Login efetuado com sucesso "+userOnline.getLogin()+ "!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
+    					
+    					//METODO PARA TROCA DE FRAME
+    					dispose();
+    					MenuPrincipal menu = new MenuPrincipal(userOnline);
+    					menu.setVisible(true);
+    					
+    				} else {
+    					lblErro.setText("Usuário não encontrado!");
+    				} 
+					
 				} catch (CampoInvalidoException e1) {
 					
-	                JOptionPane.showMessageDialog(null, e1.getMessage(), "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+					lblErro.setText(e1.getMessage());
+	             
 				}
-				
-				if (userOnline.getIdUsuario() != 0) {
-					
-					JOptionPane.showMessageDialog(null, "Login efetuado com sucesso "+userOnline.getLogin()+ "!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
-					
-					//METODO PARA TROCA DE FRAME
-					dispose();
-					MenuPrincipal menu = new MenuPrincipal(userOnline);
-					menu.setVisible(true);
-					
-				} else if (userOnline.getIdUsuario() == 0) {
-					JOptionPane.showMessageDialog(null, "Usuário não encontrado!", "Gerenciamento-Mensal", JOptionPane.WARNING_MESSAGE);
-				} 
 		   }
 		
 	    });
@@ -153,31 +157,33 @@ public class TelaLogin extends JFrame {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                   
+                	lblErro.setText("");
                 	//REALIZACAO DO LOGIN 
     				UsuarioController userController = new UsuarioController();
     				userOnline.setLogin(loginField.getText());
     				userOnline.setSenha(senhaField.getText());
     			    try {
     					userOnline = userController.realizarLoginController(userOnline);
+    					
+    					if (userOnline.getIdUsuario() != 0) {
+        					
+        					JOptionPane.showMessageDialog(null, "Login efetuado com sucesso "+userOnline.getLogin()+ "!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
+        					
+        					//METODO PARA TROCA DE FRAME
+        					dispose();
+        					MenuPrincipal menu = new MenuPrincipal(userOnline);
+        					menu.setVisible(true);
+        					
+        				} else {
+        					lblErro.setText("Usuário não encontrado!");
+        				} 
+    					
     				} catch (CampoInvalidoException e1) {
     					
-    	                JOptionPane.showMessageDialog(null, e1.getMessage(), "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+    					lblErro.setText(e1.getMessage());
+    	             
     				}
-    				
-    				if (userOnline.getIdUsuario() != 0) {
-    					
-    					JOptionPane.showMessageDialog(null, "Login efetuado com sucesso "+userOnline.getLogin()+ "!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
-    					
-    					//METODO PARA TROCA DE FRAME
-    					dispose();
-    					MenuPrincipal menu = new MenuPrincipal(userOnline);
-    					menu.setVisible(true);
-    					
-    				} else if (userOnline.getIdUsuario() == 0) {
-    					JOptionPane.showMessageDialog(null, "Usuário não encontrado!", "Gerenciamento-Mensal", JOptionPane.WARNING_MESSAGE);
-    				} 
-                	
-                	//btn_entrar.doClick(); // Simula um clique no botão
+    		
                 }
             }
 
@@ -207,6 +213,12 @@ public class TelaLogin extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
+		lblErro = new JLabel("");
+		lblErro.setForeground(new Color(255, 0, 0));
+		lblErro.setFont(new Font("Tahoma", Font.ITALIC, 9));
+		lblErro.setBounds(228, 196, 157, 14);
+		contentPane.add(lblErro);
+	
 		lblTitulo = new JLabel("Entre com suas credenciais");
 		lblTitulo.setBounds(108, 47, 319, 14);
 		panel.add(lblTitulo);
@@ -259,6 +271,6 @@ public class TelaLogin extends JFrame {
 		btnRecuperacaoSenha.setBorder(null);
 		btnRecuperacaoSenha.setBounds(116, 246, 147, 23);
 		contentPane.add(btnRecuperacaoSenha);
-	
+		
 	}
 }
