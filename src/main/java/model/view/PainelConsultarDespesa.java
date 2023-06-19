@@ -61,6 +61,10 @@ public class PainelConsultarDespesa extends JPanel {
 
 	private JButton btnConsultar;
 
+	private JLabel lblErro;
+
+	private JLabel lblIcon;
+
 	
 
 	/**
@@ -130,6 +134,12 @@ public class PainelConsultarDespesa extends JPanel {
 		lblValorConsult.setBounds(20, 288, 71, 14);
 		add(lblValorConsult);
 		
+		lblErro = new JLabel("");
+		lblErro.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblErro.setForeground(new Color(255, 0, 0));
+		lblErro.setBounds(251, 111, 121, 23);
+		add(lblErro);
+		
 		lblValor = new JLabel("");
 		lblValor.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblValor.setBounds(73, 288, 115, 14);
@@ -143,13 +153,14 @@ public class PainelConsultarDespesa extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				String despNome = campDespDigitada.getText();
+				lblErro.setText("");
 				
 				try {
 					despesaVO = despController.consultarDespesaController(campDespDigitada.getText(), userOnline);
 					
 					if (despesaVO.getIdDespesa() == 0) {
 						
-						JOptionPane.showMessageDialog(null, "Despesa " + despNome+ " \nnão encontrada!", "", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Despesa " + despNome+ " \nnão encontrada!", "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
 						
 					} else {
 					
@@ -162,8 +173,7 @@ public class PainelConsultarDespesa extends JPanel {
                   
 				} catch (CampoInvalidoException e1) {
 					
-					JOptionPane.showMessageDialog(null, "Despesa não encontrada!"
-							, "GS - Gerenciador de salário", JOptionPane.WARNING_MESSAGE);
+					lblErro.setText("O nome é obrigatório!");
 				}
 				
 			}
@@ -171,9 +181,10 @@ public class PainelConsultarDespesa extends JPanel {
 		btnConsultar.setBounds(303, 88, 38, 20);
 		add(btnConsultar);
 		
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon(PainelConsultarDespesa.class.getResource("/icons/bank.png")));
-		lblNewLabel_2.setBounds(620, 452, 32, 32);
-		add(lblNewLabel_2);
+		lblIcon = new JLabel("");
+		lblIcon.setIcon(new ImageIcon(PainelConsultarDespesa.class.getResource("/icons/bank.png")));
+		lblIcon.setBounds(620, 452, 32, 32);
+		add(lblIcon);
+		
 	}
 }
