@@ -21,8 +21,8 @@ public class UsuarioDAO {
 		
 		String query = "SELECT * "
 				+ "FROM USUARIO u "
-				+ "WHERE u.login like '" + userLogado.getLogin() + "' "
-				+ "AND u.senha = " + userLogado.getSenha();
+				+ "WHERE u.login = '" + userLogado.getLogin() + "' "
+				+ "AND u.senha = '" + userLogado.getSenha() + "' ";
 		
 		try {
 			resultado = stmt.executeQuery(query);
