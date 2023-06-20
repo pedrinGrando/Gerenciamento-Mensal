@@ -6,15 +6,18 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import com.google.gson.Gson;
+
+import exceptions.CampoInvalidoException;
 import model.vo.*;
 
   public class ViaCEP {
 	  
 	  EnderecoVO endereco = new EnderecoVO();
 	  
-	  public EnderecoVO gerarEnderecoViaCEP(String cep) {
+	  public EnderecoVO gerarEnderecoViaCEP(String cep) throws CampoInvalidoException, IOException {
 		  
         try {
+        	this.validarCep(cep);
             // Monta a URL de requisição
             URL url = new URL("https://viacep.com.br/ws/" + cep + "/json/");
 
@@ -48,8 +51,27 @@ import model.vo.*;
             // Fecha a conexão
             connection.disconnect();
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+        	throw new IOException();
         }
 		return endereco;
     }
+
+	private void validarCep(String cep) throws CampoInvalidoException {
+		
+		String mensagem = "";
+		
+		if (cep.trim().isBlank()) {
+			mensagem = "Digite o CEP!";
+		} else if (cep.trim().isEmpty()) {
+			mensagem = "Digite o CEP!";
+		} else if (cep == null) {
+			mensagem = "Digite o CEP!";
+		} 
+		
+		if (!mensagem.trim().isEmpty()) {
+			throw new CampoInvalidoException(mensagem);
+		}
+		
+	}
   }
