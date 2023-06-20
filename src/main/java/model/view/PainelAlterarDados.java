@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.net.SocketException;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -82,6 +83,7 @@ public class PainelAlterarDados extends JPanel {
 	private JComponent visaoSenha;
 	private JLabel visaoNovaSenha;
 	private JButton btnBuscarCep;
+	private JLabel lblErro;
 
 	/**
 	 * Create the panel.
@@ -165,9 +167,10 @@ public class PainelAlterarDados extends JPanel {
 				
 				try {
 					endPorCEP = enderecoController.buscarViaCepController(cepCamp.getText());
-				} catch (EnderecoInvalidoException | SocketException e1) {
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(null, e1.getMessage(), "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+				} catch (EnderecoInvalidoException | CampoInvalidoException e1) {
+					lblErro.setText("Digite o CEP!");
+				} catch (IOException e2) {
+					lblErro.setText("Digite o CEP!");
 				}
 				
 				//insere os valores do cep
@@ -380,6 +383,12 @@ public class PainelAlterarDados extends JPanel {
 		visaoNovaSenha.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		visaoNovaSenha.setBounds(377, 302, 102, 14);
 		add(visaoNovaSenha);
+		
+		lblErro = new JLabel("");
+		lblErro.setForeground(new Color(255, 0, 0));
+		lblErro.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblErro.setBounds(59, 320, 114, 14);
+		add(lblErro);
 		
 	}
 }
