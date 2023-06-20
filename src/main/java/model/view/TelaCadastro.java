@@ -43,7 +43,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.JRadioButton;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.net.SocketException;
+import java.io.IOException;
 
 import javax.swing.JCheckBox;
 import model.dao.*;
@@ -77,9 +77,9 @@ public class TelaCadastro extends JFrame {
 	private JLabel visaoEmail;
 	private JLabel visaoSalario;
 	private JLabel visaoLogin;
-	private JLabel linha2;
-	private JLabel linhas;
-	private JLabel lblEndereco;
+	private JLabel lblNewLabel_6;
+	private JLabel lblNewLabel_7;
+	private JLabel lblNewLabel_8;
 	private Container visaoRua;
 	private JLabel visaoBairro;
 	private Container visaoNumero;
@@ -98,6 +98,7 @@ public class TelaCadastro extends JFrame {
 	private JLabel visaoConfirmSenha;
 	private JCheckBox cbxAceitaTermos;
 	private JButton btnBuscarCEP;
+	private JLabel lblErro;
 
 	/**
 	 * Launch the application.
@@ -240,18 +241,18 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(loginCamp);
 		loginCamp.setColumns(10);
 		
-		linha2 = new JLabel("_______________________________________________________");
-		linha2.setBounds(399, 304, 423, 14);
-		contentPane.add(linha2);
+		lblNewLabel_6 = new JLabel("_______________________________________________________");
+		lblNewLabel_6.setBounds(399, 304, 423, 14);
+		contentPane.add(lblNewLabel_6);
 		
-		linhas = new JLabel("______________________________________________");
-		linhas.setBounds(29, 304, 290, 14);
-		contentPane.add(linhas);
+		lblNewLabel_7 = new JLabel("______________________________________________");
+		lblNewLabel_7.setBounds(29, 304, 290, 14);
+		contentPane.add(lblNewLabel_7);
 		
-		lblEndereco = new JLabel("Seu endereço ");
-		lblEndereco.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblEndereco.setBounds(312, 304, 115, 14);
-		contentPane.add(lblEndereco);
+		lblNewLabel_8 = new JLabel("Seu endereço ");
+		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		lblNewLabel_8.setBounds(312, 304, 115, 14);
+		contentPane.add(lblNewLabel_8);
 		
 		visaoSenha = new JLabel("Senha : ");
 		visaoSenha.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -340,6 +341,12 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(campCidade);
 		campCidade.setColumns(10);
 		
+		lblErro = new JLabel("");
+		lblErro.setFont(new Font("Tahoma", Font.ITALIC, 9));
+		lblErro.setForeground(new Color(255, 0, 0));
+		lblErro.setBounds(136, 369, 112, 14);
+		contentPane.add(lblErro);
+		
 		visaoEstado = new JLabel("Estado : ");
 		visaoEstado.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		visaoEstado.setBounds(468, 353, 46, 14);
@@ -384,20 +391,32 @@ public class TelaCadastro extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				this.limparCampos();
+				lblErro.setText("");
 				
 				//Traz os dados do endereco via Cep/API
 				
 				try {
 					endPorCEP = enderecoController.buscarViaCepController(cepCamp.getText());
-				} catch (EnderecoInvalidoException | SocketException excessao) {
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(null, "Endereço não encontrado!", "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+					
+					
+				} catch (EnderecoInvalidoException | CampoInvalidoException excessao) {
+					
+					lblErro.setText("Digite o CEP!");
+					
+				} catch (IOException e1) {
+					
+					lblErro.setText("Digite o CEP!");
 				}
 				ruaCamp.setText(endPorCEP.getLogradouro());
 				campCidade.setText(endPorCEP.getLocalidade());
 				bairroCamp.setText(endPorCEP.getBairro());
 				
+				if (ruaCamp.getText().isEmpty() || campCidade.getText().isEmpty()) {
+					lblErro.setText("Endereço não encontrado!");
+				} 
+				
 			}
+			
 
 			private void limparCampos() {
 				
@@ -509,6 +528,7 @@ public class TelaCadastro extends JFrame {
 		btnSalvar.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		btnSalvar.setBounds(371, 527, 128, 23);
 		contentPane.add(btnSalvar);
+		
 		
 			}
 		}
