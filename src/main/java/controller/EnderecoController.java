@@ -4,6 +4,7 @@ import model.vo.EnderecoVO;
 import model.vo.TabelaVO;
 import model.vo.UsuarioVO;
 
+import java.io.IOException;
 import java.net.SocketException;
 import java.util.ArrayList;
 
@@ -62,7 +63,7 @@ public class EnderecoController {
 		return enderecoBO.consultarEnderecoBO(endereco);
 	}
 	
-	public EnderecoVO buscarViaCepController(String cep) throws EnderecoInvalidoException, SocketException {
+	public EnderecoVO buscarViaCepController(String cep) throws EnderecoInvalidoException, CampoInvalidoException, IOException {
 		
 		this.validarCEP(cep);
 		return viaCep.gerarEnderecoViaCEP(cep);
