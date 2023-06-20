@@ -43,7 +43,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.JRadioButton;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.net.SocketException;
+import java.io.IOException;
 
 import javax.swing.JCheckBox;
 import model.dao.*;
@@ -98,6 +98,7 @@ public class TelaCadastro extends JFrame {
 	private JLabel visaoConfirmSenha;
 	private JCheckBox cbxAceitaTermos;
 	private JButton btnBuscarCEP;
+	private JLabel lblErro;
 
 	/**
 	 * Launch the application.
@@ -340,6 +341,12 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(campCidade);
 		campCidade.setColumns(10);
 		
+		lblErro = new JLabel("");
+		lblErro.setFont(new Font("Tahoma", Font.ITALIC, 9));
+		lblErro.setForeground(new Color(255, 0, 0));
+		lblErro.setBounds(136, 369, 112, 14);
+		contentPane.add(lblErro);
+		
 		visaoEstado = new JLabel("Estado : ");
 		visaoEstado.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		visaoEstado.setBounds(468, 353, 46, 14);
@@ -384,14 +391,19 @@ public class TelaCadastro extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				this.limparCampos();
+				lblErro.setText("");
 				
 				//Traz os dados do endereco via Cep/API
 				
 				try {
 					endPorCEP = enderecoController.buscarViaCepController(cepCamp.getText());
-				} catch (EnderecoInvalidoException | SocketException excessao) {
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(null, "Endereço não encontrado!", "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+				} catch (EnderecoInvalidoException | CampoInvalidoException excessao) {
+					
+					lblErro.setText("Digite o CEP!");
+					
+				} catch (IOException e1) {
+					
+					lblErro.setText("Digite o CEP!");
 				}
 				ruaCamp.setText(endPorCEP.getLogradouro());
 				campCidade.setText(endPorCEP.getLocalidade());
@@ -509,6 +521,7 @@ public class TelaCadastro extends JFrame {
 		btnSalvar.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		btnSalvar.setBounds(371, 527, 128, 23);
 		contentPane.add(btnSalvar);
+		
 		
 			}
 		}
