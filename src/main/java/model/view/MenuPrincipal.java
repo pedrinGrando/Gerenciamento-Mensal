@@ -7,7 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.UsuarioController;
+import model.vo.EnderecoVO;
 import model.vo.UsuarioVO;
+import controller.EnderecoController;
 
 import java.awt.Color;
 import javax.swing.JMenuBar;
@@ -41,6 +43,8 @@ public class MenuPrincipal extends JFrame {
 	private PainelAlterarDespesa painelAlterarDespesa;
 	
 	UsuarioController usuarioController = new UsuarioController();
+	EnderecoController enderecoController = new EnderecoController();
+	EnderecoVO enderecoPID = new EnderecoVO();
 
 	private JMenuItem mntmTabelaCompleta;
 
@@ -108,7 +112,9 @@ public class MenuPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
-					painelAlterarDados = new PainelAlterarDados(userOnline);
+					enderecoPID.setIdEndereco(userOnline.getIdUsuario());
+					enderecoPID = enderecoController.consultarEnderecoPorId(enderecoPID);
+					painelAlterarDados = new PainelAlterarDados(userOnline, enderecoPID);
 					setContentPane(painelAlterarDados);
 					revalidate(); 
 				} catch (ParseException e1) {
