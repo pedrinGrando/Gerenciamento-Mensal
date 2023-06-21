@@ -51,12 +51,12 @@ public class EnderecoDAO {
 		boolean retorno = false;
 		
 		String query = "UPDATE endereco SET idusuario = " + endAtualizado.getIdUsuario()
-				+ ", rua = '" + endAtualizado.getLogradouro()
+				+ ", logradouro = '" + endAtualizado.getLogradouro()
 				+ "', bairro = '" + endAtualizado.getBairro()
 				+ "', numero = '" + endAtualizado.getNumero()
 				+ "', cep = '" + endAtualizado.getCep()
-				+ "', estado = '" + endAtualizado.getUf()
-				+ "', cidade = '" + endAtualizado.getLocalidade()
+				+ "', uf = '" + endAtualizado.getUf()
+				+ "', localidade = '" + endAtualizado.getLocalidade()
 				+ "' WHERE idusuario = " + endAtualizado.getIdUsuario();
 		 
 		try {
@@ -80,10 +80,9 @@ public class EnderecoDAO {
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
 		
-		String query = "SELECT e.idendereco, e.idusuario, e.logradouro, e.bairro, e.numero, "
-				+ "e.cep, e.uf, e.localidade "
-				+ "FROM ENDERECO e "
-				+ "WHERE e.idusuario = " + endereco.getIdUsuario();
+		String query = "SELECT * "
+				+ "FROM ENDERECO "
+				+ "WHERE idusuario = " + endereco.getIdUsuario();
 		
 		try {
 			resultado = stmt.executeQuery(query);
