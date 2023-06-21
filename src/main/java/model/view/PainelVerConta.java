@@ -178,7 +178,6 @@ public class PainelVerConta extends JPanel {
 		telaCidade.setBounds(305, 143, 65, 14);
 		add(telaCidade);
 		
-		
 		lblCidade = new JLabel("");
 		lblCidade.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblCidade.setBounds(364, 143, 145, 14);
