@@ -99,6 +99,13 @@ public class TelaCadastro extends JFrame {
 	private JCheckBox cbxAceitaTermos;
 	private JButton btnBuscarCEP;
 	private JLabel lblErro;
+	private JLabel lblErroSenha;
+	private JLabel lblErroCpf;
+	private JLabel lblErroNome;
+	private JLabel lblDataNasciErro;
+	private JLabel lblSalarioErro;
+	private JLabel lblLoginErro;
+	private JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -347,6 +354,42 @@ public class TelaCadastro extends JFrame {
 		lblErro.setBounds(136, 369, 112, 14);
 		contentPane.add(lblErro);
 		
+		lblErroSenha = new JLabel("");
+		lblErroSenha.setForeground(new Color(255, 0, 0));
+		lblErroSenha.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblErroSenha.setBounds(592, 42, 133, 14);
+		contentPane.add(lblErroSenha);
+		
+	    lblErroCpf = new JLabel("");
+		lblErroCpf.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblErroCpf.setForeground(new Color(255, 0, 0));
+		lblErroCpf.setBounds(312, 86, 143, 14);
+		contentPane.add(lblErroCpf);
+		
+		lblErroNome = new JLabel("");
+		lblErroNome.setForeground(new Color(255, 0, 0));
+		lblErroNome.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblErroNome.setBounds(312, 41, 115, 14);
+		contentPane.add(lblErroNome);
+		
+		lblDataNasciErro = new JLabel("");
+		lblDataNasciErro.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblDataNasciErro.setForeground(new Color(255, 0, 0));
+		lblDataNasciErro.setBounds(222, 136, 233, 14);
+		contentPane.add(lblDataNasciErro);
+		
+		lblSalarioErro = new JLabel("");
+		lblSalarioErro.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblSalarioErro.setForeground(new Color(255, 0, 0));
+		lblSalarioErro.setBounds(185, 233, 200, 14);
+		contentPane.add(lblSalarioErro);
+		
+		lblLoginErro = new JLabel("");
+		lblLoginErro.setForeground(new Color(255, 0, 0));
+		lblLoginErro.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblLoginErro.setBounds(202, 279, 194, 14);
+		contentPane.add(lblLoginErro);
+		
 		visaoEstado = new JLabel("Estado : ");
 		visaoEstado.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		visaoEstado.setBounds(468, 353, 46, 14);
@@ -446,6 +489,13 @@ public class TelaCadastro extends JFrame {
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
+				//limpa os campos de erro 
+				lblErroNome.setText("");
+				lblErroCpf.setText("");
+				lblDataNasciErro.setText("");
+				lblErroSenha.setText("");
+				lblLoginErro.setText("");
+				
 				 String valor1 = "";
 				
 				// DEFININDO TIPO DE USUARIO DE ACORDO COM A REGRA 
@@ -457,8 +507,7 @@ public class TelaCadastro extends JFrame {
 							cpfCamp.getText());
 					usuario.setCpf(cpfSemMascara);
 				} catch (ParseException e1) {
-					JOptionPane.showMessageDialog(null, "Erro ao converter o CPF", 
-							"Erro", JOptionPane.ERROR_MESSAGE); 
+					lblErroCpf.setText("O CPF é obrigatório!");
 				}
 	
 				// inserindo dados nos objetos 
@@ -482,8 +531,19 @@ public class TelaCadastro extends JFrame {
 			    	usuarioController.cadastrarUsuarioController(usuario);
 			      }
 			    } catch (CpfJaUtilizadoException | CampoInvalidoException excecao) {
-			    	JOptionPane.showMessageDialog(null, excecao.getMessage(), 
-							"Erro", JOptionPane.WARNING_MESSAGE); 
+			    	
+			    	if (campoNome.getText().trim().isEmpty() || campoNome.getText().trim().isBlank()) {
+			    		lblErroNome.setText("O nome é obrigatório!");
+			    	} else if(usuario.getDataNasci() == null) {
+			    		lblDataNasciErro.setText("A data de nascimento é obrigatória!");
+			    	} else if (usuario.getSenha().isEmpty() || usuario.getSenha().isBlank()) {
+			    		lblErroSenha.setText("A senha é obrigatória!");
+			    	} else if (loginCamp.getText().isEmpty() || loginCamp.getText().trim().isBlank()) {
+			    		lblLoginErro.setText("O login é obrigatório!");
+			    	} else if(usuario.getSalariol() <= 0) {
+			    		lblSalarioErro.setText("O salário deve ser informado!");
+			    	}
+			 
 			    }
 			    
 			    //INICIA O OBJETO DE ENDERECO
@@ -493,10 +553,16 @@ public class TelaCadastro extends JFrame {
 				endereco.setBairro(bairroCamp.getText());
 				endereco.setCep(cepCamp.getText());
 				endereco.setLogradouro(ruaCamp.getText());
-				endereco.setNumero(Integer.parseInt(campNumero.getText()));
-				endereco.setLocalidade(campCidade.getText());
-				endereco.setUf((String) cbEstados.getSelectedItem());
 				
+				if (!campNumero.getText().trim().isEmpty()) {
+					endereco.setNumero(Integer.parseInt(campNumero.getText()));
+					endereco.setLocalidade(campCidade.getText());
+					endereco.setUf((String) cbEstados.getSelectedItem());
+				} else {
+					endereco.setLocalidade(campCidade.getText());
+					endereco.setUf((String) cbEstados.getSelectedItem());
+				}
+	
 				 //cadastramento no banco, chamando validacoes
 				try {
 					endereco = enderecoController.cadastrarEnderecoController(endereco);
@@ -507,10 +573,11 @@ public class TelaCadastro extends JFrame {
 				if (usuario.getIdUsuario() != 0 && endereco.getIdEndereco() != 0) {
 					JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", 
 							"Sucesso", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null, "Não foi possível cadastrar o usuário!", 
-							"Sucesso", JOptionPane.ERROR_MESSAGE);
-				}	
+					dispose();
+					MenuPrincipal tela = new MenuPrincipal(usuario);
+					tela.setVisible(true);
+					
+				} 
 			}
 
 			private void verificarSenhasDigitadas(String text, String text2) {
@@ -529,6 +596,12 @@ public class TelaCadastro extends JFrame {
 		btnSalvar.setBounds(371, 527, 128, 23);
 		contentPane.add(btnSalvar);
 		
+		lblNewLabel = new JLabel("(Opcional)");
+		lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblNewLabel.setBounds(202, 477, 70, 14);
+		contentPane.add(lblNewLabel);
+		
 		
 			}
 		}
+
