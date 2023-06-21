@@ -70,24 +70,20 @@ public class UsuarioController {
 		mensagemValidacao += validarEmail(u);
 		
 		if(u.getLogin().isEmpty() || u.getLogin() == null) {
-			mensagemValidacao += " Login é obrigatório";
+			mensagemValidacao += " Login é obrigatório!";
 		}
 		
 		if(u.getSenha().isEmpty() || u.getSenha() == null) {
-			mensagemValidacao += " Senha é obrigatória";
+			mensagemValidacao += " Senha é obrigatória!";
 		}
 		
-		if(u.getSenha().length() < 6) {
-			mensagemValidacao += " Senha digitada inválida";
+		if(u.getSenha().length() < 6 || u.getSenha().length() > 6) {
+			mensagemValidacao += " Senha digitada inválida!";
 			
 		} 
 		
 		if(u.getSalariol() <= 0 ) {
-			mensagemValidacao += " O salário é obrigatório";
-		}
-		
-		if(u.getDataNasci().getYear() > 2005 ) {
-			mensagemValidacao += " É necessário ter 18 anos para o cadastro!";
+			mensagemValidacao += " O salário é obrigatório!";
 		}
 		
 		
