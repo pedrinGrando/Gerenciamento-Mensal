@@ -442,7 +442,7 @@ public class TelaCadastro extends JFrame {
 					endPorCEP = enderecoController.buscarViaCepController(cepCamp.getText());
 					
 					
-				} catch (EnderecoInvalidoException | CampoInvalidoException excessao) {
+				} catch (EnderecoInvalidoException | CampoInvalidoException excecao) {
 					
 					lblErro.setText("Digite o CEP!");
 					
@@ -453,7 +453,7 @@ public class TelaCadastro extends JFrame {
 				ruaCamp.setText(endPorCEP.getLogradouro());
 				campCidade.setText(endPorCEP.getLocalidade());
 				bairroCamp.setText(endPorCEP.getBairro());
-				
+				cbEstados.setSelectedItem(endPorCEP.getUf());
 				if (ruaCamp.getText().isEmpty() || campCidade.getText().isEmpty()) {
 					lblErro.setText("Endereço não encontrado!");
 				} 
@@ -604,3 +604,4 @@ public class TelaCadastro extends JFrame {
 		
 			}
 		}
+

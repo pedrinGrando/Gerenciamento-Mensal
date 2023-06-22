@@ -139,7 +139,6 @@ public class PainelVerConta extends JPanel {
 		lblDataNasci.setBounds(152, 245, 124, 14);
 		add(lblDataNasci);
 		
-		
 		String dataFormat = formatoData.format(userOnline.getDataNasci());
 		
 		lblDataNasci.setText(dataFormat);
@@ -177,7 +176,6 @@ public class PainelVerConta extends JPanel {
 		telaCidade.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		telaCidade.setBounds(305, 143, 65, 14);
 		add(telaCidade);
-		
 		
 		lblCidade = new JLabel("");
 		lblCidade.setFont(new Font("Tahoma", Font.ITALIC, 11));

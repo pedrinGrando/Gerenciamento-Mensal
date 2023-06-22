@@ -77,7 +77,7 @@ public class PainelTabelaCompleta extends JPanel {
 			DefaultTableModel model = (DefaultTableModel) tblTabelas.getModel();
 			//Preenche os valores na tabela linha a linha
 			for (TabelaVO t : tabelas) {
-				Object[] novaLinhaDaTabela = new Object[7];
+				Object[] novaLinhaDaTabela = new Object[nomesColunas.length];
 				novaLinhaDaTabela[0] = userOnline.getNome();
 				novaLinhaDaTabela[1] = t.getMes();
 				novaLinhaDaTabela[2] = t.getAno();
@@ -185,8 +185,6 @@ public class PainelTabelaCompleta extends JPanel {
 						JOptionPane.showConfirmDialog(null, e1.getMessage(), "Atenção", JOptionPane.WARNING_MESSAGE);
 					}
 				}
-				
-				
 			}
 		});
 		btnGerarPlanilha.setBorder(null);
