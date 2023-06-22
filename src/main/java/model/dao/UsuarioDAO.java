@@ -12,7 +12,7 @@ import model.vo.UsuarioVO;
 
 public class UsuarioDAO {
 
-	public UsuarioVO realizarLoginDAO(UsuarioVO userLogado) {
+	public UsuarioVO realizarLoginDAO(UsuarioVO userLogado) throws SQLException {
 		
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
@@ -40,8 +40,9 @@ public class UsuarioDAO {
 				
 			}
 		} catch (SQLException erro) {
-			System.out.println("Erro ao executar a query do realizarLoginDAO!");
-			System.out.println("Erro: " + erro.getMessage());
+			
+			throw new SQLException();
+			
 		} finally {
 			Banco.closeResultSet(resultado);
 			Banco.closeStatement(stmt);

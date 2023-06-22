@@ -13,7 +13,7 @@ public class UsuarioController {
 	UsuarioBO userBO = new UsuarioBO();
 	UsuarioDAO userDAO  = new UsuarioDAO();
 
-	public UsuarioVO realizarLoginController(UsuarioVO userOnline) throws CampoInvalidoException {
+	public UsuarioVO realizarLoginController(UsuarioVO userOnline) throws CampoInvalidoException, SQLException {
 		
 		this.validarCamposObrigatoriosLogin(userOnline);
 		

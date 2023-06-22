@@ -268,7 +268,8 @@ public class PainelAlterarDados extends JPanel {
 		novoSalarioL.setBounds(10, 245, 102, 20);
 		add(novoSalarioL);
 		novoSalarioL.setColumns(10);
-		novoSalarioL.setText(""+String.valueOf(userLogado.getSalariol()));
+		DecimalFormat formato = new DecimalFormat("#,##0.00");
+		novoSalarioL.setText(""+formato.format(userLogado.getSalariol()));
 		
 		senhaAtualAtualizar = new JPasswordField();
 		senhaAtualAtualizar.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));

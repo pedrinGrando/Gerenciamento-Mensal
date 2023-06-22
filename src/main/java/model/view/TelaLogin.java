@@ -35,6 +35,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.SQLException;
 
 
 public class TelaLogin extends JFrame {
@@ -141,65 +142,15 @@ public class TelaLogin extends JFrame {
     					lblErro.setText("Usuário não encontrado!");
     				} 
 					
-				} catch (CampoInvalidoException e1) {
+				} catch (CampoInvalidoException | SQLException e1) {
 					
 					lblErro.setText(e1.getMessage());
 	             
-				}
+				} 
 		   }
 		
 	    });
 		btn_entrar.setIcon(new ImageIcon(TelaLogin.class.getResource("/icons/login.png")));
-		
-		btn_entrar.addKeyListener(new KeyListener(){
-			
-			@Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                  
-                	lblErro.setText("");
-                	//REALIZACAO DO LOGIN 
-    				UsuarioController userController = new UsuarioController();
-    				userOnline.setLogin(loginField.getText());
-    				userOnline.setSenha(senhaField.getText());
-    			    try {
-    					userOnline = userController.realizarLoginController(userOnline);
-    					
-    					if (userOnline.getIdUsuario() != 0) {
-        					
-        					JOptionPane.showMessageDialog(null, "Login efetuado com sucesso "+userOnline.getLogin()+ "!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
-        					
-        					//METODO PARA TROCA DE FRAME
-        					dispose();
-        					MenuPrincipal menu = new MenuPrincipal(userOnline);
-        					menu.setVisible(true);
-        					
-        				} else {
-        					lblErro.setText("Usuário não encontrado!");
-        				} 
-    					
-    				} catch (CampoInvalidoException e1) {
-    					
-    					lblErro.setText(e1.getMessage());
-    	             
-    				}
-    		
-                }
-            }
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		
-		});
 	 
 		btn_entrar.setBackground(new Color(192, 192, 192));
 		btn_entrar.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));

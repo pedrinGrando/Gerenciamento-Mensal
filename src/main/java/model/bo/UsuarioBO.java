@@ -1,5 +1,7 @@
 package model.bo;
 
+import java.sql.SQLException;
+
 import exceptions.CpfJaUtilizadoException;
 import model.dao.UsuarioDAO;
 import model.vo.UsuarioVO;
@@ -8,7 +10,7 @@ public class UsuarioBO {
 	
 	UsuarioDAO userDAO = new UsuarioDAO();
 	
-	public UsuarioVO realizarLoginBO(UsuarioVO userOnline) {
+	public UsuarioVO realizarLoginBO(UsuarioVO userOnline) throws SQLException {
 		UsuarioVO usuarioVO = new UsuarioVO();
 		
 		
