@@ -226,4 +226,40 @@ public class UsuarioDAO {
 	
 	}
 
+	public UsuarioVO consultarUserPorLogin(UsuarioVO userLogin) throws SQLException {
+		
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		
+		String query = "SELECT * "
+				+ "FROM USUARIO u "
+				+ "WHERE u.login = '" + userLogin.getLogin() + "' ";
+				
+		try {
+			resultado = stmt.executeQuery(query);
+			if (resultado.next()) {
+				userLogin.setIdUsuario(Integer.parseInt(resultado.getString(1)));
+				userLogin.setTipoUsuario(Integer.parseInt(resultado.getString(2)));
+				userLogin.setNome(resultado.getString(3));
+				userLogin.setCpf(resultado.getString(4));
+				userLogin.setDataNasci(LocalDate.parse(resultado.getString(5),
+						DateTimeFormatter.ofPattern("yyy-MM-dd")));
+				userLogin.setEmail(resultado.getString(6));
+				userLogin.setSalariol(Double.parseDouble(resultado.getString(7)));
+				userLogin.setLogin(resultado.getString(8));
+				userLogin.setSenha(resultado.getString(9));
+			}
+		} catch (SQLException erro) {
+			
+			throw new SQLException();
+			
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return userLogin;
+	}
+
 }

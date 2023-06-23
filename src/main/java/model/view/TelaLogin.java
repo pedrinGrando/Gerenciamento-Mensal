@@ -45,6 +45,9 @@ public class TelaLogin extends JFrame {
 	 UsuarioVO userRecuperado = new UsuarioVO();
 	 
 	 UsuarioVO userOnline = new UsuarioVO();
+	 UsuarioVO userLogin = new UsuarioVO();
+	 String userSenha = "";
+	 UsuarioController userController = new UsuarioController();
 	
 		private JPanel contentPane;
 		private JTextField loginField;
@@ -108,7 +111,7 @@ public class TelaLogin extends JFrame {
 		loginField = new JTextField();
 		loginField.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		loginField.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		loginField.setBounds(181, 149, 118, 20);
+		loginField.setBounds(181, 149, 101, 20);
 		contentPane.add(loginField);
 		loginField.setColumns(10);
 		
@@ -116,7 +119,7 @@ public class TelaLogin extends JFrame {
 		senhaField.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		senhaField.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		senhaField.setBounds(181, 174, 118, 20);
+		senhaField.setBounds(181, 174, 101, 20);
 		contentPane.add(senhaField);
 		
 		btn_entrar = new JButton("Entrar");
@@ -124,31 +127,34 @@ public class TelaLogin extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				lblErro.setText("");
-            	//REALIZACAO DO LOGIN 
-				UsuarioController userController = new UsuarioController();
-				userOnline.setLogin(loginField.getText());
-				userOnline.setSenha(senhaField.getText());
-			    try {
-					userOnline = userController.realizarLoginController(userOnline);
+				
+				// VERIFICAR SENHA PARA LOGIN DIGITADO
+				userLogin.setLogin(loginField.getText());
+				
+				try {
+					userLogin = userController.consultarUserPorLogin(userLogin);
 					
-					if (userOnline.getIdUsuario() != 0) {
-    					
-    					JOptionPane.showMessageDialog(null, "Login efetuado com sucesso "+userOnline.getLogin()+ "!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
+					if (userLogin.getIdUsuario() != 0 && userLogin.getSenha().equals(senhaField.getText())) {
+						
+                        JOptionPane.showMessageDialog(null, "Login efetuado com sucesso "+userLogin.getLogin()+ "!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
     					
     					//METODO PARA TROCA DE FRAME
     					dispose();
-    					MenuPrincipal menu = new MenuPrincipal(userOnline);
+    					MenuPrincipal menu = new MenuPrincipal(userLogin);
     					menu.setVisible(true);
-    					
-    				} else {
-    					lblErro.setText("Usuário não encontrado!");
-    				} 
+						
+					} else if(userLogin.getIdUsuario() == 0) {
+						lblErro.setText("Usuário não encontrado!");
+					} else if (!userLogin.getSenha().equals(senhaField.getText())) {
+						lblErro.setText("Senha incorreta!");
+					}
 					
-				} catch (CampoInvalidoException | SQLException e1) {
-					
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
 					lblErro.setText(e1.getMessage());
-	             
-				} 
+					
+				}
+				
 		   }
 		
 	    });

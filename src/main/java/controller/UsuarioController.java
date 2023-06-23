@@ -149,4 +149,9 @@ public class UsuarioController {
 		return userDAO.consultarUsuarioPorNomeDAO(text, cpf);
 	}
 
+	public UsuarioVO consultarUserPorLogin(UsuarioVO userLogin) throws SQLException {
+		
+		return userDAO.consultarUserPorLogin(userLogin);
+	}
+
 }
