@@ -217,6 +217,8 @@ public class PainelAlterarDados extends JPanel {
 		cbEstados.setBounds(377, 154, 80, 22);
 		add(cbEstados);
 		
+		cbEstados.setSelectedItem(endereco.getUf());
+		
 		btnBuscarCep = new JButton("");
 		btnBuscarCep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

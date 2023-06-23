@@ -173,7 +173,8 @@ public class PainelTabelaCompleta extends JPanel {
 				
 				JFileChooser janelaSelecaoDestinoArquivo = new JFileChooser();
 				janelaSelecaoDestinoArquivo.setDialogTitle("Selecione um destino para a planilha...");
-
+				janelaSelecaoDestinoArquivo.setBackground(new Color(255, 255, 255));
+				
 				int opcaoSelecionada = janelaSelecaoDestinoArquivo.showSaveDialog(null);
 				if (opcaoSelecionada == JFileChooser.APPROVE_OPTION) {
 					String caminhoEscolhido = janelaSelecaoDestinoArquivo.getSelectedFile().getAbsolutePath();

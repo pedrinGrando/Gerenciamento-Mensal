@@ -106,12 +106,14 @@ public class TelaLogin extends JFrame {
 		contentPane.add(visaoPass);
 		
 		loginField = new JTextField();
+		loginField.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		loginField.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		loginField.setBounds(181, 149, 118, 20);
 		contentPane.add(loginField);
 		loginField.setColumns(10);
 		
 		senhaField = new JPasswordField();
+		senhaField.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		senhaField.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		senhaField.setBounds(181, 174, 118, 20);
