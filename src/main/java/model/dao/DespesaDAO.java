@@ -45,25 +45,27 @@ public class DespesaDAO {
 	
 	}
 
-	public DespesaVO consultarDespesaDAO(String string, UsuarioVO userOnline) {
+	public ArrayList<DespesaVO> consultarDespesaDAO(UsuarioVO userOnline, String despNome) {
 		
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
-		DespesaVO despesa = new DespesaVO();
+		ArrayList<DespesaVO> despesas = null;
 		
 		String query = "SELECT iddespesa, idusuario, despnome, valor "
 				+ "FROM DESPESA "
-				+ "WHERE despnome like '" + string + "'"
+				+ "WHERE despnome like '" + despNome + "'"
 				+ "AND idusuario = " +userOnline.getIdUsuario();
 		
 		try {
 			resultado = stmt.executeQuery(query);
 			while(resultado.next()) {
+				DespesaVO despesa = new DespesaVO();
 				despesa.setIdDespesa(Integer.parseInt(resultado.getString(1)));
 				despesa.setIdUsuario(Integer.parseInt(resultado.getString(2)));
 				despesa.setDespNome(resultado.getString(3));
-				despesa.setValor(resultado.getDouble(4));
+				despesa.setValor(Double.parseDouble(resultado.getString(4)));
+				despesas.add(despesa);
 			}
 		} catch (SQLException erro) {
 			System.out.println("Erro ao executar a query do método consultarDespesaDAO");
@@ -74,10 +76,8 @@ public class DespesaDAO {
 			Banco.closeConnection(conn);
 		}
 		
-		return despesa;
-		
-		
-		
+		return despesas;
+
 	}
 
 	public DespesaVO inserirDespesaDAO(DespesaVO despesa) {
@@ -131,14 +131,13 @@ public class DespesaDAO {
 		
 	}
 
-	public List<DespesaVO> consultarTodasDAO(UsuarioVO userOnline) {
+	public ArrayList<DespesaVO> consultarTodasDAO(UsuarioVO userOnline) {
 		
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
-		ArrayList<DespesaVO> despesasCadastradas = new ArrayList<>(); 
+		ArrayList<DespesaVO> despesas = new ArrayList<>(); 
 		
-
 		String query = "SELECT iddespesa, idusuario, despnome, valor "
 				+ "FROM despesa "
 				+ "WHERE idusuario = " + userOnline.getIdUsuario();
@@ -151,7 +150,7 @@ public class DespesaDAO {
 				despesa.setIdUsuario(Integer.parseInt(resultado.getString(2)));
 				despesa.setDespNome(resultado.getString(3));
 				despesa.setValor(Double.parseDouble(resultado.getString(4)));
-				despesasCadastradas.add(despesa);
+				despesas.add(despesa);
 			}
 		} catch (SQLException erro) {
 			System.out.println("Erro ao executar a query do método consultarTodasDAO");
@@ -162,7 +161,7 @@ public class DespesaDAO {
 			Banco.closeConnection(conn);
 		}
 
-          return despesasCadastradas;
+          return despesas;
 		
 	}
 
@@ -190,6 +189,39 @@ public class DespesaDAO {
 		}
 		return retorno;
 	
+	}
+
+	public DespesaVO consultarDespesaPorNomeDAO(String string, UsuarioVO userOnline) {
+		
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		DespesaVO despesa = new DespesaVO();
+		
+		String query = "SELECT iddespesa, idusuario, despnome, valor "
+				+ "FROM DESPESA "
+				+ "WHERE despnome like '" + string + "'"
+				+ "AND idusuario = " +userOnline.getIdUsuario();
+		
+		try {
+			resultado = stmt.executeQuery(query);
+			while(resultado.next()) {
+				despesa.setIdDespesa(Integer.parseInt(resultado.getString(1)));
+				despesa.setIdUsuario(Integer.parseInt(resultado.getString(2)));
+				despesa.setDespNome(resultado.getString(3));
+				despesa.setValor(resultado.getDouble(4));
+			}
+		} catch (SQLException erro) {
+			System.out.println("Erro ao executar a query do método consultarDespesaDAO");
+			System.out.println("Erro: " + erro.getMessage());
+		}finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		
+		return despesa;
+		
 	}
 
 }

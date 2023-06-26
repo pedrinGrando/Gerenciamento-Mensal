@@ -101,9 +101,8 @@ public class PainelTabelaCompleta extends JPanel {
 		btnBuscar.setBackground(new Color(0, 255, 255));
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//buscarTabelaComFiltro(userOnline);
 				
-					atualizarTabelaMesesTodos(userOnline);
+		          atualizarTabelaMesesTodos(userOnline);
 			
 			}
 

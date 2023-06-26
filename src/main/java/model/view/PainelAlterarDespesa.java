@@ -45,6 +45,7 @@ public class PainelAlterarDespesa extends JPanel {
 	DecimalFormat formato = new DecimalFormat("#,##0.00");
 	private JPanel panel;
 	private JButton btnConsultar;
+	String despNome = "";
 
 	/**
 	 * Create the panel.
@@ -73,7 +74,7 @@ public class PainelAlterarDespesa extends JPanel {
 		visaoTItulo.setBounds(21, 62, 278, 14);
 		add(visaoTItulo);
 		
-		List<DespesaVO> despesasCadastradas = despController.consultarTodosController(userOnline);
+		ArrayList<DespesaVO> despesasCadastradas = despController.consultarTodosController(userOnline, despNome);
 		
 		cbDespesas = new JComboBox(despesasCadastradas.toArray());
 		cbDespesas.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -116,7 +117,7 @@ public class PainelAlterarDespesa extends JPanel {
 				
 				if (nome != null) {
 					try {
-						despesaVO = despController.consultarDespesaController(nome.getDespNome(), userOnline);
+						despesaVO = despController.consultarDespesaController2(nome.getDespNome(), userOnline);
 					} catch (CampoInvalidoException e1) {
 						JOptionPane.showMessageDialog(null, "Selecione pelo menos uma despesa!", "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
 					}

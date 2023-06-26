@@ -2,6 +2,10 @@ package model.bo;
 
 import model.vo.DespesaVO;
 import model.vo.UsuarioVO;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import model.dao.*;
 
 public class DespesaBO {
@@ -15,7 +19,7 @@ public class DespesaBO {
 
 	public DespesaVO consultarDespesaBO(String string, UsuarioVO userOnline) {
 		
-		return despDAO.consultarDespesaDAO(string, userOnline);
+		return despDAO.consultarDespesaPorNomeDAO(string, userOnline);
 	}
 
 	public DespesaVO inserirDespesaBO(DespesaVO despesa) {
@@ -32,5 +36,11 @@ public class DespesaBO {
 		
 		return despDAO.atualizarDespDAO(despesaAtualizar);
 	}
+
+	public ArrayList<DespesaVO> consultarTodasBO(UsuarioVO userOnline, String despNome) {
+		
+			return despDAO.consultarTodasDAO(userOnline);
+	}
+
 
 }

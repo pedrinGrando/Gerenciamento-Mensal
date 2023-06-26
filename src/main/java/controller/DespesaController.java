@@ -19,12 +19,12 @@ public class DespesaController {
 		return despBO.calcularDescontoTotalBO(userOnline);
 	}
 
-	public DespesaVO consultarDespesaController(String string, UsuarioVO userOnline) throws CampoInvalidoException {
+	//public DespesaVO consultarDespesaController(String string, UsuarioVO userOnline) throws CampoInvalidoException {
 		
-		this.validarCamposDespesa(string);
+		//this.validarCamposDespesa(string);
 		
-		return despBO.consultarDespesaBO(string, userOnline);
-	}
+		//return despBO.consultarDespesaBO(string, userOnline);
+	//}
 
 	private void validarCamposDespesa(String string) throws CampoInvalidoException {
 		
@@ -53,14 +53,24 @@ public class DespesaController {
 		return despBO.removerDespController(userLogado, text);
 	}
 
-	public List<DespesaVO> consultarTodosController(UsuarioVO userOnline) {
+	public ArrayList<DespesaVO> consultarTodosController(UsuarioVO userOnline, String despNome) {
 		
-		return despDAO.consultarTodasDAO(userOnline);
+		return despBO.consultarTodasBO(userOnline, despNome);
 	}
 
 	public boolean atualizarDespController(DespesaVO despesaAtualizar) {
 		
 		return despBO.atualizarDespBO(despesaAtualizar);
+	}
+
+	public DespesaVO consultarDespesaController(String despNome, UsuarioVO userOnline) {
+		
+		return despBO.consultarDespesaBO(despNome, userOnline);
+	}
+	
+     public DespesaVO consultarDespesaController2(String despNome, UsuarioVO userOnline) throws CampoInvalidoException{
+		
+		return despBO.consultarDespesaBO(despNome, userOnline);
 	}
 
 }
