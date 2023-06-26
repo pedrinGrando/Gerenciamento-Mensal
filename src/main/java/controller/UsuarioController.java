@@ -63,7 +63,35 @@ public class UsuarioController {
 		
 		if(u.getNome() == null || u.getNome().trim().length() < 3) {
 			mensagemValidacao += " Nome inválido \n";
+		} 
+		
+		if (u.getNome().contains("-")) {
+			mensagemValidacao += " Nome inválido \n";
 		}
+		
+			if (u.getNome().contains("=")) {
+				mensagemValidacao += " Nome inválido \n";
+					}
+			
+			if (u.getNome().contains("+")) {
+				mensagemValidacao += " Nome inválido \n";
+			}
+			
+			if (u.getNome().contains("-")) {
+				mensagemValidacao += " Nome inválido \n";
+			}
+			
+			if (u.getNome().contains("{}")) {
+				mensagemValidacao += " Nome inválido \n";
+			}
+			
+			if (u.getNome().contains(":;")) {
+				mensagemValidacao += " Nome inválido \n";
+			}
+			
+			if (u.getNome().contains("/|")) {
+				mensagemValidacao += " Nome inválido \n";
+			}
 		
 		mensagemValidacao += validarCpf(u);
 		
