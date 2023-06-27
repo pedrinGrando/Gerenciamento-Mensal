@@ -46,6 +46,7 @@ public class PainelAlterarDespesa extends JPanel {
 	private JPanel panel;
 	private JButton btnConsultar;
 	String despNome = "";
+	private JLabel lblTextAlteracao;
 
 	/**
 	 * Create the panel.
@@ -58,6 +59,11 @@ public class PainelAlterarDespesa extends JPanel {
 		lblIcon.setIcon(new ImageIcon(PainelAlterarDespesa.class.getResource("/icons/bank.png")));
 		lblIcon.setBounds(660, 443, 31, 39);
 		add(lblIcon);
+		
+		lblTextAlteracao = new JLabel("");
+		lblTextAlteracao.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblTextAlteracao.setBounds(238, 200, 382, 14);
+		add(lblTextAlteracao);
 		
 		lblTitulo = new JLabel("Atualização de despesa ");
 		lblTitulo.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 13));
@@ -121,6 +127,8 @@ public class PainelAlterarDespesa extends JPanel {
 					} catch (CampoInvalidoException e1) {
 						JOptionPane.showMessageDialog(null, "Selecione pelo menos uma despesa!", "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
 					}
+					
+					lblTextAlteracao.setText("Agora altere os dados da despesa e salve!");
 					campNome.setText(nome.getDespNome());
 					
 					String valorG = formato.format(despesaVO.getValor());
@@ -183,5 +191,6 @@ public class PainelAlterarDespesa extends JPanel {
 		btnEditar.setBackground(new Color(0, 255, 255));
 		btnEditar.setBounds(219, 309, 46, 23);
 		add(btnEditar);
+		
 	}
 }

@@ -65,6 +65,8 @@ public class PainelVerConta extends JPanel {
 	private JLabel lblIcon;
 	private JLabel telaNumero;
 	private JLabel lblNumero;
+	private JPanel panel;
+	private JLabel lblNewLabel;
 	
 	/**
 	 * Create the panel.
@@ -225,8 +227,17 @@ public class PainelVerConta extends JPanel {
 		lblIcon.setIcon(new ImageIcon(PainelVerConta.class.getResource("/icons/bank.png")));
 		lblIcon.setBounds(661, 447, 105, 55);
 		add(lblIcon);
+		
+		panel = new JPanel();
+		panel.setBackground(new Color(0, 0, 0));
+		panel.setBounds(0, 329, 715, 10);
+		add(panel);
+		
+		lblNewLabel = new JLabel("Para alterar dados necessário ir para atela de atualização de dados");
+		lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblNewLabel.setBounds(179, 346, 400, 14);
+		add(lblNewLabel);
 
 	}
 }
-
 
