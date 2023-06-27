@@ -404,7 +404,7 @@ public class PainelAlterarDados extends JPanel {
 		});
 		btnSalvar.setBackground(new Color(0, 255, 255));
 		btnSalvar.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btnSalvar.setBounds(623, 458, 46, 23);
+		btnSalvar.setBounds(630, 456, 46, 23);
 		add(btnSalvar);
 		
 		lblRua = new JLabel("Rua ");

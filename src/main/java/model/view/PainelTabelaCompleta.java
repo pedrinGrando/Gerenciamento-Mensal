@@ -63,6 +63,7 @@ public class PainelTabelaCompleta extends JPanel {
 		private TabelaSeletor seletor = new TabelaSeletor();
 		private JComboBox cbAnos;
 		private JLabel lblErro;
+		private JLabel lblNewLabel;
 	
 		//Métodos usados no JTable
 		private void limparTabela() {
@@ -190,8 +191,13 @@ public class PainelTabelaCompleta extends JPanel {
 		btnGerarPlanilha.setBorder(null);
 		btnGerarPlanilha.setBackground(new Color(0, 255, 255));
 		btnGerarPlanilha.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		btnGerarPlanilha.setBounds(625, 452, 40, 39);
+		btnGerarPlanilha.setBounds(583, 444, 40, 39);
 		add(btnGerarPlanilha);
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(PainelTabelaCompleta.class.getResource("/icons/bank.png")));
+		lblNewLabel.setBounds(632, 450, 33, 23);
+		add(lblNewLabel);
 		
 		atualizarQuantidadePaginas();
 		

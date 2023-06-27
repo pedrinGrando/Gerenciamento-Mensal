@@ -188,7 +188,7 @@ public class PainelConsultaMes extends JPanel {
 		
 		lblIcon = new JLabel("");
 		lblIcon.setIcon(new ImageIcon(PainelConsultaMes.class.getResource("/icons/bank.png")));
-		lblIcon.setBounds(636, 458, 34, 30);
+		lblIcon.setBounds(658, 456, 34, 30);
 		add(lblIcon);
 		
 	}

@@ -144,9 +144,9 @@ public class TelaLogin extends JFrame {
     					menu.setVisible(true);
 						
 					} else if(userLogin.getIdUsuario() == 0) {
-						lblErro.setText("Usuário não encontrado!");
+						lblErro.setText("Usuário ou Senha incorretos!");
 					} else if (!userLogin.getSenha().equals(senhaField.getText())) {
-						lblErro.setText("Senha incorreta!");
+						lblErro.setText("Usuário ou Senha incorretos!");
 					}
 					
 				} catch (SQLException e1) {

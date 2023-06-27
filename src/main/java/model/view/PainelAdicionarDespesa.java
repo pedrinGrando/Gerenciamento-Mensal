@@ -132,9 +132,18 @@ public class PainelAdicionarDespesa extends JPanel {
 		btn_inserir_camp.setBounds(142, 177, 140, 31);
 		add(btn_inserir_camp);
 		lblIcon.setIcon(new ImageIcon(PainelAdicionarDespesa.class.getResource("/icons/bank.png")));
-		lblIcon.setBounds(611, 457, 36, 31);
+		lblIcon.setBounds(653, 457, 36, 31);
 		add(lblIcon);
 		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(0, 0, 0));
+		panel.setBounds(0, 228, 689, 10);
+		add(panel);
+		
+		JLabel lblNewLabel = new JLabel("Digite o nome e o valor da despesa a ser adicionada");
+		lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblNewLabel.setBounds(261, 249, 356, 14);
+		add(lblNewLabel);
+		
 	}
-
 }

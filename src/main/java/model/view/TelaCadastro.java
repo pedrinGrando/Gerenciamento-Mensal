@@ -106,6 +106,7 @@ public class TelaCadastro extends JFrame {
 	private JLabel lblSalarioErro;
 	private JLabel lblLoginErro;
 	private JLabel lblNewLabel;
+	private JLabel lblErroEmail;
 
 	/**
 	 * Launch the application.
@@ -287,6 +288,12 @@ public class TelaCadastro extends JFrame {
 		ruaCamp.setBounds(76, 432, 254, 20);
 		contentPane.add(ruaCamp);
 		ruaCamp.setColumns(10);
+		
+		lblErroEmail = new JLabel("");
+		lblErroEmail.setForeground(new Color(255, 0, 0));
+		lblErroEmail.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblErroEmail.setBounds(257, 184, 166, 14);
+		contentPane.add(lblErroEmail);
 		
 		visaoRua = new JLabel("Rua :");
 		visaoRua.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -495,6 +502,7 @@ public class TelaCadastro extends JFrame {
 				lblDataNasciErro.setText("");
 				lblErroSenha.setText("");
 				lblLoginErro.setText("");
+				lblErroEmail.setText("");
 				
 				 String valor1 = "";
 				
@@ -542,6 +550,8 @@ public class TelaCadastro extends JFrame {
 			    		lblLoginErro.setText("O login é obrigatório!");
 			    	} else if(usuario.getSalariol() <= 0) {
 			    		lblSalarioErro.setText("O salário deve ser informado!");
+			    	} else {
+			    		lblErroEmail.setText(excecao.getMessage());
 			    	}
 			 
 			    }

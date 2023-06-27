@@ -35,6 +35,7 @@ public class PainelRemoverDespesa extends JPanel {
 	
 	DespesaController despesaController = new DespesaController();
 	DespesaVO despesa = new DespesaVO();
+	private JLabel lblNewLabel;
 	
 
 	/**
@@ -47,7 +48,7 @@ public class PainelRemoverDespesa extends JPanel {
 		
 		nomeDespesa_camp = new JTextField();
 		nomeDespesa_camp.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		nomeDespesa_camp.setBounds(42, 94, 181, 20);
+		nomeDespesa_camp.setBounds(46, 109, 181, 20);
 		nomeDespesa_camp.setColumns(10);
 		
 		nomeDespesa_camp.addKeyListener(new KeyAdapter() {
@@ -65,7 +66,7 @@ public class PainelRemoverDespesa extends JPanel {
 		
 		visaoNome = new JLabel("Nome da despesa");
 		visaoNome.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		visaoNome.setBounds(32, 77, 101, 14);
+		visaoNome.setBounds(36, 92, 101, 14);
 		add(visaoNome);
 		
 		btn_removerDespesa = new JButton("");
@@ -85,12 +86,12 @@ public class PainelRemoverDespesa extends JPanel {
 		});
 		btn_removerDespesa.setBackground(new Color(0, 255, 255));
 		btn_removerDespesa.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		btn_removerDespesa.setBounds(222, 94, 41, 23);
+		btn_removerDespesa.setBounds(226, 109, 41, 23);
 		add(btn_removerDespesa);
 		
 		visaoTitulo = new JLabel(" Remover despesa cadastrada ");
 		visaoTitulo.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 14));
-		visaoTitulo.setBounds(88, 34, 279, 14);
+		visaoTitulo.setBounds(152, 33, 279, 14);
 		add(visaoTitulo);
 		
 		JPanel panel = new JPanel();
@@ -100,8 +101,13 @@ public class PainelRemoverDespesa extends JPanel {
 		
 		JLabel lblIcon = new JLabel("");
 		lblIcon.setIcon(new ImageIcon(PainelRemoverDespesa.class.getResource("/icons/bank.png")));
-		lblIcon.setBounds(636, 430, 41, 34);
+		lblIcon.setBounds(646, 430, 41, 34);
 		add(lblIcon);
+		
+		lblNewLabel = new JLabel("Digite o nome da despesa a ser removida");
+		lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblNewLabel.setBounds(273, 216, 384, 14);
+		add(lblNewLabel);
     }
 }
 

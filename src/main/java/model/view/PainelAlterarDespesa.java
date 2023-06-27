@@ -56,7 +56,7 @@ public class PainelAlterarDespesa extends JPanel {
 		
 		lblIcon = new JLabel("");
 		lblIcon.setIcon(new ImageIcon(PainelAlterarDespesa.class.getResource("/icons/bank.png")));
-		lblIcon.setBounds(650, 433, 31, 39);
+		lblIcon.setBounds(660, 443, 31, 39);
 		add(lblIcon);
 		
 		lblTitulo = new JLabel("Atualização de despesa ");

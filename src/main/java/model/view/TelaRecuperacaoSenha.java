@@ -55,6 +55,8 @@ public class TelaRecuperacaoSenha extends JFrame {
 	private JButton btnChecarSenha;
 	private JButton btnVoltar;
 	private JPanel panel;
+	private JLabel lblErro;
+	private JLabel lblErro2;
 	
     
 
@@ -117,7 +119,7 @@ public class TelaRecuperacaoSenha extends JFrame {
 		
 		visaoCPF = new JLabel("Informe seu CPF : ");
 		visaoCPF.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
-		visaoCPF.setBounds(168, 84, 241, 14);
+		visaoCPF.setBounds(168, 84, 172, 14);
 		contentPane.add(visaoCPF);
 		
 		campNome = new JTextField();
@@ -151,6 +153,18 @@ public class TelaRecuperacaoSenha extends JFrame {
 		senhaNova.setBounds(206, 264, 119, 20);
 		contentPane.add(senhaNova);
 		
+		lblErro = new JLabel("");
+		lblErro.setForeground(new Color(255, 0, 0));
+		lblErro.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblErro.setBounds(198, 137, 150, 14);
+		contentPane.add(lblErro);
+		
+		lblErro2 = new JLabel("");
+		lblErro2.setForeground(new Color(255, 0, 0));
+		lblErro2.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblErro2.setBounds(258, 370, 196, 14);
+		contentPane.add(lblErro2);
+		
 		senhaNovaConfirm = new JPasswordField();
 		senhaNovaConfirm.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		senhaNovaConfirm.setBounds(208, 329, 117, 20);
@@ -171,20 +185,21 @@ public class TelaRecuperacaoSenha extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				String cpfSemMascara = "";
+				lblErro.setText("");
 				
 				// removendo mascara
 				try {
 					cpfSemMascara = (String) mascaraCpf.stringToValue(
 							cpfDigitadoCamp.getText());
 				} catch (ParseException e1) {
-					JOptionPane.showMessageDialog(null, "Erro ao converter o CPF", 
-							"Erro", JOptionPane.ERROR_MESSAGE); 
+					
+					lblErro.setText("O CPF é inválido!");
 				}
 				
                 if (campNome.getText().isEmpty() || cpfDigitadoCamp.getText().isEmpty()) {
 					
-                	JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios!", "Gerenciamento-Mensal", 
-                			JOptionPane.WARNING_MESSAGE);
+                	lblErro.setText("O nome é obrigatório!");
+                	
 				} else {
 					//TRAS O OBJETO CONSULTADO COM O NOME INFORMADO
 					usuarioConsultado =  userController.consultarUserPorNome(campNome.getText(), cpfSemMascara);
@@ -200,8 +215,7 @@ public class TelaRecuperacaoSenha extends JFrame {
 					
 				} else {
 					
-					JOptionPane.showMessageDialog(null, "Não foi possível consultar o usuário!", "Gerenciamento-Mensal", 
-                			JOptionPane.WARNING_MESSAGE);
+					lblErro.setText("Usuário não verificado!");
 					
 				}
 				
@@ -218,6 +232,8 @@ public class TelaRecuperacaoSenha extends JFrame {
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				lblErro2.setText("");
+				
 				if (verificarSenhasDig(senhaNova.getText(), senhaNovaConfirm.getText())) {
 					
 					usuarioConsultado.setSenha(senhaNovaConfirm.getText());
@@ -225,13 +241,12 @@ public class TelaRecuperacaoSenha extends JFrame {
 						updatePass = userController.atualizarUsuarioController(usuarioConsultado);
 					} catch (SQLException | CampoInvalidoException e1) {
 						// TODO Auto-generated catch block
-						JOptionPane.showMessageDialog(null, e1.getMessage(), "GS - Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+						lblErro2.setText(e1.getMessage());
 					}
 					JOptionPane.showMessageDialog(null, "Senha atualizada com sucesso!", "Gerenciamento-Mensal", 
                 			JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(null, "Senhas não coincidem!", "Gerenciamento-Mensal", 
-                			JOptionPane.WARNING_MESSAGE);
+					lblErro2.setText("Senhas não coincidem!");
 				}
 				
 			}

@@ -127,7 +127,7 @@ public class PainelConsultarDespesa extends JPanel {
 		add(lblTitulo);
 		
 		tblDespesas = new JTable();
-		tblDespesas.setBounds(20, 170, 445, 292);
+		tblDespesas.setBounds(20, 170, 445, 274);
 		this.limparTabela();
 		add(tblDespesas);
 		
@@ -163,7 +163,7 @@ public class PainelConsultarDespesa extends JPanel {
 		lblErro = new JLabel("");
 		lblErro.setFont(new Font("Tahoma", Font.ITALIC, 10));
 		lblErro.setForeground(new Color(255, 0, 0));
-		lblErro.setBounds(276, 475, 189, 41);
+		lblErro.setBounds(267, 442, 233, 23);
 		add(lblErro);
 		
 		btnConsultar = new JButton("");
@@ -177,10 +177,10 @@ public class PainelConsultarDespesa extends JPanel {
 					
 				    	despesaVO = despController.consultarDespesaController(campDespDigitada.getText(), userOnline);
 						
-						if (despesaVO.getIdDespesa() <= 0) {
-							 lblErro.setText("Despesa não encontrada!");
+						if (despesaVO.getIdDespesa() != 0) {
+						     atualizarTabelaDespesas2();
 						} else {
-							atualizarTabelaDespesas2();
+							 lblErro.setText("Despesa não encontrada!");
 						}	
 			}
 		});
@@ -196,11 +196,13 @@ public class PainelConsultarDespesa extends JPanel {
 		btnConsultarTodas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				lblErro.setText("");
+
 				despesas = (ArrayList<DespesaVO>) despController.consultarTodosController(userOnline, campDespDigitada.getText());
 				atualizarTabelaDespesas();
 				
 				if (despesas.size() <= 0) {
-					lblErro.setText("Despesa não encontrada!");	
+					lblErro.setText("Nenhuma despesa cadastrada!");	
 				}
 			}
 		});

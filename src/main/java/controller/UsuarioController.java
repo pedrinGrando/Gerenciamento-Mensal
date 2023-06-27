@@ -1,6 +1,8 @@
 package controller;
 
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import exceptions.CampoInvalidoException;
 import exceptions.CpfJaUtilizadoException;
@@ -10,8 +12,16 @@ import model.dao.*;
 
 public class UsuarioController {
 	
+	//VALIDACAO DE EMAIL
+	private static final String EMAIL_PATTERN =
+            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	
+	private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+	
 	UsuarioBO userBO = new UsuarioBO();
 	UsuarioDAO userDAO  = new UsuarioDAO();
+	boolean emailVerific = false;
 
 	public UsuarioVO realizarLoginController(UsuarioVO userOnline) throws CampoInvalidoException, SQLException {
 		
@@ -92,10 +102,17 @@ public class UsuarioController {
 			if (u.getNome().contains("/|")) {
 				mensagemValidacao += " Nome inválido \n";
 			}
+			
+			if (u.getEmail() == null || u.getEmail().isEmpty()) {
+				mensagemValidacao = "O email é obrigatório!";
+			}
 		
 		mensagemValidacao += validarCpf(u);
+		emailVerific = this.isValidEmail(u.getEmail());
 		
-		mensagemValidacao += validarEmail(u);
+		if (emailVerific == false) {
+			mensagemValidacao = "O email é inválido!";
+		}
 		
 		if(u.getLogin().isEmpty() || u.getLogin() == null) {
 			mensagemValidacao += " Login é obrigatório!";
@@ -114,25 +131,15 @@ public class UsuarioController {
 			mensagemValidacao += " O salário é obrigatório!";
 		}
 		
-		
 		if(!mensagemValidacao.isEmpty()) {
 			throw new CampoInvalidoException(mensagemValidacao);
 		}
-		
 	}
 
-	private String validarEmail(UsuarioVO u) {
-		
-		String validacao = "";
-		
-		if (u.getEmail().isEmpty() || u.getEmail().isBlank()) {
-			
-			validacao = "O Email é obrigatório!";
-			
-		} 
-		
-		return validacao;
-	}
+	public static boolean isValidEmail(String email) {
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
 
 	private String validarCpf(UsuarioVO u) {
 	
