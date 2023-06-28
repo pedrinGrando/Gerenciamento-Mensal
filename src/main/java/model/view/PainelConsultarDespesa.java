@@ -7,11 +7,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -70,11 +73,12 @@ public class PainelConsultarDespesa extends JPanel {
 			private JLabel lblMesFiltro;
 			private JComboBox cbMeses;
 			private JButton btnFiltrar;
-			private final int TAMANHO_PAGINA = 5;
-			private int paginaAtual = 1;
-			private int totalPaginas = 0;
 
 			private JPanel panel;
+			private DespesaVO despesaSelecionada = new DespesaVO();
+
+			private JComponent btnExcluir;
+			private JButton btnExclusao;
 		
 			//Métodos usados no JTable
 			private void limparTabela() {
@@ -118,6 +122,7 @@ public class PainelConsultarDespesa extends JPanel {
 	 * @param userOnline 
 	 */
 	public PainelConsultarDespesa(final UsuarioVO userOnline) {
+		
 		setBackground(new Color(0, 255, 255));
 		setLayout(null);
 		
@@ -155,6 +160,22 @@ public class PainelConsultarDespesa extends JPanel {
 		visaoNome.setBounds(20, 91, 115, 14);
 		add(visaoNome);
 		
+		tblDespesas.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int indiceSelecionado = tblDespesas.getSelectedRow();
+
+				if (indiceSelecionado > 0) {
+					//.setEnabled(true);
+					despesaSelecionada = despesas.get(indiceSelecionado - 1);
+				} else {
+					//btnExcluir.setEnabled(false);
+				}
+			}
+		});
+
+		
 	    panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 0));
 		panel.setBounds(0, 145, 700, 14);
@@ -165,6 +186,33 @@ public class PainelConsultarDespesa extends JPanel {
 		lblErro.setForeground(new Color(255, 0, 0));
 		lblErro.setBounds(267, 442, 233, 23);
 		add(lblErro);
+		
+		btnExclusao = new JButton("");
+		btnExclusao.setBackground(new Color(0, 255, 255));
+		btnExclusao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				int opcaoSelecionada = JOptionPane.showConfirmDialog(null, "Confirma a exclusão da despesa selecionada?");
+
+				
+				if(opcaoSelecionada == JOptionPane.YES_OPTION) {
+					
+					despController.removerDespesaController(userOnline, despesaSelecionada.getDespNome());
+					JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso");
+					despesas = (ArrayList<DespesaVO>) despController.consultarTodosController(userOnline, campDespDigitada.getText());
+					atualizarTabelaDespesas();
+					
+				}
+				
+				
+			}
+		});
+		btnExclusao.setIcon(new ImageIcon(PainelConsultarDespesa.class.getResource("/icons/remove.png")));
+		btnExclusao.setBorder(null);
+		btnExclusao.setBounds(468, 171, 32, 23);
+		add(btnExclusao);
 		
 		btnConsultar = new JButton("");
 		btnConsultar.setBorder(null);

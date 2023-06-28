@@ -81,6 +81,7 @@ public class TelaRecuperacaoSenha extends JFrame {
 	 * @throws ParseException 
 	 */
 	public TelaRecuperacaoSenha() throws ParseException {
+		setBackground(new Color(255, 255, 255));
 		setTitle("Gerenciamento-Mensal | Recuperação de senha ");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaRecuperacaoSenha.class.getResource("/icons/bank.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -150,7 +151,7 @@ public class TelaRecuperacaoSenha extends JFrame {
 		
 		senhaNova = new JPasswordField();
 		senhaNova.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		senhaNova.setBounds(206, 264, 119, 20);
+		senhaNova.setBounds(231, 263, 119, 20);
 		contentPane.add(senhaNova);
 		
 		lblErro = new JLabel("");
@@ -167,17 +168,17 @@ public class TelaRecuperacaoSenha extends JFrame {
 		
 		senhaNovaConfirm = new JPasswordField();
 		senhaNovaConfirm.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		senhaNovaConfirm.setBounds(208, 329, 117, 20);
+		senhaNovaConfirm.setBounds(233, 328, 117, 20);
 		contentPane.add(senhaNovaConfirm);
 		
 		visaoNovaSenha = new JLabel("Nova senha : ");
 		visaoNovaSenha.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		visaoNovaSenha.setBounds(122, 267, 104, 14);
+		visaoNovaSenha.setBounds(147, 266, 104, 14);
 		contentPane.add(visaoNovaSenha);
 		
 		visaoConfirmSenha = new JLabel("Confirme a senha : ");
 		visaoConfirmSenha.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		visaoConfirmSenha.setBounds(94, 332, 132, 14);
+		visaoConfirmSenha.setBounds(119, 331, 132, 14);
 		contentPane.add(visaoConfirmSenha);
 		
 		btnChecarSenha = new JButton("");
@@ -267,7 +268,7 @@ public class TelaRecuperacaoSenha extends JFrame {
 		btnSalvar.setBorder(null);
 		btnSalvar.setBackground(new Color(0, 255, 255));
 		btnSalvar.setIcon(new ImageIcon(TelaRecuperacaoSenha.class.getResource("/icons/diskette.png")));
-		btnSalvar.setBounds(320, 316, 57, 44);
+		btnSalvar.setBounds(345, 315, 57, 44);
 		contentPane.add(btnSalvar);
 		
 		btnVoltar = new JButton("");

@@ -214,7 +214,7 @@ public class PainelAlterarDados extends JPanel {
 		cbEstados = new JComboBox(listaEstados);
 		cbEstados.setBorder(null);
 		cbEstados.setBackground(new Color(192, 192, 192));
-		cbEstados.setBounds(377, 154, 80, 22);
+		cbEstados.setBounds(377, 140, 80, 22);
 		add(cbEstados);
 		
 		cbEstados.setSelectedItem(endereco.getUf());
@@ -275,7 +275,7 @@ public class PainelAlterarDados extends JPanel {
 		
 		senhaAtualAtualizar = new JPasswordField();
 		senhaAtualAtualizar.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		senhaAtualAtualizar.setBounds(377, 262, 102, 20);
+		senhaAtualAtualizar.setBounds(377, 245, 102, 20);
 		add(senhaAtualAtualizar);
 		
 		visaoSalarioLiquido = new JLabel("Salário líquido");
@@ -317,7 +317,7 @@ public class PainelAlterarDados extends JPanel {
 		
 		novaSenhaAtualizar = new JPasswordField();
 		novaSenhaAtualizar.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		novaSenhaAtualizar.setBounds(377, 317, 102, 20);
+		novaSenhaAtualizar.setBounds(377, 300, 102, 20);
 		add(novaSenhaAtualizar);
 		
 		novaSenhaAtualizar.setText(userLogado.getSenha());
@@ -429,7 +429,7 @@ public class PainelAlterarDados extends JPanel {
 		
 		lblEstado = new JLabel("Estado");
 		lblEstado.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblEstado.setBounds(377, 141, 46, 14);
+		lblEstado.setBounds(377, 127, 46, 14);
 		add(lblEstado);
 		
 	    lblCidade = new JLabel("Cidade");
@@ -439,12 +439,12 @@ public class PainelAlterarDados extends JPanel {
 		
 		visaoSenha = new JLabel("Senha atual : ");
 		visaoSenha.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		visaoSenha.setBounds(377, 248, 102, 14);
+		visaoSenha.setBounds(377, 231, 102, 14);
 		add(visaoSenha);
 		
 		visaoNovaSenha = new JLabel("Nova senha : ");
 		visaoNovaSenha.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		visaoNovaSenha.setBounds(377, 302, 102, 14);
+		visaoNovaSenha.setBounds(377, 285, 102, 14);
 		add(visaoNovaSenha);
 		
 		lblErro = new JLabel("");

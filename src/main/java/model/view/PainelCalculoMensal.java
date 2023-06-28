@@ -62,6 +62,7 @@ public class PainelCalculoMensal extends JPanel {
 		private JLabel visaoTotalDescont;
 		private JLabel lblTotalDescontado;
 		private JPanel panel;
+		private JLabel lblSubtitulo;
 		
 		//Métodos usados no JTable
 				private void limparTabela() {
@@ -99,6 +100,11 @@ public class PainelCalculoMensal extends JPanel {
 		campSaldo.setBounds(208, 93, 147, 20);
 		add(campSaldo);
 		campSaldo.setColumns(10);
+		
+		lblSubtitulo = new JLabel("");
+		lblSubtitulo.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblSubtitulo.setBounds(533, 444, 136, 29);
+		add(lblSubtitulo);
 		
 		visaoTotalDescont = new JLabel("Total descontado : ");
 		visaoTotalDescont.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -161,6 +167,8 @@ public class PainelCalculoMensal extends JPanel {
 			    t.setTotalRest("R$ " +restG);
 			    t.setIdUsuario(""+userLogado.getIdUsuario());
 			    
+			    lblSubtitulo.setText("Clique para salvar os dados");
+			    
 			    //Exibe valores na tabela
 				atualizarTabelaMeses(userLogado);
 			}
@@ -197,7 +205,7 @@ public class PainelCalculoMensal extends JPanel {
 		});
 		btn_salvarDados.setBackground(new Color(0, 255, 255));
 		btn_salvarDados.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
-		btn_salvarDados.setBounds(624, 440, 53, 29);
+		btn_salvarDados.setBounds(653, 444, 53, 29);
 		add(btn_salvarDados);
 		
 		lblTitulo = new JLabel("Cálculo Mensal do mês de : ");
@@ -207,7 +215,7 @@ public class PainelCalculoMensal extends JPanel {
 		
 		lblMesAtual = new JLabel("");
 		lblMesAtual.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 15));
-		lblMesAtual.setBounds(307, 17, 64, 35);
+		lblMesAtual.setBounds(310, 17, 64, 35);
 		add(lblMesAtual);
 		lblMesAtual.setText(mes.toUpperCase());
 		
@@ -220,5 +228,6 @@ public class PainelCalculoMensal extends JPanel {
 		panel.setBackground(new Color(0, 0, 0));
 		panel.setBounds(0, 185, 721, 10);
 		add(panel);
+		
 	}
 }

@@ -152,7 +152,6 @@ public class TelaLogin extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					lblErro.setText(e1.getMessage());
-					
 				}
 				
 		   }
