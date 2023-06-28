@@ -156,6 +156,10 @@ public class MenuPrincipal extends JFrame {
 				   dispose();
 				   MenuPrincipal tela = new MenuPrincipal(userOnline);
 				   tela.setVisible(true);
+				} else {
+					dispose();
+					MenuPrincipal tela = new MenuPrincipal(userOnline);
+					tela.setVisible(true);
 				}
 				
 			}

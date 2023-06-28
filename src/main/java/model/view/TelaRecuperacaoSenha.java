@@ -163,7 +163,7 @@ public class TelaRecuperacaoSenha extends JFrame {
 		lblErro2 = new JLabel("");
 		lblErro2.setForeground(new Color(255, 0, 0));
 		lblErro2.setFont(new Font("Tahoma", Font.ITALIC, 10));
-		lblErro2.setBounds(258, 370, 196, 14);
+		lblErro2.setBounds(258, 359, 196, 14);
 		contentPane.add(lblErro2);
 		
 		senhaNovaConfirm = new JPasswordField();
@@ -240,12 +240,12 @@ public class TelaRecuperacaoSenha extends JFrame {
 					usuarioConsultado.setSenha(senhaNovaConfirm.getText());
 					try {
 						updatePass = userController.atualizarUsuarioController(usuarioConsultado);
+						JOptionPane.showMessageDialog(null, "Senha atualizada com sucesso!", "Gerenciamento-Mensal", 
+	                			JOptionPane.INFORMATION_MESSAGE);
 					} catch (SQLException | CampoInvalidoException e1) {
 						// TODO Auto-generated catch block
 						lblErro2.setText(e1.getMessage());
 					}
-					JOptionPane.showMessageDialog(null, "Senha atualizada com sucesso!", "Gerenciamento-Mensal", 
-                			JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					lblErro2.setText("Senhas não coincidem!");
 				}

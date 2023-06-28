@@ -45,7 +45,7 @@ public class TabelaDAO {
 	
 	}
 
-	public TabelaVO consultarMesTabelaDAO(TabelaVO tabelaVO) {
+	public TabelaVO consultarMesTabelaDAO(TabelaVO tabelaVO, String ano) {
 		
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
@@ -55,8 +55,9 @@ public class TabelaDAO {
 		String query = "SELECT idtabela, idusuario, mes, ano, totalrestmes, "
 				+ "saldofinal "
 				+ "FROM tabelamensal "
-				+ "WHERE mes = '" + tabelaVO.getMes() +"'"
-				+ "AND idusuario = " + tabelaVO.getIdUsuario();
+				+ "WHERE mes = '" + tabelaVO.getMes() +"' "
+				+ "AND idusuario = " + tabelaVO.getIdUsuario()
+				+ " AND ano = '" +ano +"' ";
 		
 		try {
 			resultado = stmt.executeQuery(query);
@@ -216,6 +217,31 @@ public class TabelaDAO {
 		
 		return total;
 		
+	}
+
+	public boolean removerTabelaDAO(UsuarioVO userOnline, TabelaVO tabelaSelecionada) {
+		
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		boolean retorno = false;
+		
+		String query = "DELETE FROM tabelamensal " 
+				+ " WHERE idusuario = " + userOnline.getIdUsuario()
+				+ " AND mes = '" + tabelaSelecionada.getMes() +"' "
+			    + " AND ano = '" + tabelaSelecionada.getAno() +"' ";
+		
+		try {
+			if(stmt.executeUpdate(query) == 1) {
+				retorno = true;
+			}
+		} catch (SQLException erro) {
+			System.out.println("Erro ao executar a query do método removerTabelaDAO");
+			System.out.println("Erro: " + erro.getMessage());	
+		} finally {
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return retorno;
 	}
     
 }

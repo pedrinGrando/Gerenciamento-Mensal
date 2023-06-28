@@ -19,9 +19,9 @@ public class TabelaBO {
 	}
 
 
-	public TabelaVO consultarMesBO(TabelaVO tabelaVO) {
+	public TabelaVO consultarMesBO(TabelaVO tabelaVO, String ano) {
 		
-		return tabDAO.consultarMesTabelaDAO(tabelaVO);
+		return tabDAO.consultarMesTabelaDAO(tabelaVO, ano);
 	}
 
 
@@ -40,6 +40,12 @@ public class TabelaBO {
 	public int contarTotalRegistrosComFiltros(TabelaSeletor seletor) {
 		// TODO Auto-generated method stub
 		return tabDAO.contarTotalRegistrosComFiltros(seletor);
+	}
+
+
+	public boolean removerTabelaBO(UsuarioVO userOnline, TabelaVO tabelaSelecionada) {
+		// TODO Auto-generated method stub
+		return tabDAO.removerTabelaDAO(userOnline, tabelaSelecionada);
 	}
 
 }

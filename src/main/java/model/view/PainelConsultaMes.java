@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,6 +24,7 @@ import exceptions.CampoInvalidoException;
 import javax.swing.JProgressBar;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
+import javax.swing.JComboBox;
 
 public class PainelConsultaMes extends JPanel {
 	private JComponent btnNewButton;
@@ -43,10 +45,10 @@ public class PainelConsultaMes extends JPanel {
 	private JLabel visaoTotalRestante;
 	private JLabel visaoSaldoFinal;
 	private JLabel lblIcon;
-	private JLabel lblAno;
 	private JLabel lblSaldoFinal;
-	private JLabel lblTotalRestante;
 	private JLabel lblErro;
+	private JComboBox cbAnos;
+	private JButton btnRemover;
 
 	/**
 	 * Create the panel.
@@ -64,9 +66,38 @@ public class PainelConsultaMes extends JPanel {
 		
 		lblMes = new JLabel("New label");
 		lblMes.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblMes.setBounds(157, 150, 175, 14);
+		lblMes.setBounds(157, 150, 139, 14);
 		add(lblMes);
 		lblMes.setText("");
+		
+        String[] anos = {"2022", "2023"};
+		
+		cbAnos = new JComboBox(anos);
+		cbAnos.setBackground(new Color(192, 192, 192));
+		cbAnos.setBounds(390, 76, 75, 22);
+		add(cbAnos);
+		
+		btnRemover = new JButton("");
+		btnRemover.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int opcaoSelecionada = JOptionPane.showConfirmDialog(null, "Confirma a exclusão dos dados mensais selecionados?");
+
+				if(opcaoSelecionada == JOptionPane.YES_OPTION) {
+					
+					tabelaController.removerTabelaController(userOnline, tabelaVO);
+					JOptionPane.showMessageDialog(null, "Despesa removida com sucesso!");
+					
+				}
+				
+			}
+		});
+		btnRemover.setBackground(new Color(0, 255, 255));
+		//btnRemover.setEnabled(false);
+		btnRemover.setBorder(null);
+		btnRemover.setIcon(new ImageIcon(PainelConsultaMes.class.getResource("/icons/remove.png")));
+		btnRemover.setBounds(614, 456, 34, 30);
+		add(btnRemover);
 		
 		btnConsultar = new JButton("");
 		btnConsultar.setBorder(null);
@@ -83,20 +114,20 @@ public class PainelConsultaMes extends JPanel {
 				tabelaVO.setIdUsuario(userOnline.getIdUsuario());
 				
 				try {
-					tabelaVO = tabelaController.consultarMesController(tabelaVO);
+					tabelaVO = tabelaController.consultarMesController(tabelaVO, (String) cbAnos.getSelectedItem());
                     if (tabelaVO.getIdTabela() == 0) {
 						
-						JOptionPane.showMessageDialog(null, "Dados do mês: " + mesConsultado+ " \nnão encontradOS!", "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+                    	lblErro.setText("Nenhum dado encontrado!");
 						
 					} else {
 						
-						lblMes.setText(mesConsultado);
+						lblMes.setText(tabelaVO.getMes());
 					
-						lblAno.setText(""+tabelaVO.getAno());
+						visaoAno.setText("Ano:    "+ tabelaVO.getAno());
 						
-						lblSaldoFinal.setText("R$"+ formato.format(tabelaVO.getSaldoFinal()));
+						visaoSaldoFinal.setText("Saldo final:   R$ "+ formato.format(tabelaVO.getSaldoFinal()));
 						
-						lblTotalRestante.setText("R$" + formato.format(tabelaVO.getTotalRest()));
+						visaoTotalRestante.setText("Total restante no mês:   R$ " + formato.format(tabelaVO.getTotalRest()));
 					}
 					
 				} catch (CampoInvalidoException e1) {
@@ -105,7 +136,7 @@ public class PainelConsultaMes extends JPanel {
 					
 				}
 				
-				
+				btnRemover.setEnabled(true);
 			}
 		});
 		btnConsultar.setBackground(new Color(255, 255, 255));
@@ -124,6 +155,7 @@ public class PainelConsultaMes extends JPanel {
 		add(lblErro);
 	
 		mesDigitadoCamp = new JTextField();
+		mesDigitadoCamp.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		mesDigitadoCamp.setBorder(null);
 		mesDigitadoCamp.setBounds(233, 76, 117, 20);
 		mesDigitadoCamp.setColumns(10);
@@ -142,19 +174,9 @@ public class PainelConsultaMes extends JPanel {
 		        });
 				add(mesDigitadoCamp);
 		
-		lblAno = new JLabel("");
-		lblAno.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblAno.setBounds(81, 221, 103, 14);
-		add(lblAno);
-		
-		lblTotalRestante = new JLabel("");
-		lblTotalRestante.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblTotalRestante.setBounds(181, 264, 142, 14);
-		add(lblTotalRestante);
-		
 		lblSaldoFinal = new JLabel("");
 		lblSaldoFinal.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblSaldoFinal.setBounds(114, 309, 141, 14);
+		lblSaldoFinal.setBounds(135, 301, 117, 14);
 		add(lblSaldoFinal);
 		
 		panel = new JPanel();
@@ -173,23 +195,24 @@ public class PainelConsultaMes extends JPanel {
 		
 		visaoAno = new JLabel("Ano : ");
 		visaoAno.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		visaoAno.setBounds(43, 221, 54, 14);
+		visaoAno.setBounds(65, 213, 198, 14);
 		add(visaoAno);
 		
 		visaoTotalRestante = new JLabel("Total restante no mês :  ");
 		visaoTotalRestante.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		visaoTotalRestante.setBounds(43, 264, 142, 14);
+		visaoTotalRestante.setBounds(65, 256, 322, 14);
 		add(visaoTotalRestante);
 		
 		visaoSaldoFinal = new JLabel("Saldo final :  ");
 		visaoSaldoFinal.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		visaoSaldoFinal.setBounds(43, 309, 114, 14);
+		visaoSaldoFinal.setBounds(65, 301, 285, 14);
 		add(visaoSaldoFinal);
 		
 		lblIcon = new JLabel("");
 		lblIcon.setIcon(new ImageIcon(PainelConsultaMes.class.getResource("/icons/bank.png")));
 		lblIcon.setBounds(658, 456, 34, 30);
 		add(lblIcon);
+		
 		
 	}
 }

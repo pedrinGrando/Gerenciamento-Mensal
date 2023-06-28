@@ -167,10 +167,10 @@ public class PainelConsultarDespesa extends JPanel {
 				int indiceSelecionado = tblDespesas.getSelectedRow();
 
 				if (indiceSelecionado > 0) {
-					//.setEnabled(true);
+					btnExclusao.setEnabled(true);
 					despesaSelecionada = despesas.get(indiceSelecionado - 1);
 				} else {
-					//btnExcluir.setEnabled(false);
+					btnExclusao.setEnabled(false);
 				}
 			}
 		});
@@ -189,23 +189,21 @@ public class PainelConsultarDespesa extends JPanel {
 		
 		btnExclusao = new JButton("");
 		btnExclusao.setBackground(new Color(0, 255, 255));
+		btnExclusao.setEnabled(false);
 		btnExclusao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
-				
+			
 				int opcaoSelecionada = JOptionPane.showConfirmDialog(null, "Confirma a exclusão da despesa selecionada?");
 
-				
 				if(opcaoSelecionada == JOptionPane.YES_OPTION) {
 					
 					despController.removerDespesaController(userOnline, despesaSelecionada.getDespNome());
-					JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso");
+					JOptionPane.showMessageDialog(null, "Despesa removida com sucesso!");
 					despesas = (ArrayList<DespesaVO>) despController.consultarTodosController(userOnline, campDespDigitada.getText());
 					atualizarTabelaDespesas();
 					
 				}
-				
 				
 			}
 		});
@@ -221,6 +219,7 @@ public class PainelConsultarDespesa extends JPanel {
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				    btnExclusao.setEnabled(false);
 				    lblErro.setText("");
 					
 				    	despesaVO = despController.consultarDespesaController(campDespDigitada.getText(), userOnline);
@@ -244,6 +243,7 @@ public class PainelConsultarDespesa extends JPanel {
 		btnConsultarTodas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				btnExclusao.setEnabled(false);
 				lblErro.setText("");
 
 				despesas = (ArrayList<DespesaVO>) despController.consultarTodosController(userOnline, campDespDigitada.getText());

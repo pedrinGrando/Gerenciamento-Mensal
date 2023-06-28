@@ -19,10 +19,10 @@ public class TabelaController {
 		return tabBO.salvarDadosTabelaBO(userLogado, tabela);
 	}
 
-	public TabelaVO consultarMesController(TabelaVO tabelaVO) throws CampoInvalidoException {
+	public TabelaVO consultarMesController(TabelaVO tabelaVO, String ano) throws CampoInvalidoException {
 		
 		this.validarCampoMes(tabelaVO);
-		return tabBO.consultarMesBO(tabelaVO);
+		return tabBO.consultarMesBO(tabelaVO, ano);
 	}
 
 	public ArrayList<TabelaVO> consultarTodasController(TabelaVO tabelaVO) {
@@ -64,6 +64,11 @@ public class TabelaController {
 		
 		GeradorPlanilha gerador = new GeradorPlanilha();
 		return gerador.gerarPlanilhaClientes(tabelas, caminhoEscolhido);
+	}
+
+	public boolean removerTabelaController(UsuarioVO userOnline, TabelaVO tabelaSelecionada) {
+		// TODO Auto-generated method stub
+		return tabBO.removerTabelaBO(userOnline, tabelaSelecionada);
 	}
 
 
