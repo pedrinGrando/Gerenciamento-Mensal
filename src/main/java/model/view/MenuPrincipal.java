@@ -44,6 +44,8 @@ public class MenuPrincipal extends JFrame {
 
 	private JMenuItem mntmTabelaCompleta;
 
+	private JMenu mnNewMenu_2;
+
 	/**
 	 * Launch the application.
 	 */
@@ -145,30 +147,23 @@ public class MenuPrincipal extends JFrame {
 		mntmEncerrarConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean retorn = false;
-				String resp = JOptionPane.showInputDialog("Deseja excluir sua conta?\n"
-						+userOnline.getNome() + " Digite:"
-								+ "\n1-Confirmar"
-								+ "\n2-Cancelar");
-				if (resp.equals("1")) {
+				
+				int opcaoSelecionada = JOptionPane.showConfirmDialog(null, "Confirma a exclusão da sua conta?");
+				
+				if (opcaoSelecionada == JOptionPane.YES_OPTION) {
 				retorn = usuarioController.excluirContaController(userOnline);
 				JOptionPane.showMessageDialog(null, "Usuário excluído com sucesso!", "GS - Gerenciador de salário", JOptionPane.INFORMATION_MESSAGE);
-				} else if (resp.equals("2")) {
+				} else  {
 				   dispose();
 				   MenuPrincipal tela = new MenuPrincipal(userOnline);
 				   tela.setVisible(true);
-				} else {
-					dispose();
-					MenuPrincipal tela = new MenuPrincipal(userOnline);
-					tela.setVisible(true);
-				}
-				
-			}
-				
+				} 	
+			}	
 		});
 		mntmEncerrarConta.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		mnNewMenu.add(mntmEncerrarConta);
 		
-		JMenu mnNewMenu_2 = new JMenu("Despesas");
+		mnNewMenu_2 = new JMenu("Despesas");
 		mnNewMenu_2.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/expenses.png")));
 		mnNewMenu_2.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
 		menuBar.add(mnNewMenu_2);

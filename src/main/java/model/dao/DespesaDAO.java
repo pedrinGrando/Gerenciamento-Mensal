@@ -140,7 +140,7 @@ public class DespesaDAO {
 		
 		String query = "SELECT iddespesa, idusuario, despnome, valor "
 				+ "FROM despesa "
-				+ "WHERE idusuario = " + userOnline.getIdUsuario();
+				+ "2WHERE idusuario = " + userOnline.getIdUsuario();
 		
 		try {
 			resultado = stmt.executeQuery(query);
