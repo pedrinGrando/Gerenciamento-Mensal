@@ -219,9 +219,14 @@ public class PainelConsultarDespesa extends JPanel {
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				    btnExclusao.setVisible(false);
 				    btnExclusao.setEnabled(false);
 				    lblErro.setText("");
-					
+				    tblDespesas.setRowSelectionAllowed(false);
+				    tblDespesas.setEnabled(false);
+
+				    despesaSelecionada = null;
+				    
 				    	despesaVO = despController.consultarDespesaController(campDespDigitada.getText(), userOnline);
 						
 						if (despesaVO.getIdDespesa() != 0) {
@@ -243,6 +248,9 @@ public class PainelConsultarDespesa extends JPanel {
 		btnConsultarTodas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				tblDespesas.setRowSelectionAllowed(true);
+				tblDespesas.setEnabled(true);
+				btnExclusao.setVisible(true);
 				btnExclusao.setEnabled(false);
 				lblErro.setText("");
 
