@@ -32,6 +32,8 @@ import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import javax.swing.JProgressBar;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.border.BevelBorder;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -51,7 +53,7 @@ public class TelaLogin extends JFrame {
 	
 		private JPanel contentPane;
 		private JTextField loginField;
-		private JPasswordField senhaField;
+		private LimitedPasswordField senhaField;
 		private JButton btn_entrar;
 		private JLabel lblTitulo;
 		private Label visaoUser;
@@ -83,6 +85,7 @@ public class TelaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaLogin() {
+		
 		setForeground(new Color(64, 128, 128));
 		setFont(new Font("Source Serif Pro Semibold", Font.ITALIC, 12));
 		setBackground(new Color(255, 255, 255));
@@ -91,6 +94,7 @@ public class TelaLogin extends JFrame {
 		setResizable(false);
 		setBounds(100, 100, 479, 372);
 		setLocationRelativeTo(null);
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(192, 192, 192));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -99,27 +103,27 @@ public class TelaLogin extends JFrame {
 		contentPane.setLayout(null);
 		
 		visaoUser = new Label("Usuário :");
-		visaoUser.setFont(new Font("Dialog", Font.ITALIC, 10));
-		visaoUser.setBounds(113, 149, 62, 12);
+		visaoUser.setFont(new Font("Dialog", Font.ITALIC, 11));
+		visaoUser.setBounds(123, 149, 51, 12);
 		contentPane.add(visaoUser);
 		
         visaoPass = new Label("Senha :");
-		visaoPass.setFont(new Font("Dialog", Font.ITALIC, 10));
-		visaoPass.setBounds(113, 167, 62, 27);
+		visaoPass.setFont(new Font("Dialog", Font.ITALIC, 11));
+		visaoPass.setBounds(123, 167, 51, 27);
 		contentPane.add(visaoPass);
 		
 		loginField = new JTextField();
 		loginField.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		loginField.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		loginField.setBounds(181, 149, 101, 20);
+		loginField.setBounds(181, 149, 91, 20);
 		contentPane.add(loginField);
 		loginField.setColumns(10);
 		
-		senhaField = new JPasswordField();
+		senhaField = new LimitedPasswordField();
 		senhaField.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		senhaField.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		senhaField.setBounds(181, 174, 101, 20);
+		senhaField.setBounds(181, 174, 91, 20);
 		contentPane.add(senhaField);
 		
 		btn_entrar = new JButton("Entrar");

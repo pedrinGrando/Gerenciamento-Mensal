@@ -89,8 +89,8 @@ public class TelaCadastro extends JFrame {
 	private JLabel visaoCidade;
 	private JButton btnVoltar;
 	private JButton btnSalvar;
-	private JPasswordField campSenha;
-	private JPasswordField confirmCampSenha;
+	private LimitedPasswordField campSenha;
+	private LimitedPasswordField confirmCampSenha;
 	private JTextField campCidade;
 	private JNumberFormatField salarioCamp;
 	private JComboBox cbEstados;
@@ -272,12 +272,12 @@ public class TelaCadastro extends JFrame {
 		visaoConfirmSenha.setBounds(483, 67, 106, 14);
 		contentPane.add(visaoConfirmSenha);
 		
-		campSenha = new JPasswordField();
+		campSenha = new LimitedPasswordField ();
 		campSenha.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		campSenha.setBounds(582, 24, 95, 20);
 		contentPane.add(campSenha);
 		
-		confirmCampSenha = new JPasswordField();
+		confirmCampSenha = new LimitedPasswordField ();
 		confirmCampSenha.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		confirmCampSenha.setBounds(582, 64, 95, 20);
 		contentPane.add(confirmCampSenha);

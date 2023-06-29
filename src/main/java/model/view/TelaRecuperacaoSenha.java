@@ -36,8 +36,8 @@ public class TelaRecuperacaoSenha extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField campNome;
-	private JPasswordField senhaNova;
-	private JPasswordField senhaNovaConfirm;
+	private LimitedPasswordField senhaNova;
+	private LimitedPasswordField senhaNovaConfirm;
 	private JFormattedTextField cpfDigitadoCamp;
 	private MaskFormatter mascaraCpf;
 
@@ -58,8 +58,6 @@ public class TelaRecuperacaoSenha extends JFrame {
 	private JLabel lblErro;
 	private JLabel lblErro2;
 	
-    
-
 	/**
 	 * Launch the application.
 	 */
@@ -149,7 +147,7 @@ public class TelaRecuperacaoSenha extends JFrame {
 		lblConsultado.setBounds(60, 214, 402, 14);
 		contentPane.add(lblConsultado);
 		
-		senhaNova = new JPasswordField();
+		senhaNova = new LimitedPasswordField ();
 		senhaNova.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		senhaNova.setBounds(231, 263, 119, 20);
 		contentPane.add(senhaNova);
@@ -166,7 +164,7 @@ public class TelaRecuperacaoSenha extends JFrame {
 		lblErro2.setBounds(258, 359, 196, 14);
 		contentPane.add(lblErro2);
 		
-		senhaNovaConfirm = new JPasswordField();
+		senhaNovaConfirm = new LimitedPasswordField ();
 		senhaNovaConfirm.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		senhaNovaConfirm.setBounds(233, 328, 117, 20);
 		contentPane.add(senhaNovaConfirm);
@@ -242,6 +240,10 @@ public class TelaRecuperacaoSenha extends JFrame {
 						updatePass = userController.atualizarUsuarioController(usuarioConsultado);
 						JOptionPane.showMessageDialog(null, "Senha atualizada com sucesso!", "Gerenciamento-Mensal", 
 	                			JOptionPane.INFORMATION_MESSAGE);
+	                	dispose();
+						TelaLogin login = new TelaLogin();
+						login.setVisible(true);
+						
 					} catch (SQLException | CampoInvalidoException e1) {
 						// TODO Auto-generated catch block
 						lblErro2.setText(e1.getMessage());

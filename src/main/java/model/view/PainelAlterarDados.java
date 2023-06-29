@@ -72,8 +72,8 @@ public class PainelAlterarDados extends JPanel {
 	private JTextField campCIdade;
 	private JComboBox cbEstados;
 	private JFormattedTextField cepCamp;
-	private JPasswordField senhaAtualAtualizar;
-	private JPasswordField novaSenhaAtualizar;
+	private LimitedPasswordField senhaAtualAtualizar;
+	private LimitedPasswordField novaSenhaAtualizar;
 	private MaskFormatter mascaraCEP;
 	private JLabel lblTitulo;
 	private JLabel lblRua;
@@ -273,7 +273,7 @@ public class PainelAlterarDados extends JPanel {
 		DecimalFormat formato = new DecimalFormat("#,##0.00");
 		novoSalarioL.setText(""+formato.format(userLogado.getSalariol()));
 		
-		senhaAtualAtualizar = new JPasswordField();
+		senhaAtualAtualizar = new LimitedPasswordField ();
 		senhaAtualAtualizar.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		senhaAtualAtualizar.setBounds(377, 245, 102, 20);
 		add(senhaAtualAtualizar);
@@ -315,7 +315,7 @@ public class PainelAlterarDados extends JPanel {
 		
 		campCIdade.setText(endereco.getLocalidade());
 		
-		novaSenhaAtualizar = new JPasswordField();
+		novaSenhaAtualizar = new LimitedPasswordField ();
 		novaSenhaAtualizar.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		novaSenhaAtualizar.setBounds(377, 300, 102, 20);
 		add(novaSenhaAtualizar);
