@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import exceptions.CampoInvalidoException;
 import exceptions.EnderecoInvalidoException;
 import model.bo.*;
+import model.dao.EnderecoDAO;
 import model.dao.ViaCEP;
 import model.seletor.TabelaSeletor;
 
@@ -18,6 +19,7 @@ public class EnderecoController {
 
 	EnderecoBO enderecoBO = new EnderecoBO();
 	ViaCEP viaCep = new ViaCEP();
+	EnderecoDAO endDAO = new EnderecoDAO();
 	
 	public EnderecoVO cadastrarEnderecoController(EnderecoVO endereco) throws CampoInvalidoException {
 	
@@ -86,6 +88,11 @@ public class EnderecoController {
 			throw new SocketException(mensagemValidacao);
 		}
 		
+	}
+
+	public boolean excluirEndController(UsuarioVO userOnline) {
+	
+		return endDAO.excluirEndDAO(userOnline);
 	}
 
 

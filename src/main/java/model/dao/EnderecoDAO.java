@@ -108,4 +108,28 @@ public class EnderecoDAO {
 		return endereco;
 	}
 
+	public boolean excluirEndDAO(UsuarioVO userOnline) {
+	
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		boolean retorno = false;
+		
+		String query = "DELETE FROM endereco " 
+				+ "WHERE idusuario = " + userOnline.getIdUsuario();
+			
+		try {
+			if(stmt.executeUpdate(query) == 1) {
+				retorno = true;
+			}
+		} catch (SQLException erro) {
+			System.out.println("Erro ao executar a query do método excluirEndDAO");
+			System.out.println("Erro: " + erro.getMessage());	
+		} finally {
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return retorno;
+	
+	}
+
 }

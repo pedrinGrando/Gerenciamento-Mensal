@@ -140,7 +140,7 @@ public class DespesaDAO {
 		
 		String query = "SELECT iddespesa, idusuario, despnome, valor "
 				+ "FROM despesa "
-				+ "2WHERE idusuario = " + userOnline.getIdUsuario();
+				+ "WHERE idusuario = " + userOnline.getIdUsuario();
 		
 		try {
 			resultado = stmt.executeQuery(query);
@@ -221,6 +221,30 @@ public class DespesaDAO {
 		}
 		
 		return despesa;
+		
+	}
+
+	public boolean excluirDespesasDAO(UsuarioVO userOnline) {
+
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		boolean retorno = false;
+		
+		String query = "DELETE FROM despesa " 
+				+ " WHERE idusuario = " + userOnline.getIdUsuario();
+			
+		try {
+			if(stmt.executeUpdate(query) == 1) {
+				retorno = true;
+			}
+		} catch (SQLException erro) {
+			System.out.println("Erro ao executar a query do método excluirDespesasDAO");
+			System.out.println("Erro: " + erro.getMessage());	
+		} finally {
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return retorno;
 		
 	}
 

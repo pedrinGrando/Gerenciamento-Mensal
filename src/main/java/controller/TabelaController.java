@@ -2,6 +2,7 @@ package controller;
 
 import model.vo.TabelaVO;
 import model.vo.UsuarioVO;
+import model.dao.*;
 
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ import model.geradorPlanilhas.*;
 public class TabelaController {
 	
 	TabelaBO tabBO = new TabelaBO();
+	TabelaDAO tabDAO = new TabelaDAO();
 
 	public TabelaVO salvarDadosTabelaController(UsuarioVO userLogado, TabelaVO tabela) {
 		
@@ -69,6 +71,11 @@ public class TabelaController {
 	public boolean removerTabelaController(UsuarioVO userOnline, TabelaVO tabelaSelecionada) {
 		// TODO Auto-generated method stub
 		return tabBO.removerTabelaBO(userOnline, tabelaSelecionada);
+	}
+
+	public boolean excluirTabelasController(UsuarioVO userOnline) {
+		
+		return tabDAO.excluirTabelasDAO(userOnline);
 	}
 
 

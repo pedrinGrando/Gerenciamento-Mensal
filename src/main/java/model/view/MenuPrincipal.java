@@ -25,6 +25,8 @@ import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.Cursor;
 
+import controller.*;
+
 public class MenuPrincipal extends JFrame {
 
 	private JPanel contentPane;
@@ -41,6 +43,9 @@ public class MenuPrincipal extends JFrame {
 	private PainelAlterarDespesa painelAlterarDespesa;
 	
 	UsuarioController usuarioController = new UsuarioController();
+	EnderecoController endController = new EnderecoController();
+	DespesaController despController = new DespesaController();
+	TabelaController tabController = new TabelaController();
 
 	private JMenuItem mntmTabelaCompleta;
 
@@ -146,13 +151,22 @@ public class MenuPrincipal extends JFrame {
 		mntmEncerrarConta.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/cross.png")));
 		mntmEncerrarConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean retorn = false;
 				
 				int opcaoSelecionada = JOptionPane.showConfirmDialog(null, "Confirma a exclusão da sua conta?");
 				
 				if (opcaoSelecionada == JOptionPane.YES_OPTION) {
-				retorn = usuarioController.excluirContaController(userOnline);
-				JOptionPane.showMessageDialog(null, "Usuário excluído com sucesso!", "GS - Gerenciador de salário", JOptionPane.INFORMATION_MESSAGE);
+					
+					//Apaga todas os registros relacionados
+					endController.excluirEndController(userOnline);
+					despController.excluirDespesasController(userOnline);
+					tabController.excluirTabelasController(userOnline);
+					usuarioController.excluirContaController(userOnline);
+					//CHAMA O LOGIN NOVAMENTE
+					dispose();
+					TelaLogin login = new TelaLogin();
+					login.setVisible(true);
+
+				JOptionPane.showMessageDialog(null, "Conta excluída com sucesso!", "GS - Gerenciador de salário", JOptionPane.INFORMATION_MESSAGE);
 				} else  {
 				   dispose();
 				   MenuPrincipal tela = new MenuPrincipal(userOnline);

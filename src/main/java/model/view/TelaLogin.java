@@ -195,8 +195,7 @@ public class TelaLogin extends JFrame {
 					tela = new TelaCadastro();
 					tela.setVisible(true);
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, e1.getStackTrace(), "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

@@ -73,4 +73,9 @@ public class DespesaController {
 		return despBO.consultarDespesaBO(despNome, userOnline);
 	}
 
+	public boolean excluirDespesasController(UsuarioVO userOnline) {
+		 
+		return despDAO.excluirDespesasDAO(userOnline);
+	}
+
 }
