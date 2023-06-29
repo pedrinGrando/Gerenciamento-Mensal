@@ -3,6 +3,8 @@ package controller;
 import model.vo.DespesaVO;
 import model.vo.UsuarioVO;
 import model.bo.*;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,9 +60,24 @@ public class DespesaController {
 		return despBO.consultarTodasBO(userOnline, despNome);
 	}
 
-	public boolean atualizarDespController(DespesaVO despesaAtualizar) {
+	public boolean atualizarDespController(DespesaVO despesaAtualizar, String text) throws SQLException, CampoInvalidoException {
 		
-		return despBO.atualizarDespBO(despesaAtualizar);
+		this.validarCampos(despesaAtualizar);
+		return despBO.atualizarDespBO(despesaAtualizar, text);
+	}
+
+	private void validarCampos(DespesaVO despesaAtualizar) throws CampoInvalidoException {
+
+		String mensagem = "";
+		
+		if (despesaAtualizar.getDespNome().trim().isEmpty() || despesaAtualizar.getDespNome().trim().isBlank()) {
+			mensagem = " O nome é obrigatório!";
+		}
+		
+		if (!mensagem.isEmpty()) {
+			throw new CampoInvalidoException(mensagem);
+		}
+		
 	}
 
 	public DespesaVO consultarDespesaController(String despNome, UsuarioVO userOnline) {

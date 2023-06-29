@@ -3,6 +3,7 @@ package model.bo;
 import model.vo.DespesaVO;
 import model.vo.UsuarioVO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,9 +33,9 @@ public class DespesaBO {
 		return despDAO.removerDespDAO(userLogado, text);
 	}
 
-	public boolean atualizarDespBO(DespesaVO despesaAtualizar) {
+	public boolean atualizarDespBO(DespesaVO despesaAtualizar ,String text) throws SQLException {
 		
-		return despDAO.atualizarDespDAO(despesaAtualizar);
+		return despDAO.atualizarDespDAO(despesaAtualizar, text);
 	}
 
 	public ArrayList<DespesaVO> consultarTodasBO(UsuarioVO userOnline, String despNome) {

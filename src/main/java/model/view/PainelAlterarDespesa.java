@@ -24,6 +24,7 @@ import javax.swing.border.BevelBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;
 
@@ -47,6 +48,7 @@ public class PainelAlterarDespesa extends JPanel {
 	private JButton btnConsultar;
 	String despNome = "";
 	private JLabel lblTextAlteracao;
+	private JLabel lblErro;
 
 	/**
 	 * Create the panel.
@@ -85,7 +87,7 @@ public class PainelAlterarDespesa extends JPanel {
 		cbDespesas = new JComboBox(despesasCadastradas.toArray());
 		cbDespesas.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		cbDespesas.setBackground(new Color(192, 192, 192));
-		cbDespesas.setBounds(260, 58, 110, 22);
+		cbDespesas.setBounds(289, 58, 110, 22);
 		add(cbDespesas);
 		
 		campNome = new JTextField();
@@ -118,6 +120,7 @@ public class PainelAlterarDespesa extends JPanel {
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				lblErro.setText("");
 				//CONSULTA POR NOME
 				DespesaVO nome = (DespesaVO) cbDespesas.getSelectedItem();
 				
@@ -145,13 +148,19 @@ public class PainelAlterarDespesa extends JPanel {
 		btnConsultar.setBorder(null);
 		btnConsultar.setIcon(new ImageIcon(PainelAlterarDespesa.class.getResource("/icons/loupe.png")));
 		btnConsultar.setBackground(new Color(0, 255, 255));
-		btnConsultar.setBounds(376, 58, 31, 19);
+		btnConsultar.setBounds(399, 57, 31, 23);
 		add(btnConsultar);
 		
 		visaoNome = new JLabel("Nome : ");
 		visaoNome.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		visaoNome.setBounds(35, 274, 59, 14);
 		add(visaoNome);
+		
+		lblErro = new JLabel("");
+		lblErro.setForeground(new Color(255, 0, 0));
+		lblErro.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblErro.setBounds(133, 343, 266, 14);
+		add(lblErro);
 		
 		visaoValor = new JLabel("Valor : ");
 		visaoValor.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -162,8 +171,8 @@ public class PainelAlterarDespesa extends JPanel {
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				boolean att = false;
 				String valor1 = "";
+				lblErro.setText("");
 				
                 despesaAtualizar.setDespNome(campNome.getText());
 				
@@ -172,25 +181,26 @@ public class PainelAlterarDespesa extends JPanel {
 				valor1 = campValor.getText().replace(".", "");
 				valor1 = valor1.replace(",", ".");
 				
+				
 				despesaAtualizar.setValor(Double.parseDouble(valor1.replace("R$", "")));
 				
 			    if (despesaAtualizar.getDespNome() != null || despesaAtualizar.getValor() != 0) {
 			    	
-			         att = despController.atualizarDespController(despesaAtualizar);
-			         JOptionPane.showMessageDialog(null, "Despesa atualizada com sucesso!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
-				
-			    } else {
-			    	
-			    	JOptionPane.showMessageDialog(null, "Preencha todos os campos!", "Gerenciamento-Mensal", JOptionPane.WARNING_MESSAGE);
-			    }
-				
+					try {
+						despController.atualizarDespController(despesaAtualizar, despesaVO.getDespNome());
+						JOptionPane.showMessageDialog(null, "Despesa atualizada com sucesso!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
+					} catch (SQLException | CampoInvalidoException e1) {
+						lblErro.setText(e1.getMessage());
+					}
+			    } 
 			}
 		});
 		btnEditar.setIcon(new ImageIcon(PainelAlterarDespesa.class.getResource("/icons/diskette.png")));
 		btnEditar.setBorder(null);
 		btnEditar.setBackground(new Color(0, 255, 255));
-		btnEditar.setBounds(219, 309, 46, 23);
+		btnEditar.setBounds(207, 309, 46, 23);
 		add(btnEditar);
+		
 		
 	}
 }

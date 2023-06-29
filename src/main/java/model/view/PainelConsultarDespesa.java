@@ -184,7 +184,7 @@ public class PainelConsultarDespesa extends JPanel {
 		lblErro = new JLabel("");
 		lblErro.setFont(new Font("Tahoma", Font.ITALIC, 10));
 		lblErro.setForeground(new Color(255, 0, 0));
-		lblErro.setBounds(267, 442, 233, 23);
+		lblErro.setBounds(321, 444, 195, 14);
 		add(lblErro);
 		
 		btnExclusao = new JButton("");

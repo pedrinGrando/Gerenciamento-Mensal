@@ -165,7 +165,7 @@ public class DespesaDAO {
 		
 	}
 
-	public boolean atualizarDespDAO(DespesaVO despesaAtualizar) {
+	public boolean atualizarDespDAO(DespesaVO despesaAtualizar, String text) {
 		
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
@@ -174,7 +174,7 @@ public class DespesaDAO {
 		String query = "UPDATE despesa SET despnome = '" + despesaAtualizar.getDespNome()
 				+ "', valor = " + despesaAtualizar.getValor()
 				+ " WHERE idusuario = " + despesaAtualizar.getIdUsuario()
-		        + " AND despnome = '" + despesaAtualizar.getDespNome() + "' ";
+		        + " AND despnome = '" + text + "' ";
 		 
 		try {
 			if(stmt.executeUpdate(query) == 1) {
