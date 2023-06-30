@@ -188,12 +188,12 @@ public class PainelVerConta extends JPanel {
 		
 		telaNumero = new JLabel("Número:");
 		telaNumero.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		telaNumero.setBounds(305, 267, 56, 14);
+		telaNumero.setBounds(305, 245, 56, 14);
 		add(telaNumero);
 		
 		lblNumero = new JLabel("");
 		lblNumero.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNumero.setBounds(364, 267, 115, 14);
+		lblNumero.setBounds(364, 245, 115, 14);
 		add(lblNumero);
 		telaNumero = new JLabel("Número:");
 		
@@ -201,24 +201,24 @@ public class PainelVerConta extends JPanel {
 		
 		telaRua = new JLabel("Rua :");
 		telaRua.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		telaRua.setBounds(305, 190, 65, 14);
+		telaRua.setBounds(305, 181, 65, 14);
 		add(telaRua);
 		
 		lblRua = new JLabel("");
 		lblRua.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblRua.setBounds(347, 190, 234, 14);
+		lblRua.setBounds(345, 181, 234, 14);
 		add(lblRua);
 		
 		lblRua.setText(endereco.getLogradouro());
 		
 		telaCep = new JLabel("CEP : ");
 		telaCep.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		telaCep.setBounds(305, 231, 65, 14);
+		telaCep.setBounds(305, 215, 65, 14);
 		add(telaCep);
 		
 		lblCEP = new JLabel("");
 		lblCEP.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblCEP.setBounds(339, 231, 140, 14);
+		lblCEP.setBounds(339, 215, 140, 14);
 		add(lblCEP);
 		
 		lblCEP.setText(endereco.getCep());

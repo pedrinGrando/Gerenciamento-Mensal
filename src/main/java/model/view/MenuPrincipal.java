@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
+
+import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import javax.swing.KeyStroke;
@@ -26,6 +28,7 @@ import java.awt.event.KeyEvent;
 import java.awt.Cursor;
 
 import controller.*;
+import javax.swing.JToggleButton;
 
 public class MenuPrincipal extends JFrame {
 
@@ -49,7 +52,50 @@ public class MenuPrincipal extends JFrame {
 
 	private JMenuItem mntmTabelaCompleta;
 
-	private JMenu mnNewMenu_2;
+	private JMenu mnmDespesas;
+
+	private JToggleButton tglBtnTeste;
+
+	private JMenuBar menuBar;
+
+	private JMenu mnmConta;
+
+	private JMenuItem mntmVerConta;
+
+	private JMenuItem mntmAtualizarDados;
+
+	private JMenuItem mntmTrocarConta;
+
+	private JMenuItem mntmEncerrarConta;
+
+	private JPanel pnlAprensent;
+
+	private JLabel lblContato;
+
+	private JLabel lblIconPrincipal;
+
+	private JLabel lblTItuloPrincipal;
+
+	private JMenuItem mntmConsultarDesp;
+
+	private JMenuItem mntmEditarDesp;
+
+	private JMenuItem mntmInserirNovaDespesa;
+
+	private JMenuItem mntmRemoverDesp;
+
+	private JMenu mnmCalculos;
+
+	private JMenuItem mntmCalculoMensal;
+
+	private JMenu mnmTabela;
+
+	private JMenuItem mntmMesEsp;
+
+	private JMenu mnmSobre;
+
+	private AbstractButton mntmSobre;
+	private JToggleButton tglbtnNewToggleButton;
 
 	/**
 	 * Launch the application.
@@ -72,6 +118,7 @@ public class MenuPrincipal extends JFrame {
 	 * @param userLogado 
 	 */
 	public MenuPrincipal(final UsuarioVO userOnline) {
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/icons/bank.png")));
 		setBackground(new Color(255, 255, 255));
 		setTitle("Gerenciamento Mensal | Menu");
@@ -80,16 +127,18 @@ public class MenuPrincipal extends JFrame {
 		setBounds(100, 100, 710, 558);
 		setLocationRelativeTo(null);
 		
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
+		menuBar.setForeground(new Color(255, 255, 255));
 		menuBar.setBackground(new Color(255, 255, 255));
 		setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("Conta");
-		mnNewMenu.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/user.png")));
-		mnNewMenu.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
-		menuBar.add(mnNewMenu);
+		mnmConta = new JMenu("Conta");
+		mnmConta.setForeground(new Color(0, 0, 0));
+		mnmConta.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/user.png")));
+		mnmConta.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
+		menuBar.add(mnmConta);
 		
-		JMenuItem mntmVerConta = new JMenuItem("Ver conta ");
+		mntmVerConta = new JMenuItem("Ver conta ");
 		mntmVerConta.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		mntmVerConta.setBackground(new Color(255, 255, 255));
 		mntmVerConta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
@@ -105,9 +154,9 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		mntmVerConta.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-		mnNewMenu.add(mntmVerConta);
+		mnmConta.add(mntmVerConta);
 		
-		JMenuItem mntmAtualizarDados = new JMenuItem("Atualizar dados ");
+		mntmAtualizarDados = new JMenuItem("Atualizar dados ");
 		mntmAtualizarDados.setBackground(new Color(255, 255, 255));
 		mntmAtualizarDados.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
 		mntmAtualizarDados.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/pencil.png")));
@@ -126,9 +175,9 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		mntmAtualizarDados.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-		mnNewMenu.add(mntmAtualizarDados);
+		mnmConta.add(mntmAtualizarDados);
 		
-		JMenuItem mntmTrocarConta = new JMenuItem("Trocar usuário");
+		mntmTrocarConta = new JMenuItem("Trocar usuário");
 		mntmTrocarConta.setBackground(new Color(255, 255, 255));
 		mntmTrocarConta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0));
 		mntmTrocarConta.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/refresh.png")));
@@ -143,9 +192,9 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		mntmTrocarConta.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-		mnNewMenu.add(mntmTrocarConta);
+		mnmConta.add(mntmTrocarConta);
 		
-		JMenuItem mntmEncerrarConta = new JMenuItem("Encerrar conta");
+	    mntmEncerrarConta = new JMenuItem("Encerrar conta");
 		mntmEncerrarConta.setBackground(new Color(255, 255, 255));
 		mntmEncerrarConta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
 		mntmEncerrarConta.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/cross.png")));
@@ -175,14 +224,15 @@ public class MenuPrincipal extends JFrame {
 			}	
 		});
 		mntmEncerrarConta.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-		mnNewMenu.add(mntmEncerrarConta);
+		mnmConta.add(mntmEncerrarConta);
 		
-		mnNewMenu_2 = new JMenu("Despesas");
-		mnNewMenu_2.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/expenses.png")));
-		mnNewMenu_2.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
-		menuBar.add(mnNewMenu_2);
+		mnmDespesas = new JMenu("Despesas");
+		mnmDespesas.setForeground(new Color(0, 0, 0));
+		mnmDespesas.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/expenses.png")));
+		mnmDespesas.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
+		menuBar.add(mnmDespesas);
 		
-		JMenuItem mntmConsultarDesp = new JMenuItem("Consultar");
+		mntmConsultarDesp = new JMenuItem("Consultar");
 		mntmConsultarDesp.setBackground(new Color(255, 255, 255));
 		mntmConsultarDesp.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/search.png")));
 		mntmConsultarDesp.addActionListener(new ActionListener() {
@@ -195,7 +245,7 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		
-		JMenuItem mntmEditarDesp = new JMenuItem("Editar ");
+		mntmEditarDesp = new JMenuItem("Editar ");
 		mntmEditarDesp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -208,11 +258,11 @@ public class MenuPrincipal extends JFrame {
 		mntmEditarDesp.setBackground(new Color(255, 255, 255));
 		mntmEditarDesp.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/pencil.png")));
 		mntmEditarDesp.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-		mnNewMenu_2.add(mntmEditarDesp);
+		mnmDespesas.add(mntmEditarDesp);
 		mntmConsultarDesp.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-		mnNewMenu_2.add(mntmConsultarDesp);
+		mnmDespesas.add(mntmConsultarDesp);
 		
-		JMenuItem mntmInserirNovaDespesa = new JMenuItem("Inserir nova ");
+		mntmInserirNovaDespesa = new JMenuItem("Inserir nova ");
 		mntmInserirNovaDespesa.setBackground(new Color(255, 255, 255));
 		mntmInserirNovaDespesa.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/add.png")));
 		mntmInserirNovaDespesa.addActionListener(new ActionListener() {
@@ -225,9 +275,9 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		mntmInserirNovaDespesa.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-		mnNewMenu_2.add(mntmInserirNovaDespesa);
+		mnmDespesas.add(mntmInserirNovaDespesa);
 		
-		JMenuItem mntmRemoverDesp = new JMenuItem("Remover despesa");
+		mntmRemoverDesp = new JMenuItem("Remover despesa");
 		mntmRemoverDesp.setBackground(new Color(255, 255, 255));
 		mntmRemoverDesp.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/remove.png")));
 		mntmRemoverDesp.addActionListener(new ActionListener() {
@@ -241,14 +291,15 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		mntmRemoverDesp.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-		mnNewMenu_2.add(mntmRemoverDesp);
+		mnmDespesas.add(mntmRemoverDesp);
 		
-		JMenu mnNewMenu_1 = new JMenu("Cálculos");
-		mnNewMenu_1.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/chart-histogram.png")));
-		mnNewMenu_1.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
-		menuBar.add(mnNewMenu_1);
+		mnmCalculos = new JMenu("Cálculos");
+		mnmCalculos.setForeground(new Color(0, 0, 0));
+		mnmCalculos.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/chart-histogram.png")));
+		mnmCalculos.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
+		menuBar.add(mnmCalculos);
 		
-		JMenuItem mntmCalculoMensal = new JMenuItem("Cálculo mensal");
+		mntmCalculoMensal = new JMenuItem("Cálculo mensal");
 		mntmCalculoMensal.setBackground(new Color(255, 255, 255));
 		mntmCalculoMensal.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/chart-histogram.png")));
 		mntmCalculoMensal.addActionListener(new ActionListener() {
@@ -261,14 +312,15 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		mntmCalculoMensal.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-		mnNewMenu_1.add(mntmCalculoMensal);
+		mnmCalculos.add(mntmCalculoMensal);
 		
-		JMenu mnNewMenu_3 = new JMenu("Tabela");
-		mnNewMenu_3.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/cells.png")));
-		mnNewMenu_3.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
-		menuBar.add(mnNewMenu_3);
+		mnmTabela = new JMenu("Tabela");
+		mnmTabela.setForeground(new Color(0, 0, 0));
+		mnmTabela.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/cells.png")));
+		mnmTabela.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
+		menuBar.add(mnmTabela);
 		
-		JMenuItem mntmMesEsp = new JMenuItem("Mês específico");
+		mntmMesEsp = new JMenuItem("Mês específico");
 		mntmMesEsp.setBackground(new Color(255, 255, 255));
 		mntmMesEsp.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/calendar (1).png")));
 		mntmMesEsp.addActionListener(new ActionListener() {
@@ -281,7 +333,7 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		mntmMesEsp.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-		mnNewMenu_3.add(mntmMesEsp);
+		mnmTabela.add(mntmMesEsp);
 		
 	    mntmTabelaCompleta = new JMenuItem("Tabela completa");
 		mntmTabelaCompleta.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/cells.png")));
@@ -295,14 +347,15 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		mntmTabelaCompleta.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-		mnNewMenu_3.add(mntmTabelaCompleta);
+		mnmTabela.add(mntmTabelaCompleta);
 		
-		JMenu mnNewMenu_4 = new JMenu("Sobre");
-		mnNewMenu_4.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/info.png")));
-		mnNewMenu_4.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
-		menuBar.add(mnNewMenu_4);
+		mnmSobre = new JMenu("Sobre");
+		mnmSobre.setForeground(new Color(0, 0, 0));
+		mnmSobre.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/info.png")));
+		mnmSobre.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
+		menuBar.add(mnmSobre);
 		
-		JMenuItem mntmSobre = new JMenuItem("Sobre o sistema ");
+		mntmSobre = new JMenuItem("Sobre o sistema ");
 		mntmSobre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -316,7 +369,7 @@ public class MenuPrincipal extends JFrame {
 		mntmSobre.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		mntmSobre.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/about (1).png")));
 		mntmSobre.setBackground(new Color(255, 255, 255));
-		mnNewMenu_4.add(mntmSobre);
+		mnmSobre.add(mntmSobre);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -324,25 +377,139 @@ public class MenuPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 461, 725, 36);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		pnlAprensent = new JPanel();
+		pnlAprensent.setBounds(0, 461, 725, 36);
+		contentPane.add(pnlAprensent);
+		pnlAprensent.setLayout(null);
 		
-		JLabel lblContato = new JLabel("Made by Pedro A/Gabriel (48988471534)");
+		lblContato = new JLabel("Made by Pedro A/Gabriel (48988471534)");
 		lblContato.setFont(new Font("Yu Gothic UI", Font.ITALIC, 9));
 		lblContato.setBounds(275, 11, 299, 14);
-		panel.add(lblContato);
+		pnlAprensent.add(lblContato);
 		
-		JLabel lblIconPrincipal = new JLabel("");
+		lblIconPrincipal = new JLabel("");
 		lblIconPrincipal.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/bankColor2.png")));
 		lblIconPrincipal.setBounds(206, 44, 275, 326);
 		contentPane.add(lblIconPrincipal);
 		
-		JLabel lblTItuloPrincipal = new JLabel("Sistema para gerenciamento de despesas mensais individuais ");
+		lblTItuloPrincipal = new JLabel("Sistema para gerenciamento de despesas mensais individuais ");
 		lblTItuloPrincipal.setFont(new Font("Source Code Pro Black", Font.ITALIC, 11));
 		lblTItuloPrincipal.setBounds(122, 356, 449, 14);
 		contentPane.add(lblTItuloPrincipal);
+		
+		tglbtnNewToggleButton = new JToggleButton("");
+		tglbtnNewToggleButton.setBackground(new Color(0, 255, 255));
+		tglbtnNewToggleButton.setBorder(null);
+		tglbtnNewToggleButton.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/dark.png")));
+		tglbtnNewToggleButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if (tglbtnNewToggleButton.isSelected()) {
+					//ALTERANDO A COR DOS COMPONENTES 
+					
+					tglbtnNewToggleButton.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/light.png")));
+					
+					menuBar.setBackground(new Color(0, 0, 0));
+					pnlAprensent.setBackground(new Color(0, 0, 0));
+					lblContato.setForeground(new Color(255,255,255));
+					mnmConta.setForeground(new Color(255,255,255));
+					mnmDespesas.setForeground(new Color(255,255,255));
+					mnmCalculos.setForeground(new Color(255,255,255));
+					mnmSobre.setForeground(new Color(255,255,255));
+					mnmTabela.setForeground(new Color(255,255,255));
+					
+					mntmVerConta.setBackground(new Color(0, 0, 0));
+					mntmVerConta.setForeground(new Color(255,255,255));
+					
+					mntmAtualizarDados.setBackground(new Color(0, 0, 0));
+					mntmAtualizarDados.setForeground(new Color(255,255,255));
+					
+					mntmTrocarConta.setBackground(new Color(0, 0, 0));
+					mntmTrocarConta.setForeground(new Color(255,255,255));
+					
+					mntmEncerrarConta.setBackground(new Color(0, 0, 0));
+					mntmEncerrarConta.setForeground(new Color(255,255,255));
+
+					mntmEditarDesp.setBackground(new Color(0, 0, 0));
+					mntmEditarDesp.setForeground(new Color(255,255,255));
+					
+					mntmConsultarDesp.setBackground(new Color(0, 0, 0));
+					mntmConsultarDesp.setForeground(new Color(255,255,255));
+					
+					mntmInserirNovaDespesa.setBackground(new Color(0, 0, 0));
+					mntmInserirNovaDespesa.setForeground(new Color(255,255,255));
+					
+					mntmRemoverDesp.setBackground(new Color(0, 0, 0));
+					mntmRemoverDesp.setForeground(new Color(255,255,255));
+
+					mntmCalculoMensal.setBackground(new Color(0, 0, 0));
+					mntmCalculoMensal.setForeground(new Color(255,255,255));
+					
+					mntmMesEsp.setBackground(new Color(0, 0, 0));
+					mntmMesEsp.setForeground(new Color(255,255,255));
+					
+					mntmTabelaCompleta.setBackground(new Color(0, 0, 0));
+					mntmTabelaCompleta.setForeground(new Color(255,255,255));
+					
+					mntmSobre.setBackground(new Color(0, 0, 0));
+					mntmSobre.setForeground(new Color(255,255,255));
+					
+		        } else {
+		            // Código a ser executado quando o botão não estiver selecionado
+		        	
+		        	tglbtnNewToggleButton.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/dark.png")));
+		        	
+		        	menuBar.setBackground(new Color(255,255,255));
+					pnlAprensent.setBackground(new Color(255,255,255));
+					lblContato.setForeground(new Color(0, 0, 0));
+					mnmConta.setForeground(new Color(0, 0, 0));
+					mnmDespesas.setForeground(new Color(0, 0, 0));
+					mnmCalculos.setForeground(new Color(0, 0, 0));
+					mnmSobre.setForeground(new Color(0, 0, 0));
+					mnmTabela.setForeground(new Color(0, 0, 0));
+					
+					mntmVerConta.setBackground(new Color(255,255,255));
+					mntmVerConta.setForeground(new Color(0, 0, 0));
+					
+					mntmAtualizarDados.setBackground(new Color(255,255,255));
+					mntmAtualizarDados.setForeground(new Color(0, 0, 0));
+					
+					mntmTrocarConta.setBackground(new Color(255,255,255));
+					mntmTrocarConta.setForeground(new Color(0, 0, 0));
+					
+					mntmEncerrarConta.setBackground(new Color(255,255,255));
+					mntmEncerrarConta.setForeground(new Color(0, 0, 0));
+
+					mntmEditarDesp.setBackground(new Color(255,255,255));
+					mntmEditarDesp.setForeground(new Color(0, 0, 0));
+					
+					mntmConsultarDesp.setBackground(new Color(255,255,255));
+					mntmConsultarDesp.setForeground(new Color(0, 0, 0));
+					
+					mntmInserirNovaDespesa.setBackground(new Color(255,255,255));
+					mntmInserirNovaDespesa.setForeground(new Color(0, 0, 0));
+					
+					mntmRemoverDesp.setBackground(new Color(255,255,255));
+					mntmRemoverDesp.setForeground(new Color(0, 0, 0));
+
+					mntmCalculoMensal.setBackground(new Color(255,255,255));
+					mntmCalculoMensal.setForeground(new Color(0, 0, 0));
+					
+					mntmMesEsp.setBackground(new Color(255,255,255));
+					mntmMesEsp.setForeground(new Color(0, 0, 0));
+					
+					mntmTabelaCompleta.setBackground(new Color(255,255,255));
+					mntmTabelaCompleta.setForeground(new Color(0, 0, 0));
+					
+					mntmSobre.setBackground(new Color(255,255,255));
+					mntmSobre.setForeground(new Color(0, 0, 0));
+					
+		        }
+				
+			}
+		});
+		tglbtnNewToggleButton.setBounds(643, 11, 41, 23);
+		contentPane.add(tglbtnNewToggleButton);
 		
 	}
 }
