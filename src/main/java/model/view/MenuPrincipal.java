@@ -184,6 +184,9 @@ public class MenuPrincipal extends JFrame {
 					mntmTemaClaro.setBackground(new Color(255,255,255));
 					mntmTemaClaro.setForeground(new Color(0, 0, 0));
 					
+					mntmTemaEscuro.setBackground(new Color(255,255,255));
+					mntmTemaEscuro.setForeground(new Color(0, 0, 0));
+					
 					mntmAtualizarDados.setBackground(new Color(255,255,255));
 					mntmAtualizarDados.setForeground(new Color(0, 0, 0));
 					
@@ -260,6 +263,9 @@ public class MenuPrincipal extends JFrame {
 				mntmTemaClaro.setBackground(new Color(0, 0, 0));
 				mntmTemaClaro.setForeground(new Color(255,255,255));
 				
+				mntmTemaEscuro.setBackground(new Color(0, 0, 0));
+				mntmTemaEscuro.setForeground(new Color(255,255,255));
+				
 				mntmAtualizarDados.setBackground(new Color(0, 0, 0));
 				mntmAtualizarDados.setForeground(new Color(255,255,255));
 				
@@ -292,11 +298,6 @@ public class MenuPrincipal extends JFrame {
 				
 				mntmSobre.setBackground(new Color(0, 0, 0));
 				mntmSobre.setForeground(new Color(255,255,255));
-				
-				
-				
-				
-				
 				
 			}
 		});
@@ -534,6 +535,9 @@ public class MenuPrincipal extends JFrame {
 		contentPane.add(lblTItuloPrincipal);
 		
 		tglTrocaDeCor = new JToggleButton("");
+		tglTrocaDeCor.setContentAreaFilled(false);
+		tglTrocaDeCor.setBorderPainted(false);
+		tglTrocaDeCor.setFocusPainted(false);
 		tglTrocaDeCor.setSelectedIcon(new ImageIcon(MenuPrincipal.class.getResource("/icons/light.png")));
 		tglTrocaDeCor.setBackground(new Color(0, 255, 255));
 		tglTrocaDeCor.setBorder(null);
