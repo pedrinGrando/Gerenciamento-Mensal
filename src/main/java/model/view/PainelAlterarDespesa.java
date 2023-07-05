@@ -77,7 +77,7 @@ public class PainelAlterarDespesa extends JPanel {
 		panel.setBounds(0, 225, 733, 10);
 		add(panel);
 		
-		visaoTItulo = new JLabel("Seleciona a despesa que deseja alterar  "+userOnline.getLogin());
+		visaoTItulo = new JLabel("Seleciona a despesa que deseja alterar "+userOnline.getLogin());
 		visaoTItulo.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		visaoTItulo.setBounds(21, 62, 278, 14);
 		add(visaoTItulo);
@@ -87,7 +87,7 @@ public class PainelAlterarDespesa extends JPanel {
 		cbDespesas = new JComboBox(despesasCadastradas.toArray());
 		cbDespesas.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		cbDespesas.setBackground(new Color(192, 192, 192));
-		cbDespesas.setBounds(289, 58, 110, 22);
+		cbDespesas.setBounds(280, 58, 110, 22);
 		add(cbDespesas);
 		
 		campNome = new JTextField();
@@ -117,6 +117,8 @@ public class PainelAlterarDespesa extends JPanel {
 		campValor.setColumns(10);
 		
 	    btnConsultar = new JButton("");
+	    btnConsultar.setFocusPainted(false);
+	    btnConsultar.setBorderPainted(false);
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -148,7 +150,7 @@ public class PainelAlterarDespesa extends JPanel {
 		btnConsultar.setBorder(null);
 		btnConsultar.setIcon(new ImageIcon(PainelAlterarDespesa.class.getResource("/icons/loupe.png")));
 		btnConsultar.setBackground(new Color(0, 255, 255));
-		btnConsultar.setBounds(399, 57, 31, 23);
+		btnConsultar.setBounds(388, 53, 31, 31);
 		add(btnConsultar);
 		
 		visaoNome = new JLabel("Nome : ");

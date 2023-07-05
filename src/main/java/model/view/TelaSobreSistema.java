@@ -54,6 +54,9 @@ public class TelaSobreSistema extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			okButton = new JButton("");
+			okButton.setFocusPainted(false);
+			okButton.setContentAreaFilled(false);
+			okButton.setBorderPainted(false);
 			okButton.setBorder(null);
 			okButton.setBounds(562, 416, 57, 33);
 			contentPanel.add(okButton);

@@ -184,21 +184,17 @@ public class PainelCalculoMensal extends JPanel {
 		btn_salvarDados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String resp = JOptionPane.showInputDialog("Deseja salvar os dados do mês de junho? \n"
+				int opcaoSelecionada = JOptionPane.showConfirmDialog(null,"Deseja salvar os dados do mês de junho? \n"
 						+ "Confirme os dados de " +mes +" abaixo! \n"
 								+ "Saldo restante : R$ " +formato.format(tabela.getTotalRest()) +"\n"
 										+ "Saldo final : R$ " + formato.format(tabela.getSaldoFinal()));
-				if (resp.equalsIgnoreCase("sim")) {
+				if (opcaoSelecionada == JOptionPane.YES_OPTION) {
 					tabela = tabelaController.salvarDadosTabelaController(userLogado, tabela);
 					JOptionPane.showMessageDialog(null, "Dados do mês: "+mes.toUpperCase() +
 							"\nSalvos com sucesso!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
-				} else if (resp.equalsIgnoreCase("Não")) {
-					JOptionPane.showMessageDialog(null, "Dados do mês: "+mes.toUpperCase() +
-							"\nNão serão salvos!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);
-					
 				} else {
-					JOptionPane.showMessageDialog(null, " Opção digitada inválida!",
-							 "Gerenciamento-Mensal", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Dados do mês: "+mes.toUpperCase() +
+							"\nNão serão salvos!", "Gerenciamento-Mensal", JOptionPane.INFORMATION_MESSAGE);	
 				}
 				
 			}
@@ -215,7 +211,7 @@ public class PainelCalculoMensal extends JPanel {
 		
 		lblMesAtual = new JLabel("");
 		lblMesAtual.setFont(new Font("Source Serif Pro Semibold", Font.BOLD | Font.ITALIC, 15));
-		lblMesAtual.setBounds(310, 17, 64, 35);
+		lblMesAtual.setBounds(315, 17, 64, 35);
 		add(lblMesAtual);
 		lblMesAtual.setText(mes.toUpperCase());
 		

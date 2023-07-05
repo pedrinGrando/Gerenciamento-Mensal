@@ -117,6 +117,7 @@ public class PainelTabelaCompleta extends JPanel {
 		String[] anos = {"2022", "2023"};
 		
 		tblTabelas = new JTable();
+		tblTabelas.setEnabled(false);
 		tblTabelas.setForeground(new Color(0, 0, 0));
 		this.limparTabela();
 		tblTabelas.setBounds(10, 56, 655, 383);
