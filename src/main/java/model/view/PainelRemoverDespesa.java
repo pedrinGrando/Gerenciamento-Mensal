@@ -76,7 +76,7 @@ public class PainelRemoverDespesa extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				if (nomeDespesa_camp.getText().isEmpty() || nomeDespesa_camp.getText().isBlank()) {
-					JOptionPane.showMessageDialog(null, "O nome é obrigatório!", "Gerenciador-Mensal", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "O nome é obrigatório!", "Gerenciador-Mensal", JOptionPane.WARNING_MESSAGE);
 					
 				}else  {
 					despesaController.removerDespesaController(userLogado, nomeDespesa_camp.getText());
